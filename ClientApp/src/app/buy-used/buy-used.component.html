@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">       
+     
+    <div *ngFor="let j of usedItem; let i = index">
+     
+      <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Seller</mat-card-title>
+            <mat-card-subtitle>Dynamic Value</mat-card-subtitle>
+          </mat-card-header>         
+          <img (click)="openDialog(photo)" matTooltip="Click to expand." *ngFor="let photo of collectionPhotos[i]" src="/Uploads/{{ photo.fileName }}" class="img-thumbnail">
+ 
+          <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+         
+          <mat-card-content>       
+            <p >CPU:<br> {{j.cpu}}</p>                   
+            <p>Motherboard:<br> {{j.motherboard}}</p>
+            <p>RAM:<br> {{j.ram}}</p>
+            <p>Storage:<br> {{j.storage}}</p>
+            <p>GPU:<br> {{j.gpu}}</p>
+            <p>Powersupply:<br> {{j.power_Supply}}</p>
+            <p>Cooling Fan:<br> {{j.cooling_Fan}}</p>                   
+            <p>Case:<br> {{j.case}}</p>                                   
+            <p>Total Price: ${{j.total_Price}}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button (click)="addToCart(i)">Add to Cart</button>
+ 
+          </mat-card-actions>
+        </mat-card>
+        </div>
+         
+  </div>
+ </div>
+ 

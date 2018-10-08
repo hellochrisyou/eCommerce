@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Upload Photo</h1>
+    <div mat-dialog-content> 
+        <p *ngIf="count > 4">Maximum image upload reached.</p>
+        <input *ngIf="!(count > 4)" type="file" (change)="uploadPhoto()" #fileInput >                                        
+    <img *ngFor="let photo of photos" src="/Uploads/{{ photo.fileName }}" class="img-thumbnail"> 
+    </div>
+<div mat-dialog-actions>
+  <button mat-button (click)="done()">Done</button>
+</div>
+
