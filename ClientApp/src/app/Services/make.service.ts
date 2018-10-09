@@ -92,4 +92,8 @@ export class MakeService {
   {
     return this.http.post('/api/ItemForSale', saleItem);
   }
+  createUser(user)
+  {
+    return this.http.post('/api/Account', user);
+  }  
 }

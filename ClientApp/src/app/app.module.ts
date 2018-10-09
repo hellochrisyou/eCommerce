@@ -66,6 +66,8 @@ import { BuyUsedComponent, expandPic } from './buy-used/buy-used.component';
 import { OrderhistoryComponent } from './orderhistory/orderhistory.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 import { PhotoService } from './Services/photo.service';
+import { MainHomeComponent } from './main-home/main-home.component';
+import { CallbackComponent } from './callback/callback.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +83,9 @@ import { PhotoService } from './Services/photo.service';
     ShoppingcartComponent,
     UploadDialog,
     snackErrorMessage,
-    expandPic
+    expandPic,
+    MainHomeComponent,
+    CallbackComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -117,8 +121,8 @@ import { PhotoService } from './Services/photo.service';
       { path: 'sell', component: SellComponent },
       { path: 'orderhistory', component: OrderhistoryComponent },
       { path: 'shoppingcart', component: ShoppingcartComponent },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'mainhome', component: MainHomeComponent },
+      { path: 'callback', component: CallbackComponent },
     ])
   ],
   entryComponents: [UploadDialog, snackErrorMessage, expandPic],

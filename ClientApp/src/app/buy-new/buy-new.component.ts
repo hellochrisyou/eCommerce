@@ -124,7 +124,7 @@ export class BuyNewComponent implements OnInit {
       this.reverse = !this.reverse;
       console.log(this.key);
     }
-    constructor(private ShoppingcartServiceService: ShoppingcartService, private MakeService: MakeService, private _formBuilder: FormBuilder) { }
+    constructor(private ShoppingcartService: ShoppingcartService, private MakeService: MakeService, private _formBuilder: FormBuilder) { }
 
     ngOnInit() {
         this.MakeService.getCase().subscribe(caseItem => this.caseItem = caseItem);
@@ -197,7 +197,7 @@ export class BuyNewComponent implements OnInit {
 
   addOrder()
   {
-    this.ShoppingcartServiceService.add(this.tmpThisOrder);    
+    this.ShoppingcartService.add(this.tmpThisOrder);    
   }
 
 }

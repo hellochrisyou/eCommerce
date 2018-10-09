@@ -26,31 +26,34 @@ namespace CyouEcommerce.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-            var accountInfo = mapper.Map<AccountResource, Account>(accountResource);
-            context.Accounts.Add(accountInfo);
-            await context.SaveChangesAsync();
-            var result = mapper.Map<Account, AccountResource>(accountInfo);
-            return Ok(result);
-        }
+            }        
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> CreateAccountInfo(int id, [FromBody] AccountResource accountInfoResource)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var account = await context.Accounts.FindAsync(id);
-
-            if (account == null)
-            return NotFound();
-            
-            mapper.Map<AccountResource, Account>(accountInfoResource, account);
+            var account = mapper.Map<AccountResource, Account>(accountResource);
+            context.Accounts.Add(account);
             await context.SaveChangesAsync();
             var result = mapper.Map<Account, AccountResource>(account);
             return Ok(result);
         }
+
+        // [HttpPut("{id}")]
+        // public async Task<IActionResult> CreateAccountInfo(int id, [FromBody] AccountResource accountInfoResource)
+        // {
+        //     if (!ModelState.IsValid)
+        //     {
+        //         return BadRequest(ModelState);
+        //     }
+        //     var account = await context.Accounts.FindAsync(id);
+
+        //     if (account == null)
+        //     return NotFound();
+            
+        //     mapper.Map<AccountResource, Account>(accountInfoResource, account);
+        //     await context.SaveChangesAsync();
+        //     var result = mapper.Map<Account, AccountResource>(account);
+        //     return Ok(result);
+        // }
+
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAccountInfo(int id)
