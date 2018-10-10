@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CYouEcommerce.Migrations
 {
-    public partial class initialMigration : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,12 +13,9 @@ namespace CYouEcommerce.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 255, nullable: false),
-                    Address = table.Column<string>(maxLength: 255, nullable: false),
                     Email = table.Column<string>(maxLength: 255, nullable: false),
-                    Phone = table.Column<string>(maxLength: 20, nullable: false),
-                    Username = table.Column<string>(maxLength: 255, nullable: false),
-                    Password = table.Column<string>(maxLength: 255, nullable: false)
+                    master_account = table.Column<bool>(nullable: false),
+                    admin = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -175,8 +172,9 @@ namespace CYouEcommerce.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AccountInfoOrderId = table.Column<int>(nullable: false),
                     Order_Number = table.Column<int>(nullable: false),
+                    Address = table.Column<string>(maxLength: 255, nullable: false),
+                    AccountInfoOrderId = table.Column<int>(nullable: false),
                     Type = table.Column<string>(maxLength: 255, nullable: false),
                     CPU = table.Column<string>(maxLength: 255, nullable: false),
                     Motherboard = table.Column<string>(maxLength: 255, nullable: false),

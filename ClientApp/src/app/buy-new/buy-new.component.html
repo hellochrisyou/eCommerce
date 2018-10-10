@@ -4,7 +4,7 @@
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="cpuFormGroup">
         <ng-template matStepLabel>CPU</ng-template>          
-        <select id="CPU" class="form-control" (change)="setValue()" [(ngModel)]="tmpThisOrder.cpu" name="CPU" #case="ngModel" [ngModelOptions]="{standalone: true}">
+        <select id="CPU" class="form-control" [(ngModel)]="tmpThisOrder.cpu" name="CPU" #case="ngModel" [ngModelOptions]="{standalone: true}">
               <option value=""></option>
               <option *ngFor="let m of CPU" value="{{ m.name }}">{{ m.name }}</option>
             </select>     
@@ -36,7 +36,7 @@
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="motherboardFormGroup">
         <ng-template matStepLabel>Motherboard</ng-template>          
-        <select id="Motherboard" class="form-control" (change)="setValue()" [(ngModel)]="tmpThisOrder.motherboard" name="Motherboard" #case="ngModel" [ngModelOptions]="{standalone: true}">
+        <select id="Motherboard" class="form-control" [(ngModel)]="tmpThisOrder.motherboard" name="Motherboard" #case="ngModel" [ngModelOptions]="{standalone: true}">
               <option value=""></option>
               <option *ngFor="let m of motherboard" value="{{ m.name }}">{{ m.name }}</option>
             </select>     
@@ -68,7 +68,7 @@
      <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="motherboardFormGroup">
         <ng-template matStepLabel>RAM</ng-template>          
-        <select id="RAM" class="form-control" (change)="setValue()" [(ngModel)]="tmpThisOrder.ram" name="RAM" #case="ngModel" [ngModelOptions]="{standalone: true}">
+        <select id="RAM" class="form-control" [(ngModel)]="tmpThisOrder.ram" name="RAM" #case="ngModel" [ngModelOptions]="{standalone: true}">
               <option value=""></option>
               <option *ngFor="let m of RAM" value="{{ m.name }}">{{ m.name }}</option>
             </select>     
@@ -100,7 +100,7 @@
       <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="storageFormGroup">
         <ng-template matStepLabel>Storage</ng-template>          
-        <select id="Storage" class="form-control" (change)="setValue()" [(ngModel)]="tmpThisOrder.storage" name="Storage" #case="ngModel" [ngModelOptions]="{standalone: true}">
+        <select id="Storage" class="form-control" [(ngModel)]="tmpThisOrder.storage" name="Storage" #case="ngModel" [ngModelOptions]="{standalone: true}">
               <option value=""></option>
               <option *ngFor="let m of storage" value="{{ m.name }}">{{ m.name }}</option>
             </select>   
@@ -132,7 +132,7 @@
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="gpuFormGroup">
         <ng-template matStepLabel>GPU</ng-template>          
-        <select id="GPU" class="form-control" (change)="setValue()" [(ngModel)]="tmpThisOrder.gpu" name="GPU" #case="ngModel" [ngModelOptions]="{standalone: true}">
+        <select id="GPU" class="form-control" [(ngModel)]="tmpThisOrder.gpu" name="GPU" #case="ngModel" [ngModelOptions]="{standalone: true}">
               <option value=""></option>
               <option *ngFor="let m of GPU" value="{{ m.name }}">{{ m.name }}</option>
             </select>   
@@ -164,7 +164,7 @@
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="powerFormGroup">
         <ng-template matStepLabel>Power Supply</ng-template>          
-        <select id="Power_Supply" class="form-control" (change)="setValue()" [(ngModel)]="tmpThisOrder.power_Supply" name="Power_Supply" #case="ngModel" [ngModelOptions]="{standalone: true}">
+        <select id="Power_Supply" class="form-control" [(ngModel)]="tmpThisOrder.power_Supply" name="Power_Supply" #case="ngModel" [ngModelOptions]="{standalone: true}">
               <option value=""></option>
               <option *ngFor="let m of powerSupply" value="{{ m.name }}">{{ m.name }}</option>
             </select>     
@@ -196,7 +196,7 @@
      <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="coolingFormGroup">
         <ng-template matStepLabel>Cooling Fan</ng-template>          
-        <select id="Cooling_Fan" class="form-control" (change)="setValue()" [(ngModel)]="tmpThisOrder.cooling_Fan" name="Cooling_Fan" #case="ngModel" [ngModelOptions]="{standalone: true}">
+        <select id="Cooling_Fan" class="form-control" [(ngModel)]="tmpThisOrder.cooling_Fan" name="Cooling_Fan" #case="ngModel" [ngModelOptions]="{standalone: true}">
               <option value=""></option>
               <option *ngFor="let m of coolingFan" value="{{ m.name }}">{{ m.name }}</option>
             </select>     

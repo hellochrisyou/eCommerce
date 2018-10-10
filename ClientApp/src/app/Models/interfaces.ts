@@ -1,5 +1,8 @@
 export interface thisOrder {
     type: string;    
+    order_Number: string,
+    address: string;
+    AccountInfoOrderId: string;
     cpu: string;
     motherboard: string;
     ram: string;
@@ -8,7 +11,7 @@ export interface thisOrder {
     power_Supply: string;
     cooling_Fan: string;
     case: string;
-    total_Price: number; 
+    total_Price: string; 
     }
   
   export interface KeyValuePair 

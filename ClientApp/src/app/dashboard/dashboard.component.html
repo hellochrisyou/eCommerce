@@ -1,0 +1,103 @@
+<div class="container-fluid">
+  <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">bar_chart</mat-icon>
+          Dashboard
+        </ng-template>  
+
+<div class="container">
+        <div class="col-4 offset-2">
+          <mat-card class="example-card">           
+              <mat-icon style="color:white" class="card-icon">attach_money</mat-icon>
+              <p style="color: white">{{revenue}}</p>
+          </mat-card>
+        </div>    
+        
+
+  
+            <div id="pieChart" style="margin-top:5%; padding:0px">
+                
+              <canvas baseChart 
+              class="col"              
+              style="margin:0 auto;position:relative;"   
+                      [data]="orderData"
+                      [labels]="pieChartLabels"
+                      [chartType]="pieChartType"
+                      (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)"
+                      [colors]="colors">
+              </canvas>
+            </div>
+          </div>
+      </mat-tab>
+    
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">account_circle</mat-icon>
+            Account
+        </ng-template>
+          <div class="container">
+              <div class="row">
+                <div class="search-hero">
+                  <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="on" placeholder="&#61442;  Search">
+                </div>
+              <table class="table table-striped">
+              <thead>
+                  <tr>
+                    <th (click)="sortList('email')">Email
+                      <span *ngIf="key === 'email'">
+                          <span *ngIf="reverse">
+                            <i class="fa fa-arrow-up"></i>
+                          </span>
+                          <span *ngIf="!reverse">
+                            <i class="fa fa-arrow-down"></i>
+                          </span>
+                      </span>                
+                    </th>
+                  <th (click)="sortList('master_account')">Master
+                    <span *ngIf="key === 'master_account'">
+                        <span *ngIf="reverse">
+                          <i class="fa fa-arrow-up"></i>
+                        </span>
+                    <span *ngIf="!reverse">
+                          <i class="fa fa-arrow-down"></i>
+                          </span>
+                    </span>            
+                  </th>
+                  <th (click)="sortList('admin')">Admin
+                      <span *ngIf="key === 'admin'">
+                          <span *ngIf="reverse">
+                            <i class="fa fa-arrow-up"></i>
+                          </span>
+                          <span *ngIf="!reverse">
+                            <i class="fa fa-arrow-down"></i>
+                          </span>
+                      </span>              
+                  </th>                   
+                  </tr>
+                </thead>
+              <tbody>
+              <tr *ngFor="let t of accounts | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }">
+                <td>{{t.email}}</td>
+                <td>
+                  <mat-slide-toggle (change)="updateMaster()"
+                    [color]="red"
+                    [checked]=t.master_account>
+                  </mat-slide-toggle>
+                </td>
+                <td>
+                    <mat-slide-toggle (change)="updateAdmin()"
+                    [color]="red"
+                    [checked]=t.admin>
+                  </mat-slide-toggle>
+                </td>                   
+              </tr>
+              </tbody>
+              <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </table>
+            </div>
+            </div> 
+      </mat-tab>
+  </mat-tab-group>
+</div>

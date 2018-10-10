@@ -9,7 +9,10 @@ namespace CyouEcommerce.Controllers.Resources
     public class OrderResource
     {
         public int Id { get; set; }        
-        public int Order_Number { get; set; }     
+        public int Order_Number { get; set; } 
+        public Account AccountInfoOrder { get; set; }
+        public int AccountInfoOrderId { get; set; }    
+        public string Address  { get; set;}          
         // public DateTime Date { get; set; } 
         public string Type { get; set; }
         public string CPU { get; set; } 

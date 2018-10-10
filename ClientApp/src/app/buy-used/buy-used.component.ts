@@ -4,7 +4,7 @@ import { ShoppingcartComponent } from '../shoppingcart/shoppingcart.component';
 import { ShoppingcartService } from './../Services/shoppingcart.service';
 import { PhotoService } from '../Services/photo.service';
 import { thisOrder } from '../Models/interfaces';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 
 @Component({
  selector: 'app-buy-used',
@@ -19,6 +19,9 @@ export class BuyUsedComponent implements OnInit {
  //temporary object for practice.  use ng init to cycle through items
  tmpThisOrder: thisOrder = { 
      type: 'Used',
+     address: '',
+     AccountInfoOrderId: '',
+     order_Number: '',
      case: '',
      cooling_Fan: '',
      cpu: '',
@@ -27,12 +30,18 @@ export class BuyUsedComponent implements OnInit {
      power_Supply: '',
      ram: '',
      storage: '',
-     total_Price: 0  
+     total_Price: ''  
  }
 
  tmpShoppingOrder: thisOrder;
 
- constructor(public dialog: MatDialog, private shoppingcart: ShoppingcartService, private MakeService: MakeService, private photoService: PhotoService) { }
+ constructor(
+  public UsedSnackBar: MatSnackBar,
+  public dialog: MatDialog, 
+  private shoppingcart: ShoppingcartService, 
+  private MakeService: MakeService, 
+  private photoService: PhotoService
+  ) {}
 
  ngOnInit() {
    this.MakeService.getAllSaleItem().subscribe(usedItem => {
@@ -49,10 +58,12 @@ export class BuyUsedComponent implements OnInit {
 
  addToCart(i)
  {
+   this.openUsedSnackBar();
    console.log('index', i);
    this.tmpThisOrder = this.usedItem[i];
+   this.tmpThisOrder.total_Price = this.tmpThisOrder.total_Price.toString();
    console.log('tmpthisorder', this.tmpThisOrder);
-   this.shoppingcart.add(this.tmpThisOrder);   
+   this.shoppingcart.add(this.tmpThisOrder);      
  }
 
  openDialog(selectedPic): void {
@@ -64,7 +75,25 @@ export class BuyUsedComponent implements OnInit {
     data: {expandedPic: this.tmpSelectedFileName}
   });
   }
+
+  openUsedSnackBar() {
+    this.UsedSnackBar.openFromComponent(ConfirmUsedItem, {
+      duration: 5000,
+    });
+  }
 }
+
+@Component({
+  selector: 'ConfirmUsedItem',
+  templateUrl: 'ConfirmUsedItem.html',
+  styles: [`
+    .confirmMessage {
+      color: green;      
+    }
+  `],
+})
+export class ConfirmUsedItem {}
+
 
 @Component({
   selector: 'expandPic',
@@ -77,17 +106,18 @@ export class BuyUsedComponent implements OnInit {
   `],
 })
 export class expandPic {
-
-  constructor(
+  constructor(    
     public dialogRef: MatDialogRef<expandPic>,
     @Inject(MAT_DIALOG_DATA) public data: photoClass) {}
 
     done(): void {
-      this.dialogRef.close();
+      
+      this.dialogRef.close();      
     }
-
+    
 }
 
 class photoClass {
   expandedPic: string;
 }
+

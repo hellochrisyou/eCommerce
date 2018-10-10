@@ -10,6 +10,10 @@ namespace CYouEcommerce.Core.EFTables
         [Required]
         [StringLength(255)]
         public string Email { get; set; }        
+        [Required]
+        public bool master_account { get; set; }
+        [Required]
+        public bool admin { get; set; }        
         public ICollection<Order> Orders { get; set; }
         public ICollection<SaleItem> ItemForSales { get; set; }
 

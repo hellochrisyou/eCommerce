@@ -1,3 +1,4 @@
+import { AuthService } from './../Services/auth.service';
 import { PhotoService } from './../Services/photo.service';
 import { Component, OnInit, ElementRef, ViewChild, NgZone, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -21,7 +22,7 @@ export class SellComponent implements OnInit {
   
 
   tmpThisOrder: thisSellOrder = {
-    accountsaleitemid: 1,    
+    accountsaleitemid: '',    
     type: 'Used',
     case: '',
     cooling_Fan: '',
@@ -31,7 +32,7 @@ export class SellComponent implements OnInit {
     power_Supply: '',
     ram: '',
     storage: '',   
-    total_Price: 0,
+    total_Price: '',
     sellername: 'test'
   }
   
@@ -54,14 +55,18 @@ export class SellComponent implements OnInit {
     private _formBuilder: FormBuilder,  
     private MakeService: MakeService, 
     private photoService: PhotoService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private Auth: AuthService,
     ) 
     {
     console.log('constructor', this.tmpThisOrder);
     }
 
   ngOnInit() {
-    
+    //initialize accountId
+    this.tmpThisOrder.accountsaleitemid = localStorage.getItem('account_id');
+
+    //initialize form groups
     this.cpuFormGroup = this._formBuilder.group({
       cpuCtrl: ['', Validators.required]
     });
@@ -107,7 +112,7 @@ export class SellComponent implements OnInit {
     this.tmpThisOrder.power_Supply = this.powerFormGroup.value.powerCtrl;
     this.tmpThisOrder.ram = this.ramFormGroup.value.ramCtrl;
     this.tmpThisOrder.storage = this.storageFormGroup.value.storageCtrl;
-    this.tmpThisOrder.total_Price = this.priceFormGroup.value.priceCtrl;
+    this.tmpThisOrder.total_Price = this.priceFormGroup.value.priceCtrl.toString();    
     console.log('test this', this.tmpThisOrder);
 
     this.cpuFormGroup.reset();
@@ -128,7 +133,7 @@ export class SellComponent implements OnInit {
           console.log("uploadeditemid", this.uploadedItemId)
           this.openDialog();
           this.tmpThisOrder =  {
-            accountsaleitemid: 1,    
+            accountsaleitemid: '',    
             type: 'Used',
             case: '',
             cooling_Fan: '',
@@ -138,7 +143,7 @@ export class SellComponent implements OnInit {
             power_Supply: '',
             ram: '',
             storage: '',   
-            total_Price: 0,
+            total_Price: '',
             sellername: 'test'
           };
           this.priceFormGroup.get('priceCtrl').setValue(0);
@@ -220,7 +225,7 @@ export class UploadDialog{
 export class snackErrorMessage {}
 
 class thisSellOrder  {
-  accountsaleitemid: number;
+  accountsaleitemid: string;
   type: string;  
   cooling_Fan: string;
   cpu: string;
@@ -230,7 +235,7 @@ class thisSellOrder  {
   ram: string;
   storage: string;        
   case: string;
-  total_Price: number; 
+  total_Price: string; 
   sellername: string;
 }
 

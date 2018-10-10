@@ -16,6 +16,7 @@ export class OrderhistoryComponent implements OnInit {
 
   tmpThisOrder: thisOrder = {
     order_Number: 0,
+    address: '',
     type: '',
     case: '',
     cooling_Fan: '',
@@ -25,7 +26,7 @@ export class OrderhistoryComponent implements OnInit {
     power_Supply: '',
     ram: '',
     storage: '',
-    total_Price: 0
+    total_Price: ''
   }
 
     // sorting logic
@@ -55,6 +56,7 @@ export class OrderhistoryComponent implements OnInit {
 class thisOrder 
 {
   order_Number: number;
+  address: string;
   type: string;
   case: string;
   cooling_Fan: string;
@@ -64,5 +66,5 @@ class thisOrder
   power_Supply: string;
   ram: string;
   storage: string;        
-  total_Price: number;
+  total_Price: string;
 }

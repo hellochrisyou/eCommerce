@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 //import { Observable } from 'rxjs/Observable';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { thisOrder, KeyValuePair} from './../Models/interfaces'
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-buy-new',
@@ -94,6 +95,9 @@ export class BuyNewComponent implements OnInit {
 
     tmpThisOrder: thisOrder = {
     type: 'New',
+    address: '',
+    AccountInfoOrderId: '',
+    order_Number: '',
     case: '',
     cooling_Fan: '',
     cpu: '',
@@ -102,7 +106,7 @@ export class BuyNewComponent implements OnInit {
     power_Supply: '',
     ram: '',
     storage: '',
-    total_Price: 0       
+    total_Price: '11'       
     }
 
     isLinear = false;
@@ -124,7 +128,12 @@ export class BuyNewComponent implements OnInit {
       this.reverse = !this.reverse;
       console.log(this.key);
     }
-    constructor(private ShoppingcartService: ShoppingcartService, private MakeService: MakeService, private _formBuilder: FormBuilder) { }
+    constructor(
+      public snackBar: MatSnackBar,
+      private ShoppingcartService: ShoppingcartService, 
+      private MakeService: MakeService, 
+      private _formBuilder: FormBuilder
+      ) { }
 
     ngOnInit() {
         this.MakeService.getCase().subscribe(caseItem => this.caseItem = caseItem);
@@ -141,8 +150,7 @@ export class BuyNewComponent implements OnInit {
           this.clonedOrder.forEach(function (value) {
           delete value.id;
         });        
-      })
-        // this.MakeService.getSoftware().subscribe(software => this.software = software);
+      })       
           
         this.cpuFormGroup = this._formBuilder.group({
           cpuCtrl: ['', Validators.required]
@@ -173,20 +181,6 @@ export class BuyNewComponent implements OnInit {
         });
       } 
 
-  // createCase()
-  // {
-    // this.modelObject = {Name: 'testName', Price: 1000};
-    // console.log(this.modelObject);
-    // this.MakeService.createCase(this.modelObject).subscribe(x => console.log(x));  
-  // }
-
-  setValue()
-  {  
-
-    // var selectedCategory = this.caseItem.find(m => m.id == this.tmpThisOrder.order_Number);
-    // console.log('select', selectedCategory);
-    
-  }
   onCaseChange()
   {
     var selectedCategory = this.caseItem.find(m => m.name == this.tmpThisOrder.case);   
@@ -194,10 +188,26 @@ export class BuyNewComponent implements OnInit {
     console.log(this.selectedCase);
   }
 
-
   addOrder()
   {
-    this.ShoppingcartService.add(this.tmpThisOrder);    
+    this.ShoppingcartService.add(this.tmpThisOrder);   
+    this.openSnackBar(); 
   }
-
+  
+  openSnackBar() {
+    this.snackBar.openFromComponent(ConfirmNewItem, {
+      duration: 5000,
+    });
+  }
 }
+
+@Component({
+  selector: 'ConfirmNewItem',
+  templateUrl: 'ConfirmNewItem.html',
+  styles: [`
+    .confirmMessage {
+      color: green;      
+    }
+  `],
+})
+export class ConfirmNewItem {}

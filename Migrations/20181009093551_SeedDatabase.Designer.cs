@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CYouEcommerce.Migrations
 {
     [DbContext(typeof(R13DbContext))]
-    [Migration("20181009000754_changedAccountFields")]
-    partial class changedAccountFields
+    [Migration("20181009093551_SeedDatabase")]
+    partial class SeedDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,6 +30,10 @@ namespace CYouEcommerce.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255);
+
+                    b.Property<bool>("admin");
+
+                    b.Property<bool>("master_account");
 
                     b.HasKey("Id");
 
@@ -242,6 +246,10 @@ namespace CYouEcommerce.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AccountInfoOrderId");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(255);
 
                     b.Property<string>("CPU")
                         .IsRequired()

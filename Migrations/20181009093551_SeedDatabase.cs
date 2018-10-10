@@ -2,7 +2,7 @@
 
 namespace CYouEcommerce.Migrations
 {
-    public partial class seedDatabase : Migration
+    public partial class SeedDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -56,7 +56,8 @@ namespace CYouEcommerce.Migrations
             migrationBuilder.Sql("insert into Cases ([name], price, brand, model, series, details) values ('be quiet! Silent Base 601', 129.90, 'be quiet!', 'Silent Base', '600 Series', 'be quiet! Silent Base 601 Orange delivers the perfect combination of maximum silence and an excellent usability for remarkably quiet configurations')");
             migrationBuilder.Sql("insert into Cases ([name], price, brand, model, series, details) values ('Riotoro CR500 TG', 102.64, 'Riotoro', 'CR500', '', 'SPCC (Cold Roll Steel) Metal with Tempered Glass Window ATX Mid Tower. 1 x USB 3.0 / 2 x USB 2.0 / Audio Front Ports. 4 Internal 3.5 Drive Bays')");
 
-            migrationBuilder.Sql("insert into accounts (name, address, email, phone, username, password) values ('chris', 'Address 1', 'chrisyoufacebook@gmail.com', 5555555555, 'cyou', 'password123')");
+            migrationBuilder.Sql("insert into accounts (email, master_account, admin) values ('chris22311@yahoo.com', 1, 1)");
+            migrationBuilder.Sql("insert into accounts (email, master_account, admin) values ('hellochrisyou@gmail.com', 1, 1)");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

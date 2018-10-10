@@ -7,6 +7,7 @@
   <table class="table table-striped">
    <thead>
       <tr>
+      <th>Delete</th>
       <th (click)="sortList('type')">Type
          <span *ngIf="key === 'type'">
             <span *ngIf="reverse">
@@ -110,7 +111,12 @@
       </tr>
     </thead>
   <tbody>
-  <tr *ngFor="let t of shoppingOrder | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }">
+  <tr *ngFor="let t of shoppingOrder | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+    <td style="text-align:center">
+      <button class="trash-button">
+          <i style="color:red" class="fa fa-trash" (click)="DeleteOrder(i)" aria-hidden="true"></i>
+      </button>  
+    </td>
     <td>{{t.type}}</td>
     <td>{{t.case}}</td>
     <td>{{t.ram}}</td>
@@ -126,6 +132,6 @@
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </table>
 
-<button (click)="click()">show</button>
+<button (click)="submit()">show</button>
 </div>
 </div> 

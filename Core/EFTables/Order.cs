@@ -8,10 +8,13 @@ namespace CYouEcommerce.Core.EFTables
     public class Order
     {
         public int Id { get; set; }
-        public Account AccountInfoOrder { get; set; }
-        public int AccountInfoOrderId { get; set; }
         [Required]        
         public int Order_Number { get; set; }
+        [Required]
+        [StringLength(255)]
+        public string Address { get; set; }
+        public Account AccountInfoOrder { get; set; }
+        public int AccountInfoOrderId { get; set; }        
         // [Required]                
         // public DateTime Date { get; set; }       
         [Required]

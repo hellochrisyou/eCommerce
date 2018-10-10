@@ -29,6 +29,10 @@ namespace CYouEcommerce.Migrations
                         .IsRequired()
                         .HasMaxLength(255);
 
+                    b.Property<bool>("admin");
+
+                    b.Property<bool>("master_account");
+
                     b.HasKey("Id");
 
                     b.ToTable("Accounts");
@@ -240,6 +244,10 @@ namespace CYouEcommerce.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AccountInfoOrderId");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(255);
 
                     b.Property<string>("CPU")
                         .IsRequired()

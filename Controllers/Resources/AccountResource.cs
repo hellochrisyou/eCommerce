@@ -9,6 +9,8 @@ namespace CyouEcommerce.Controllers.Resources
     {
         public int Id { get; set; }
         public string Email { get; set; }
+        public bool master_account { get; set; }
+        public bool admin { get; set; }
         public ICollection<OrderResource> Orders { get; set; }
         public ICollection<SaleItemResource> ItemForSales { get; set; }        
         public AccountResource()

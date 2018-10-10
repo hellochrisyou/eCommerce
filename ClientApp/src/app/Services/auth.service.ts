@@ -1,5 +1,4 @@
 import { MakeService } from './make.service';
-import { EmailService } from './email.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -12,8 +11,17 @@ import * as auth0 from 'auth0-js';
 export class AuthService {
 
   userEmail: accountClass = {
-    email: ""
+    email: "",
+    admin: false,
+    master_account: false,
+
   };
+  existingUser: existingAccountClass = {
+    id: '0',
+    email: "",
+    admin: false,
+    master_account: false,
+  }
   userAccount: any;
   auth0 = new auth0.WebAuth({
     clientID: '0MJ1BB2OJ-f_9eaPXxTZA7RBjkkMUR1s',
@@ -23,7 +31,7 @@ export class AuthService {
     scope: 'openid email'
   });
 
-  constructor(public router: Router, private emailService: EmailService, private makeService: MakeService) {    
+  constructor(public router: Router, private makeService: MakeService) {    
   }
 
 
@@ -53,25 +61,37 @@ export class AuthService {
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);    
     console.log('token', auth0.id_token);
-    console.log('usermeail', authResult.idTokenPayload.email);
-    this.emailService.setEmail(authResult.idTokenPayload.email);
+    console.log('useremail', authResult.idTokenPayload.email);
+    //create user account if not exist, otherwise set user_email to current user
     this.makeService.getAccount().subscribe(userAccount => {
       this.userAccount = userAccount;
       console.log('useraccount', this.userAccount);
+    //check if user account exists
     var accountExists = this.userAccount.find(m => m.email == authResult.idTokenPayload.email); 
     if (accountExists == null)
     {
+      //create account with email value
       this.userEmail.email = authResult.idTokenPayload.email;
       this.makeService.createAccount(this.userEmail).subscribe(x => {x});
       localStorage.setItem('user_email', this.userEmail.email);
+      //get userId.  refactor so you can search last id of user and not make another get request
+        this.makeService.getAccount().subscribe(userAccount => {
+          this.userAccount = userAccount;
+          console.log('useraccount', this.userAccount);
+            var accountId = this.userAccount.find(m => m.email == userAccount.email); 
+              localStorage.setItem('account_id', accountId.Id);   
+              console.log('local storage', localStorage);
+        }) 
     }        
     else
     {
-      localStorage.setItem('user_email', authResult.idTokenPayload.email);
+      this.existingUser = this.userAccount.find(m => m.email == authResult.idTokenPayload.email)
+      localStorage.setItem('user_email',this.existingUser.email);
+      localStorage.setItem('account_id', this.existingUser.id);
+      console.log('local storage', localStorage);
+      console.log('existinguser', this.existingUser);
     }
-    });
-    
-    
+    });      
   }
 
   public logout(): void {
@@ -98,6 +118,16 @@ export class AuthService {
 }
 
 class accountClass 
-{
+{  
   email: string;
+  admin: boolean;
+  master_account: boolean;
+}
+
+class existingAccountClass
+{
+  id: string;
+  email: string;
+  admin: boolean;
+  master_account: boolean;
 }

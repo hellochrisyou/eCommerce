@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../Services/auth.service';
-import { EmailService } from '../Services/email.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -13,10 +12,11 @@ export class NavMenuComponent{
   emailName: string = "";
   isExpanded = false;
 
-  constructor(public auth: AuthService, private emailService: EmailService){ 
+  constructor(public auth: AuthService){ 
+    //timeout for now, until you can figure out how to set email. Also, component constructor is running twice
     setTimeout(() => {
-      this.emailName = this.emailService.getEmail(); 
-    console.log('emailname', this.emailName);
+      localStorage; 
+    this.emailName = localStorage.getItem('user_email');
    }, 2000);
     
   }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CYouEcommerce.Migrations
 {
     [DbContext(typeof(R13DbContext))]
-    [Migration("20181008185647_seedDatabase")]
-    partial class seedDatabase
+    [Migration("20181009093526_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,29 +27,13 @@ namespace CYouEcommerce.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(255);
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255);
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255);
+                    b.Property<bool>("admin");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(255);
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(20);
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasMaxLength(255);
+                    b.Property<bool>("master_account");
 
                     b.HasKey("Id");
 
@@ -262,6 +246,10 @@ namespace CYouEcommerce.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AccountInfoOrderId");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(255);
 
                     b.Property<string>("CPU")
                         .IsRequired()

@@ -1,0 +1,8 @@
+<div class="example-container">
+    <mat-form-field appearance="legacy">
+        <mat-label>Address</mat-label>          
+        <input [(ngModel)]="addressValue" matInput placeholder="Address">                           
+    </mat-form-field>    
+    <button (click) = "submit()">Submit</button>
+    <button (click) = "cancel()">Cancel</button>
+</div>

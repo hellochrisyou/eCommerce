@@ -18,6 +18,11 @@
                     </a>
                 </li>
                 <li [routerLinkActive]='["link-active"]' >
+                        <a [routerLink]='["/Dashboard"]' (click)='collapse()'>
+                            <span class='glyphicon glyphicon-th-list'></span> Dashboard
+                        </a>
+                    </li>
+                <li [routerLinkActive]='["link-active"]' >
                     <a [routerLink]='["/"]' (click)='collapse()'>
                         <span class='glyphicon glyphicon-home'></span> Home
                     </a>

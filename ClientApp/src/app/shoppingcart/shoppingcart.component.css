@@ -16,3 +16,11 @@
     padding-left: 10px;
     cursor: pointer;
   }
+  
+  .trash-button {
+    padding: 0 !important;
+    border: none !important;
+    background: none !important;
+  }
+
+  
