@@ -14,10 +14,11 @@ import { MatSnackBar } from '@angular/material';
   providers: [MakeService]
 })
 export class BuyNewComponent implements OnInit {
+    totalPrice: number = 0;
     caseItem: any[];
     selectedCase: KeyValuePair =  {
       name: '',
-      price: '',
+      price: 0,
       model: '',
       series: '',
       brand: '',
@@ -26,7 +27,7 @@ export class BuyNewComponent implements OnInit {
     coolingFan: any[];
     selectedFan : KeyValuePair =  {
       name: '',
-      price: '',
+      price: 0,
       model: '',
       series: '',
       brand: '',
@@ -35,7 +36,7 @@ export class BuyNewComponent implements OnInit {
     CPU: any[];
     selectedCPU : KeyValuePair =  {
       name: '',
-      price: '',
+      price: 0,
       model: '',
       series: '',
       brand: '',
@@ -44,7 +45,7 @@ export class BuyNewComponent implements OnInit {
     GPU: any[];
     selectedGPU : KeyValuePair =  {
       name: '',
-      price: '',
+      price: 0,
       model: '',
       series: '',
       brand: '',
@@ -53,7 +54,7 @@ export class BuyNewComponent implements OnInit {
     motherboard: any[];
     selectedMotherboard : KeyValuePair =  {
       name: '',
-      price: '',
+      price: 0,
       model: '',
       series: '',
       brand: '',
@@ -62,7 +63,7 @@ export class BuyNewComponent implements OnInit {
     powerSupply: any[];
     selectedPSupply : KeyValuePair =  {
       name: '',
-      price: '',
+      price: 0,
       model: '',
       series: '',
       brand: '',
@@ -71,7 +72,7 @@ export class BuyNewComponent implements OnInit {
     RAM: any[];
     selectedRAM : KeyValuePair =  {
       name: '',
-      price: '',
+      price: 0,
       model: '',
       series: '',
       brand: '',
@@ -80,7 +81,7 @@ export class BuyNewComponent implements OnInit {
     storage: any[];
     selectedStorage : KeyValuePair =  {
       name: '',
-      price: '',
+      price: 0,
       model: '',
       series: '',
       brand: '',
@@ -96,7 +97,7 @@ export class BuyNewComponent implements OnInit {
     tmpThisOrder: thisOrder = {
     type: 'New',
     address: '',
-    AccountInfoOrderId: '',
+    accountInfoOrderId: '',
     order_Number: '',
     case: '',
     cooling_Fan: '',
@@ -136,7 +137,10 @@ export class BuyNewComponent implements OnInit {
       ) { }
 
     ngOnInit() {
-        this.MakeService.getCase().subscribe(caseItem => this.caseItem = caseItem);
+        this.MakeService.getCase().subscribe(caseItem => {
+          this.caseItem = caseItem
+          console.log('caseprice', this.caseItem);
+        });
         this.MakeService.getCoolingfan().subscribe(coolingFan => this.coolingFan = coolingFan);
         this.MakeService.getCPU().subscribe(CPU => this.CPU = CPU);
         this.MakeService.getGPU().subscribe(GPU => this.GPU = GPU);
@@ -180,14 +184,7 @@ export class BuyNewComponent implements OnInit {
           caseCtrl: ['', Validators.required]
         });
       } 
-
-  onCaseChange()
-  {
-    var selectedCategory = this.caseItem.find(m => m.name == this.tmpThisOrder.case);   
-    this.selectedCase = selectedCategory;   
-    console.log(this.selectedCase);
-  }
-
+      
   addOrder()
   {
     this.ShoppingcartService.add(this.tmpThisOrder);   
@@ -199,7 +196,70 @@ export class BuyNewComponent implements OnInit {
       duration: 5000,
     });
   }
+
+  calculateTotal()
+  {
+    this.totalPrice = 0;
+    
+    if (this.tmpThisOrder.cpu != '')
+    {
+    var tmp = this.CPU.find(m => m.name == this.tmpThisOrder.cpu);  
+    console.log('tmp', tmp);
+    this.selectedCPU = tmp
+    console.log('this.selectedCPU', this.selectedCPU);
+    this.totalPrice = parseFloat((this.selectedCPU.price + this.totalPrice).toFixed(2));
+    }
+    if (this.tmpThisOrder.motherboard != '')
+    {
+    var tmp = this.motherboard.find(m => m.name == this.tmpThisOrder.motherboard);   
+    console.log('tmp', tmp);
+    this.selectedMotherboard = tmp;
+    console.log('this.selectedMotherboard', this.selectedMotherboard);
+    this.totalPrice = parseFloat((this.selectedMotherboard.price + this.totalPrice).toFixed(2));
+    }
+    if (this.tmpThisOrder.ram != '')
+    {
+    var tmp = this.RAM.find(m => m.name == this.tmpThisOrder.ram);   
+    this.selectedRAM = tmp;
+    this.totalPrice = parseFloat((this.selectedRAM.price + this.totalPrice).toFixed(2));
+    }
+    if (this.tmpThisOrder.storage != '')
+    {
+    var tmp = this.storage.find(m => m.name == this.tmpThisOrder.storage);   
+    this.selectedStorage = tmp;
+    this.totalPrice = parseFloat((this.selectedStorage.price + this.totalPrice).toFixed(2));
+    }
+    if (this.tmpThisOrder.gpu != '')
+    {
+    var tmp = this.GPU.find(m => m.name == this.tmpThisOrder.gpu);   
+    this.selectedGPU = tmp;
+    this.totalPrice = parseFloat((this.selectedGPU.price + this.totalPrice).toFixed(2));
+    }
+    if (this.tmpThisOrder.power_Supply != '')
+    {
+    var tmp = this.powerSupply.find(m => m.name == this.tmpThisOrder.power_Supply);   
+    this.selectedPSupply = tmp;
+    this.totalPrice = parseFloat((this.selectedPSupply.price + this.totalPrice).toFixed(2));
+    }
+    if (this.tmpThisOrder.cooling_Fan != '')
+    {
+    var tmp = this.coolingFan.find(m => m.name == this.tmpThisOrder.cooling_Fan);   
+    this.selectedFan = tmp;
+    this.totalPrice = parseFloat((this.selectedFan.price + this.totalPrice).toFixed(2));
+    }
+    if (this.tmpThisOrder.case != '')
+    {
+    var tmp = this.caseItem.find(m => m.name == this.tmpThisOrder.case);          
+    this.selectedCase = tmp;
+    this.totalPrice = parseFloat((this.selectedCase.price + this.totalPrice).toFixed(2));  
+    }
+    console.log('totalprice', this.totalPrice);
+
+  }
+
 }
+
+
 
 @Component({
   selector: 'ConfirmNewItem',

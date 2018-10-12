@@ -27,7 +27,7 @@ export class AuthService {
     clientID: '0MJ1BB2OJ-f_9eaPXxTZA7RBjkkMUR1s',
     domain: 'r13champ.auth0.com',
     responseType: 'token id_token',
-    redirectUri: 'https://localhost:5001/callback',
+    redirectUri: 'https://localhost:5001',
     scope: 'openid email'
   });
 
@@ -75,17 +75,46 @@ export class AuthService {
       this.makeService.createAccount(this.userEmail).subscribe(x => {x});
       localStorage.setItem('user_email', this.userEmail.email);
       //get userId.  refactor so you can search last id of user and not make another get request
+
+        // DO WE REALLY NEED TO CALL GET ACCOUNT TWICE?
         this.makeService.getAccount().subscribe(userAccount => {
           this.userAccount = userAccount;
           console.log('useraccount', this.userAccount);
             var accountId = this.userAccount.find(m => m.email == userAccount.email); 
-              localStorage.setItem('account_id', accountId.Id);   
+              localStorage.setItem('account_id', accountId.Id);
+
+              //added
+              localStorage.setItem('isAdmin', 'false');   
+              localStorage.setItem('isMaster', 'false');
+              //end
               console.log('local storage', localStorage);
+
         }) 
     }        
     else
     {
       this.existingUser = this.userAccount.find(m => m.email == authResult.idTokenPayload.email)
+
+      //added
+      //check if user is admin
+      if (this.existingUser.admin == true)
+      {
+        localStorage.setItem('isAdmin', 'true');
+      }
+      else
+      {
+        localStorage.setItem('isAdmin', 'false');
+      }
+      if (this.existingUser.master_account == true)
+      {
+        localStorage.setItem('isMaster', 'true');
+      }
+      else
+      {
+        localStorage.setItem('isMaster', 'false');
+      }
+      //end
+
       localStorage.setItem('user_email',this.existingUser.email);
       localStorage.setItem('account_id', this.existingUser.id);
       console.log('local storage', localStorage);

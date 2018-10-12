@@ -4,14 +4,16 @@ using CYouEcommerce.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CYouEcommerce.Migrations
 {
     [DbContext(typeof(R13DbContext))]
-    partial class R13DbContextModelSnapshot : ModelSnapshot
+    [Migration("20181012014623_addDatetoORders")]
+    partial class addDatetoORders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MakeService } from './../Services/make.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 import {ErrorHandler} from "@angular/core";
+import { thisSellOrder } from '../Models/interfaces';
 
 
 
@@ -146,6 +147,7 @@ export class SellComponent implements OnInit {
             total_Price: '',
             sellername: 'test'
           };
+          this.tmpThisOrder.accountsaleitemid = localStorage.getItem('account_id');
           this.priceFormGroup.get('priceCtrl').setValue(0);
           });   
   console.log('regenerate', this.tmpThisOrder);  
@@ -223,21 +225,6 @@ export class UploadDialog{
   `],
 })
 export class snackErrorMessage {}
-
-class thisSellOrder  {
-  accountsaleitemid: string;
-  type: string;  
-  cooling_Fan: string;
-  cpu: string;
-  gpu: string;
-  motherboard: string;
-  power_Supply: string;
-  ram: string;
-  storage: string;        
-  case: string;
-  total_Price: string; 
-  sellername: string;
-}
 
 interface uploadedItemId {
   itemId: number;

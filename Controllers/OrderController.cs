@@ -29,6 +29,10 @@ namespace CyouEcommerce.Controllers
                 return BadRequest(ModelState);
             }
             var order = mapper.Map<OrderResource, Order>(orderResource);
+
+            var dateAndTime = DateTime.Now;
+            order.OrderDate = dateAndTime.Date;
+            
             context.Orders.Add(order);
             await context.SaveChangesAsync();
             var result = mapper.Map<Order, OrderResource>(order);

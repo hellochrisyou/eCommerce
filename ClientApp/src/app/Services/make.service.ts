@@ -52,7 +52,7 @@ export class MakeService {
   {
     return this.http.post('/api/Case', caseItem).map(res=>res.json());
   }
-  creatCoolingfan(coolingfan)
+  createCoolingfan(coolingfan)
   {
     return this.http.post('/api/Coolingfan', coolingfan).map(res=>res.json());
   }
@@ -96,4 +96,11 @@ export class MakeService {
   {
     return this.http.post('/api/Account', user);
   }  
+
+  //added
+  updateAccount(account)
+  {
+    return this.http.put('/api/Account/' + account.id, account).map(res => res.json());
+  }
+  //end
 }

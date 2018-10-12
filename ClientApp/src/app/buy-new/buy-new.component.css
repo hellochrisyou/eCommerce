@@ -18,3 +18,9 @@
     padding-left: 10px;
     cursor: pointer;
   }
+
+  .mat-header-row {
+    position: sticky;
+    top: 0;
+    background-color: inherit;
+  }

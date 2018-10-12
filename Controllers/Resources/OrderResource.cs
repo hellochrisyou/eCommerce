@@ -13,7 +13,7 @@ namespace CyouEcommerce.Controllers.Resources
         public Account AccountInfoOrder { get; set; }
         public int AccountInfoOrderId { get; set; }    
         public string Address  { get; set;}          
-        // public DateTime Date { get; set; } 
+        public DateTime OrderDate { get; set; } 
         public string Type { get; set; }
         public string CPU { get; set; } 
         public string Motherboard { get; set; }

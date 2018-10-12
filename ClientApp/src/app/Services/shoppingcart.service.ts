@@ -11,7 +11,7 @@ export class ShoppingcartService {
   tmpThisOrder: shoppingthisOrder = {
     type: '',
     address: '',
-    AccountInfoOrderId: '',
+    accountInfoOrderId: '',
     order_Number: '',
     case: '',
     cooling_Fan: '',
@@ -46,7 +46,7 @@ export class ShoppingcartService {
 class shoppingthisOrder {
   type: string;
   address: string;
-  AccountInfoOrderId: string;
+  accountInfoOrderId: string;
   order_Number: string;
   case: string;
   cooling_Fan: string;

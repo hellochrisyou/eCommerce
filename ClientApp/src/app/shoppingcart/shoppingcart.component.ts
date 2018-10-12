@@ -2,7 +2,7 @@ import { MakeService } from './../Services/make.service';
 import { ShoppingcartService } from './../Services/shoppingcart.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { thisOrder } from './../Models/interfaces'
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
 import { AuthService } from '../Services/auth.service';
 
 
@@ -56,7 +56,10 @@ export class ShoppingcartComponent implements OnInit {
   `],
 })
 export class checkout {
-  constructor(private makeService: MakeService, public auth: AuthService,
+  constructor(
+    public snackBar: MatSnackBar, 
+    private makeService: MakeService, 
+    public auth: AuthService,
     public dialogRef: MatDialogRef<checkout>,
     @Inject(MAT_DIALOG_DATA) public data: {}) {}    
     addressValue: string;
@@ -65,7 +68,7 @@ export class checkout {
       order_Number: '1',
       type: 'Used',
       address: 'aa',
-      AccountInfoOrderId: '',
+      accountInfoOrderId: '',
       case: '',
       cooling_Fan: '',
       cpu: '',
@@ -84,7 +87,7 @@ export class checkout {
       for (var tmp in this.data) {
         this.tmpObject.address = this.addressValue;
         this.tmpObject.order_Number=Math.floor((Math.random() * 999999) + 1000000).toString();         
-        this.tmpObject.AccountInfoOrderId= localStorage.getItem('account_id');
+        this.tmpObject.accountInfoOrderId= localStorage.getItem('account_id');
         this.tmpObject.case = this.data[tmp].case;
         this.tmpObject.cooling_Fan = this.data[tmp].cooling_Fan;
         this.tmpObject.cpu = this.data[tmp].cpu;
@@ -96,12 +99,33 @@ export class checkout {
         this.tmpObject.total_Price = this.data[tmp].total_Price;
         this.tmpObject.type = this.data[tmp].type;
         console.log('this.tmpobject', this.tmpObject);
-    this.makeService.createOrder(this.tmpObject).subscribe(x => x)    
+    this.makeService.createOrder(this.tmpObject).subscribe(x => x);
+    this.dialogRef.close();
+    this.openSnackBar();
   };
     }
+
     cancel(): void {
       this.dialogRef.close();
     }
+
+    openSnackBar() {
+      this.snackBar.openFromComponent(OrderCompleteSnack, {
+        duration: 5000,
+      });
+    }
 }
+
+@Component({
+  selector: 'OrderCompleteSnack',
+  templateUrl: 'OrderCompleteSnack.html',
+  styles: [`
+    .OrderMessage {
+      color: Green;      
+    }
+  `],
+})
+export class OrderCompleteSnack {}
+
 
 

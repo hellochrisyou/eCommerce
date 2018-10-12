@@ -25,11 +25,33 @@
     max-width: 400px;
     background-color: #3F51B5 !important;
   }
-  
-
+ 
+  .rectangle-users {
+    height: 50px;
+    width: 150px;
+    background-color: #3F51B5 !important;
+  }
+  .rectangle-revenue {
+    height: 50px;
+    width: 150px;
+    background-color: #EF4D4A !important;
+  }
+  .rectangle-orders {
+    height: 50px;
+    width: 150px;
+    background-color: #2196F7 !important;
+  }
 
   .text-primary {
       color:black !important;
   }
   
+  .example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 100%;
+  }
  

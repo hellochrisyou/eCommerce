@@ -1,8 +1,9 @@
+import { AuthService } from './../Services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { MakeService } from './../Services/make.service';
 //import { Observable } from 'rxjs/Observable';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { thisOrder, KeyValuePair, orderWDate} from './../Models/interfaces'
 
 @Component({
   selector: 'app-orderhistory',
@@ -14,10 +15,12 @@ export class OrderhistoryComponent implements OnInit {
   order: any[];
   clonedOrder: any[];
 
-  tmpThisOrder: thisOrder = {
-    order_Number: 0,
+  tmpThisOrder: orderWDate = {
+    type: 'New',
     address: '',
-    type: '',
+    accountInfoOrderId: '',
+    order_Number: '',
+    orderDate: new Date("January 1, 2018 00:00:00"),
     case: '',
     cooling_Fan: '',
     cpu: '',
@@ -26,8 +29,8 @@ export class OrderhistoryComponent implements OnInit {
     power_Supply: '',
     ram: '',
     storage: '',
-    total_Price: ''
-  }
+    total_Price: '11'       
+    }
 
     // sorting logic
     key = 'order_Number'; // sort default by name
@@ -38,33 +41,36 @@ export class OrderhistoryComponent implements OnInit {
       console.log(this.key);
     }
 
-  constructor(private MakeService: MakeService, private _formBuilder: FormBuilder) { }
+  constructor(
+    private Auth: AuthService, 
+    private MakeService: MakeService, 
+    private _formBuilder: FormBuilder
+    ) { }
 
-  ngOnInit() {    
+  ngOnInit() {        
+    var accountId = localStorage.getItem('account_id');
+    console.log('accountId', accountId);
       this.MakeService.getOrder().subscribe(order => {
-        this.order = order     
-        this.clonedOrder = JSON.parse(JSON.stringify(this.order));
-        this.clonedOrder.forEach(function (value) {
-        delete value.id;
+        this.order = order;
+        this.clonedOrder = JSON.parse(JSON.stringify(this.order
+          .filter(
+            function(e) {
+              console.log(e);
+              if (e.accountInfoOrderId == accountId)             
+              {
+                
+                return e;              
+              }
+            }
+          )));
+        
+        this.clonedOrder.forEach(function (value, index, object) {
+        delete value.id;        
         });
-      console.log(this.clonedOrder);      
-      })
+      console.log(this.clonedOrder);    
+    })
   } 
 }
 
 
-class thisOrder 
-{
-  order_Number: number;
-  address: string;
-  type: string;
-  case: string;
-  cooling_Fan: string;
-  cpu: string;
-  gpu: string;
-  motherboard: string;
-  power_Supply: string;
-  ram: string;
-  storage: string;        
-  total_Price: string;
-}
+

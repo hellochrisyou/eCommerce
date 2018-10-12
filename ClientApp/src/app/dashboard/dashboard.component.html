@@ -1,3 +1,21 @@
+
+<h4 style="text-align:center"> Bar chart of New and Used Computer Orders
+  <br/><br/>      
+  </h4><br/>
+<div>
+  <div style="display: block" *ngIf="barChartData.length > 0">
+    <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="mbarChartLabels"
+            [options]="barChartOptions"
+            [colors]="barChartColors"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+  </div> 
+</div>
+
 <div class="container-fluid">
   <mat-tab-group>
       <mat-tab>
@@ -6,18 +24,21 @@
           Dashboard
         </ng-template>  
 
-<div class="container">
-        <div class="col-4 offset-2">
-          <mat-card class="example-card">           
-              <mat-icon style="color:white" class="card-icon">attach_money</mat-icon>
-              <p style="color: white">{{revenue}}</p>
-          </mat-card>
-        </div>    
-        
+        <div class="container">
+            <div class="rectangle-users">
+                <mat-icon style="color:white" class="col,card-icon">group</mat-icon>              
+                <p style="color: white">{{totalAccounts}}</p>
+            </div>           
+            <div class="rectangle-revenue">
+                  <mat-icon style="color:white" class="col,card-icon">attach_money</mat-icon>              
+                  <p style="color: white">{{revenue}}</p>
+            </div>
+            <div class="rectangle-orders">
+                <mat-icon style="color:white" class="col,card-icon">business_center</mat-icon>              
+                <p style="color: white">{{totalOrders}}</p>
+            </div>  
 
-  
-            <div id="pieChart" style="margin-top:5%; padding:0px">
-                
+            <div id="pieChart" style="margin-top:5%; padding:0px">                
               <canvas baseChart 
               class="col"              
               style="margin:0 auto;position:relative;"   
@@ -78,26 +99,206 @@
                   </tr>
                 </thead>
               <tbody>
-              <tr *ngFor="let t of accounts | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }">
-                <td>{{t.email}}</td>
-                <td>
-                  <mat-slide-toggle (change)="updateMaster()"
-                    [color]="red"
-                    [checked]=t.master_account>
-                  </mat-slide-toggle>
+                <tr *ngFor="let t of accounts | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index"> <!--added-->
+                  <td>{{t.email}}</td>
+                  <td>
+                    <!--added--><mat-slide-toggle (change)="updateAccount(i, 'master')"
+                      [color]="red"
+                      [checked]=t.master_account
+                      [disabled] = "!isMaster"> <!--ADDED-->
+                    </mat-slide-toggle>
+                  </td>
+                  <td>
+                    <!--added--><mat-slide-toggle (change)="updateAccount(i, 'admin')"
+                      [color]="red"
+                      [checked]=t.admin>
+                    </mat-slide-toggle>
+                  </td>                   
+                </tr>
+                </tbody>
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+              </table>
+              </div>
+              </div> 
+        </mat-tab>
+        
+        <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">add_to_queue</mat-icon>
+          Hardware
+      </ng-template>  
+        <mat-tab-group>
+          <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon">add_box</mat-icon>
+                  Add
+            </ng-template>  
+            <div class="example-container">
+                <mat-form-field hintLabel="Max 10 characters">
+                  <mat-select placeholder="Select Component"  [(ngModel)]="selectedComponent.value">
+                    <mat-option *ngFor="let tmp of thisComponent" value="{{tmp.value}}" name="component" ngDefaultControl>
+                      {{tmp.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>              
+                <mat-form-field appearance="legacy">                  
+                  <input matInput [(ngModel)]="tmpNewComponent.name" maxlength="255" placeholder="Name">                                    
+                </mat-form-field>
+                <mat-form-field appearance="legacy">                  
+                  <input matInput [(ngModel)]="tmpNewComponent.brand" maxlength="255" placeholder="Brand">                                    
+                </mat-form-field>
+                <mat-form-field appearance="legacy">                  
+                    <input matInput [(ngModel)]="tmpNewComponent.model" maxlength="255" placeholder="Model">                                    
+                </mat-form-field>
+                <mat-form-field appearance="legacy">                  
+                    <input matInput [(ngModel)]="tmpNewComponent.series" maxlength="255" placeholder="Series">                                    
+                </mat-form-field>
+                <mat-form-field appearance="legacy">                  
+                    <input matInput [(ngModel)]="tmpNewComponent.details" maxlength="255" placeholder="Details">                                    
+                </mat-form-field>
+                <mat-form-field appearance="legacy">                  
+                    <input matInput  matInput type="number" [(ngModel)]="tmpNewComponent.price" placeholder="Price">                                    
+                </mat-form-field>
+                <button (click)="submitNewComponent()">Submit</button>
+              </div>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon">border_color</mat-icon>
+                  Edit
+            </ng-template>  
+            <div class="search-hero">
+              <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="on" placeholder="&#61442;  Search">
+            </div>
+              <!-- <table class="table table-striped">
+              <thead>
+                  <tr>
+                  <th>Delete</th>
+                  <th (click)="sortList('type')">Type
+                    <span *ngIf="key === 'type'">
+                        <span *ngIf="reverse">
+                          <i class="fa fa-arrow-up"></i>
+                        </span>
+                    <span *ngIf="!reverse">
+                          <i class="fa fa-arrow-down"></i>
+                          </span>
+                    </span>            
+                  </th>
+                  <th (click)="sortList('cpu')">CPU
+                      <span *ngIf="key === 'cpu'">
+                          <span *ngIf="reverse">
+                            <i class="fa fa-arrow-up"></i>
+                          </span>
+                          <span *ngIf="!reverse">
+                            <i class="fa fa-arrow-down"></i>
+                          </span>
+                      </span>              
+                  </th>
+                  <th (click)="sortList('motherboard')">Motherboard
+                    <span *ngIf="key === 'motherboard'">
+                        <span *ngIf="reverse">
+                          <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                        </span>
+                        <span *ngIf="!reverse">
+                          <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                        </span>
+                    </span>                 
+                  </th>
+                  <th (click)="sortList('ram')">RAM
+                      <span *ngIf="key === 'ram'">
+                          <span *ngIf="reverse">
+                            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                          </span>
+                          <span *ngIf="!reverse">
+                            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                          </span>
+                      </span>                    
+                    </th>
+                    <th (click)="sortList('gpu')">GPU
+                      <span *ngIf="key === 'gpu'">
+                        <span *ngIf="reverse">
+                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                        </span>
+                        <span *ngIf="!reverse">
+                          <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                        </span>
+                      </span>              
+                    </th>
+                    <th (click)="sortList('storage')">Storage
+                        <span *ngIf="key === 'storage'">
+                            <span *ngIf="reverse">
+                              <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                            </span>
+                            <span *ngIf="!reverse">
+                              <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                            </span>
+                        </span>               
+                    </th>
+                    <th (click)="sortList('power_Supply')">Power Supply
+                        <span *ngIf="key === 'power_Supply'">
+                            <span *ngIf="reverse">
+                              <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                            </span>
+                            <span *ngIf="!reverse">
+                              <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                            </span>
+                        </span>                   
+                    </th>
+                    <th (click)="sortList('cooling_Fan')">Cooling Fan
+                      <span *ngIf="key === 'cooling_Fan'">
+                          <span *ngIf="reverse">
+                            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                          </span>
+                          <span *ngIf="!reverse">
+                            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                          </span>
+                      </span>                     
+                    </th>
+                    <th (click)="sortList('case')">Case
+                      <span *ngIf="key === 'case'">
+                        <span *ngIf="reverse">
+                          <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                        </span>
+                        <span *ngIf="!reverse">
+                          <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                        </span>
+                      </span>                      
+                    </th>
+                    <th (click)="sortList('total_Price')">Total Price
+                      <span *ngIf="key === 'total_Price'">
+                        <span *ngIf="reverse">
+                          <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                        </span>
+                        <span *ngIf="!reverse">
+                          <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                        </span>
+                      </span>                       
+                    </th>    
+                  </tr>
+                </thead>
+              <tbody>
+              <tr *ngFor="let t of shoppingOrder | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                <td style="text-align:center">
+                  <button class="trash-button">
+                      <i style="color:red" class="fa fa-trash" (click)="DeleteOrder(i)" aria-hidden="true"></i>
+                  </button>  
                 </td>
-                <td>
-                    <mat-slide-toggle (change)="updateAdmin()"
-                    [color]="red"
-                    [checked]=t.admin>
-                  </mat-slide-toggle>
-                </td>                   
+                <td>{{t.type}}</td>
+                <td>{{t.case}}</td>
+                <td>{{t.ram}}</td>
+                <td>{{t.cpu}}</td>
+                <td>{{t.gpu}}</td>
+                <td>{{t.motherboard}}</td>
+                <td>{{t.power_Supply}}</td>
+                <td>{{t.cooling_Fan}}</td>
+                <td>{{t.storage}}</td>
+                <td>{{t.total_Price}}</td>
               </tr>
               </tbody>
               <pagination-controls (pageChange)="p = $event"></pagination-controls>
-            </table>
-            </div>
-            </div> 
+            </table> -->
+          </mat-tab>
+        </mat-tab-group>    
       </mat-tab>
   </mat-tab-group>
 </div>

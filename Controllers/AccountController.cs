@@ -35,23 +35,23 @@ namespace CyouEcommerce.Controllers
             return Ok(result);
         }
 
-        // [HttpPut("{id}")]
-        // public async Task<IActionResult> CreateAccountInfo(int id, [FromBody] AccountResource accountInfoResource)
-        // {
-        //     if (!ModelState.IsValid)
-        //     {
-        //         return BadRequest(ModelState);
-        //     }
-        //     var account = await context.Accounts.FindAsync(id);
+        [HttpPut("{id}")]
+        public async Task<IActionResult> CreateAccountInfo(int id, [FromBody] AccountResource accountInfoResource)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var account = await context.Accounts.FindAsync(id);
 
-        //     if (account == null)
-        //     return NotFound();
+            if (account == null)
+            return NotFound();
             
-        //     mapper.Map<AccountResource, Account>(accountInfoResource, account);
-        //     await context.SaveChangesAsync();
-        //     var result = mapper.Map<Account, AccountResource>(account);
-        //     return Ok(result);
-        // }
+            mapper.Map<AccountResource, Account>(accountInfoResource, account);
+            await context.SaveChangesAsync();
+            var result = mapper.Map<Account, AccountResource>(account);
+            return Ok(result);
+        }
 
 
 

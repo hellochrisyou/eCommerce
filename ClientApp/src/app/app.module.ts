@@ -64,7 +64,7 @@ import { MakeService } from './Services/make.service';
 import { SellComponent, UploadDialog, snackErrorMessage } from './sell/sell.component';
 import { BuyUsedComponent, expandPic, ConfirmUsedItem } from './buy-used/buy-used.component';
 import { OrderhistoryComponent } from './orderhistory/orderhistory.component';
-import { ShoppingcartComponent, checkout } from './shoppingcart/shoppingcart.component';
+import { ShoppingcartComponent, checkout, OrderCompleteSnack } from './shoppingcart/shoppingcart.component';
 import { PhotoService } from './Services/photo.service';
 import { MainHomeComponent } from './main-home/main-home.component';
 import { CallbackComponent } from './callback/callback.component';
@@ -91,6 +91,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ConfirmNewItem,
     ConfirmUsedItem,
     DashboardComponent,
+    OrderCompleteSnack
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -122,6 +123,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatIconModule,
     MatSlideToggleModule,    
     ChartsModule,
+    MatRadioModule,
     
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -141,7 +143,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     expandPic, 
     checkout, 
     ConfirmNewItem, 
-    ConfirmUsedItem
+    ConfirmUsedItem,
+    OrderCompleteSnack
   ],
   providers: [
     AuthService,

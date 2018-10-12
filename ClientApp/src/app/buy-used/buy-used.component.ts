@@ -5,6 +5,7 @@ import { ShoppingcartService } from './../Services/shoppingcart.service';
 import { PhotoService } from '../Services/photo.service';
 import { thisOrder } from '../Models/interfaces';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
+import { AuthService } from '../Services/auth.service';
 
 @Component({
  selector: 'app-buy-used',
@@ -12,15 +13,18 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/ma
  styleUrls: ['./buy-used.component.css']
 })
 export class BuyUsedComponent implements OnInit {
+ selectedItems: any = {};
+ radioSelection: string[] = ['All items', "My items"];
  photos: any[];
  tmpSelectedFileName: string;
  collectionPhotos: any[] = [];
- usedItem: any[];
+ allUsedItems: any[];
+ myUsedItems: any[];
  //temporary object for practice.  use ng init to cycle through items
  tmpThisOrder: thisOrder = { 
      type: 'Used',
      address: '',
-     AccountInfoOrderId: '',
+     accountInfoOrderId: '',
      order_Number: '',
      case: '',
      cooling_Fan: '',
@@ -36,6 +40,7 @@ export class BuyUsedComponent implements OnInit {
  tmpShoppingOrder: thisOrder;
 
  constructor(
+  private Auth: AuthService,
   public UsedSnackBar: MatSnackBar,
   public dialog: MatDialog, 
   private shoppingcart: ShoppingcartService, 
@@ -44,15 +49,28 @@ export class BuyUsedComponent implements OnInit {
   ) {}
 
  ngOnInit() {
+  var accountId = localStorage.getItem('account_id');
    this.MakeService.getAllSaleItem().subscribe(usedItem => {
-     this.usedItem = usedItem
+     this.allUsedItems = usedItem
 
-     this.usedItem.forEach(element => {
+     this.allUsedItems.forEach(element => {
            this.photoService.getPhotos(element.id)
            .subscribe(photo => {
              this.collectionPhotos.push(photo);
            });
      });     
+
+     this.myUsedItems = this.allUsedItems
+      .filter(
+        function(e) {
+          console.log(e);
+          if (e.accountSaleItemId == accountId)             
+          {            
+            return e;              
+          }
+        }
+      );
+     this.selectedItems = this.allUsedItems;
    });   
  } 
 
@@ -60,7 +78,7 @@ export class BuyUsedComponent implements OnInit {
  {
    this.openUsedSnackBar();
    console.log('index', i);
-   this.tmpThisOrder = this.usedItem[i];
+   this.tmpThisOrder = this.allUsedItems[i];
    this.tmpThisOrder.total_Price = this.tmpThisOrder.total_Price.toString();
    console.log('tmpthisorder', this.tmpThisOrder);
    this.shoppingcart.add(this.tmpThisOrder);      
@@ -80,6 +98,20 @@ export class BuyUsedComponent implements OnInit {
     this.UsedSnackBar.openFromComponent(ConfirmUsedItem, {
       duration: 5000,
     });
+  }
+
+  filterItems(selection)
+  {
+ 
+    if (selection == 'All items')
+    {
+      this.selectedItems = this.allUsedItems;
+      console.log('all items', this.selectedItems);
+    }
+    else{
+      this.selectedItems = this.myUsedItems;
+      console.log('my items', this.selectedItems);
+    }
   }
 }
 
