@@ -1,7 +1,9 @@
-import { components, account } from './../Models/interfaces';
-import { Component, OnInit } from '@angular/core';
+import { components, account, KeyValuePair } from './../Models/interfaces';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MakeService } from '../Services/make.service';
 import { FormBuilder } from '@angular/forms';
+import { KeyValue } from '@angular/common';
+import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-dashboard',
@@ -144,10 +146,106 @@ tmpAccount: account = {
     value: '',
     viewValue: ''
   };  
+  //filter
+  listComponents: string [] = ['', 'CPU', 'Motherboard', 'RAM', 'Storage', 'GPU', 'Power Supply', 'Cooling Fan', 'Case'];
+  selectedFilter: string;
 
-  constructor(private MakeService: MakeService, private _formBuilder: FormBuilder) { }
+  filteredComponent: any [] = [];
+
+  powerSupplyComponent: KeyValuePair = {
+    name: '',
+    price: 0,
+    hardwareType: '',
+    model: '',
+    series: '',
+    brand: '',
+    details: ''
+  }
+
+  coolingFanComponent: KeyValuePair = {
+    name: '',
+    price: 0,
+    hardwareType: '',
+    model: '',
+    series: '',
+    brand: '',
+    details: ''
+  }
+
+  motherboardComponent: KeyValuePair = {
+    name: '',
+    price: 0,
+    hardwareType: '',
+    model: '',
+    series: '',
+    brand: '',
+    details: ''
+  }
+
+  gpuComponent: KeyValuePair = {
+    name: '',
+    price: 0,
+    hardwareType: '',
+    model: '',
+    series: '',
+    brand: '',
+    details: ''
+  }
+
+  cpuComponent: KeyValuePair = {
+    name: '',
+    price: 0,
+    hardwareType: '',
+    model: '',
+    series: '',
+    brand: '',
+    details: ''
+  }
+
+  ramComponent: KeyValuePair = {
+    name: '',
+    price: 0,
+    hardwareType: '',
+    model: '',
+    series: '',
+    brand: '',
+    details: ''
+  }
+
+  storageComponent: KeyValuePair = {
+    name: '',
+    price: 0,
+    hardwareType: '',
+    model: '',
+    series: '',
+    brand: '',
+    details: ''
+  }
+
+  caseComponent: KeyValuePair = {
+    name: '',
+    price: 0,
+    hardwareType: '',
+    model: '',
+    series: '',
+    brand: '',
+    details: ''
+  }
+  //end
+
+  constructor(
+  public dialog: MatDialog,
+  private MakeService: MakeService, 
+  private _formBuilder: FormBuilder
+  ) {
+    
+   }
 
   ngOnInit() {
+    //filter
+    this.getComponents();
+    //end
+
     this.MakeService.getAccount().subscribe(account => {
       this.accounts = account   
       this.totalAccounts = this.accounts.length;             
@@ -216,60 +314,57 @@ tmpAccount: account = {
         if (this.orders[tmp].type == "New")
         {
           newCount = newCount + 1;
-          console.log(newCount);
-
           if (this.orders[tmp].orderDate.substring(5, 7) == '01')
           {
-            this.countJan = this.NewCountJan + 1; 
+            this.NewCountJan = this.NewCountJan + 1; 
           }
           if (this.orders[tmp].orderDate.substring(5, 7) == '02')
           {
-            this.countFeb = this.NewCountFeb + 1; 
+            this.NewCountFeb = this.NewCountFeb + 1; 
           }
           if (this.orders[tmp].orderDate.substring(5, 7) == '03')
           {
-            this.countMar = this.NewCountMar + 1; 
+            this.NewCountMar = this.NewCountMar + 1; 
           }
           if (this.orders[tmp].orderDate.substring(5, 7) == '04')
           {
-            this.countApr = this.NewCountApr + 1; 
+            this.NewCountApr = this.NewCountApr + 1; 
           }
           if (this.orders[tmp].orderDate.substring(5, 7) == '05')
           {
-            this.countMay = this.NewCountMay + 1; 
+            this.NewCountMay = this.NewCountMay + 1; 
           }
           if (this.orders[tmp].orderDate.substring(5, 7) == '06')
           {
-            this.countJun = this.NewCountJun + 1; 
+            this.NewCountJun = this.NewCountJun + 1; 
           }
           if (this.orders[tmp].orderDate.substring(5, 7) == '07')
           {
-            this.countJul = this.NewCountJul + 1; 
+            this.NewCountJul = this.NewCountJul + 1; 
           }
           if (this.orders[tmp].orderDate.substring(5, 7) == '08')
           {
-            this.countAug = this.NewCountAug + 1; 
+            this.NewCountAug = this.NewCountAug + 1; 
           }
           if (this.orders[tmp].orderDate.substring(5, 7) == '09')
           {
-            this.countSep = this.NewCountSep + 1; 
+            this.NewCountSep = this.NewCountSep + 1; 
           }
           if (this.orders[tmp].orderDate.substring(5, 7) == '10')
           {
-            this.countOct = this.NewCountOct + 1; 
+            this.NewCountOct = this.NewCountOct + 1; 
           }
           if (this.orders[tmp].orderDate.substring(5, 7) == '11')
           {
-            this.countNov = this.NewCountNov + 1; 
+            this.NewCountNov = this.NewCountNov + 1; 
           }
           if (this.orders[tmp].orderDate.substring(5, 7) == '12')
           {
-            this.countDec = this.NewCountDec + 1; 
+            this.NewCountDec = this.NewCountDec + 1; 
           }
         }                
         this.totalOrders = this.orders.length;
         this.revenue = this.orders[tmp].total_Price + this.revenue;
-        console.log('revenu', this.revenue);
       }
       
       this.dataUsedOrders[0] = this.countJan;
@@ -298,12 +393,6 @@ tmpAccount: account = {
       this.dataNewOrders[10] = this.NewCountNov;
       this.dataNewOrders[11] = this.NewCountDec;
       
-      console.log('sampledata', [55, 60, 75, 82, 56, 62, 80]);
-      console.log('dataNewOrders', this.dataNewOrders);
-      console.log('dataUsedOrders', this.dataUsedOrders);
-      console.log('barchartdata', this.barChartData);
-      console.log('secondObj', this.secondObj);
-
       this.firstObj.data = this.dataNewOrders;
       this.firstObj.label = 'New';
       this.secondObj.data = this.dataUsedOrders;
@@ -312,18 +401,82 @@ tmpAccount: account = {
       this.barChartData.push(this.firstObj);
       this.barChartData.push(this.secondObj);
 
-      console.log('barchartdata', this.barChartData);
-
       this.orderData.push(usedCount);
-      this.orderData.push(newCount);         
+      this.orderData.push(newCount);               
     });
     
-    
+      this.isMaster = localStorage.getItem('isMaster');    
   }
+
+  //filter
+  insertAllComponents()
+  {
+    this.filteredComponent = [];
+    this.filteredComponent = this.filteredComponent.concat(this.caseComponent);
+    this.filteredComponent = this.filteredComponent.concat(this.coolingFanComponent);
+    this.filteredComponent = this.filteredComponent.concat(this.cpuComponent);
+    this.filteredComponent = this.filteredComponent.concat(this.gpuComponent);
+    this.filteredComponent = this.filteredComponent.concat(this.storageComponent);
+    this.filteredComponent = this.filteredComponent.concat(this.ramComponent);
+    this.filteredComponent = this.filteredComponent.concat(this.powerSupplyComponent);
+    this.filteredComponent = this.filteredComponent.concat(this.motherboardComponent);
+    console.log('this.filtered', this.filteredComponent);
+  }
+  filterList()
+  {
+    console.log('thisselectedfilter', this.selectedFilter);
+    console.log('filteredComponent', this.filteredComponent);
+    if (this.selectedFilter == '')
+    {
+      this.insertAllComponents();
+    }
+    if (this.selectedFilter == 'CPU')
+    {
+      this.filteredComponent = [];
+      this.filteredComponent = this.filteredComponent.concat(this.cpuComponent);
+      console.log('cpufiltered', this.filteredComponent);
+    }
+    if (this.selectedFilter == 'Motherboard')
+    {
+      this.filteredComponent = [];
+      this.filteredComponent = this.filteredComponent.concat(this.motherboardComponent);
+    }
+    if (this.selectedFilter == 'RAM')
+    {
+      this.filteredComponent = [];
+      this.filteredComponent = this.filteredComponent.concat(this.ramComponent); 
+       }
+    if (this.selectedFilter == 'Storage')
+    {
+      this.filteredComponent = [];
+      this.filteredComponent = this.filteredComponent.concat(this.storageComponent);   
+     }
+    if (this.selectedFilter == 'GPU')
+    {
+      this.filteredComponent = [];
+      this.filteredComponent = this.filteredComponent.concat(this.gpuComponent);  
+      }
+    if (this.selectedFilter == 'Power Supply')
+    {
+      this.filteredComponent = [];
+      this.filteredComponent = this.filteredComponent.concat(this.powerSupplyComponent);  
+      }
+    if (this.selectedFilter == 'Cooling Fan')
+    { 
+      this.filteredComponent = [];
+      this.filteredComponent = this.filteredComponent.concat(this.coolingFanComponent); 
+       }
+    if (this.selectedFilter == 'Case')
+    {
+      this.filteredComponent = [];
+      this.filteredComponent = this.filteredComponent.concat(this.caseComponent); 
+       }
+
+  }
+  //end
 
   submitNewComponent()
   {
-    console.log('thisselectedcomponent', this.selectedComponent);
     if (this.selectedComponent.value == 'cpu')
     {
       this.MakeService.createCPU(this.tmpNewComponent).subscribe(x => x);      
@@ -356,18 +509,7 @@ tmpAccount: account = {
     {
       this.MakeService.createCase(this.tmpNewComponent).subscribe(x => x);
     }
-
-    //added
-    if (localStorage.getItem('isMaster') == 'true')
-    {
-      this.isMaster = 'true';
-    }
-    else 
-    {
-      this.isMaster = 'false';
-    }
-    //end
-
+    this.ngOnInit();
   }
 
   chartClicked(e:any):void {
@@ -402,8 +544,105 @@ tmpAccount: account = {
         console.log('this.tmpAccount.master', this.tmpAccount.master_account);
       }
       this.MakeService.updateAccount(this.tmpAccount).subscribe(x => x);        
-  }
+    }
 
+    deleteComponent(index)
+    {      
+      if (this.filteredComponent[index].hardwareType == 'CPU')
+      {
+        this.MakeService.deleteCPU(this.filteredComponent[index].id).subscribe(x =>
+          this.getComponents()
+          );  
+      }
+      if (this.filteredComponent[index].hardwareType == 'Case')
+      {
+        this.MakeService.deleteCase(this.filteredComponent[index].id).subscribe(x =>
+          this.getComponents()
+          );  
+      }
+      if (this.filteredComponent[index].hardwareType == 'Cooling Fan')
+      {
+        this.MakeService.deleteCoolingFan(this.filteredComponent[index].id).subscribe(x =>
+          this.getComponents());  
+      }
+      if (this.filteredComponent[index].hardwareType == 'Motherboard')
+      {
+        this.MakeService.deleteMotherboard(this.filteredComponent[index].id).subscribe(x =>
+          this.getComponents());  
+      }
+      if (this.filteredComponent[index].hardwareType == 'RAM')
+      {
+        this.MakeService.deleteRAM(this.filteredComponent[index].id).subscribe(x =>
+          this.getComponents());  
+      }
+      if (this.filteredComponent[index].hardwareType == 'Storage')
+      {
+        this.MakeService.deleteStorage(this.filteredComponent[index].id).subscribe(x =>
+          this.getComponents());  
+      }
+      if (this.filteredComponent[index].hardwareType == 'Power Supply')
+      {
+        this.MakeService.deletePowerSupply(this.filteredComponent[index].id).subscribe(x =>
+          this.getComponents());  
+      }
+      if (this.filteredComponent[index].hardwareType == 'GPU')
+      {
+        this.MakeService.deleteGPU(this.filteredComponent[index].id).subscribe(x =>
+          this.getComponents());
+      }         
+    }
+
+    openDialog(index): void {
+      console.log('thisselectedfilter', this.selectedFilter);
+      const dialogRef = this.dialog.open(editComponent, {
+        width: '250px',
+        data: {
+          id: this.filteredComponent[index].id,
+          name: this.filteredComponent[index].name,
+          brand: this.filteredComponent[index].brand ,
+          model: this.filteredComponent[index].model ,
+          hardwareType: this.filteredComponent[index].hardwareType,
+          series: this.filteredComponent[index].series , 
+          price: this.filteredComponent[index].price ,
+          details: this.filteredComponent[index].details,
+        }
+      });
+      dialogRef.afterClosed().subscribe(() => {
+        this.getComponents();
+      })
+    }
+    getComponents()
+    {    
+      this.MakeService.getCase().subscribe(caseItem => {
+        this.caseComponent = caseItem;      
+        console.log('casecomponent', this.caseComponent);
+          this.MakeService.getCoolingfan().subscribe(coolingFan => {
+            this.coolingFanComponent = coolingFan;
+              this.MakeService.getCoolingfan().subscribe(coolingFan => {
+                this.coolingFanComponent = coolingFan;
+                  this.MakeService.getCPU().subscribe(CPU => {
+                    this.cpuComponent = CPU;        
+                      this.MakeService.getGPU().subscribe(GPU => {
+                        this.gpuComponent = GPU;  
+                          this.MakeService.getStorage().subscribe(storage => {
+                            this.storageComponent = storage;   
+                              this.MakeService.getRAM().subscribe(RAM => {
+                                this.ramComponent = RAM;
+                                  this.MakeService.getPowersupply().subscribe(powerSupply => {
+                                    this.powerSupplyComponent = powerSupply;         
+                                      this.MakeService.getMotherboard().subscribe(motherboard => {
+                                        this.motherboardComponent = motherboard;         
+                                        this.insertAllComponents();
+                                      });
+                                  });
+                              });      
+                          });       
+                      });
+                  });
+              });
+          });
+      });
+    }
 }
 
 class componentDetails 
@@ -422,4 +661,83 @@ class numberArrObj
   label: string;
 }
 
-  
+@Component({
+  selector: 'editComponent',
+  templateUrl: 'editComponent.html',
+  styles: [`
+        .picSize {
+          height: 100%;
+          width: 100%;      
+        }
+      `],
+})
+
+export class editComponent{  
+  constructor(
+    public snackBar: MatSnackBar,
+    public dialogRef: MatDialogRef<editComponent>,
+    private MakeService: MakeService, 
+    @Inject(MAT_DIALOG_DATA) public tmpComponent: any = {
+      id: 0,
+      name: '',
+      price: 0,
+      hardwareType: '',
+      model: '',
+      series: '',
+      brand: '',
+      details: '',
+      },       
+    ){}
+
+      ngOnInit() {
+        
+      }
+      cancel(): void {                    
+        this.dialogRef.close();      
+      }
+      submit(): void {
+        console.log('thiscomponetnname', this.tmpComponent);
+        if (this.tmpComponent.hardwareType == 'CPU')
+        {
+          this.MakeService.updateCPU(this.tmpComponent).subscribe(x => x);
+        }
+        if (this.tmpComponent.hardwareType == 'Motherboard')
+        {
+          this.MakeService.updateMotherboard(this.tmpComponent).subscribe(x => x);
+        }
+        if (this.tmpComponent.hardwareType == 'RAM')
+        {
+          this.MakeService.updateRAM(this.tmpComponent).subscribe(x => x);
+        }
+        if (this.tmpComponent.hardwareType == 'Storage')
+        {
+          this.MakeService.updateStorage(this.tmpComponent).subscribe(x => x);
+        }
+        if (this.tmpComponent.hardwareType == 'GPU')
+        {
+          this.MakeService.updateGPU(this.tmpComponent).subscribe(x => x);
+        }
+        if (this.tmpComponent.hardwareType == 'Power Supply')
+        {
+          this.MakeService.updatePowerSupply(this.tmpComponent).subscribe(x => x);
+        }
+        if (this.tmpComponent.hardwareType == 'Cooling Fan')
+        {
+          this.MakeService.updateCoolingFan(this.tmpComponent).subscribe(x => x);
+        }
+        if (this.tmpComponent.hardwareType == 'Case')
+        {
+          this.MakeService.updateCase(this.tmpComponent).subscribe(x => console.log('done'));
+        }
+        
+        this.dialogRef.close();
+      }
+    }  
+    class stringProvider {
+      componentName: string;
+    }     
+    
+        
+        
+    
+    

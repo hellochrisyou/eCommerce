@@ -22,6 +22,7 @@ export class ShoppingcartComponent implements OnInit {
 
   ngOnInit() {
     this.shoppingOrder = this.ShoppingcartService.get();
+    console.log('thisshoppingorder', this.shoppingOrder);
   }
   
   DeleteOrder(index) {
@@ -81,9 +82,6 @@ export class checkout {
    };
 
     submit(): void {
-      console.log('address', this.addressValue);
-      console.log('math', (Math.floor((Math.random() * 999999) + 1000000)));
-
       for (var tmp in this.data) {
         this.tmpObject.address = this.addressValue;
         this.tmpObject.order_Number=Math.floor((Math.random() * 999999) + 1000000).toString();         
@@ -98,10 +96,9 @@ export class checkout {
         this.tmpObject.storage = this.data[tmp].storage;
         this.tmpObject.total_Price = this.data[tmp].total_Price;
         this.tmpObject.type = this.data[tmp].type;
-        console.log('this.tmpobject', this.tmpObject);
-    this.makeService.createOrder(this.tmpObject).subscribe(x => x);
-    this.dialogRef.close();
-    this.openSnackBar();
+        this.makeService.createOrder(this.tmpObject).subscribe(x => x);
+        this.dialogRef.close();
+        this.openSnackBar();
   };
     }
 

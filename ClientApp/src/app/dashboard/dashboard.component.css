@@ -54,4 +54,10 @@
   .example-container > * {
     width: 100%;
   }
+
+  .button-no-border {
+    padding: 0 !important;
+    border: none !important;
+    background: none !important;
+  }
  

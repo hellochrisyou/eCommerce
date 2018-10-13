@@ -105,9 +105,11 @@ export class AuthService {
       {
         localStorage.setItem('isAdmin', 'false');
       }
+      console.log('ismaster', this.existingUser.master_account);
       if (this.existingUser.master_account == true)
       {
         localStorage.setItem('isMaster', 'true');
+        console.log('setmaster');
       }
       else
       {

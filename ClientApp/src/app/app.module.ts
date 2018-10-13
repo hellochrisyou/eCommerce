@@ -68,7 +68,7 @@ import { ShoppingcartComponent, checkout, OrderCompleteSnack } from './shoppingc
 import { PhotoService } from './Services/photo.service';
 import { MainHomeComponent } from './main-home/main-home.component';
 import { CallbackComponent } from './callback/callback.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent, editComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +91,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ConfirmNewItem,
     ConfirmUsedItem,
     DashboardComponent,
-    OrderCompleteSnack
+    OrderCompleteSnack,
+    editComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -144,7 +145,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     checkout, 
     ConfirmNewItem, 
     ConfirmUsedItem,
-    OrderCompleteSnack
+    OrderCompleteSnack,
+    editComponent
   ],
   providers: [
     AuthService,

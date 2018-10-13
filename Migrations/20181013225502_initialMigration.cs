@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CYouEcommerce.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class initialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,6 +30,7 @@ namespace CYouEcommerce.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 255, nullable: false),
+                    HardwareType = table.Column<string>(maxLength: 255, nullable: false),
                     Price = table.Column<float>(nullable: false),
                     Brand = table.Column<string>(nullable: true),
                     Series = table.Column<string>(nullable: true),
@@ -47,6 +49,7 @@ namespace CYouEcommerce.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 255, nullable: false),
+                    HardwareType = table.Column<string>(maxLength: 255, nullable: false),
                     Price = table.Column<float>(nullable: false),
                     Brand = table.Column<string>(nullable: true),
                     Series = table.Column<string>(nullable: true),
@@ -65,6 +68,7 @@ namespace CYouEcommerce.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 255, nullable: false),
+                    HardwareType = table.Column<string>(maxLength: 255, nullable: false),
                     Price = table.Column<float>(nullable: false),
                     Brand = table.Column<string>(nullable: true),
                     Series = table.Column<string>(nullable: true),
@@ -83,6 +87,7 @@ namespace CYouEcommerce.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 255, nullable: false),
+                    HardwareType = table.Column<string>(maxLength: 255, nullable: false),
                     Price = table.Column<float>(nullable: false),
                     Brand = table.Column<string>(nullable: true),
                     Series = table.Column<string>(nullable: true),
@@ -101,6 +106,7 @@ namespace CYouEcommerce.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 255, nullable: false),
+                    HardwareType = table.Column<string>(maxLength: 255, nullable: false),
                     Price = table.Column<float>(nullable: false),
                     Brand = table.Column<string>(nullable: true),
                     Series = table.Column<string>(nullable: true),
@@ -119,6 +125,7 @@ namespace CYouEcommerce.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 255, nullable: false),
+                    HardwareType = table.Column<string>(maxLength: 255, nullable: false),
                     Price = table.Column<float>(nullable: false),
                     Brand = table.Column<string>(nullable: true),
                     Series = table.Column<string>(nullable: true),
@@ -136,7 +143,8 @@ namespace CYouEcommerce.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 255, nullable: true),
+                    Name = table.Column<string>(maxLength: 255, nullable: false),
+                    HardwareType = table.Column<string>(maxLength: 255, nullable: false),
                     Price = table.Column<float>(nullable: false),
                     Brand = table.Column<string>(nullable: true),
                     Series = table.Column<string>(nullable: true),
@@ -155,6 +163,7 @@ namespace CYouEcommerce.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 255, nullable: false),
+                    HardwareType = table.Column<string>(maxLength: 255, nullable: false),
                     Price = table.Column<float>(nullable: false),
                     Brand = table.Column<string>(nullable: true),
                     Series = table.Column<string>(nullable: true),
@@ -175,6 +184,7 @@ namespace CYouEcommerce.Migrations
                     Order_Number = table.Column<int>(nullable: false),
                     Address = table.Column<string>(maxLength: 255, nullable: false),
                     AccountInfoOrderId = table.Column<int>(nullable: false),
+                    OrderDate = table.Column<DateTime>(nullable: false),
                     Type = table.Column<string>(maxLength: 255, nullable: false),
                     CPU = table.Column<string>(maxLength: 255, nullable: false),
                     Motherboard = table.Column<string>(maxLength: 255, nullable: false),

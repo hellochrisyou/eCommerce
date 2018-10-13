@@ -19,6 +19,7 @@ export class BuyNewComponent implements OnInit {
     selectedCase: KeyValuePair =  {
       name: '',
       price: 0,
+      hardwareType: '',
       model: '',
       series: '',
       brand: '',
@@ -28,6 +29,7 @@ export class BuyNewComponent implements OnInit {
     selectedFan : KeyValuePair =  {
       name: '',
       price: 0,
+      hardwareType: '',
       model: '',
       series: '',
       brand: '',
@@ -37,6 +39,7 @@ export class BuyNewComponent implements OnInit {
     selectedCPU : KeyValuePair =  {
       name: '',
       price: 0,
+      hardwareType: '',
       model: '',
       series: '',
       brand: '',
@@ -46,6 +49,7 @@ export class BuyNewComponent implements OnInit {
     selectedGPU : KeyValuePair =  {
       name: '',
       price: 0,
+      hardwareType: '',
       model: '',
       series: '',
       brand: '',
@@ -55,6 +59,7 @@ export class BuyNewComponent implements OnInit {
     selectedMotherboard : KeyValuePair =  {
       name: '',
       price: 0,
+      hardwareType: '',
       model: '',
       series: '',
       brand: '',
@@ -64,6 +69,7 @@ export class BuyNewComponent implements OnInit {
     selectedPSupply : KeyValuePair =  {
       name: '',
       price: 0,
+      hardwareType: '',
       model: '',
       series: '',
       brand: '',
@@ -73,6 +79,7 @@ export class BuyNewComponent implements OnInit {
     selectedRAM : KeyValuePair =  {
       name: '',
       price: 0,
+      hardwareType: '',
       model: '',
       series: '',
       brand: '',
@@ -82,6 +89,7 @@ export class BuyNewComponent implements OnInit {
     selectedStorage : KeyValuePair =  {
       name: '',
       price: 0,
+      hardwareType: '',
       model: '',
       series: '',
       brand: '',

@@ -1,21 +1,3 @@
-
-<h4 style="text-align:center"> Bar chart of New and Used Computer Orders
-  <br/><br/>      
-  </h4><br/>
-<div>
-  <div style="display: block" *ngIf="barChartData.length > 0">
-    <canvas baseChart
-            [datasets]="barChartData"
-            [labels]="mbarChartLabels"
-            [options]="barChartOptions"
-            [colors]="barChartColors"
-            [legend]="barChartLegend"
-            [chartType]="barChartType"
-            (chartHover)="chartHovered($event)"
-            (chartClick)="chartClicked($event)"></canvas>
-  </div> 
-</div>
-
 <div class="container-fluid">
   <mat-tab-group>
       <mat-tab>
@@ -37,6 +19,23 @@
                 <mat-icon style="color:white" class="col,card-icon">business_center</mat-icon>              
                 <p style="color: white">{{totalOrders}}</p>
             </div>  
+
+            <h4 style="text-align:center"> Bar chart of New and Used Computer Orders
+              <br/><br/>      
+              </h4><br/>
+            <div>
+              <div style="display: block" *ngIf="barChartData.length > 0">
+                <canvas baseChart
+                        [datasets]="barChartData"
+                        [labels]="mbarChartLabels"
+                        [options]="barChartOptions"
+                        [colors]="barChartColors"
+                        [legend]="barChartLegend"
+                        [chartType]="barChartType"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)"></canvas>
+              </div> 
+            </div>
 
             <div id="pieChart" style="margin-top:5%; padding:0px">                
               <canvas baseChart 
@@ -167,15 +166,20 @@
                 <mat-icon class="example-tab-icon">border_color</mat-icon>
                   Edit
             </ng-template>  
-            <div class="search-hero">
-              <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="on" placeholder="&#61442;  Search">
-            </div>
-              <!-- <table class="table table-striped">
+            <mat-form-field>
+              <mat-select placeholder="Filter"  (selectionChange)="filterList()" [(ngModel)]="selectedFilter">
+                <mat-option *ngFor="let component of listComponents" [value]="component">
+                  {{component}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+              <table class="table table-striped">
               <thead>
                   <tr>
+                  <th>Edit</th>
                   <th>Delete</th>
-                  <th (click)="sortList('type')">Type
-                    <span *ngIf="key === 'type'">
+                  <th (click)="sortList('hardwareType')">hardwareType
+                    <span *ngIf="key === 'hardwareType'">
                         <span *ngIf="reverse">
                           <i class="fa fa-arrow-up"></i>
                         </span>
@@ -184,8 +188,18 @@
                           </span>
                     </span>            
                   </th>
-                  <th (click)="sortList('cpu')">CPU
-                      <span *ngIf="key === 'cpu'">
+                  <th (click)="sortList('name')">Name
+                    <span *ngIf="key === 'name'">
+                        <span *ngIf="reverse">
+                          <i class="fa fa-arrow-up"></i>
+                        </span>
+                    <span *ngIf="!reverse">
+                          <i class="fa fa-arrow-down"></i>
+                          </span>
+                    </span>            
+                  </th>
+                  <th (click)="sortList('brand')">Brand
+                      <span *ngIf="key === 'brand'">
                           <span *ngIf="reverse">
                             <i class="fa fa-arrow-up"></i>
                           </span>
@@ -194,8 +208,8 @@
                           </span>
                       </span>              
                   </th>
-                  <th (click)="sortList('motherboard')">Motherboard
-                    <span *ngIf="key === 'motherboard'">
+                  <th (click)="sortList('model')">Model
+                    <span *ngIf="key === 'model'">
                         <span *ngIf="reverse">
                           <i class="fa fa-arrow-up" aria-hidden="true"></i>
                         </span>
@@ -204,8 +218,8 @@
                         </span>
                     </span>                 
                   </th>
-                  <th (click)="sortList('ram')">RAM
-                      <span *ngIf="key === 'ram'">
+                  <th (click)="sortList('series')">Series
+                      <span *ngIf="key === 'series'">
                           <span *ngIf="reverse">
                             <i class="fa fa-arrow-up" aria-hidden="true"></i>
                           </span>
@@ -214,8 +228,8 @@
                           </span>
                       </span>                    
                     </th>
-                    <th (click)="sortList('gpu')">GPU
-                      <span *ngIf="key === 'gpu'">
+                    <th (click)="sortList('price')">Price
+                      <span *ngIf="key === 'price'">
                         <span *ngIf="reverse">
                         <i class="fa fa-arrow-up" aria-hidden="true"></i>
                         </span>
@@ -224,8 +238,8 @@
                         </span>
                       </span>              
                     </th>
-                    <th (click)="sortList('storage')">Storage
-                        <span *ngIf="key === 'storage'">
+                    <th (click)="sortList('details')">Details
+                        <span *ngIf="key === 'details'">
                             <span *ngIf="reverse">
                               <i class="fa fa-arrow-up" aria-hidden="true"></i>
                             </span>
@@ -233,70 +247,32 @@
                               <i class="fa fa-arrow-down" aria-hidden="true"></i>
                             </span>
                         </span>               
-                    </th>
-                    <th (click)="sortList('power_Supply')">Power Supply
-                        <span *ngIf="key === 'power_Supply'">
-                            <span *ngIf="reverse">
-                              <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                            </span>
-                            <span *ngIf="!reverse">
-                              <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                            </span>
-                        </span>                   
-                    </th>
-                    <th (click)="sortList('cooling_Fan')">Cooling Fan
-                      <span *ngIf="key === 'cooling_Fan'">
-                          <span *ngIf="reverse">
-                            <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                          </span>
-                          <span *ngIf="!reverse">
-                            <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                          </span>
-                      </span>                     
-                    </th>
-                    <th (click)="sortList('case')">Case
-                      <span *ngIf="key === 'case'">
-                        <span *ngIf="reverse">
-                          <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                        </span>
-                        <span *ngIf="!reverse">
-                          <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                        </span>
-                      </span>                      
-                    </th>
-                    <th (click)="sortList('total_Price')">Total Price
-                      <span *ngIf="key === 'total_Price'">
-                        <span *ngIf="reverse">
-                          <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                        </span>
-                        <span *ngIf="!reverse">
-                          <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                        </span>
-                      </span>                       
-                    </th>    
+                    </th>                    
                   </tr>
                 </thead>
               <tbody>
-              <tr *ngFor="let t of shoppingOrder | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+              <tr *ngFor="let t of filteredComponent | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                 <td style="text-align:center">
-                  <button class="trash-button">
-                      <i style="color:red" class="fa fa-trash" (click)="DeleteOrder(i)" aria-hidden="true"></i>
+                  <button class="trash-button button-no-border">
+                      <i class="fa fa-edit" (click)="openDialog(i)" aria-hidden="true"></i>
                   </button>  
                 </td>
-                <td>{{t.type}}</td>
-                <td>{{t.case}}</td>
-                <td>{{t.ram}}</td>
-                <td>{{t.cpu}}</td>
-                <td>{{t.gpu}}</td>
-                <td>{{t.motherboard}}</td>
-                <td>{{t.power_Supply}}</td>
-                <td>{{t.cooling_Fan}}</td>
-                <td>{{t.storage}}</td>
-                <td>{{t.total_Price}}</td>
+                <td style="text-align:center">
+                    <button class="trash-button button-no-border">
+                        <i style="color:red" class="fa fa-trash" (click)="deleteComponent(i)" aria-hidden="true"></i>
+                    </button>  
+                  </td>
+                <td>{{t.hardwareType}}</td>
+                <td>{{t.name}}</td>
+                <td>{{t.brand}}</td>
+                <td>{{t.model}}</td>
+                <td>{{t.series}}</td>
+                <td>{{t.price}}</td>
+                <td>{{t.details}}</td>                
               </tr>
               </tbody>
               <pagination-controls (pageChange)="p = $event"></pagination-controls>
-            </table> -->
+            </table>
           </mat-tab>
         </mat-tab-group>    
       </mat-tab>

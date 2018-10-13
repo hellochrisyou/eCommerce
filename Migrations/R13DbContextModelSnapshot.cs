@@ -48,6 +48,10 @@ namespace CYouEcommerce.Migrations
 
                     b.Property<string>("Details");
 
+                    b.Property<string>("HardwareType")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
                     b.Property<string>("Model");
 
                     b.Property<string>("Name")
@@ -72,6 +76,10 @@ namespace CYouEcommerce.Migrations
                     b.Property<string>("Brand");
 
                     b.Property<string>("Details");
+
+                    b.Property<string>("HardwareType")
+                        .IsRequired()
+                        .HasMaxLength(255);
 
                     b.Property<string>("Model");
 
@@ -98,6 +106,10 @@ namespace CYouEcommerce.Migrations
 
                     b.Property<string>("Details");
 
+                    b.Property<string>("HardwareType")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
                     b.Property<string>("Model");
 
                     b.Property<string>("Name")
@@ -122,6 +134,10 @@ namespace CYouEcommerce.Migrations
                     b.Property<string>("Brand");
 
                     b.Property<string>("Details");
+
+                    b.Property<string>("HardwareType")
+                        .IsRequired()
+                        .HasMaxLength(255);
 
                     b.Property<string>("Model");
 
@@ -148,6 +164,10 @@ namespace CYouEcommerce.Migrations
 
                     b.Property<string>("Details");
 
+                    b.Property<string>("HardwareType")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
                     b.Property<string>("Model");
 
                     b.Property<string>("Name")
@@ -172,6 +192,10 @@ namespace CYouEcommerce.Migrations
                     b.Property<string>("Brand");
 
                     b.Property<string>("Details");
+
+                    b.Property<string>("HardwareType")
+                        .IsRequired()
+                        .HasMaxLength(255);
 
                     b.Property<string>("Model");
 
@@ -198,9 +222,14 @@ namespace CYouEcommerce.Migrations
 
                     b.Property<string>("Details");
 
+                    b.Property<string>("HardwareType")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
                     b.Property<string>("Model");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(255);
 
                     b.Property<float>("Price");
@@ -221,6 +250,10 @@ namespace CYouEcommerce.Migrations
                     b.Property<string>("Brand");
 
                     b.Property<string>("Details");
+
+                    b.Property<string>("HardwareType")
+                        .IsRequired()
+                        .HasMaxLength(255);
 
                     b.Property<string>("Model");
 

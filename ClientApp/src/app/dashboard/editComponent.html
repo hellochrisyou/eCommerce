@@ -1,0 +1,28 @@
+<div class="example-container">
+        <mat-form-field appearance="legacy">
+            <mat-label>Name</mat-label>          
+            <input [(ngModel)]="tmpComponent.name" matInput placeholder="Name">                           
+        </mat-form-field>    
+        <mat-form-field appearance="legacy">
+                <mat-label>Brand</mat-label>          
+                <input [(ngModel)]="tmpComponent.brand" matInput placeholder="Brand">                           
+            </mat-form-field>   
+        <mat-form-field appearance="legacy">
+                <mat-label>Model</mat-label>          
+                <input [(ngModel)]="tmpComponent.model" matInput placeholder="Model">                           
+            </mat-form-field>   
+        <mat-form-field appearance="legacy">
+                <mat-label>Series</mat-label>          
+                <input [(ngModel)]="tmpComponent.series" matInput placeholder="Series">                           
+            </mat-form-field>   
+        <mat-form-field appearance="legacy">
+                <mat-label>Price</mat-label>          
+                <input type="number" [(ngModel)]="tmpComponent.price" matInput placeholder="Price">                           
+            </mat-form-field>   
+        <mat-form-field appearance="legacy">
+                <mat-label>Details</mat-label>          
+                <input [(ngModel)]="tmpComponent.details" matInput placeholder="Details">                           
+            </mat-form-field>   
+        <button (click) = "submit()">Submit</button>
+        <button (click) = "cancel()">Cancel</button>
+    </div>

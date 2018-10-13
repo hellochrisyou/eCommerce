@@ -4,12 +4,15 @@ namespace CYouEcommerce.Core.EFTables.Hardware
 {
     public class CPU
     {
-       public int Id { get; set; }   
+        public int Id { get; set; }   
         [Required]
         [StringLength(255)]
         public string Name { get; set; }
+        [Required]
+        [StringLength(255)]
+        public string HardwareType { get; set; }
         [Required]        
-        public float Price { get; set; } 
+        public float Price { get; set; }       
         public string Brand { get; set; }
         public string Series { get; set; }
         public string Model { get; set; }

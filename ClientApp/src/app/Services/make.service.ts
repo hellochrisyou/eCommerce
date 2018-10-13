@@ -102,5 +102,62 @@ export class MakeService {
   {
     return this.http.put('/api/Account/' + account.id, account).map(res => res.json());
   }
+  updateCPU(cpu)
+  {
+    return this.http.put('/api/CPU/' + cpu.id, cpu).map(res => res.json());
+  }
+  updateCase(caseItem)
+  {
+    return this.http.put('/api/Case/' + caseItem.id, caseItem).map(res => res.json());
+  }
+  updateCoolingFan(coolingFan)
+  {
+    return this.http.put('/api/CoolingFan/' + coolingFan.id, coolingFan).map(res => res.json());
+  }
+  updatePowerSupply(powerSupply)
+  {
+    return this.http.put('/api/PowerSupply/' + powerSupply.id, powerSupply).map(res => res.json());
+  }
+  updateGPU(gpu)
+  {
+    return this.http.put('/api/GPU/' + gpu.id, gpu).map(res => res.json());
+  }
+  updateMotherboard(motherboard)
+  {
+    return this.http.put('/api/Motherboard/' + motherboard.id, motherboard).map(res => res.json());
+  }
+  updateRAM(ram)
+  {
+    return this.http.put('/api/RAM/' + ram.id, ram).map(res => res.json());
+  }
+  updateStorage(storage)
+  {
+    return this.http.put('/api/Storage/' + storage.id, storage).map(res => res.json());
+  }
+
+  deleteCPU(id) {
+    return this.http.delete('/api/CPU/' + id).map(res =>res.json());
+  }
+  deleteCase(id) {
+    return this.http.delete('/api/Case/' + id).map(res =>res.json());
+  }
+  deleteCoolingFan(id) {
+    return this.http.delete('/api/CoolingFan/' + id).map(res =>res.json());
+  }
+  deletePowerSupply(id) {
+    return this.http.delete('/api/PowerSupply/' + id).map(res =>res.json());
+  }
+  deleteGPU(id) {
+    return this.http.delete('/api/GPU/' + id).map(res =>res.json());
+  }
+  deleteMotherboard(id) {
+    return this.http.delete('/api/Motherboard/' + id).map(res =>res.json());
+  }
+  deleteRAM(id) {
+    return this.http.delete('/api/RAM/' + id).map(res =>res.json());
+  }
+  deleteStorage(id) {
+    return this.http.delete('/api/Storage/' + id).map(res =>res.json());
+  }
   //end
 }
