@@ -13,6 +13,12 @@ namespace CYouEcommerce.Core.EFTables
         [Required]
         [StringLength(255)]
         public string Address { get; set; }
+        [Required]
+        [StringLength(20)]
+        public string State { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string ZipCode { get; set; }
         public Account AccountInfoOrder { get; set; }
         public int AccountInfoOrderId { get; set; }        
         [Required]                

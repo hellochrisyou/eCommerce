@@ -1,9 +1,11 @@
+import { AuthService } from './../Services/auth.service';
 import { components, account, KeyValuePair } from './../Models/interfaces';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MakeService } from '../Services/make.service';
 import { FormBuilder } from '@angular/forms';
 import { KeyValue } from '@angular/common';
 import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -234,6 +236,8 @@ tmpAccount: account = {
   //end
 
   constructor(
+  private router: Router,
+  private auth: AuthService,
   public dialog: MatDialog,
   private MakeService: MakeService, 
   private _formBuilder: FormBuilder
@@ -242,6 +246,10 @@ tmpAccount: account = {
    }
 
   ngOnInit() {
+    if (!this.auth.isAuthenticated() || !this.auth.isAdmin())
+        {
+          this.router.navigate(['/home']);
+        }
     //filter
     this.getComponents();
     //end
@@ -260,7 +268,6 @@ tmpAccount: account = {
         {
           usedCount = usedCount + 1;                  
           //added
-          console.log('month', this.orders[tmp].orderDate.substring(5, 7) );
           if (this.orders[tmp].orderDate.substring(5, 7) == '01')
           {
             this.countJan = this.countJan + 1; 
@@ -420,12 +427,9 @@ tmpAccount: account = {
     this.filteredComponent = this.filteredComponent.concat(this.ramComponent);
     this.filteredComponent = this.filteredComponent.concat(this.powerSupplyComponent);
     this.filteredComponent = this.filteredComponent.concat(this.motherboardComponent);
-    console.log('this.filtered', this.filteredComponent);
   }
   filterList()
   {
-    console.log('thisselectedfilter', this.selectedFilter);
-    console.log('filteredComponent', this.filteredComponent);
     if (this.selectedFilter == '')
     {
       this.insertAllComponents();
@@ -434,7 +438,6 @@ tmpAccount: account = {
     {
       this.filteredComponent = [];
       this.filteredComponent = this.filteredComponent.concat(this.cpuComponent);
-      console.log('cpufiltered', this.filteredComponent);
     }
     if (this.selectedFilter == 'Motherboard')
     {
@@ -513,35 +516,27 @@ tmpAccount: account = {
   }
 
   chartClicked(e:any):void {
-    console.log(e);
   }
  
   chartHovered(e:any):void {
-    console.log(e);
   }
 
     //added
     updateAccount(index, role)
     {
-      console.log('this.ismaster', this.isMaster);
       this.tmpAccount = this.accounts[index]; 
-      console.log('index', index);
-      console.log('this.tmpAccount', this.tmpAccount);
       
       if (this.tmpAccount.admin == true)
       {      
-        console.log('this.tmpAccount.admin == true', this.tmpAccount.admin);
         this.tmpAccount.admin = false;                
       }
       else
       {
-        console.log('this.tmpAccount.admin == false', this.tmpAccount.admin);
         this.tmpAccount.admin = true;               
       }
       if (this.isMaster == 'true' && role == 'master')
       {
         this.tmpAccount.master_account = this.tmpAccount.admin;
-        console.log('this.tmpAccount.master', this.tmpAccount.master_account);
       }
       this.MakeService.updateAccount(this.tmpAccount).subscribe(x => x);        
     }
@@ -593,7 +588,6 @@ tmpAccount: account = {
     }
 
     openDialog(index): void {
-      console.log('thisselectedfilter', this.selectedFilter);
       const dialogRef = this.dialog.open(editComponent, {
         width: '250px',
         data: {
@@ -615,7 +609,6 @@ tmpAccount: account = {
     {    
       this.MakeService.getCase().subscribe(caseItem => {
         this.caseComponent = caseItem;      
-        console.log('casecomponent', this.caseComponent);
           this.MakeService.getCoolingfan().subscribe(coolingFan => {
             this.coolingFanComponent = coolingFan;
               this.MakeService.getCoolingfan().subscribe(coolingFan => {
@@ -642,7 +635,7 @@ tmpAccount: account = {
               });
           });
       });
-    }
+    }    
 }
 
 class componentDetails 
@@ -696,7 +689,6 @@ export class editComponent{
         this.dialogRef.close();      
       }
       submit(): void {
-        console.log('thiscomponetnname', this.tmpComponent);
         if (this.tmpComponent.hardwareType == 'CPU')
         {
           this.MakeService.updateCPU(this.tmpComponent).subscribe(x => x);
@@ -727,7 +719,7 @@ export class editComponent{
         }
         if (this.tmpComponent.hardwareType == 'Case')
         {
-          this.MakeService.updateCase(this.tmpComponent).subscribe(x => console.log('done'));
+          this.MakeService.updateCase(this.tmpComponent).subscribe(x => x);
         }
         
         this.dialogRef.close();

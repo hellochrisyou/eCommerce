@@ -2,6 +2,8 @@
     <mat-form-field appearance="legacy">
         <mat-label>Address</mat-label>          
         <input [(ngModel)]="addressValue" matInput placeholder="Address">                           
+        <input [(ngModel)]="stateValue" matInput placeholder="State"> 
+        <input [(ngModel)]="zipCodeValue" matInput placeholder="ZipCode"> 
     </mat-form-field>    
     <button (click) = "submit()">Submit</button>
     <button (click) = "cancel()">Cancel</button>

@@ -1,3 +1,5 @@
+
+
 .search-hero {
     max-width: 500px;
     padding-bottom: 50px;
@@ -23,4 +25,7 @@
     background: none !important;
   }
 
-  
+  td:nth-child(1), th:nth-child(1)
+  { 
+    width: 1% !important;
+  }

@@ -18,8 +18,9 @@ export class NavMenuComponent{
       localStorage; 
     this.emailName = localStorage.getItem('user_email');
    }, 2000);
-    
+
   }
+
   collapse() {
     this.isExpanded = false;
   }

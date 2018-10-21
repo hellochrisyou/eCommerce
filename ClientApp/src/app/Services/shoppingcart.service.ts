@@ -11,6 +11,8 @@ export class ShoppingcartService {
   tmpThisOrder: shoppingthisOrder = {
     type: '',
     address: '',
+    state: '',
+    zipCode: '',
     accountInfoOrderId: '',
     order_Number: '',
     case: '',
@@ -30,22 +32,30 @@ export class ShoppingcartService {
   {
     this.tmpThisOrder = tmpOrder;
     this.tmpArray.push(this.tmpThisOrder);
-    console.log(this.tmpArray);
   }
   delete(index)
   {
-    console.log('finished splice', this.tmpArray);
     this.tmpArray.splice(index,1);
-    console.log('finished splice', this.tmpArray);
   }
   get() 
   {
     return this.tmpArray;
   }  
+
+  // sorting logic
+  key = 'order_Number'; // sort default by name
+  reverse = false;
+  sortList(key) {
+    this.key = key;
+    this.reverse = !this.reverse;
+  }
+  
 }
 class shoppingthisOrder {
   type: string;
   address: string;
+  state: string;
+  zipCode: string;
   accountInfoOrderId: string;
   order_Number: string;
   case: string;

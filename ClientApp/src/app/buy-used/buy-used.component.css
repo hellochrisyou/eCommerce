@@ -1,11 +1,22 @@
+@media (min-width: 768px) {
 .example-card {
-    max-width: 400px;
-    height:750px;
-    margin-top:5% !important;
+    max-width: 400px !important;
+    display: block;    
+    margin-top:3% !important;    
+    margin-bottom: 3% !important;
+  }  
+}
+
+@media (max-width: 767px) {
+  .example-card {
+      max-width: 300px !important;
+      display: block;      
+      margin-top:3% !important;    
+      margin-bottom: 3% !important;
+    }  
   }
-  
   .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/f/f4/User_Avatar_2.png');
     background-size: cover;
   }
   
@@ -21,4 +32,36 @@
   .example-selected-value {
     margin: 15px 0;
   }
+
+  .row
+  {
+    text-align: center;
+    margin-left:1% !important;
+    margin-right:1% !important;
+  }
   
+  .col-2, .col-sm-5
+  {
+    display:inline-block;
+    float:none;
+  }
+
+  .word-overflow
+  {
+    overflow-wrap: break-word;
+    text-align:left;
+  }
+
+  .title-label 
+  {    
+    text-align:left;
+    text-decoration: underline;
+    
+  }
+
+  .trash-button {
+    padding: 0 !important;
+    border: none !important;
+    background: none !important;    
+    margin-left:10%;
+  }

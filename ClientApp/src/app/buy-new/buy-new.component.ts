@@ -1,3 +1,4 @@
+import { AuthService } from './../Services/auth.service';
 import { MakeService } from './../Services/make.service';
 import { ShoppingcartService } from './../Services/shoppingcart.service';
 import { ShoppingcartComponent } from './../shoppingcart/shoppingcart.component';
@@ -6,11 +7,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { thisOrder, KeyValuePair} from './../Models/interfaces'
 import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-buy-new',
   templateUrl: './buy-new.component.html',
-  styleUrls: ['./buy-new.component.css'],
+  styleUrls: ['./buy-new.component.css'], 
   providers: [MakeService]
 })
 export class BuyNewComponent implements OnInit {
@@ -105,6 +107,8 @@ export class BuyNewComponent implements OnInit {
     tmpThisOrder: thisOrder = {
     type: 'New',
     address: '',
+    state: '',
+    zipCode: '',
     accountInfoOrderId: '',
     order_Number: '',
     case: '',
@@ -135,9 +139,10 @@ export class BuyNewComponent implements OnInit {
     sortList(key) {
       this.key = key;
       this.reverse = !this.reverse;
-      console.log(this.key);
     }
     constructor(
+      private auth: AuthService,
+      private router: Router,
       public snackBar: MatSnackBar,
       private ShoppingcartService: ShoppingcartService, 
       private MakeService: MakeService, 
@@ -145,10 +150,11 @@ export class BuyNewComponent implements OnInit {
       ) { }
 
     ngOnInit() {
-        this.MakeService.getCase().subscribe(caseItem => {
-          this.caseItem = caseItem
-          console.log('caseprice', this.caseItem);
-        });
+        if (!this.auth.isAuthenticated())
+        {
+          this.router.navigate(['/home']);
+        }
+        this.MakeService.getCase().subscribe(caseItem => this.caseItem = caseItem);
         this.MakeService.getCoolingfan().subscribe(coolingFan => this.coolingFan = coolingFan);
         this.MakeService.getCPU().subscribe(CPU => this.CPU = CPU);
         this.MakeService.getGPU().subscribe(GPU => this.GPU = GPU);
@@ -212,17 +218,13 @@ export class BuyNewComponent implements OnInit {
     if (this.tmpThisOrder.cpu != '')
     {
     var tmp = this.CPU.find(m => m.name == this.tmpThisOrder.cpu);  
-    console.log('tmp', tmp);
     this.selectedCPU = tmp
-    console.log('this.selectedCPU', this.selectedCPU);
     this.totalPrice = parseFloat((this.selectedCPU.price + this.totalPrice).toFixed(2));
     }
     if (this.tmpThisOrder.motherboard != '')
     {
     var tmp = this.motherboard.find(m => m.name == this.tmpThisOrder.motherboard);   
-    console.log('tmp', tmp);
     this.selectedMotherboard = tmp;
-    console.log('this.selectedMotherboard', this.selectedMotherboard);
     this.totalPrice = parseFloat((this.selectedMotherboard.price + this.totalPrice).toFixed(2));
     }
     if (this.tmpThisOrder.ram != '')
@@ -261,8 +263,6 @@ export class BuyNewComponent implements OnInit {
     this.selectedCase = tmp;
     this.totalPrice = parseFloat((this.selectedCase.price + this.totalPrice).toFixed(2));  
     }
-    console.log('totalprice', this.totalPrice);
-
   }
 
 }

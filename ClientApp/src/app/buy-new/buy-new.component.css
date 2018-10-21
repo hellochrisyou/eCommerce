@@ -24,3 +24,30 @@
     top: 0;
     background-color: inherit;
   }
+  @media (min-width: 768px) {
+    .mat-stepper-vertical
+    {
+      width: 75% !important;
+    }
+  }
+  @media (min-width: 1025px) {
+    .mat-stepper-vertical
+    {
+      width: 50% !important;
+    }
+  }
+  @media (min-width: 1367px) {
+    .mat-stepper-vertical
+    {
+      width: 50% !important;
+      margin-left:23%  !important;
+    }
+  }
+
+  .mat-expansion-panel, mat-elevation-z0, mat-accordian, .mat-expansion-panel-header, .mat-expanded,
+  .mat-expansion-panel-header, .mat-expanded:hover 
+  {
+    background-color: transparent !important;
+    margin-top: 1px;    
+  }
+

@@ -1,40 +1,54 @@
-<div class="container">
-  <div class="row">       
-  
-    <mat-radio-group class="example-radio-group" [(ngModel)]="selection">
-      <mat-radio-button class="example-radio-button" *ngFor="let select of radioSelection" (change)="filterItems(select)">
-        {{select}}
-      </mat-radio-button>
-    </mat-radio-group>
-
-
-      <div *ngFor="let j of selectedItems; let i = index">     
-
-
-      <mat-card class="example-card">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Seller</mat-card-title>
-            <mat-card-subtitle>Dynamic Value</mat-card-subtitle>
-          </mat-card-header>         
-          <img (click)="openDialog(photo)" matTooltip="Click to expand." *ngFor="let photo of collectionPhotos[i]" src="/Uploads/{{ photo.fileName }}" class="img-thumbnail">                  
-            <mat-card-content>       
-              <p >CPU:<br> {{j.cpu}}</p>                   
-              <p>Motherboard:<br> {{j.motherboard}}</p>
-              <p>RAM:<br> {{j.ram}}</p>
-              <p>Storage:<br> {{j.storage}}</p>
-              <p>GPU:<br> {{j.gpu}}</p>
-              <p>Powersupply:<br> {{j.power_Supply}}</p>
-              <p>Cooling Fan:<br> {{j.cooling_Fan}}</p>                   
-              <p>Case:<br> {{j.case}}</p>                                   
-              <p>Total Price: ${{j.total_Price}}</p>
-            </mat-card-content>
-          <mat-card-actions>
-            <button mat-button (click)="addToCart(i)">Add to Cart</button> 
-          </mat-card-actions>
-        </mat-card>
-        </div>
-         
+<div class="container m-0">
+    <div class="row">
+        <h2>Buy Used</h2>
+      <mat-radio-group class="example-radio-group" [(ngModel)]="selection" name="selection">
+        <mat-radio-button class="example-radio-button" *ngFor="let select of radioSelection" (change)="filterItems(select)">
+          {{select}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="row">
+        <div class="col col-sm-5">
+          <div *ngFor="let j of selectedItems; let i = index">     
+            <mat-card class="example-card mat-elevation-z1">
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>Seller
+                    <span *ngIf="isAdmin">
+                      <button class="trash-button">
+                        <i style="color:red" class="fa fa-trash" (click)="DeleteItem(i)" aria-hidden="true"></i>
+                      </button>
+                    </span>
+                  </mat-card-title>
+                  <mat-card-subtitle>{{j.sellerName}}</mat-card-subtitle>
+                </mat-card-header>         
+                <!-- <img (click)="openDialog(photo)" matTooltip="Click to expand." *ngFor="let photo of collectionPhotos[i]" src="/Uploads/{{ photo.fileName }}" class="img-thumbnail">                   -->
+                  <mat-card-content>       
+                    <p class="title-label">CPU:</p>
+                    <p class="word-overflow">{{j.cpu}}</p>                   
+                    <p class="title-label">Motherboard:</p>
+                    <p class="word-overflow">{{j.motherboard}}</p>                   
+                    <p class="title-label">RAM:</p>
+                    <p class="word-overflow">{{j.ram}}</p>                   
+                    <p class="title-label">Storage:</p>
+                    <p class="word-overflow">{{j.storage}}</p>                   
+                    <p class="title-label">GPU:</p>
+                    <p class="word-overflow">{{j.gpu}}</p>                   
+                    <p class="title-label">Power Supply:</p>
+                    <p class="word-overflow">{{j.power_Supply}}</p>                   
+                    <p class="title-label">Cooling Fan:</p>
+                    <p class="word-overflow">{{j.cooling_Fan}}</p>                   
+                    <p class="title-label">Case:</p>
+                    <p class="word-overflow">{{j.case}}</p>                   
+                    <p class="title-label">Total Price: ${{j.total_Price}}</p>
+                  </mat-card-content>
+                <mat-card-actions>
+                  <button mat-raised-button color="primary" (click)="addToCart(i)">Add to Cart</button>                   
+                </mat-card-actions>
+            </mat-card>
+      </div>          
+    </div>
   </div>
- </div>
+</div>
+
  

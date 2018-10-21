@@ -314,6 +314,10 @@ namespace CYouEcommerce.Migrations
                         .IsRequired()
                         .HasMaxLength(255);
 
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
                     b.Property<string>("Storage")
                         .IsRequired()
                         .HasMaxLength(255);
@@ -323,6 +327,10 @@ namespace CYouEcommerce.Migrations
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasMaxLength(255);
+
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 

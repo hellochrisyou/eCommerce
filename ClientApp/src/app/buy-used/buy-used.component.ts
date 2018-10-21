@@ -6,24 +6,30 @@ import { PhotoService } from '../Services/photo.service';
 import { thisOrder } from '../Models/interfaces';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 import { AuthService } from '../Services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
  selector: 'app-buy-used',
  templateUrl: './buy-used.component.html',
  styleUrls: ['./buy-used.component.css']
 })
-export class BuyUsedComponent implements OnInit {
- selectedItems: any = {};
+export class BuyUsedComponent implements OnInit { 
+ selectedItems: any;
  radioSelection: string[] = ['All items', "My items"];
+ selection: any;
+ tmpSelect: string = '';
  photos: any[];
  tmpSelectedFileName: string;
  collectionPhotos: any[] = [];
  allUsedItems: any[];
  myUsedItems: any[];
+ isAdmin: string = '';
  //temporary object for practice.  use ng init to cycle through items
  tmpThisOrder: thisOrder = { 
      type: 'Used',
      address: '',
+     state: '',
+     zipCode: '',
      accountInfoOrderId: '',
      order_Number: '',
      case: '',
@@ -40,6 +46,7 @@ export class BuyUsedComponent implements OnInit {
  tmpShoppingOrder: thisOrder;
 
  constructor(
+  private router: Router,
   private Auth: AuthService,
   public UsedSnackBar: MatSnackBar,
   public dialog: MatDialog, 
@@ -48,48 +55,48 @@ export class BuyUsedComponent implements OnInit {
   private photoService: PhotoService
   ) {}
 
- ngOnInit() {
-  var accountId = localStorage.getItem('account_id');
-   this.MakeService.getAllSaleItem().subscribe(usedItem => {
-     this.allUsedItems = usedItem
-
-     this.allUsedItems.forEach(element => {
-           this.photoService.getPhotos(element.id)
-           .subscribe(photo => {
-             this.collectionPhotos.push(photo);
-           });
-     });     
-
-     this.myUsedItems = this.allUsedItems
-      .filter(
-        function(e) {
-          console.log(e);
-          if (e.accountSaleItemId == accountId)             
-          {            
-            return e;              
-          }
-        }
-      );
-     this.selectedItems = this.allUsedItems;
-   });   
+ ngOnInit() {  
+  if (!this.Auth.isAuthenticated())
+  {
+    this.router.navigate(['/home']);
+  }
+   this.tmpSelect = '';
+   this.serviceGet();
  } 
+
+ DeleteItem(index) {
+  if (this.tmpSelect === 'My items')
+  {    
+    this.MakeService.deleteUsed(this.myUsedItems[index].id).subscribe(x =>
+      {
+        x;
+        this.serviceGet();
+        this.filterItems('My items');
+      });;
+  }
+  else{
+    this.MakeService.deleteUsed(this.allUsedItems[index].id).subscribe(x =>
+      {
+        x;
+        this.serviceGet();
+        this.filterItems('All items');
+      });
+  } 
+}
 
  addToCart(i)
  {
    this.openUsedSnackBar();
-   console.log('index', i);
    this.tmpThisOrder = this.allUsedItems[i];
    this.tmpThisOrder.total_Price = this.tmpThisOrder.total_Price.toString();
-   console.log('tmpthisorder', this.tmpThisOrder);
    this.shoppingcart.add(this.tmpThisOrder);      
  }
 
  openDialog(selectedPic): void {
    this.tmpSelectedFileName = selectedPic.fileName;
-   console.log(selectedPic.fileName);
   const dialogRef = this.dialog.open(expandPic, {
-    width: '450px',
-    height: '350px',
+    width: '300px',
+    height: '300px',
     data: {expandedPic: this.tmpSelectedFileName}
   });
   }
@@ -100,17 +107,47 @@ export class BuyUsedComponent implements OnInit {
     });
   }
 
+  serviceGet()
+  {
+    var accountId = localStorage.getItem('account_id');
+    this.isAdmin = localStorage.getItem('isAdmin');
+    this.MakeService.getAllSaleItem().subscribe(usedItem => {
+      this.allUsedItems = usedItem
+ 
+      // this.allUsedItems.forEach(element => {
+      //       this.photoService.getPhotos(element.id)
+      //       .subscribe(photo => {
+      //         this.collectionPhotos.push(photo);              
+      //       });
+      // });     
+ 
+      this.myUsedItems = this.allUsedItems
+       .filter(
+         function(e) {
+           if (e.accountSaleItemId == accountId)             
+           {            
+             return e;              
+           }
+         }
+       );   
+       this.filterItems(this.tmpSelect);    
+    });   
+  }
+
   filterItems(selection)
   {
- 
-    if (selection == 'All items')
+    if (selection === 'All items')
     {
       this.selectedItems = this.allUsedItems;
-      console.log('all items', this.selectedItems);
+      this.tmpSelect = 'All items';
     }
-    else{
+    else if (selection === 'My items')
+    {
       this.selectedItems = this.myUsedItems;
-      console.log('my items', this.selectedItems);
+      this.tmpSelect = 'My items';
+    }
+    else
+    {      
     }
   }
 }
@@ -130,11 +167,10 @@ export class ConfirmUsedItem {}
 @Component({
   selector: 'expandPic',
   templateUrl: 'expandPic.html',
-  styles: [`
-    .picSize {
-      height: 100%;
-      width: 100%;      
-    }
+  styles: [`  
+    .picSize{
+      width:90%;
+      height:auto;     
   `],
 })
 export class expandPic {

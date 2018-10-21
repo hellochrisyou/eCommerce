@@ -2,6 +2,8 @@ export interface thisOrder {
     type: string;    
     order_Number: string,
     address: string;
+    state: string;
+    zipCode: string;
     accountInfoOrderId: string;
     cpu: string;
     motherboard: string;
@@ -38,6 +40,8 @@ export interface thisOrder {
     type: string;    
     order_Number: string,
     address: string;
+    state: string;
+    zipCode: string;
     accountInfoOrderId: string;
     orderDate: Date;
     cpu: string;
@@ -65,7 +69,7 @@ export interface thisOrder {
     storage: string;        
     case: string;
     total_Price: string; 
-    sellername: string;
+    sellerName: string;
   }
 
   export interface components {

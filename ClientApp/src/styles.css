@@ -1,11 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: 'Roboto', sans-serif; }
-container-fluid {
-    width: 100% !important;
-    height: 100% !important;
+
+html, body { 
+    height: 100%; 
+}
+body { 
+    margin: 0; 
+    font-family: 'Roboto', sans-serif; 
 }
 
-a {outline : none;}
+
+.h2, h2, h4
+{
+    text-align:center !important;
+    font-family: 'trebuchet ms' !important;
+    font-weight: bold !important;
+
+}

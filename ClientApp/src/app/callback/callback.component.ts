@@ -1,4 +1,6 @@
+import { AuthService } from './../Services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-callback',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CallbackComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    if (!this.auth.isAuthenticated())
+        {
+          this.router.navigate(['/home']);
+        }
   }
 
 }

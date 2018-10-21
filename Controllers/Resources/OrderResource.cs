@@ -12,7 +12,9 @@ namespace CyouEcommerce.Controllers.Resources
         public int Order_Number { get; set; } 
         public Account AccountInfoOrder { get; set; }
         public int AccountInfoOrderId { get; set; }    
-        public string Address  { get; set;}          
+        public string Address  { get; set;}   
+        public string State { get; set; }
+        public string ZipCode { get; set; }       
         public DateTime OrderDate { get; set; } 
         public string Type { get; set; }
         public string CPU { get; set; } 

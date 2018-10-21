@@ -4,6 +4,7 @@ import { MakeService } from './../Services/make.service';
 //import { Observable } from 'rxjs/Observable';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { thisOrder, KeyValuePair, orderWDate} from './../Models/interfaces'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-orderhistory',
@@ -12,12 +13,14 @@ import { thisOrder, KeyValuePair, orderWDate} from './../Models/interfaces'
 })
 export class OrderhistoryComponent implements OnInit {
 
-  order: any[];
-  clonedOrder: any[];
+  order: any;
+  clonedOrder: any = {};
 
   tmpThisOrder: orderWDate = {
     type: 'New',
     address: '',
+    state: '',
+    zipCode: '',
     accountInfoOrderId: '',
     order_Number: '',
     orderDate: new Date("January 1, 2018 00:00:00"),
@@ -38,27 +41,28 @@ export class OrderhistoryComponent implements OnInit {
     sortList(key) {
       this.key = key;
       this.reverse = !this.reverse;
-      console.log(this.key);
     }
 
   constructor(
+    private router: Router,
     private Auth: AuthService, 
     private MakeService: MakeService, 
     private _formBuilder: FormBuilder
     ) { }
 
   ngOnInit() {        
+    if (!this.Auth.isAuthenticated())
+        {
+          this.router.navigate(['/home']);
+        }
     var accountId = localStorage.getItem('account_id');
-    console.log('accountId', accountId);
       this.MakeService.getOrder().subscribe(order => {
         this.order = order;
         this.clonedOrder = JSON.parse(JSON.stringify(this.order
           .filter(
             function(e) {
-              console.log(e);
               if (e.accountInfoOrderId == accountId)             
-              {
-                
+              {                
                 return e;              
               }
             }
@@ -67,7 +71,6 @@ export class OrderhistoryComponent implements OnInit {
         this.clonedOrder.forEach(function (value, index, object) {
         delete value.id;        
         });
-      console.log(this.clonedOrder);    
     })
   } 
 }

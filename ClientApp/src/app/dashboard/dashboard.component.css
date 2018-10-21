@@ -1,9 +1,13 @@
+@import "~bootstrap/dist/css/bootstrap-grid.css";
+
+
+
 .example-tab-icon {
     margin-right: 8px;
   }
 
   .search-hero {
-    max-width: 500px;    
+    width: 500px;    
     padding-bottom: 25px;
     margin:auto;
   }
@@ -26,20 +30,10 @@
     background-color: #3F51B5 !important;
   }
  
-  .rectangle-users {
-    height: 50px;
-    width: 150px;
-    background-color: #3F51B5 !important;
-  }
-  .rectangle-revenue {
-    height: 50px;
-    width: 150px;
-    background-color: #EF4D4A !important;
-  }
-  .rectangle-orders {
-    height: 50px;
-    width: 150px;
-    background-color: #2196F7 !important;
+  .filter-length
+  {
+    float:right;
+    min-width:300px;
   }
 
   .text-primary {
@@ -51,13 +45,219 @@
     flex-direction: column;
   }
   
-  .example-container > * {
-    width: 100%;
-  }
+
 
   .button-no-border {
     padding: 0 !important;
     border: none !important;
     background: none !important;
+  } 
+
+
+  @media (max-width: 768px) {
+    .first-margin
+    {
+      margin-top:13%;
+    }
+    .bar-margin
+    {
+      margin-top:10%;
+    }
+    .icon-margin
+    {
+      margin-top:15%
+    }
+    .margin-box
+    {
+      margin-top:40%;
+    }
+    .margin-box-left-label
+    {
+      margin-left:13%;
+      margin-top:-5%;
+    }
+    .rectangle-users {
+      height: 50px;
+      max-width: 150px;
+      background-color: #3F51B5 !important;
+    }
+    .rectangle-revenue {
+      height: 50px;
+      max-width: 150px;
+      background-color: #EF4D4A !important;
+    }
+    .rectangle-orders {
+      height: 50px;
+      max-width: 150px;
+      background-color: #2196F7 !important;
+    }
   }
- 
+
+  @media (min-width: 1023px) {
+    .first-margin
+    {
+      margin-top:13%;
+    }
+    .bar-margin
+    {
+      margin-top:10%;
+    }
+    .margin-container
+    {
+      margin-right:2%;
+    }
+    .icon-margin
+    {
+      margin-top:42%
+    }
+    .margin-box
+    {
+      margin-top:40%;
+    }
+    .margin-box-left-label
+    {
+      margin-left:17%;
+      margin-top:1%;
+    }
+    .rectangle-users {
+      height: 70px;
+      max-width: 220px;
+      background-color: #3F51B5 !important;
+    }
+    .rectangle-revenue {
+      height: 70px;
+      max-width: 220px;
+      background-color: #EF4D4A !important;
+    }
+    .rectangle-orders {
+      height: 70px;
+      max-width: 220px;
+      background-color: #2196F7 !important;
+    }
+  }
+
+  @media (min-width: 1279px) {
+    .first-margin
+    {
+      margin-top:13%;
+    }
+    .bar-margin
+    {
+      margin-top:10%;
+    }
+    .margin-container
+    {
+      margin-right:3%;
+    }
+    .icon-margin
+    {
+      margin-top:42%
+    }
+    .margin-box
+    {
+      margin-top:40%;
+    }
+    .margin-box-left-label
+    {
+      margin-left:23%;
+      margin-top:1%;
+    }
+    .rectangle-users {
+      height: 70px;
+      max-width: 220px;
+      background-color: #3F51B5 !important;
+      margin-left:5%;
+    }
+    .rectangle-revenue {
+      height: 70px;
+      max-width: 220px;
+      background-color: #EF4D4A !important;
+    }
+    .rectangle-orders {
+      height: 70px;
+      max-width: 220px;
+      background-color: #2196F7 !important;
+    }
+  }
+  
+  @media (min-width: 1365px) {
+    .first-margin
+    {
+      margin-top:7%;
+    }
+    .bar-margin
+    {
+      margin-top:5%;
+    }
+    .margin-container
+    {
+      margin-left: 3%;
+    }
+    .margin-container
+    {
+      margin-right:10%;
+    }
+    .icon-margin
+    {
+      margin-top:30%
+    }
+    .margin-box
+    {
+      margin-top:40%;
+    }
+    .margin-box-left-label
+    {
+      margin-left:23%;
+      margin-top: 1%;
+    }
+    .rectangle-users {
+      height: 70px;
+      min-width: 225px;
+      background-color: #3F51B5 !important;
+    }
+    .rectangle-revenue {
+      height: 70px;
+      min-width: 225px;
+      background-color: #EF4D4A !important;
+    }
+    .rectangle-orders {
+      height: 70px;
+      min-width: 225px;
+      background-color: #2196F7 !important;
+    }
+  }
+
+  @media (min-width: 1919px) {
+    .icon-margin
+    {
+      margin-top: 60%
+    }
+    .bar-margin
+    {
+      margin-top:10%;
+    }
+    .margin-box
+    {
+      margin-top: 30%;
+    }
+    .margin-box-left-label
+    {
+      margin-left: 25%; 
+      margin-top: 2%;
+    }
+    .rectangle-users {
+      height: 80px;
+      min-width: 245px;
+      background-color: #3F51B5 !important;
+    }
+    .rectangle-revenue {
+      height: 80px;
+      min-width: 245px;
+      background-color: #EF4D4A !important;
+    }
+    .rectangle-orders {
+      height: 80px;
+      min-width: 245px;
+      background-color: #2196F7 !important;
+    }
+  }

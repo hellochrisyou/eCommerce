@@ -6,6 +6,7 @@ import { MakeService } from './../Services/make.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 import {ErrorHandler} from "@angular/core";
 import { thisSellOrder } from '../Models/interfaces';
+import { Router } from '@angular/router';
 
 
 
@@ -34,10 +35,11 @@ export class SellComponent implements OnInit {
     ram: '',
     storage: '',   
     total_Price: '',
-    sellername: 'test'
+    sellerName: 'test'
   }
   
   isLinear = false;
+  sellerNameFormGroup: FormGroup;
   cpuFormGroup: FormGroup;
   secondFormGroup: FormGroup;  
   motherboardFormGroup: FormGroup;
@@ -52,6 +54,7 @@ export class SellComponent implements OnInit {
 
 
   constructor(
+    private router: Router,
     public snackBar: MatSnackBar,
     private _formBuilder: FormBuilder,  
     private MakeService: MakeService, 
@@ -60,14 +63,20 @@ export class SellComponent implements OnInit {
     private Auth: AuthService,
     ) 
     {
-    console.log('constructor', this.tmpThisOrder);
     }
 
   ngOnInit() {
+    if (!this.Auth.isAuthenticated())
+        {
+          this.router.navigate(['/home']);
+        }
     //initialize accountId
     this.tmpThisOrder.accountsaleitemid = localStorage.getItem('account_id');
 
     //initialize form groups
+    this.sellerNameFormGroup = this._formBuilder.group({
+      sellerNameCtrl: ['', Validators.required]
+    });
     this.cpuFormGroup = this._formBuilder.group({
       cpuCtrl: ['', Validators.required]
     });
@@ -103,8 +112,7 @@ export class SellComponent implements OnInit {
 
   submit()
   {
-    console.log('show value', this.priceFormGroup.value.priceCtrl);
-
+    this.tmpThisOrder.sellerName = this.sellerNameFormGroup.value.sellerNameCtrl;
     this.tmpThisOrder.case = this.caseFormGroup.value.caseCtrl;
     this.tmpThisOrder.cooling_Fan = this.coolingFormGroup.value.coolingCtrl;
     this.tmpThisOrder.cpu = this.cpuFormGroup.value.cpuCtrl;
@@ -114,8 +122,8 @@ export class SellComponent implements OnInit {
     this.tmpThisOrder.ram = this.ramFormGroup.value.ramCtrl;
     this.tmpThisOrder.storage = this.storageFormGroup.value.storageCtrl;
     this.tmpThisOrder.total_Price = this.priceFormGroup.value.priceCtrl.toString();    
-    console.log('test this', this.tmpThisOrder);
 
+    this.sellerNameFormGroup.reset();
     this.cpuFormGroup.reset();
     this.motherboardFormGroup.reset();
     this.ramFormGroup.reset();
@@ -126,13 +134,12 @@ export class SellComponent implements OnInit {
     this.coolingFormGroup.reset();
     this.priceFormGroup.reset();
     this.MakeService.createSaleItem(this.tmpThisOrder).subscribe(x => {
-      console.log('created sale', x);
       this.MakeService.getAllSaleItem().subscribe(uploadedItem => {
-        this.uploadedItem = uploadedItem;
-        var lastItem = this.uploadedItem.pop();
-          this.uploadedItemId = lastItem.id;
-          console.log("uploadeditemid", this.uploadedItemId)
-          this.openDialog();
+        // this.uploadedItem = uploadedItem;
+        // var lastItem = this.uploadedItem.pop();
+        //   this.uploadedItemId = lastItem.id;
+        //   console.log("uploadeditemid", this.uploadedItemId)
+        //   this.openDialog();
           this.tmpThisOrder =  {
             accountsaleitemid: '',    
             type: 'Used',
@@ -145,12 +152,11 @@ export class SellComponent implements OnInit {
             ram: '',
             storage: '',   
             total_Price: '',
-            sellername: 'test'
+            sellerName: 'test'
           };
           this.tmpThisOrder.accountsaleitemid = localStorage.getItem('account_id');
           this.priceFormGroup.get('priceCtrl').setValue(0);
           });   
-  console.log('regenerate', this.tmpThisOrder);  
     });    
   }
 
@@ -181,7 +187,6 @@ export class UploadDialog{
     @Inject(MAT_DIALOG_DATA) public itemObject: uploadedItemId) {}
 
     ngOnInit() {
-      console.log(this.itemObject.itemId);      
       this.photoService.getPhotos(this.itemObject.itemId).subscribe(photos => 
         {
           this.photos = photos          
@@ -195,10 +200,8 @@ export class UploadDialog{
         .subscribe(photo => {
           this.photos.push(photo);
           this.count = this.count + 1;
-          console.log('thiscount', this.count);
         },
         err => {
-          console.log('error caught')
           this.openSnackBar();
         }
         );

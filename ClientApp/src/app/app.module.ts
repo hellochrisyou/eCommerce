@@ -35,22 +35,22 @@ import {
   MatToolbarModule,
   MatTreeModule,
 } from '@angular/material';
-import {BrowserModule} from '@angular/platform-browser';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { BrowserModule } from '@angular/platform-browser';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 
 import { MatSelectModule, MatSnackBarModule } from  '@angular/material';
 import { MatTableModule } from '@angular/material/table';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { Ng2OrderModule } from 'ng2-order-pipe';
-import {NgxPaginationModule} from 'ngx-pagination'; 
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatInputModule, MatDialogModule} from '@angular/material';
-import {MatCardModule} from '@angular/material/card';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { NgxPaginationModule } from 'ngx-pagination'; 
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatInputModule, MatDialogModule } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
@@ -64,11 +64,12 @@ import { MakeService } from './Services/make.service';
 import { SellComponent, UploadDialog, snackErrorMessage } from './sell/sell.component';
 import { BuyUsedComponent, expandPic, ConfirmUsedItem } from './buy-used/buy-used.component';
 import { OrderhistoryComponent } from './orderhistory/orderhistory.component';
-import { ShoppingcartComponent, checkout, OrderCompleteSnack } from './shoppingcart/shoppingcart.component';
+import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 import { PhotoService } from './Services/photo.service';
 import { MainHomeComponent } from './main-home/main-home.component';
 import { CallbackComponent } from './callback/callback.component';
 import { DashboardComponent, editComponent } from './dashboard/dashboard.component';
+import { CheckoutComponent, OrderCompleteSnack } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -86,13 +87,13 @@ import { DashboardComponent, editComponent } from './dashboard/dashboard.compone
     snackErrorMessage,
     expandPic,
     MainHomeComponent,
-    CallbackComponent,
-    checkout,
+    CallbackComponent,    
     ConfirmNewItem,
     ConfirmUsedItem,
     DashboardComponent,
     OrderCompleteSnack,
-    editComponent
+    editComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -125,10 +126,13 @@ import { DashboardComponent, editComponent } from './dashboard/dashboard.compone
     MatSlideToggleModule,    
     ChartsModule,
     MatRadioModule,
-    
+    MatToolbarModule,
+    MatButtonModule,
+
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'buy-new', component: BuyNewComponent },
+      { path: 'home', component: HomeComponent },
       { path: 'buy-used', component: BuyUsedComponent },
       { path: 'sell', component: SellComponent },
       { path: 'orderhistory', component: OrderhistoryComponent },
@@ -136,13 +140,13 @@ import { DashboardComponent, editComponent } from './dashboard/dashboard.compone
       { path: 'mainhome', component: MainHomeComponent },
       { path: 'callback', component: CallbackComponent },
       { path: 'Dashboard', component: DashboardComponent },
+      { path: 'checkout', component: CheckoutComponent },
     ])
   ],
   entryComponents: [
     UploadDialog, 
     snackErrorMessage, 
-    expandPic, 
-    checkout, 
+    expandPic,     
     ConfirmNewItem, 
     ConfirmUsedItem,
     OrderCompleteSnack,
@@ -151,14 +155,13 @@ import { DashboardComponent, editComponent } from './dashboard/dashboard.compone
   providers: [
     AuthService,
     MakeService, 
-    ShoppingcartComponent, 
     PhotoService,
   ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }
-enableProdMode();
+// enableProdMode();
 
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+// platformBrowserDynamic().bootstrapModule(AppModule);

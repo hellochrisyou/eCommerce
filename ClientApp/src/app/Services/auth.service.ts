@@ -43,13 +43,10 @@ export class AuthService {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
-        console.log('authresult', authResult);
         this.setSession(authResult);        
         this.router.navigate(['/']);
       } else if (err) {
-        console.log('no token', authResult);
         this.router.navigate(['/']);
-        console.log(err);
       }
     });
   }
@@ -60,12 +57,9 @@ export class AuthService {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);    
-    console.log('token', auth0.id_token);
-    console.log('useremail', authResult.idTokenPayload.email);
     //create user account if not exist, otherwise set user_email to current user
     this.makeService.getAccount().subscribe(userAccount => {
       this.userAccount = userAccount;
-      console.log('useraccount', this.userAccount);
     //check if user account exists
     var accountExists = this.userAccount.find(m => m.email == authResult.idTokenPayload.email); 
     if (accountExists == null)
@@ -79,16 +73,10 @@ export class AuthService {
         // DO WE REALLY NEED TO CALL GET ACCOUNT TWICE?
         this.makeService.getAccount().subscribe(userAccount => {
           this.userAccount = userAccount;
-          console.log('useraccount', this.userAccount);
-            var accountId = this.userAccount.find(m => m.email == userAccount.email); 
+            var accountId = this.userAccount.find(m => m.email == userAccount.email);             
               localStorage.setItem('account_id', accountId.Id);
-
-              //added
               localStorage.setItem('isAdmin', 'false');   
               localStorage.setItem('isMaster', 'false');
-              //end
-              console.log('local storage', localStorage);
-
         }) 
     }        
     else
@@ -105,11 +93,9 @@ export class AuthService {
       {
         localStorage.setItem('isAdmin', 'false');
       }
-      console.log('ismaster', this.existingUser.master_account);
       if (this.existingUser.master_account == true)
       {
         localStorage.setItem('isMaster', 'true');
-        console.log('setmaster');
       }
       else
       {
@@ -119,8 +105,6 @@ export class AuthService {
 
       localStorage.setItem('user_email',this.existingUser.email);
       localStorage.setItem('account_id', this.existingUser.id);
-      console.log('local storage', localStorage);
-      console.log('existinguser', this.existingUser);
     }
     });      
   }
@@ -131,8 +115,10 @@ export class AuthService {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     localStorage.removeItem('user_email');
+    localStorage.removeItem('account_id');
+    localStorage.removeItem('isMaster');
+    localStorage.removeItem('isAdmin');
     window.location.href='https://r13champ.auth0.com/v2/logout/?returnTo=https%3A%2F%2Flocalhost%3A5001';
-    console.log('localstorage', localStorage);
     
     // this.isAuthenticated();
     // Go back to the home route
@@ -145,6 +131,14 @@ export class AuthService {
     const expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
     // console.log(new Date().getTime() < expiresAt);
     return new Date().getTime() < expiresAt;
+  }
+
+  public isAdmin(): boolean {
+    if (localStorage.getItem('isAdmin') == 'true')
+    {
+      return true;
+    }
+    return false;
   }
 }
 

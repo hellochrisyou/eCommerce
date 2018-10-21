@@ -57,3 +57,9 @@ li.link-active a:focus {
         text-overflow: ellipsis;
     }
 }
+
+.nav-button
+{
+    float:left !important;
+    margin-left:1%
+}

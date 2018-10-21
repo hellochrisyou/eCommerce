@@ -1,0 +1,59 @@
+<div class="container m-0 text-center">
+  <h2>Checkout</h2>
+  <div class="row" style="margin-top:4%">
+    <h3>Orders</h3>
+    <div *ngIf="shoppingOrder.length == 0">
+      <h4>Empty</h4>
+    </div>
+    <div *ngIf="shoppingOrder.length > 0">
+  <table style="border-collapse:collapse" class="table table-striped">
+    <thead>
+        <tr>
+        <th>Type</th>
+        <th>CPU</th>
+        <th>Motherboard</th>
+        <th>RAM</th>
+        <th>GPU</th>
+        <th>Storage</th>
+        <th>PowerSupply</th>
+        <th>Cooling Fan</th>
+        <th>Case</th>
+        <th>Price</th>    
+      </tr>
+    </thead>
+  <tbody>
+  <tr class="text-left" *ngFor="let t of shoppingOrder | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">    
+    <td class="text-left">{{t.type}}</td>
+    <td class="text-left">{{t.cpu}}</td>
+    <td class="text-left">{{t.motherboard}}</td>
+    <td class="text-left">{{t.ram}}</td>
+    <td class="text-left">{{t.gpu}}</td>
+    <td class="text-left">{{t.storage}}</td>
+    <td class="text-left">{{t.power_Supply}}</td>
+    <td class="text-left">{{t.cooling_Fan}}</td>
+    <td class="text-left">{{t.case}}</td>
+    <td class="text-left">{{t.total_Price}}</td>
+  </tr>
+  </tbody>      
+</table>
+  <div class="row">  
+    <mat-form-field class = "address" appearance="legacy">
+        <mat-label>Address</mat-label>          
+        <input [(ngModel)]="addressValue" matInput>   
+    </mat-form-field>
+    </div>
+    <div class="row">
+    <mat-form-field class = "state" appearance="legacy">
+        <mat-label>State</mat-label>          
+        <input [(ngModel)]="stateValue" matInput> 
+    </mat-form-field>
+    <mat-form-field class = "Zip-Code" appearance="legacy">
+        <mat-label>Zipcode</mat-label>          
+        <input [(ngModel)]="zipCodeValue" matInput>         
+    </mat-form-field>     
+      <h4>Total Price: ${{total_price}}</h4>
+      <div id="paypal-checkout-btn"></div>
+    </div>
+  </div>
+</div>
+</div>

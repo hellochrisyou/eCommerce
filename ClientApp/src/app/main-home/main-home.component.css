@@ -2,3 +2,25 @@ container-fluid {
     width: 100% !important;
     height: 100% !important;
 }
+
+@media (max-width: 767px) {
+    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
+    .body-content {
+      padding-top: 50px;
+      display: block;
+      overflow: auto;
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+    }
+  }
+
+@media (min-width: 768px) {
+/* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
+    .body-content {
+        display: block;
+        overflow: auto;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+    
+}

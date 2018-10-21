@@ -1,137 +1,143 @@
 
-<div class="container">
-  <div class="row">
-    <div class="search-hero">
-      <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="on" placeholder="&#61442;  Search">
-    </div>
-  <table class="table table-striped">
-   <thead>
-      <tr>
-      <th>Delete</th>
-      <th (click)="sortList('type')">Type
-         <span *ngIf="key === 'type'">
-            <span *ngIf="reverse">
-              <i class="fa fa-arrow-up"></i>
-            </span>
-         <span *ngIf="!reverse">
-              <i class="fa fa-arrow-down"></i>
-              </span>
-        </span>            
-      </th>
-      <th (click)="sortList('cpu')">CPU
-          <span *ngIf="key === 'cpu'">
-              <span *ngIf="reverse">
-                <i class="fa fa-arrow-up"></i>
-              </span>
-              <span *ngIf="!reverse">
-                <i class="fa fa-arrow-down"></i>
-              </span>
-          </span>              
-      </th>
-      <th (click)="sortList('motherboard')">Motherboard
-        <span *ngIf="key === 'motherboard'">
-            <span *ngIf="reverse">
-              <i class="fa fa-arrow-up" aria-hidden="true"></i>
-            </span>
-            <span *ngIf="!reverse">
-              <i class="fa fa-arrow-down" aria-hidden="true"></i>
-            </span>
-        </span>                 
-       </th>
-       <th (click)="sortList('ram')">RAM
-          <span *ngIf="key === 'ram'">
-              <span *ngIf="reverse">
-                <i class="fa fa-arrow-up" aria-hidden="true"></i>
-              </span>
-              <span *ngIf="!reverse">
-                <i class="fa fa-arrow-down" aria-hidden="true"></i>
-              </span>
-          </span>                    
-        </th>
-        <th (click)="sortList('gpu')">GPU
-          <span *ngIf="key === 'gpu'">
-            <span *ngIf="reverse">
-             <i class="fa fa-arrow-up" aria-hidden="true"></i>
-            </span>
-            <span *ngIf="!reverse">
-              <i class="fa fa-arrow-down" aria-hidden="true"></i>
-            </span>
-          </span>              
-         </th>
-         <th (click)="sortList('storage')">Storage
-            <span *ngIf="key === 'storage'">
-                <span *ngIf="reverse">
-                  <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                </span>
-                <span *ngIf="!reverse">
-                  <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                </span>
-            </span>               
-         </th>
-         <th (click)="sortList('power_Supply')">Power Supply
-            <span *ngIf="key === 'power_Supply'">
-                <span *ngIf="reverse">
-                  <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                </span>
-                <span *ngIf="!reverse">
-                  <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                </span>
-            </span>                   
-         </th>
-         <th (click)="sortList('cooling_Fan')">Cooling Fan
-           <span *ngIf="key === 'cooling_Fan'">
-               <span *ngIf="reverse">
-                 <i class="fa fa-arrow-up" aria-hidden="true"></i>
-               </span>
-               <span *ngIf="!reverse">
-                 <i class="fa fa-arrow-down" aria-hidden="true"></i>
-               </span>
-           </span>                     
-         </th>
-         <th (click)="sortList('case')">Case
-          <span *ngIf="key === 'case'">
-            <span *ngIf="reverse">
-              <i class="fa fa-arrow-up" aria-hidden="true"></i>
-            </span>
-            <span *ngIf="!reverse">
-              <i class="fa fa-arrow-down" aria-hidden="true"></i>
-            </span>
-          </span>                      
-        </th>
-        <th (click)="sortList('total_Price')">Total Price
-          <span *ngIf="key === 'total_Price'">
-            <span *ngIf="reverse">
-              <i class="fa fa-arrow-up" aria-hidden="true"></i>
-            </span>
-            <span *ngIf="!reverse">
-              <i class="fa fa-arrow-down" aria-hidden="true"></i>
-            </span>
-          </span>                       
-        </th>    
-      </tr>
-    </thead>
-  <tbody>
-  <tr *ngFor="let t of shoppingOrder | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
-    <td style="text-align:center">
-      <button class="trash-button">
-          <i style="color:red" class="fa fa-trash" (click)="DeleteOrder(i)" aria-hidden="true"></i>
-      </button>  
-    </td>
-    <td>{{t.type}}</td>
-    <td>{{t.case}}</td>
-    <td>{{t.ram}}</td>
-    <td>{{t.cpu}}</td>
-    <td>{{t.gpu}}</td>
-    <td>{{t.motherboard}}</td>
-    <td>{{t.power_Supply}}</td>
-    <td>{{t.cooling_Fan}}</td>
-    <td>{{t.storage}}</td>
-    <td>{{t.total_Price}}</td>
-  </tr>
-  </tbody>
-  <pagination-controls (pageChange)="p = $event"></pagination-controls>
-</table>
-
-<button (click)="submit()">show</button>
-</div>
-</div> 
+        <div class="container m-0">
+            <div class="row text-center" style="margin-left:1%; margin-right:1%">
+                <h2>Shopping Cart</h2>
+                <div *ngIf="shoppingOrder.length == 0">
+                  <h4>Empty</h4>
+                </div>
+                <div *ngIf="shoppingOrder.length > 0">
+            <div class="search-hero">
+              <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="on" placeholder="&#61442;  Search">
+            </div>    
+              <table style="border-collapse:collapse" class="table table-striped">
+              <thead>
+                  <tr>
+                  <th style="text-align: center;">Delete</th>
+                  <th (click)="sortList('type')">Type
+                    <span *ngIf="key === 'type'">
+                        <span *ngIf="reverse">
+                          <i class="fa fa-arrow-up"></i>
+                        </span>
+                    <span *ngIf="!reverse">
+                          <i class="fa fa-arrow-down"></i>
+                          </span>
+                    </span>            
+                  </th>
+                  <th (click)="sortList('cpu')">CPU
+                      <span *ngIf="key === 'cpu'">
+                          <span *ngIf="reverse">
+                            <i class="fa fa-arrow-up"></i>
+                          </span>
+                          <span *ngIf="!reverse">
+                            <i class="fa fa-arrow-down"></i>
+                          </span>
+                      </span>              
+                  </th>
+                  <th (click)="sortList('motherboard')">Motherboard
+                    <span *ngIf="key === 'motherboard'">
+                        <span *ngIf="reverse">
+                          <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                        </span>
+                        <span *ngIf="!reverse">
+                          <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                        </span>
+                    </span>                 
+                  </th>
+                  <th (click)="sortList('ram')">RAM
+                      <span *ngIf="key === 'ram'">
+                          <span *ngIf="reverse">
+                            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                          </span>
+                          <span *ngIf="!reverse">
+                            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                          </span>
+                      </span>                    
+                    </th>
+                    <th (click)="sortList('gpu')">GPU
+                      <span *ngIf="key === 'gpu'">
+                        <span *ngIf="reverse">
+                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                        </span>
+                        <span *ngIf="!reverse">
+                          <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                        </span>
+                      </span>              
+                    </th>
+                    <th (click)="sortList('storage')">Storage 
+                        <span *ngIf="key === 'storage'">
+                            <span *ngIf="reverse">
+                              <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                            </span>
+                            <span *ngIf="!reverse">
+                              <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                            </span>
+                        </span>               
+                    </th>
+                    <th (click)="sortList('power_Supply')">PowerSupply
+                        <span *ngIf="key === 'power_Supply'">
+                            <span *ngIf="reverse">
+                              <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                            </span>
+                            <span *ngIf="!reverse">
+                              <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                            </span>
+                        </span>                   
+                    </th>
+                    <th (click)="sortList('cooling_Fan')">Cooling Fan
+                      <span *ngIf="key === 'cooling_Fan'">
+                          <span *ngIf="reverse">
+                            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                          </span>
+                          <span *ngIf="!reverse">
+                            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                          </span>
+                      </span>                     
+                    </th>
+                    <th (click)="sortList('case')">Case
+                      <span *ngIf="key === 'case'">
+                        <span *ngIf="reverse">
+                          <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                        </span>
+                        <span *ngIf="!reverse">
+                          <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                        </span>
+                      </span>                      
+                    </th>
+                    <th (click)="sortList('total_Price')">Total Price
+                      <span *ngIf="key === 'total_Price'">
+                        <span *ngIf="reverse">
+                          <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                        </span>
+                        <span *ngIf="!reverse">
+                          <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                        </span>
+                      </span>                       
+                    </th>    
+                  </tr>
+                </thead>
+              <tbody>
+              <tr *ngFor="let t of shoppingOrder | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                <td style="text-align:center">
+                  <button class="trash-button">
+                      <i style="color:red" class="fa fa-trash" (click)="DeleteOrder(i)" aria-hidden="true"></i>
+                  </button>  
+                </td>
+                <td>{{t.type}}</td>
+                <td>{{t.cpu}}</td>
+                <td>{{t.motherboard}}</td>
+                <td>{{t.ram}}</td>
+                <td>{{t.gpu}}</td>
+                <td>{{t.storage}}</td>
+                <td>{{t.power_Supply}}</td>
+                <td>{{t.cooling_Fan}}</td>
+                <td>{{t.case}}</td>
+                <td>{{t.total_Price}}</td>
+              </tr>
+              </tbody>      
+            </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            <button mat-raised-button color="primary"(click)="submit()">Submit</button>
+            </div>
+          </div>
+        </div> 
+      

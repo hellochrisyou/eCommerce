@@ -159,5 +159,8 @@ export class MakeService {
   deleteStorage(id) {
     return this.http.delete('/api/Storage/' + id).map(res =>res.json());
   }
+  deleteUsed(id) {
+    return this.http.delete('/api/ItemForSale/' + id).map(res =>res.json());
+  }
   //end
 }
