@@ -1,114 +1,104 @@
 <div class="container m-0">
-    <div class="row">
-        <h2>Sell</h2>
-    <mat-vertical-stepper [linear]="isLinear" #stepper >
-      <mat-step [stepControl]="secondFormGroup">
-          <form [formGroup]="sellerNameFormGroup">
-            <ng-template matStepLabel>Seller Name</ng-template>          
-            <mat-form-field>
+  <div class="row">
+     <h2>Sell</h2>
+     <mat-vertical-stepper [linear]="isLinear" #stepper >
+     <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="sellerNameFormGroup">
+           <ng-template matStepLabel>Seller Name</ng-template>
+           <mat-form-field>
               <input matInput placeholder="Name" type="string" type="string" formControlName="sellerNameCtrl">
-            </mat-form-field>
-          </form>    
-        </mat-step>
-
-      <mat-step [stepControl]="secondFormGroup">
+           </mat-form-field>
+        </form>
+     </mat-step>
+     <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="cpuFormGroup">
-          <ng-template matStepLabel>CPU</ng-template>          
-          <mat-form-field>
-            <input matInput placeholder="Name" type="string" type="string" formControlName="cpuCtrl">
-          </mat-form-field>
-        </form>    
-      </mat-step>
-
-      <mat-step [stepControl]="secondFormGroup">
+           <ng-template matStepLabel>CPU</ng-template>
+           <mat-form-field>
+              <input matInput placeholder="Name" type="string" type="string" formControlName="cpuCtrl">
+           </mat-form-field>
+        </form>
+     </mat-step>
+     <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="motherboardFormGroup">
-          <ng-template matStepLabel>Motherboard</ng-template>          
-          <mat-form-field>
-            <input matInput placeholder="Name" type="string" formControlName="motherboardCtrl" >
-          </mat-form-field>
-        </form>    
-      </mat-step>
-
-      <mat-step [stepControl]="secondFormGroup">
+           <ng-template matStepLabel>Motherboard</ng-template>
+           <mat-form-field>
+              <input matInput placeholder="Name" type="string" formControlName="motherboardCtrl" >
+           </mat-form-field>
+        </form>
+     </mat-step>
+     <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="ramFormGroup">
-          <ng-template matStepLabel>RAM</ng-template>          
-          <mat-form-field>
-            <input matInput placeholder="Name" type="string" formControlName="ramCtrl"  >
-          </mat-form-field>
-        </form>    
-      </mat-step>  
-
-      <mat-step [stepControl]="secondFormGroup">
+           <ng-template matStepLabel>RAM</ng-template>
+           <mat-form-field>
+              <input matInput placeholder="Name" type="string" formControlName="ramCtrl"  >
+           </mat-form-field>
+        </form>
+     </mat-step>
+     <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="storageFormGroup">
-          <ng-template matStepLabel>Storage</ng-template>          
-          <mat-form-field>
-            <input matInput placeholder="Name" type="string" formControlName="storageCtrl" >
-          </mat-form-field>
-        </form>    
-      </mat-step> 
-
-      <mat-step [stepControl]="secondFormGroup">
+           <ng-template matStepLabel>Storage</ng-template>
+           <mat-form-field>
+              <input matInput placeholder="Name" type="string" formControlName="storageCtrl" >
+           </mat-form-field>
+        </form>
+     </mat-step>
+     <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="gpuFormGroup">
-          <ng-template matStepLabel>GPU</ng-template>          
-          <mat-form-field>
-            <input matInput placeholder="Name" type="string" formControlName="gpuCtrl" >
-          </mat-form-field>
-        </form>    
-      </mat-step> 
-
-      <mat-step [stepControl]="secondFormGroup">
+           <ng-template matStepLabel>GPU</ng-template>
+           <mat-form-field>
+              <input matInput placeholder="Name" type="string" formControlName="gpuCtrl" >
+           </mat-form-field>
+        </form>
+     </mat-step>
+     <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="powerFormGroup">
-          <ng-template matStepLabel>Power Supply</ng-template>               
-          <mat-form-field>
-            <input matInput placeholder="Name" type="string" formControlName="powerCtrl" >
-          </mat-form-field>
-        </form>    
-      </mat-step> 
-
-      <mat-step [stepControl]="secondFormGroup">
+           <ng-template matStepLabel>Power Supply</ng-template>
+           <mat-form-field>
+              <input matInput placeholder="Name" type="string" formControlName="powerCtrl" >
+           </mat-form-field>
+        </form>
+     </mat-step>
+     <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="coolingFormGroup">
-          <ng-template matStepLabel>Cooling Fan</ng-template>          
-          <mat-form-field>
-            <input matInput placeholder="Name" type="string" type="string" formControlName="coolingCtrl" required>
-          </mat-form-field>
-        </form>    
-      </mat-step>
-        
-      <mat-step [stepControl]="secondFormGroup">
+           <ng-template matStepLabel>Cooling Fan</ng-template>
+           <mat-form-field>
+              <input matInput placeholder="Name" type="string" type="string" formControlName="coolingCtrl" required>
+           </mat-form-field>
+        </form>
+     </mat-step>
+     <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="caseFormGroup">
-          <ng-template matStepLabel>Case</ng-template>          
-          <mat-form-field>
-            <input matInput placeholder="Name" type="string" formControlName="caseCtrl" required>
-          </mat-form-field>
-        </form>    
-      </mat-step>
-
-      <mat-step [stepControl]="secondFormGroup">
+           <ng-template matStepLabel>Case</ng-template>
+           <mat-form-field>
+              <input matInput placeholder="Name" type="string" formControlName="caseCtrl" required>
+           </mat-form-field>
+        </form>
+     </mat-step>
+     <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="priceFormGroup">
-          <ng-template matStepLabel>Sale Price</ng-template>          
-          <mat-form-field>
-            <input matInput type="number" placeholder="Price" formControlName="priceCtrl" required >
-          </mat-form-field>
-        </form>    
-      </mat-step>
-
-      <mat-step>
+           <ng-template matStepLabel>Sale Price</ng-template>
+           <mat-form-field>
+              <input matInput type="number" placeholder="Price" formControlName="priceCtrl" required >
+           </mat-form-field>
+        </form>
+     </mat-step>
+     <mat-step>
         <ng-template matStepLabel>Save</ng-template>
         <div>
-          <button mat-raised-button color="primary"  (click)="stepper.reset();submit();" 
-          [disabled]="!cpuFormGroup.valid || 
-          !motherboardFormGroup.valid ||
-          !ramFormGroup.valid ||
-          !storageFormGroup.valid ||
-          !gpuFormGroup.valid ||
-        !powerFormGroup.valid ||
-          !coolingFormGroup.valid ||
-          !caseFormGroup.valid ||
-        !priceFormGroup.valid"
-          >Submit</button>
-          <!-- <button mat-raised-button color="primary" (click)="stepper.reset();submit();">Submit</button> -->
+           <button mat-raised-button color="primary"  (click)="stepper.reset();submit();" 
+           [disabled]="!cpuFormGroup.valid || 
+           !motherboardFormGroup.valid ||
+           !ramFormGroup.valid ||
+           !storageFormGroup.valid ||
+           !gpuFormGroup.valid ||
+           !powerFormGroup.valid ||
+           !coolingFormGroup.valid ||
+           !caseFormGroup.valid ||
+           !priceFormGroup.valid"
+           >Submit</button>
+           <!-- <button mat-raised-button color="primary" (click)="stepper.reset();submit();">Submit</button> -->
         </div>
-      </mat-step>
-    </mat-vertical-stepper>
+     </mat-step>
+     </mat-vertical-stepper>
   </div>
 </div>

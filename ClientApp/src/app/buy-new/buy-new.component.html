@@ -1,264 +1,256 @@
 <div class="container m-0">
-    <div class="row">
-        <h2>Buy New</h2>      
-        <mat-vertical-stepper [linear]="isLinear" #stepper>
-          <mat-step [stepControl]="secondFormGroup">
-            <form [formGroup]="cpuFormGroup">
-              <ng-template matStepLabel>CPU</ng-template>     
-            <form-field>              
+  <div class="row">
+     <h2>Buy New</h2>
+     <mat-vertical-stepper [linear]="isLinear" #stepper>
+     <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="cpuFormGroup">
+           <ng-template matStepLabel>CPU</ng-template>
+           <form-field>
               <select id="CPU" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.cpu" name="CPU" #case="ngModel" [ngModelOptions]="{standalone: true}">
-                    <option value=""></option>
-                    <option *ngFor="let m of CPU" value="{{ m.name }}">{{ m.name }}</option>
-                  </select>     
-                    <mat-accordion>
-                      <mat-expansion-panel class="mat-elevation-z0">
-                        <mat-expansion-panel-header>
-                          <mat-panel-title>
-                            Details
-                          </mat-panel-title>
-                          <mat-panel-description>
-                            <!-- Type your name and age -->
-                          </mat-panel-description>
-                        </mat-expansion-panel-header>   
-                        <mat-list>
-                          <mat-list-item>Model: {{selectedCPU.model}}</mat-list-item>
-                          <mat-divider></mat-divider>
-                          <mat-list-item>Series: {{selectedCPU.series}}</mat-list-item>
-                          <mat-divider></mat-divider>
-                          <mat-list-item>Brand: {{selectedCPU.brand}}</mat-list-item>
-                          <mat-divider></mat-divider>
-                          <mat-list-item>Details: {{selectedCPU.details}}</mat-list-item>
-                        </mat-list>
-                      </mat-expansion-panel>
-                    </mat-accordion>
-                  </form-field>
-            </form>    
-          </mat-step>
-          <mat-step [stepControl]="secondFormGroup">
-            <form [formGroup]="motherboardFormGroup">
-              <ng-template matStepLabel>Motherboard</ng-template>          
-              <select id="Motherboard" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.motherboard" name="Motherboard" #case="ngModel" [ngModelOptions]="{standalone: true}">
-                    <option value=""></option>
-                    <option *ngFor="let m of motherboard" value="{{ m.name }}">{{ m.name }}</option>
-                  </select>     
-                  <mat-accordion>
-                    <mat-expansion-panel>
-                      <mat-expansion-panel-header>
-                        <mat-panel-title>
+              <option value=""></option>
+              <option *ngFor="let m of CPU" value="{{ m.name }}">{{ m.name }}</option>
+              </select>     
+              <mat-accordion>
+                 <mat-expansion-panel class="mat-elevation-z0">
+                    <mat-expansion-panel-header>
+                       <mat-panel-title>
                           Details
-                        </mat-panel-title>
-                        <mat-panel-description>
+                       </mat-panel-title>
+                       <mat-panel-description>
                           <!-- Type your name and age -->
-                        </mat-panel-description>
-                      </mat-expansion-panel-header>   
-                      <mat-list>
-                        <mat-list-item>Model: {{selectedMotherboard.model}}</mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item>Series: {{selectedMotherboard.series}}</mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item>Brand: {{selectedMotherboard.brand}}</mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item>Details: {{selectedMotherboard.details}}</mat-list-item>
-                      </mat-list>
-                    </mat-expansion-panel>
-                  </mat-accordion>
-            </form>    
-          </mat-step>
-          <mat-step [stepControl]="secondFormGroup">
-            <form [formGroup]="motherboardFormGroup">
-              <ng-template matStepLabel>RAM</ng-template>          
-              <select id="RAM" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.ram" name="RAM" #case="ngModel" [ngModelOptions]="{standalone: true}">
-                    <option value=""></option>
-                    <option *ngFor="let m of RAM" value="{{ m.name }}">{{ m.name }}</option>
-                  </select>     
-                  <mat-accordion>
-                    <mat-expansion-panel>
-                      <mat-expansion-panel-header>
-                        <mat-panel-title>
-                          Details
-                        </mat-panel-title>
-                        <mat-panel-description>
-                          <!-- Type your name and age -->
-                        </mat-panel-description>
-                      </mat-expansion-panel-header>   
-                      <mat-list>
-                        <mat-list-item>Model: {{selectedRAM.model}}</mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item>Series: {{selectedRAM.series}}</mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item>Brand: {{selectedRAM.brand}}</mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item>Details: {{selectedRAM.details}}</mat-list-item>
-                      </mat-list>
-                    </mat-expansion-panel>
-                  </mat-accordion>
-            </form>    
-          </mat-step>     
-            <mat-step [stepControl]="secondFormGroup">
-            <form [formGroup]="storageFormGroup">
-              <ng-template matStepLabel>Storage</ng-template>          
-              <select id="Storage" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.storage" name="Storage" #case="ngModel" [ngModelOptions]="{standalone: true}">
-                    <option value=""></option>
-                    <option *ngFor="let m of storage" value="{{ m.name }}">{{ m.name }}</option>
-                  </select>   
-                  <mat-accordion>
-                    <mat-expansion-panel>
-                      <mat-expansion-panel-header>
-                        <mat-panel-title>
-                          Details
-                        </mat-panel-title>
-                        <mat-panel-description>
-                          <!-- Type your name and age -->
-                        </mat-panel-description>
-                      </mat-expansion-panel-header>   
-                      <mat-list>
-                        <mat-list-item>Model: {{selectedStorage.model}}</mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item>Series: {{selectedStorage.series}}</mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item>Brand: {{selectedStorage.brand}}</mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item>Details: {{selectedStorage.details}}</mat-list-item>
-                      </mat-list>
-                    </mat-expansion-panel>
-                  </mat-accordion>  
-            </form>    
-          </mat-step>  
-          <mat-step [stepControl]="secondFormGroup">
-            <form [formGroup]="gpuFormGroup">
-              <ng-template matStepLabel>GPU</ng-template>          
-              <select id="GPU" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.gpu" name="GPU" #case="ngModel" [ngModelOptions]="{standalone: true}">
-                    <option value=""></option>
-                    <option *ngFor="let m of GPU" value="{{ m.name }}">{{ m.name }}</option>
-                  </select>   
-                  <mat-accordion>
-                    <mat-expansion-panel>
-                      <mat-expansion-panel-header>
-                        <mat-panel-title>
-                          Details
-                        </mat-panel-title>
-                        <mat-panel-description>
-                          <!-- Type your name and age -->
-                        </mat-panel-description>
-                      </mat-expansion-panel-header>   
-                      <mat-list>
-                        <mat-list-item>Model: {{selectedGPU.model}}</mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item>Series: {{selectedGPU.series}}</mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item>Brand: {{selectedGPU.brand}}</mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item>Details: {{selectedGPU.details}}</mat-list-item>
-                      </mat-list>
-                    </mat-expansion-panel>
-                  </mat-accordion>  
-            </form>    
-          </mat-step>
-          <mat-step [stepControl]="secondFormGroup">
-            <form [formGroup]="powerFormGroup">
-              <ng-template matStepLabel>Power Supply</ng-template>          
-              <select id="Power_Supply" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.power_Supply" name="Power_Supply" #case="ngModel" [ngModelOptions]="{standalone: true}">
-                    <option value=""></option>
-                    <option *ngFor="let m of powerSupply" value="{{ m.name }}">{{ m.name }}</option>
-                  </select>     
-                  <mat-accordion>
-                    <mat-expansion-panel>
-                      <mat-expansion-panel-header>
-                        <mat-panel-title>
-                          Details
-                        </mat-panel-title>
-                        <mat-panel-description>
-                          <!-- Type your name and age -->
-                        </mat-panel-description>
-                      </mat-expansion-panel-header>   
-                      <mat-list>
-                        <mat-list-item>Model: {{selectedPSupply.model}}</mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item>Series: {{selectedPSupply.series}}</mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item>Brand: {{selectedPSupply.brand}}</mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item>Details: {{selectedPSupply.details}}</mat-list-item>
-                      </mat-list>
-                    </mat-expansion-panel>
-                  </mat-accordion>
-            </form>    
-          </mat-step> 
-          <mat-step [stepControl]="secondFormGroup">
-            <form [formGroup]="coolingFormGroup">
-              <ng-template matStepLabel>Cooling Fan</ng-template>          
-              <select id="Cooling_Fan" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.cooling_Fan" name="Cooling_Fan" #case="ngModel" [ngModelOptions]="{standalone: true}">
-                    <option value=""></option>
-                    <option *ngFor="let m of coolingFan" value="{{ m.name }}">{{ m.name }}</option>
-                  </select>     
-                  <mat-accordion>
-                    <mat-expansion-panel>
-                      <mat-expansion-panel-header>
-                        <mat-panel-title>
-                          Details
-                        </mat-panel-title>
-                        <mat-panel-description>
-                          <!-- Type your name and age -->
-                        </mat-panel-description>
-                      </mat-expansion-panel-header>   
-                      <mat-list>
-                        <mat-list-item>Model: {{selectedFan.model}}</mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item>Series: {{selectedFan.series}}</mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item>Brand: {{selectedFan.brand}}</mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item>Details: {{selectedFan.details}}</mat-list-item>
-                      </mat-list>
-                    </mat-expansion-panel>
-                  </mat-accordion>
-            </form>    
-          </mat-step>
-            
-          <mat-step [stepControl]="secondFormGroup">
-            <form [formGroup]="caseFormGroup">
-              <ng-template matStepLabel>Case</ng-template>          
-                  <select id="Case" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.case" name="Case" #case="ngModel" [ngModelOptions]="{standalone: true}">
-                    <option value=""></option>
-                    <option *ngFor="let m of caseItem" value="{{ m.name }}">{{ m.name }}</option>
-                  </select>     
-                  <mat-accordion>
-                    <mat-expansion-panel>
-                      <mat-expansion-panel-header>
-                        <mat-panel-title>
-                          Details
-                        </mat-panel-title>
-                        <mat-panel-description>
-                          <!-- Type your name and age -->
-                        </mat-panel-description>
-                      </mat-expansion-panel-header>   
-                      <mat-list>
-                        <mat-list-item>Model: {{selectedCase.model}}</mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item>Series: {{selectedCase.series}}</mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item>Brand: {{selectedCase.brand}}</mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item>Details: {{selectedCase.details}}</mat-list-item>
-                      </mat-list>
-                    </mat-expansion-panel>
-                  </mat-accordion>
-            </form>    
-          </mat-step>
-        
-          <mat-step>
-            <ng-template matStepLabel>Save</ng-template>
-            <div>
-              <button mat-raised-button color="primary" (click)='stepper.reset();addOrder()' [disabled]="tmpThisOrder.cpu == '' || tmpThisOrder.case == '' || tmpThisOrder.cooling_Fan == '' || tmpThisOrder.gpu == '' || tmpThisOrder.motherboard == '' || tmpThisOrder.power_Supply == '' || tmpThisOrder.ram == '' || tmpThisOrder.storage == ''">Add to Shopping Cart</button>
-            </div>
-          </mat-step>
-        </mat-vertical-stepper>
-    <h4>Total Price: {{totalPrice}}</h4>
-    </div>
+                       </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <mat-list>
+                       <mat-list-item>Model: {{selectedCPU.model}}</mat-list-item>
+                       <mat-divider></mat-divider>
+                       <mat-list-item>Series: {{selectedCPU.series}}</mat-list-item>
+                       <mat-divider></mat-divider>
+                       <mat-list-item>Brand: {{selectedCPU.brand}}</mat-list-item>
+                       <mat-divider></mat-divider>
+                       <mat-list-item>Details: {{selectedCPU.details}}</mat-list-item>
+                    </mat-list>
+                 </mat-expansion-panel>
+              </mat-accordion>
+           </form-field>
+        </form>
+     </mat-step>
+     <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="motherboardFormGroup">
+           <ng-template matStepLabel>Motherboard</ng-template>
+           <select id="Motherboard" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.motherboard" name="Motherboard" #case="ngModel" [ngModelOptions]="{standalone: true}">
+           <option value=""></option>
+           <option *ngFor="let m of motherboard" value="{{ m.name }}">{{ m.name }}</option>
+           </select>     
+           <mat-accordion>
+              <mat-expansion-panel>
+                 <mat-expansion-panel-header>
+                    <mat-panel-title>
+                       Details
+                    </mat-panel-title>
+                    <mat-panel-description>
+                       <!-- Type your name and age -->
+                    </mat-panel-description>
+                 </mat-expansion-panel-header>
+                 <mat-list>
+                    <mat-list-item>Model: {{selectedMotherboard.model}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Series: {{selectedMotherboard.series}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Brand: {{selectedMotherboard.brand}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Details: {{selectedMotherboard.details}}</mat-list-item>
+                 </mat-list>
+              </mat-expansion-panel>
+           </mat-accordion>
+        </form>
+     </mat-step>
+     <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="motherboardFormGroup">
+           <ng-template matStepLabel>RAM</ng-template>
+           <select id="RAM" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.ram" name="RAM" #case="ngModel" [ngModelOptions]="{standalone: true}">
+           <option value=""></option>
+           <option *ngFor="let m of RAM" value="{{ m.name }}">{{ m.name }}</option>
+           </select>     
+           <mat-accordion>
+              <mat-expansion-panel>
+                 <mat-expansion-panel-header>
+                    <mat-panel-title>
+                       Details
+                    </mat-panel-title>
+                    <mat-panel-description>
+                       <!-- Type your name and age -->
+                    </mat-panel-description>
+                 </mat-expansion-panel-header>
+                 <mat-list>
+                    <mat-list-item>Model: {{selectedRAM.model}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Series: {{selectedRAM.series}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Brand: {{selectedRAM.brand}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Details: {{selectedRAM.details}}</mat-list-item>
+                 </mat-list>
+              </mat-expansion-panel>
+           </mat-accordion>
+        </form>
+     </mat-step>
+     <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="storageFormGroup">
+           <ng-template matStepLabel>Storage</ng-template>
+           <select id="Storage" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.storage" name="Storage" #case="ngModel" [ngModelOptions]="{standalone: true}">
+           <option value=""></option>
+           <option *ngFor="let m of storage" value="{{ m.name }}">{{ m.name }}</option>
+           </select>   
+           <mat-accordion>
+              <mat-expansion-panel>
+                 <mat-expansion-panel-header>
+                    <mat-panel-title>
+                       Details
+                    </mat-panel-title>
+                    <mat-panel-description>
+                       <!-- Type your name and age -->
+                    </mat-panel-description>
+                 </mat-expansion-panel-header>
+                 <mat-list>
+                    <mat-list-item>Model: {{selectedStorage.model}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Series: {{selectedStorage.series}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Brand: {{selectedStorage.brand}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Details: {{selectedStorage.details}}</mat-list-item>
+                 </mat-list>
+              </mat-expansion-panel>
+           </mat-accordion>
+        </form>
+     </mat-step>
+     <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="gpuFormGroup">
+           <ng-template matStepLabel>GPU</ng-template>
+           <select id="GPU" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.gpu" name="GPU" #case="ngModel" [ngModelOptions]="{standalone: true}">
+           <option value=""></option>
+           <option *ngFor="let m of GPU" value="{{ m.name }}">{{ m.name }}</option>
+           </select>   
+           <mat-accordion>
+              <mat-expansion-panel>
+                 <mat-expansion-panel-header>
+                    <mat-panel-title>
+                       Details
+                    </mat-panel-title>
+                    <mat-panel-description>
+                       <!-- Type your name and age -->
+                    </mat-panel-description>
+                 </mat-expansion-panel-header>
+                 <mat-list>
+                    <mat-list-item>Model: {{selectedGPU.model}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Series: {{selectedGPU.series}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Brand: {{selectedGPU.brand}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Details: {{selectedGPU.details}}</mat-list-item>
+                 </mat-list>
+              </mat-expansion-panel>
+           </mat-accordion>
+        </form>
+     </mat-step>
+     <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="powerFormGroup">
+           <ng-template matStepLabel>Power Supply</ng-template>
+           <select id="Power_Supply" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.power_Supply" name="Power_Supply" #case="ngModel" [ngModelOptions]="{standalone: true}">
+           <option value=""></option>
+           <option *ngFor="let m of powerSupply" value="{{ m.name }}">{{ m.name }}</option>
+           </select>     
+           <mat-accordion>
+              <mat-expansion-panel>
+                 <mat-expansion-panel-header>
+                    <mat-panel-title>
+                       Details
+                    </mat-panel-title>
+                    <mat-panel-description>
+                       <!-- Type your name and age -->
+                    </mat-panel-description>
+                 </mat-expansion-panel-header>
+                 <mat-list>
+                    <mat-list-item>Model: {{selectedPSupply.model}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Series: {{selectedPSupply.series}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Brand: {{selectedPSupply.brand}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Details: {{selectedPSupply.details}}</mat-list-item>
+                 </mat-list>
+              </mat-expansion-panel>
+           </mat-accordion>
+        </form>
+     </mat-step>
+     <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="coolingFormGroup">
+           <ng-template matStepLabel>Cooling Fan</ng-template>
+           <select id="Cooling_Fan" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.cooling_Fan" name="Cooling_Fan" #case="ngModel" [ngModelOptions]="{standalone: true}">
+           <option value=""></option>
+           <option *ngFor="let m of coolingFan" value="{{ m.name }}">{{ m.name }}</option>
+           </select>     
+           <mat-accordion>
+              <mat-expansion-panel>
+                 <mat-expansion-panel-header>
+                    <mat-panel-title>
+                       Details
+                    </mat-panel-title>
+                    <mat-panel-description>
+                       <!-- Type your name and age -->
+                    </mat-panel-description>
+                 </mat-expansion-panel-header>
+                 <mat-list>
+                    <mat-list-item>Model: {{selectedFan.model}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Series: {{selectedFan.series}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Brand: {{selectedFan.brand}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Details: {{selectedFan.details}}</mat-list-item>
+                 </mat-list>
+              </mat-expansion-panel>
+           </mat-accordion>
+        </form>
+     </mat-step>
+     <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="caseFormGroup">
+           <ng-template matStepLabel>Case</ng-template>
+           <select id="Case" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.case" name="Case" #case="ngModel" [ngModelOptions]="{standalone: true}">
+           <option value=""></option>
+           <option *ngFor="let m of caseItem" value="{{ m.name }}">{{ m.name }}</option>
+           </select>     
+           <mat-accordion>
+              <mat-expansion-panel>
+                 <mat-expansion-panel-header>
+                    <mat-panel-title>
+                       Details
+                    </mat-panel-title>
+                    <mat-panel-description>
+                       <!-- Type your name and age -->
+                    </mat-panel-description>
+                 </mat-expansion-panel-header>
+                 <mat-list>
+                    <mat-list-item>Model: {{selectedCase.model}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Series: {{selectedCase.series}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Brand: {{selectedCase.brand}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Details: {{selectedCase.details}}</mat-list-item>
+                 </mat-list>
+              </mat-expansion-panel>
+           </mat-accordion>
+        </form>
+     </mat-step>
+     <mat-step>
+        <ng-template matStepLabel>Save</ng-template>
+        <div>
+           <button mat-raised-button color="primary" (click)='stepper.reset();addOrder()' [disabled]="tmpThisOrder.cpu == '' || tmpThisOrder.case == '' || tmpThisOrder.cooling_Fan == '' || tmpThisOrder.gpu == '' || tmpThisOrder.motherboard == '' || tmpThisOrder.power_Supply == '' || tmpThisOrder.ram == '' || tmpThisOrder.storage == ''">Add to Shopping Cart</button>
+        </div>
+     </mat-step>
+     </mat-vertical-stepper>
+     <h4>Total Price: {{totalPrice}}</h4>
   </div>
-  
-  
-
-  
-  
-  
+</div>

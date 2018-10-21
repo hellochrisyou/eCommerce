@@ -1,305 +1,301 @@
-
 <div class="container m-0 text-center">
-    <h2>Dashboard</h2>
-    <div class="row">        
-      <mat-tab-group mat-stretch-tabs class="col margin-container">
-          <mat-tab>
-            <ng-template mat-tab-label>
+  <h2>Dashboard</h2>
+  <div class="row">
+     <mat-tab-group mat-stretch-tabs class="col margin-container">
+        <mat-tab>
+           <ng-template mat-tab-label>
               <mat-icon class="example-tab-icon">bar_chart</mat-icon>
               Dashboard
-            </ng-template>  
-
-            <div class="container">
-              <div class="row first-margin">             
-                <div class="rectangle-users col-4 col-sm">
-                  <div class="row text-center" style="display:inline-block">
-                    <mat-icon class="icon-margin" style="color:white">group</mat-icon>              
-                  </div>                    
-                  <div class="row">
-                    <span class="margin-box-left-label" style="color:white">Accounts</span>                      
-                    <span class="margin-box-left-label" style="color: white">{{totalAccounts}}</span>
-                  </div>
-                </div>
-                <div class="rectangle-revenue col-4 col-sm offset-sm-1">
-                  <div class="row text-center" style="display:inline-block">
-                    <mat-icon class="icon-margin" style="color:white">attach_money</mat-icon>              
-                  </div>                    
-                  <div class="row">
-                    <span class="margin-box-left-label" style="color:white">Revenue</span>                      
-                    <span class="margin-box-left-label" style="color: white">{{revenue}}</span>
-                  </div>
-                </div>   
-                  <div class="rectangle-orders col-4 col-sm offset-sm-1">
+           </ng-template>
+           <div class="container">
+              <div class="row first-margin">
+                 <div class="rectangle-users col-4 col-sm">
                     <div class="row text-center" style="display:inline-block">
-                      <mat-icon class="icon-margin" style="color:white">business_center</mat-icon>              
-                    </div>                    
+                       <mat-icon class="icon-margin" style="color:white">group</mat-icon>
+                    </div>
                     <div class="row">
-                      <span class="margin-box-left-label" style="color:white">Orders</span>                      
-                      <span class="margin-box-left-label" style="color: white">{{totalOrders}}</span>
+                       <span class="margin-box-left-label" style="color:white">Accounts</span>                      
+                       <span class="margin-box-left-label" style="color: white">{{totalAccounts}}</span>
                     </div>
-                  </div>                   
+                 </div>
+                 <div class="rectangle-revenue col-4 col-sm offset-sm-1">
+                    <div class="row text-center" style="display:inline-block">
+                       <mat-icon class="icon-margin" style="color:white">attach_money</mat-icon>
+                    </div>
+                    <div class="row">
+                       <span class="margin-box-left-label" style="color:white">Net</span>                      
+                       <span class="margin-box-left-label" style="color: white">{{revenue}}</span>
+                    </div>
+                 </div>
+                 <div class="rectangle-orders col-4 col-sm offset-sm-1">
+                    <div class="row text-center" style="display:inline-block">
+                       <mat-icon class="icon-margin" style="color:white">business_center</mat-icon>
+                    </div>
+                    <div class="row">
+                       <span class="margin-box-left-label" style="color:white">Orders</span>                      
+                       <span class="margin-box-left-label" style="color: white">{{totalOrders}}</span>
+                    </div>
+                 </div>
               </div>
-                <h4 class="bar-margin" style="text-align:center">Bar chart for Orders
-     
-                  </h4><br/>
-                <div>
-                  <div style="display: block" *ngIf="barChartData.length > 0">
+              <h4 class="bar-margin" style="text-align:center">Bar chart for Orders
+              </h4>
+              <br/>
+              <div>
+                 <div style="display: block" *ngIf="barChartData.length > 0">
                     <canvas baseChart
-                            [datasets]="barChartData"
-                            [labels]="mbarChartLabels"
-                            [options]="barChartOptions"
-                            [colors]="barChartColors"
-                            [legend]="barChartLegend"
-                            [chartType]="barChartType"
-                            (chartHover)="chartHovered($event)"
-                            (chartClick)="chartClicked($event)"></canvas>
-                  </div> 
-                </div>
-                <!-- <div id="pieChart" style="margin-top:5%; padding:0px">                
-                  <canvas baseChart 
-                  class="col"              
-                  style="margin:0 auto;position:relative;"   
-                          [data]="orderData"
-                          [labels]="pieChartLabels"
-                          [chartType]="pieChartType"
-                          (chartHover)="chartHovered($event)"
-                          (chartClick)="chartClicked($event)"
-                          [colors]="colors">
-                  </canvas>
-                </div> -->
-            </div>
-              
-          </mat-tab>
-        
-          <mat-tab>
-            <ng-template mat-tab-label>
+                    [datasets]="barChartData"
+                    [labels]="mbarChartLabels"
+                    [options]="barChartOptions"
+                    [colors]="barChartColors"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+                 </div>
+              </div>
+              <!-- <div id="pieChart" style="margin-top:5%; padding:0px">                
+                 <canvas baseChart 
+                 class="col"              
+                 style="margin:0 auto;position:relative;"   
+                         [data]="orderData"
+                         [labels]="pieChartLabels"
+                         [chartType]="pieChartType"
+                         (chartHover)="chartHovered($event)"
+                         (chartClick)="chartClicked($event)"
+                         [colors]="colors">
+                 </canvas>
+                 </div> -->
+           </div>
+        </mat-tab>
+        <mat-tab>
+           <ng-template mat-tab-label>
               <mat-icon class="example-tab-icon">account_circle</mat-icon>
-                Account
-            </ng-template>
-              <div class="container" style="margin-top:7%">
-                  <div class="row">
-                    <div class="search-hero">
-                      <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="on" placeholder="&#61442;  Search">
-                    </div>
-                  <table style="border-collapse:collapse" class="table table-striped">
-                  <thead>
-                      <tr>
-                        <th (click)="sortList('email')">Email
-                          <span *ngIf="key === 'email'">
-                              <span *ngIf="reverse">
-                                <i class="fa fa-arrow-up"></i>
-                              </span>
-                              <span *ngIf="!reverse">
-                                <i class="fa fa-arrow-down"></i>
-                              </span>
-                          </span>                
-                        </th>
-                      <th (click)="sortList('master_account')">Master
-                        <span *ngIf="key === 'master_account'">
-                            <span *ngIf="reverse">
-                              <i class="fa fa-arrow-up"></i>
-                            </span>
-                        <span *ngIf="!reverse">
-                              <i class="fa fa-arrow-down"></i>
-                              </span>
-                        </span>            
-                      </th>
-                      <th (click)="sortList('admin')">Admin
-                          <span *ngIf="key === 'admin'">
-                              <span *ngIf="reverse">
-                                <i class="fa fa-arrow-up"></i>
-                              </span>
-                              <span *ngIf="!reverse">
-                                <i class="fa fa-arrow-down"></i>
-                              </span>
-                          </span>              
-                      </th>                   
-                      </tr>
+              Account
+           </ng-template>
+           <div class="container" style="margin-top:7%">
+              <div class="row">
+                 <div class="search-hero">
+                    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="on" placeholder="&#61442;  Search">
+                 </div>
+                 <table style="border-collapse:collapse" class="table table-striped">
+                    <thead>
+                       <tr>
+                          <th (click)="sortList('email')">Email
+                             <span *ngIf="key === 'email'">
+                             <span *ngIf="reverse">
+                             <i class="fa fa-arrow-up"></i>
+                             </span>
+                             <span *ngIf="!reverse">
+                             <i class="fa fa-arrow-down"></i>
+                             </span>
+                             </span>                
+                          </th>
+                          <th (click)="sortList('master_account')">Master
+                             <span *ngIf="key === 'master_account'">
+                             <span *ngIf="reverse">
+                             <i class="fa fa-arrow-up"></i>
+                             </span>
+                             <span *ngIf="!reverse">
+                             <i class="fa fa-arrow-down"></i>
+                             </span>
+                             </span>            
+                          </th>
+                          <th (click)="sortList('admin')">Admin
+                             <span *ngIf="key === 'admin'">
+                             <span *ngIf="reverse">
+                             <i class="fa fa-arrow-up"></i>
+                             </span>
+                             <span *ngIf="!reverse">
+                             <i class="fa fa-arrow-down"></i>
+                             </span>
+                             </span>              
+                          </th>
+                       </tr>
                     </thead>
-                  <tbody>
-                    <tr *ngFor="let t of accounts | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index"> <!--added-->
-                      <td>{{t.email}}</td>
-                      <td>
-                        <!--added--><mat-slide-toggle (change)="updateAccount(i, 'master')"
-                          [color]="red"
-                          [checked]=t.master_account
-                          [disabled] = "!isMaster"> <!--ADDED-->
-                        </mat-slide-toggle>
-                      </td>
-                      <td>
-                        <!--added--><mat-slide-toggle (change)="updateAccount(i, 'admin')"
-                          [color]="red"
-                          [checked]=t.admin>
-                        </mat-slide-toggle>
-                      </td>                   
-                    </tr>
+                    <tbody>
+                       <tr *ngFor="let t of accounts | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                          <!--added-->
+                          <td>{{t.email}}</td>
+                          <td>
+                             <!--added--><mat-slide-toggle (change)="updateAccount(i, 'master')"
+                             [color]="red"
+                             [checked]=t.master_account
+                             [disabled] = "!isMaster"> <!--ADDED-->
+                             </mat-slide-toggle>
+                          </td>
+                          <td>
+                             <!--added--><mat-slide-toggle (change)="updateAccount(i, 'admin')"
+                             [color]="red"
+                             [checked]=t.admin>
+                             </mat-slide-toggle>
+                          </td>
+                       </tr>
                     </tbody>
                     <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                  </table>
-                  </div>
-                  </div> 
-            </mat-tab>
-            
-            <mat-tab>
-          <ng-template mat-tab-label>
-            <mat-icon class="example-tab-icon">add_to_queue</mat-icon>
+                 </table>
+              </div>
+           </div>
+        </mat-tab>
+        <mat-tab>
+           <ng-template mat-tab-label>
+              <mat-icon class="example-tab-icon">add_to_queue</mat-icon>
               Hardware
-          </ng-template>  
-            <mat-tab-group>
+           </ng-template>
+           <mat-tab-group>
               <mat-tab>
-                <ng-template mat-tab-label>
+                 <ng-template mat-tab-label>
                     <mat-icon class="example-tab-icon">add_box</mat-icon>
-                      Add
-                </ng-template>  
-                <div class="example-container" style="margin-top:7%">
+                    Add
+                 </ng-template>
+                 <div class="example-container" style="margin-top:7%">
                     <mat-form-field hintLabel="Max 10 characters">
-                      <mat-select placeholder="Select Component"  [(ngModel)]="selectedComponent.value">
-                        <mat-option *ngFor="let tmp of thisComponent" value="{{tmp.value}}" name="component" ngDefaultControl>
+                       <mat-select placeholder="Select Component"  [(ngModel)]="selectedComponent.value">
+                       <mat-option *ngFor="let tmp of thisComponent" value="{{tmp.value}}" name="component" ngDefaultControl>
                           {{tmp.viewValue}}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>              
-                    <mat-form-field appearance="legacy">                  
-                      <input matInput [(ngModel)]="tmpNewComponent.name" maxlength="255" placeholder="Name">                                    
+                       </mat-option>
+                       </mat-select>
                     </mat-form-field>
                     <mat-form-field appearance="legacy">                  
-                      <input matInput [(ngModel)]="tmpNewComponent.brand" maxlength="255" placeholder="Brand">                                    
+                       <input matInput [(ngModel)]="tmpNewComponent.name" maxlength="255" placeholder="Name">                                    
                     </mat-form-field>
                     <mat-form-field appearance="legacy">                  
-                        <input matInput [(ngModel)]="tmpNewComponent.model" maxlength="255" placeholder="Model">                                    
+                       <input matInput [(ngModel)]="tmpNewComponent.brand" maxlength="255" placeholder="Brand">                                    
                     </mat-form-field>
                     <mat-form-field appearance="legacy">                  
-                        <input matInput [(ngModel)]="tmpNewComponent.series" maxlength="255" placeholder="Series">                                    
+                       <input matInput [(ngModel)]="tmpNewComponent.model" maxlength="255" placeholder="Model">                                    
                     </mat-form-field>
                     <mat-form-field appearance="legacy">                  
-                        <input matInput [(ngModel)]="tmpNewComponent.details" maxlength="255" placeholder="Details">                                    
+                       <input matInput [(ngModel)]="tmpNewComponent.series" maxlength="255" placeholder="Series">                                    
                     </mat-form-field>
                     <mat-form-field appearance="legacy">                  
-                        <input matInput  matInput type="number" [(ngModel)]="tmpNewComponent.price" placeholder="Price">                                    
-                    </mat-form-field>                    
-                  </div>
-                  <button mat-raised-button color="primary" (click)="submitNewComponent()">Submit</button>
+                       <input matInput [(ngModel)]="tmpNewComponent.details" maxlength="255" placeholder="Details">                                    
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy">                  
+                       <input matInput  matInput type="number" [(ngModel)]="tmpNewComponent.price" placeholder="Price">                                    
+                    </mat-form-field>
+                 </div>
+                 <button mat-raised-button color="primary" (click)="submitNewComponent()">Submit</button>
               </mat-tab>
               <mat-tab>
-                <ng-template mat-tab-label>
+                 <ng-template mat-tab-label>
                     <mat-icon class="example-tab-icon">border_color</mat-icon>
-                      Edit
-                </ng-template>  
-                <mat-form-field class="filter-length">
-                  <mat-select placeholder="Filter" (selectionChange)="filterList()" [(ngModel)]="selectedFilter">
+                    Edit
+                 </ng-template>
+                 <mat-form-field class="filter-length">
+                    <mat-select placeholder="Filter" (selectionChange)="filterList()" [(ngModel)]="selectedFilter">
                     <mat-option *ngFor="let component of listComponents" [value]="component">
-                      {{component}}
+                    {{component}}
                     </mat-option>
-                  </mat-select>
-                </mat-form-field>
-                <div *ngIf="filteredComponent.length == 0">
+                    </mat-select>
+                 </mat-form-field>
+                 <div *ngIf="filteredComponent.length == 0">
                     <h4>Empty</h4>
-                  </div>
-                <div *ngIf="filteredComponent.length > 0">
-                  <table   style='border-collapse:collapse' class="table table-striped">
-                  <thead>
-                      <tr>
-                      <th>Edit</th>
-                      <th>Delete</th>
-                      <th (click)="sortList('hardwareType')">hardwareType
-                        <span *ngIf="key === 'hardwareType'">
-                            <span *ngIf="reverse">
-                              <i class="fa fa-arrow-up"></i>
-                            </span>
-                        <span *ngIf="!reverse">
-                              <i class="fa fa-arrow-down"></i>
-                              </span>
-                        </span>            
-                      </th>
-                      <th (click)="sortList('name')">Name
-                        <span *ngIf="key === 'name'">
-                            <span *ngIf="reverse">
-                              <i class="fa fa-arrow-up"></i>
-                            </span>
-                        <span *ngIf="!reverse">
-                              <i class="fa fa-arrow-down"></i>
-                              </span>
-                        </span>            
-                      </th>
-                      <th (click)="sortList('brand')">Brand
-                          <span *ngIf="key === 'brand'">
-                              <span *ngIf="reverse">
-                                <i class="fa fa-arrow-up"></i>
-                              </span>
-                              <span *ngIf="!reverse">
-                                <i class="fa fa-arrow-down"></i>
-                              </span>
-                          </span>              
-                      </th>
-                      <th (click)="sortList('model')">Model
-                        <span *ngIf="key === 'model'">
-                            <span *ngIf="reverse">
-                              <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                            </span>
-                            <span *ngIf="!reverse">
-                              <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                            </span>
-                        </span>                 
-                      </th>
-                      <th (click)="sortList('series')">Series
-                          <span *ngIf="key === 'series'">
-                              <span *ngIf="reverse">
-                                <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                              </span>
-                              <span *ngIf="!reverse">
-                                <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                              </span>
-                          </span>                    
-                        </th>
-                        <th (click)="sortList('price')">Price
-                          <span *ngIf="key === 'price'">
-                            <span *ngIf="reverse">
-                            <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                            </span>
-                            <span *ngIf="!reverse">
-                              <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                            </span>
-                          </span>              
-                        </th>
-                        <th (click)="sortList('details')">Details
-                            <span *ngIf="key === 'details'">
+                 </div>
+                 <div *ngIf="filteredComponent.length > 0">
+                    <table   style='border-collapse:collapse' class="table table-striped">
+                       <thead>
+                          <tr>
+                             <th>Edit</th>
+                             <th>Delete</th>
+                             <th (click)="sortList('hardwareType')">hardwareType
+                                <span *ngIf="key === 'hardwareType'">
                                 <span *ngIf="reverse">
-                                  <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                                <i class="fa fa-arrow-up"></i>
                                 </span>
                                 <span *ngIf="!reverse">
-                                  <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                                <i class="fa fa-arrow-down"></i>
                                 </span>
-                            </span>               
-                        </th>                    
-                      </tr>
-                    </thead>
-                  <tbody>
-                  <tr *ngFor="let t of filteredComponent | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
-                    <td style="text-align:center">
-                      <button class="trash-button button-no-border">
-                          <i class="fa fa-edit" (click)="openDialog(i)" aria-hidden="true"></i>
-                      </button>  
-                    </td>
-                    <td style="text-align:center">
-                        <button class="trash-button button-no-border">
-                            <i style="color:red" class="fa fa-trash" (click)="deleteComponent(i)" aria-hidden="true"></i>
-                        </button>  
-                      </td>
-                    <td>{{t.hardwareType}}</td>
-                    <td>{{t.name}}</td>
-                    <td>{{t.brand}}</td>
-                    <td>{{t.model}}</td>
-                    <td>{{t.series}}</td>
-                    <td>{{t.price}}</td>
-                    <td>{{t.details}}</td>                
-                  </tr>
-                  </tbody>                                                   
-                </table>
-                <pagination-controls (pageChange)="p = $event"></pagination-controls>
-              </div>
+                                </span>            
+                             </th>
+                             <th (click)="sortList('name')">Name
+                                <span *ngIf="key === 'name'">
+                                <span *ngIf="reverse">
+                                <i class="fa fa-arrow-up"></i>
+                                </span>
+                                <span *ngIf="!reverse">
+                                <i class="fa fa-arrow-down"></i>
+                                </span>
+                                </span>            
+                             </th>
+                             <th (click)="sortList('brand')">Brand
+                                <span *ngIf="key === 'brand'">
+                                <span *ngIf="reverse">
+                                <i class="fa fa-arrow-up"></i>
+                                </span>
+                                <span *ngIf="!reverse">
+                                <i class="fa fa-arrow-down"></i>
+                                </span>
+                                </span>              
+                             </th>
+                             <th (click)="sortList('model')">Model
+                                <span *ngIf="key === 'model'">
+                                <span *ngIf="reverse">
+                                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                                </span>
+                                <span *ngIf="!reverse">
+                                <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                                </span>
+                                </span>                 
+                             </th>
+                             <th (click)="sortList('series')">Series
+                                <span *ngIf="key === 'series'">
+                                <span *ngIf="reverse">
+                                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                                </span>
+                                <span *ngIf="!reverse">
+                                <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                                </span>
+                                </span>                    
+                             </th>
+                             <th (click)="sortList('price')">Price
+                                <span *ngIf="key === 'price'">
+                                <span *ngIf="reverse">
+                                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                                </span>
+                                <span *ngIf="!reverse">
+                                <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                                </span>
+                                </span>              
+                             </th>
+                             <th (click)="sortList('details')">Details
+                                <span *ngIf="key === 'details'">
+                                <span *ngIf="reverse">
+                                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                                </span>
+                                <span *ngIf="!reverse">
+                                <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                                </span>
+                                </span>               
+                             </th>
+                          </tr>
+                       </thead>
+                       <tbody>
+                          <tr *ngFor="let t of filteredComponent | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                             <td style="text-align:center">
+                                <button class="trash-button button-no-border">
+                                <i class="fa fa-edit" (click)="openDialog(i)" aria-hidden="true"></i>
+                                </button>  
+                             </td>
+                             <td style="text-align:center">
+                                <button class="trash-button button-no-border">
+                                <i style="color:red" class="fa fa-trash" (click)="deleteComponent(i)" aria-hidden="true"></i>
+                                </button>  
+                             </td>
+                             <td>{{t.hardwareType}}</td>
+                             <td>{{t.name}}</td>
+                             <td>{{t.brand}}</td>
+                             <td>{{t.model}}</td>
+                             <td>{{t.series}}</td>
+                             <td>{{t.price}}</td>
+                             <td>{{t.details}}</td>
+                          </tr>
+                       </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                 </div>
               </mat-tab>
-            </mat-tab-group>    
-          </mat-tab>
-      </mat-tab-group>
+           </mat-tab-group>
+        </mat-tab>
+     </mat-tab-group>
   </div>
 </div>
