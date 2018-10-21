@@ -25,7 +25,7 @@ namespace CYouEcommerce
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<PhotoSettings>(Configuration.GetSection("PhotoSettings"));
+            // services.Configure<PhotoSettings>(Configuration.GetSection("PhotoSettings"));
             services.AddAutoMapper(typeof(Startup));
         
             services.AddDbContext<R13DbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:Default"]));
@@ -66,6 +66,7 @@ namespace CYouEcommerce
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+            app.UseDefaultFiles();
 
             // 2. Enable authentication middleware
                 app.UseAuthentication();
@@ -83,7 +84,7 @@ namespace CYouEcommerce
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
                 spa.Options.SourcePath = "ClientApp";
-
+                spa.UseAngularCliServer(npmScript: "start");
                 if (env.IsDevelopment())
                 {
                     spa.UseAngularCliServer(npmScript: "start");

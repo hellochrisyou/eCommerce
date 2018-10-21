@@ -16,7 +16,8 @@ export class DashboardComponent implements OnInit {
   //added
   isMaster: string;
 //end
-
+  p: any;
+  searchText: any;
 public barChartOptions:any = {
   scaleShowVerticalLines: false,
   responsive: true
