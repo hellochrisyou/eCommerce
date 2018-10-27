@@ -1,45 +1,12 @@
 import { AuthService } from './Services/auth.service';
-
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, enableProdMode } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { HttpModule, BrowserXhr } from '@angular/http';
-
-import {CdkTableModule} from '@angular/cdk/table';
-import {CdkTreeModule} from '@angular/cdk/tree';
-
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {
-  MatAutocompleteModule,
-  MatBadgeModule,
-  MatBottomSheetModule,
-  MatButtonModule,
-  MatButtonToggleModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatDatepickerModule,
-  MatGridListModule,
-  MatIconModule,
-  MatListModule,
-  MatMenuModule,
-  MatNativeDateModule,
-  MatPaginatorModule,
-  MatProgressBarModule,
-  MatRadioModule,
-  MatRippleModule,
-  MatSidenavModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-  MatSortModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTreeModule,
-} from '@angular/material';
+import { HttpModule } from '@angular/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule, MatIconModule, MatRadioModule, MatSlideToggleModule, MatTabsModule, MatToolbarModule, } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-
-
 import { MatSelectModule, MatSnackBarModule } from  '@angular/material';
 import { MatTableModule } from '@angular/material/table';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -52,7 +19,6 @@ import { MatInputModule, MatDialogModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ChartsModule } from 'ng2-charts';
-
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';

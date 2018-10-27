@@ -9,38 +9,38 @@ import { Router } from '@angular/router'
   selector: 'app-shoppingcart',
   templateUrl: './shoppingcart.component.html',
   styleUrls: ['./shoppingcart.component.css']
- })
- export class ShoppingcartComponent implements OnInit {
+})
+export class ShoppingcartComponent implements OnInit {
   shoppingOrder: any = {};
- 
+
   //Sorting Logic
   key = 'order_Number'; // sort default by name
   reverse = false;
   sortList(key) {
-   this.key = key;
-   this.reverse = !this.reverse;
+      this.key = key;
+      this.reverse = !this.reverse;
   }
- 
+
   constructor(
-   private ShoppingcartService: ShoppingcartService,
-   public snackBar: MatSnackBar,
-   private makeService: MakeService,
-   public auth: AuthService,
-   private router: Router
+      private ShoppingcartService: ShoppingcartService,
+      public snackBar: MatSnackBar,
+      private makeService: MakeService,
+      public auth: AuthService,
+      private router: Router
   ) {}
- 
+
   ngOnInit() {
-   if (!this.auth.isAuthenticated()) {
-    this.router.navigate(['/home']);
-   }
-   this.shoppingOrder = this.ShoppingcartService.get();
+      if (!this.auth.isAuthenticated()) {
+          this.router.navigate(['/home']);
+      }
+      this.shoppingOrder = this.ShoppingcartService.get();
   }
- 
+
   DeleteOrder(index) {
-   this.ShoppingcartService.delete(index);
+      this.ShoppingcartService.delete(index);
   }
- 
+
   submit() {
-   this.router.navigate(['/checkout']);
+      this.router.navigate(['/checkout']);
   }
- }
+}
