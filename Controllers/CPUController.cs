@@ -68,8 +68,7 @@ namespace CyouEcommerce.Controllers
         [HttpGet]
         public async Task<IEnumerable<KeyValuePairResource>> GetCPU()
         {
-            var features = await context.CPUs.ToListAsync();
-      
+            var features = await context.CPUs.ToListAsync();      
             return mapper.Map<List<CPU>, List<KeyValuePairResource>>(features);
         }
     }

@@ -69,8 +69,7 @@ namespace CyouEcommerce.Controllers
         [HttpGet]
         public async Task<IEnumerable<KeyValuePairResource>> GetPowerSupply()
         {
-            var features = await context.PowerSupplys.ToListAsync();
-      
+            var features = await context.PowerSupplys.ToListAsync();      
             return mapper.Map<List<Powersupply>, List<KeyValuePairResource>>(features);
         }
     }

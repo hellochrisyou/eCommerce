@@ -68,8 +68,7 @@ namespace CyouEcommerce.Controllers
         [HttpGet]
         public async Task<IEnumerable<KeyValuePairResource>> GetCase()
         {
-            var features = await context.Cases.ToListAsync();
-      
+            var features = await context.Cases.ToListAsync();      
             return mapper.Map<List<Case>, List<KeyValuePairResource>>(features);
         }
     }

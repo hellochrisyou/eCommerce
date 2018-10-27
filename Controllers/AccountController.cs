@@ -72,8 +72,7 @@ namespace CyouEcommerce.Controllers
         [HttpGet]
         public async Task<IEnumerable<AccountResource>> GetAccountInfo()
         {
-            var features = await context.Accounts.ToListAsync();
-      
+            var features = await context.Accounts.ToListAsync();      
             return mapper.Map<List<Account>, List<AccountResource>>(features);
         }
     }

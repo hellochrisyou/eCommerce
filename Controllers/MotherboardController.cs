@@ -68,8 +68,7 @@ namespace CyouEcommerce.Controllers
         [HttpGet]
         public async Task<IEnumerable<KeyValuePairResource>> GetMotherboard()
         {
-            var features = await context.Motherboards.ToListAsync();
-      
+            var features = await context.Motherboards.ToListAsync();      
             return mapper.Map<List<Motherboard>, List<KeyValuePairResource>>(features);
         }
     }

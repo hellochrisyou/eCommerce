@@ -19,19 +19,8 @@ namespace CYouEcommerce.Persistence
         public DbSet<SaleItem> SaleItems { get; set; } 
         public DbSet<Order> Orders { get; set; }
         public DbSet<Photo> Photos { get; set; }
-        public R13DbContext(DbContextOptions<R13DbContext> options):base(options) 
-        {          
-        }        
+        public R13DbContext(DbContextOptions<R13DbContext> options):base(options) {}        
         
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            // foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-            // {
-            //     relationship.DeleteBehavior = DeleteBehavior.Restrict;
-            // }            
-            // modelBuilder.Entity<ItemSoftware>().HasKey(iS => new { iS.SoftwareId, iS.ItemForSaleId});
-            // modelBuilder.Entity<ItemSoftware>().HasKey(iS => new { iS.SoftwareId, iS.OrderId});       
-        }
 
     }
 

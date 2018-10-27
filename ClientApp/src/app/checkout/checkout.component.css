@@ -1,21 +1,18 @@
-.address 
-{
+.address {
     width: 24%;
-}
-
-.state
-{
+  }
+  
+  .state {
     width: 9%;
-}
-
-.Zip-Code
-{
-    margin-left:3%;
+  }
+  
+  .Zip-Code {
+    margin-left: 3%;
     width: 12%;
-}
-
+  }
   
   .form-control {
     box-shadow: 0 10px 40px 0 #B0C1D9;
   }
-
+  
+  

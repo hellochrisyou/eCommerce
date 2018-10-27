@@ -7,8 +7,6 @@ import { AuthService } from '../Services/auth.service';
   styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent{
-
-  
   emailName: string = "";
   isExpanded = false;
 
@@ -18,7 +16,6 @@ export class NavMenuComponent{
       localStorage; 
     this.emailName = localStorage.getItem('user_email');
    }, 2000);
-
   }
 
   collapse() {

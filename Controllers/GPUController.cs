@@ -68,8 +68,7 @@ namespace CyouEcommerce.Controllers
         [HttpGet]
         public async Task<IEnumerable<KeyValuePairResource>> GetGPU()
         {
-            var features = await context.GPUs.ToListAsync();
-      
+            var features = await context.GPUs.ToListAsync();      
             return mapper.Map<List<GPU>, List<KeyValuePairResource>>(features);
         }
     }

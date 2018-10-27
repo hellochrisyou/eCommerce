@@ -31,6 +31,7 @@ namespace CyouEcommerce.Controllers
             context.SaleItems.Add(saleItem);
             await context.SaveChangesAsync();
             var result = mapper.Map<SaleItem, SaleItemResource>(saleItem);
+
             return Ok(result);
         }
 
@@ -49,6 +50,7 @@ namespace CyouEcommerce.Controllers
             mapper.Map<SaleItemResource, SaleItem>(saleItemResource, saleItem);
             await context.SaveChangesAsync();
             var result = mapper.Map<SaleItem, SaleItemResource>(saleItem);
+
             return Ok(result);
         }
 
@@ -62,7 +64,7 @@ namespace CyouEcommerce.Controllers
 
             context.Remove(saleItem);
             await context.SaveChangesAsync();
-
+            
             return Ok(id);
         }
 
@@ -81,7 +83,6 @@ namespace CyouEcommerce.Controllers
                 return NotFound();
 
             var saleResource = mapper.Map<SaleItem, SaleItemResource>(saleItem);
-
             return Ok(saleResource);
         }
 

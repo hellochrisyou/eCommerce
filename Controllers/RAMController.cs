@@ -69,8 +69,7 @@ namespace CyouEcommerce.Controllers
         [HttpGet]
         public async Task<IEnumerable<KeyValuePairResource>> GetRAM()
         {
-            var features = await context.RAMs.ToListAsync();
-      
+            var features = await context.RAMs.ToListAsync();      
             return mapper.Map<List<RAM>, List<KeyValuePairResource>>(features);
         }
     }

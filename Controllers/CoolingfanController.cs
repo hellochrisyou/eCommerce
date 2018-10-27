@@ -67,8 +67,7 @@ namespace CyouEcommerce.Controllers
 
         [HttpGet]        public async Task<IEnumerable<KeyValuePairResource>> GetCoolingFan()
         {
-            var features = await context.CoolingFans.ToListAsync();
-      
+            var features = await context.CoolingFans.ToListAsync();      
             return mapper.Map<List<Coolingfan>, List<KeyValuePairResource>>(features);
         }
     }

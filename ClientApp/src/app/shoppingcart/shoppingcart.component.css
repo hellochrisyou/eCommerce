@@ -1,31 +1,29 @@
-
-
 .search-hero {
-    max-width: 500px;
-    padding-bottom: 50px;
-    margin:auto;
-  }
-  
-  .form-control {
-    box-shadow: 0 10px 40px 0 #B0C1D9;
-  }
-  .form-control::placeholder  {
-    font-family: FontAwesome;
-  }
+  max-width: 500px;
+  padding-bottom: 50px;
+  margin: auto;
+}
 
-  .by-country, .by-name {
-    text-decoration: underline;
-    padding-left: 10px;
-    cursor: pointer;
-  }
-  
-  .trash-button {
-    padding: 0 !important;
-    border: none !important;
-    background: none !important;
-  }
+.form-control {
+  box-shadow: 0 10px 40px 0 #B0C1D9;
+}
 
-  td:nth-child(1), th:nth-child(1)
-  { 
-    width: 1% !important;
-  }
+.form-control::placeholder {
+  font-family: FontAwesome;
+}
+
+.by-country, .by-name {
+  text-decoration: underline;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+.trash-button {
+  padding: 0 !important;
+  border: none !important;
+  background: none !important;
+}
+
+td:nth-child(1), th:nth-child(1) {
+  width: 1% !important;
+}

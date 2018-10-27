@@ -1,67 +1,63 @@
 @media (min-width: 768px) {
-.example-card {
+  .example-card {
     max-width: 400px !important;
-    display: block;    
-    margin-top:3% !important;    
+    display: block;
+    margin-top: 3% !important;
     margin-bottom: 3% !important;
-  }  
+  }
 }
 
 @media (max-width: 767px) {
   .example-card {
-      max-width: 300px !important;
-      display: block;      
-      margin-top:3% !important;    
-      margin-bottom: 3% !important;
-    }  
+    max-width: 300px !important;
+    display: block;
+    margin-top: 3% !important;
+    margin-bottom: 3% !important;
   }
-  .example-header-image {
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/f/f4/User_Avatar_2.png');
-    background-size: cover;
-  }
-  
-  .example-radio-group {
-    display: inline-flex;
-    flex-direction: column;
-  }
-  
-  .example-radio-button {
-    margin: 5px;
-  }
-  
-  .example-selected-value {
-    margin: 15px 0;
-  }
+}
 
-  .row
-  {
-    text-align: center;
-    margin-left:1% !important;
-    margin-right:1% !important;
-  }
-  
-  .col-2, .col-sm-5
-  {
-    display:inline-block;
-    float:none;
-  }
+.example-header-image {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/f/f4/User_Avatar_2.png');
+  background-size: cover;
+}
 
-  .word-overflow
-  {
-    overflow-wrap: break-word;
-    text-align:left;
-  }
+.example-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+}
 
-  .title-label 
-  {    
-    text-align:left;
-    text-decoration: underline;
-    
-  }
+.example-radio-button {
+  margin: 5px;
+}
 
-  .trash-button {
-    padding: 0 !important;
-    border: none !important;
-    background: none !important;    
-    margin-left:10%;
-  }
+.example-selected-value {
+  margin: 15px 0;
+}
+
+.row {
+  text-align: center;
+  margin-left: 1% !important;
+  margin-right: 1% !important;
+}
+
+.col-2, .col-sm-5 {
+  display: inline-block;
+  float: none;
+}
+
+.word-overflow {
+  overflow-wrap: break-word;
+  text-align: left;
+}
+
+.title-label {
+  text-align: left;
+  text-decoration: underline;
+}
+
+.trash-button {
+  padding: 0 !important;
+  border: none !important;
+  background: none !important;
+  margin-left: 10%;
+}

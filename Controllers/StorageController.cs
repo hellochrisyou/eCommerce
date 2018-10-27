@@ -69,8 +69,7 @@ namespace CyouEcommerce.Controllers
         [HttpGet]
         public async Task<IEnumerable<KeyValuePairResource>> GetStorage()
         {
-            var features = await context.Storages.ToListAsync();
-      
+            var features = await context.Storages.ToListAsync();      
             return mapper.Map<List<Storage>, List<KeyValuePairResource>>(features); 
         }
     }
