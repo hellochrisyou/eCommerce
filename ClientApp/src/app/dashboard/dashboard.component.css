@@ -1,6 +1,6 @@
 @import "~bootstrap/dist/css/bootstrap-grid.css";
 
-.example-tab-icon {
+.dashboard-tab-icon {
   margin-right: 8px;
 }
 
@@ -24,7 +24,7 @@
   cursor: pointer;
 }
 
-.example-card {
+.dashboard-card {
   max-width: 400px;
   background-color: #3F51B5 !important;
 }
@@ -38,7 +38,7 @@
   color: black !important;
 }
 
-.example-container {
+.dashboard-container {
   display: flex;
   flex-direction: column;
 }

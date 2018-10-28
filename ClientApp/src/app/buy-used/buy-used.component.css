@@ -1,5 +1,5 @@
 @media (min-width: 768px) {
-  .example-card {
+  .buy-card {
     max-width: 400px !important;
     display: block;
     margin-top: 3% !important;
@@ -8,7 +8,7 @@
 }
 
 @media (max-width: 767px) {
-  .example-card {
+  .buy-card {
     max-width: 300px !important;
     display: block;
     margin-top: 3% !important;
@@ -16,21 +16,21 @@
   }
 }
 
-.example-header-image {
+.buy-header-image {
   background-image: url('https://upload.wikimedia.org/wikipedia/commons/f/f4/User_Avatar_2.png');
   background-size: cover;
 }
 
-.example-radio-group {
+.buy-radio-group {
   display: inline-flex;
   flex-direction: column;
 }
 
-.example-radio-button {
+.buy-radio-button {
   margin: 5px;
 }
 
-.example-selected-value {
+.buy-selected-value {
   margin: 15px 0;
 }
 
