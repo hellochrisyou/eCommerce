@@ -60,6 +60,6 @@ li.link-active a:focus {
 
 .nav-button
 {
-    float:left !important;
+    float:left;
     margin-left:1%
 }

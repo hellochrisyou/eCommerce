@@ -19,11 +19,11 @@
 }
 
 .trash-button {
-  padding: 0 !important;
-  border: none !important;
-  background: none !important;
+  padding: 0;
+  border: none;
+  background: none;
 }
 
 td:nth-child(1), th:nth-child(1) {
-  width: 1% !important;
+  width: 1%;
 }

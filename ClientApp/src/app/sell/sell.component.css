@@ -2,7 +2,7 @@
 
 @media (min-width: 1367px) {
   .mat-stepper-vertical {
-    width: 50% !important;
-    margin-left: 36%  !important;
+    width: 50%;
+    margin-left: 36% ;
   }
 }

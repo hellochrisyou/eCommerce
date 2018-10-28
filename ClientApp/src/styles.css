@@ -15,8 +15,8 @@ body {
 
 .h2, h2, h4
 {
-    text-align:center !important;
-    font-family: 'trebuchet ms' !important;
-    font-weight: bold !important;
+    text-align:center;
+    font-family: 'trebuchet ms';
+    font-weight: bold;
 
 }
