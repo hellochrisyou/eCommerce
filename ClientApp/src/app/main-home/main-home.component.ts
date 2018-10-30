@@ -9,8 +9,8 @@ import { AuthService } from '../Services/auth.service';
 export class MainHomeComponent implements OnInit {
 
   constructor(public auth: AuthService) {
-    auth.handleAuthentication();
-    auth.isAdmin();   
+      auth.handleAuthentication();
+      auth.isAdmin();   
   }
 
   ngOnInit() {}

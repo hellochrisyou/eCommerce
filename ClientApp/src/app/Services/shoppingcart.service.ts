@@ -9,7 +9,7 @@ export class ShoppingcartService {
   tmpArray: ThisOrder[] = [];
 
   //Objects
-  tmpThisOrder: shoppingthisOrder = {
+  tmpThisOrder: ShoppingthisOrder = {
       type: '',
       address: '',
       state: '',
@@ -51,7 +51,7 @@ export class ShoppingcartService {
 //End Shoppingcart Service
 
 //Classes
-class shoppingthisOrder {
+class ShoppingthisOrder {
   type: string;
   address: string;
   state: string;

@@ -16,12 +16,11 @@
 export class BuyNewComponent implements OnInit {
   //Variables
   totalPrice: number = 0;
-  caseItem: any[];
+  
   modelObject: any = {};
   account: any = {};
-  software: any[];
-  order: any[];
-  clonedOrder: any[];
+  
+  
   name: string = '';
 
   //Form Group
@@ -36,6 +35,18 @@ export class BuyNewComponent implements OnInit {
   coolingFormGroup: FormGroup;
   caseFormGroup: FormGroup;
 
+  //Arrays
+  CPU: any[];
+  motherboard: any[];
+  RAM: any[];
+  storage: any[];
+  GPU: any[];
+  powerSupply: any[];
+  coolingFan: any[];
+  caseItem: any[];
+  clonedOrder: any[];
+  order: any[];
+  
   //tmp Components
   selectedCase: KeyValuePair = {
       name: '',
@@ -45,8 +56,7 @@ export class BuyNewComponent implements OnInit {
       series: '',
       brand: '',
       details: ''
-  };
-  coolingFan: any[];
+  };  
   selectedFan: KeyValuePair = {
       name: '',
       price: 0,
@@ -55,8 +65,7 @@ export class BuyNewComponent implements OnInit {
       series: '',
       brand: '',
       details: ''
-  };
-  CPU: any[];
+  };  
   selectedCPU: KeyValuePair = {
       name: '',
       price: 0,
@@ -65,8 +74,7 @@ export class BuyNewComponent implements OnInit {
       series: '',
       brand: '',
       details: ''
-  };
-  GPU: any[];
+  };  
   selectedGPU: KeyValuePair = {
       name: '',
       price: 0,
@@ -75,8 +83,7 @@ export class BuyNewComponent implements OnInit {
       series: '',
       brand: '',
       details: ''
-  };
-  motherboard: any[];
+  };  
   selectedMotherboard: KeyValuePair = {
       name: '',
       price: 0,
@@ -85,8 +92,7 @@ export class BuyNewComponent implements OnInit {
       series: '',
       brand: '',
       details: ''
-  };
-  powerSupply: any[];
+  };  
   selectedPSupply: KeyValuePair = {
       name: '',
       price: 0,
@@ -95,8 +101,7 @@ export class BuyNewComponent implements OnInit {
       series: '',
       brand: '',
       details: ''
-  };
-  RAM: any[];
+  };  
   selectedRAM: KeyValuePair = {
       name: '',
       price: 0,
@@ -106,7 +111,6 @@ export class BuyNewComponent implements OnInit {
       brand: '',
       details: ''
   };
-  storage: any[];
   selectedStorage: KeyValuePair = {
       name: '',
       price: 0,
@@ -116,7 +120,6 @@ export class BuyNewComponent implements OnInit {
       brand: '',
       details: ''
   };
-
   tmpThisOrder: ThisOrder = {
       type: 'New',
       address: '',
@@ -132,7 +135,7 @@ export class BuyNewComponent implements OnInit {
       power_Supply: '',
       ram: '',
       storage: '',
-      total_Price: '11'
+      total_Price: ''
   }
 
   // sorting logic
@@ -167,108 +170,108 @@ export class BuyNewComponent implements OnInit {
       this.MakeService.getStorage().subscribe(storage => this.storage = storage);
       //Eliminate id from List
       this.MakeService.getOrder().subscribe(order => {
-          this.order = order
-          this.clonedOrder = JSON.parse(JSON.stringify(this.order));
-          this.clonedOrder.forEach(function(value) {
-              delete value.id;
-          });
+        this.order = order
+        this.clonedOrder = JSON.parse(JSON.stringify(this.order));
+        this.clonedOrder.forEach(function(value) {
+            delete value.id;
+        });
       })
       //Initialize Form Groups
       this.cpuFormGroup = this._formBuilder.group({
-          cpuCtrl: ['', Validators.required]
+        cpuCtrl: ['', Validators.required]
       });
       this.secondFormGroup = this._formBuilder.group({
-          secondCtrl: ['', Validators.required]
+        secondCtrl: ['', Validators.required]
       });
       this.motherboardFormGroup = this._formBuilder.group({
-          motherboardCtrl: ['', Validators.required]
+        motherboardCtrl: ['', Validators.required]
       });
       this.ramFormGroup = this._formBuilder.group({
-          ramCtrl: ['', Validators.required]
+        ramCtrl: ['', Validators.required]
       });
       this.storageFormGroup = this._formBuilder.group({
-          storageCtrl: ['', Validators.required]
+        storageCtrl: ['', Validators.required]
       });
       this.gpuFormGroup = this._formBuilder.group({
-          gpuCtrl: ['', Validators.required]
+        gpuCtrl: ['', Validators.required]
       });
       this.powerFormGroup = this._formBuilder.group({
-          powerCtrl: ['', Validators.required]
+        powerCtrl: ['', Validators.required]
       });
       this.coolingFormGroup = this._formBuilder.group({
-          coolingCtrl: ['', Validators.required]
+        coolingCtrl: ['', Validators.required]
       });
       this.caseFormGroup = this._formBuilder.group({
-          caseCtrl: ['', Validators.required]
+        caseCtrl: ['', Validators.required]
       });
   }
 
   calculateTotal() {
-      this.totalPrice = 0;
+    this.totalPrice = 0;
 
-      if (this.tmpThisOrder.cpu != '') {
-          var tmp = this.CPU.find(m => m.name == this.tmpThisOrder.cpu);
-          this.selectedCPU = tmp
-          this.totalPrice = parseFloat((this.selectedCPU.price + this.totalPrice).toFixed(2));
-      }
-      if (this.tmpThisOrder.motherboard != '') {
-          var tmp = this.motherboard.find(m => m.name == this.tmpThisOrder.motherboard);
-          this.selectedMotherboard = tmp;
-          this.totalPrice = parseFloat((this.selectedMotherboard.price + this.totalPrice).toFixed(2));
-      }
-      if (this.tmpThisOrder.ram != '') {
-          var tmp = this.RAM.find(m => m.name == this.tmpThisOrder.ram);
-          this.selectedRAM = tmp;
-          this.totalPrice = parseFloat((this.selectedRAM.price + this.totalPrice).toFixed(2));
-      }
-      if (this.tmpThisOrder.storage != '') {
-          var tmp = this.storage.find(m => m.name == this.tmpThisOrder.storage);
-          this.selectedStorage = tmp;
-          this.totalPrice = parseFloat((this.selectedStorage.price + this.totalPrice).toFixed(2));
-      }
-      if (this.tmpThisOrder.gpu != '') {
-          var tmp = this.GPU.find(m => m.name == this.tmpThisOrder.gpu);
-          this.selectedGPU = tmp;
-          this.totalPrice = parseFloat((this.selectedGPU.price + this.totalPrice).toFixed(2));
-      }
-      if (this.tmpThisOrder.power_Supply != '') {
-          var tmp = this.powerSupply.find(m => m.name == this.tmpThisOrder.power_Supply);
-          this.selectedPSupply = tmp;
-          this.totalPrice = parseFloat((this.selectedPSupply.price + this.totalPrice).toFixed(2));
-      }
-      if (this.tmpThisOrder.cooling_Fan != '') {
-          var tmp = this.coolingFan.find(m => m.name == this.tmpThisOrder.cooling_Fan);
-          this.selectedFan = tmp;
-          this.totalPrice = parseFloat((this.selectedFan.price + this.totalPrice).toFixed(2));
-      }
-      if (this.tmpThisOrder.case != '') {
-          var tmp = this.caseItem.find(m => m.name == this.tmpThisOrder.case);
-          this.selectedCase = tmp;
-          this.totalPrice = parseFloat((this.selectedCase.price + this.totalPrice).toFixed(2));
-      }
+    if (this.tmpThisOrder.cpu != '') {
+        var tmp = this.CPU.find(m => m.name == this.tmpThisOrder.cpu);
+        this.selectedCPU = tmp
+        this.totalPrice = parseFloat((this.selectedCPU.price + this.totalPrice).toFixed(2));
+    }
+    if (this.tmpThisOrder.motherboard != '') {
+        var tmp = this.motherboard.find(m => m.name == this.tmpThisOrder.motherboard);
+        this.selectedMotherboard = tmp;
+        this.totalPrice = parseFloat((this.selectedMotherboard.price + this.totalPrice).toFixed(2));
+    }
+    if (this.tmpThisOrder.ram != '') {
+        var tmp = this.RAM.find(m => m.name == this.tmpThisOrder.ram);
+        this.selectedRAM = tmp;
+        this.totalPrice = parseFloat((this.selectedRAM.price + this.totalPrice).toFixed(2));
+    }
+    if (this.tmpThisOrder.storage != '') {
+        var tmp = this.storage.find(m => m.name == this.tmpThisOrder.storage);
+        this.selectedStorage = tmp;
+        this.totalPrice = parseFloat((this.selectedStorage.price + this.totalPrice).toFixed(2));
+    }
+    if (this.tmpThisOrder.gpu != '') {
+        var tmp = this.GPU.find(m => m.name == this.tmpThisOrder.gpu);
+        this.selectedGPU = tmp;
+        this.totalPrice = parseFloat((this.selectedGPU.price + this.totalPrice).toFixed(2));
+    }
+        if (this.tmpThisOrder.power_Supply != '') {
+        var tmp = this.powerSupply.find(m => m.name == this.tmpThisOrder.power_Supply);
+        this.selectedPSupply = tmp;
+        this.totalPrice = parseFloat((this.selectedPSupply.price + this.totalPrice).toFixed(2));
+    }
+        if (this.tmpThisOrder.cooling_Fan != '') {
+        var tmp = this.coolingFan.find(m => m.name == this.tmpThisOrder.cooling_Fan);
+        this.selectedFan = tmp;
+        this.totalPrice = parseFloat((this.selectedFan.price + this.totalPrice).toFixed(2));
+    }
+        if (this.tmpThisOrder.case != '') {
+        var tmp = this.caseItem.find(m => m.name == this.tmpThisOrder.case);
+        this.selectedCase = tmp;
+        this.totalPrice = parseFloat((this.selectedCase.price + this.totalPrice).toFixed(2));
+    }
   }
 
   addOrder() {
-      this.ShoppingcartService.add(this.tmpThisOrder);
-      this.openSnackBar();
+    this.ShoppingcartService.add(this.tmpThisOrder);
+    this.openSnackBar();
   }
 
   openSnackBar() {
-      this.snackBar.openFromComponent(ConfirmNewItem, {
-          duration: 5000,
-      });
+    this.snackBar.openFromComponent(ConfirmNewItem, {
+        duration: 5000,
+    });
   }
 }
 //End Buy-New Component
 
 //Confirmation Dialog
 @Component({
-  selector: 'ConfirmNewItem',
-  templateUrl: 'ConfirmNewItem.html',
-  styles: [`
-    .confirmMessage {
-      color: green;      
-    }
-  `],
+    selector: 'ConfirmNewItem',
+    templateUrl: 'ConfirmNewItem.html',
+    styles: [`
+        .confirmMessage {
+        color: green;      
+        }
+    `],
 })
 export class ConfirmNewItem {}

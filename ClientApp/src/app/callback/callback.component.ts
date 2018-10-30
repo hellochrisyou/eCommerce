@@ -9,15 +9,15 @@ import { Router } from '@angular/router';
  })
  export class CallbackComponent implements OnInit {
  
-  constructor(
-   private auth: AuthService,
-   private router: Router
-  ) {}
- 
-  ngOnInit() {
-   if (!this.auth.isAuthenticated()) {
-    this.router.navigate(['/home']);
-   }
-  }
- 
+    constructor(
+      private auth: AuthService,
+      private router: Router
+    ) {}
+  
+    ngOnInit() {
+      if (!this.auth.isAuthenticated()) {
+        this.router.navigate(['/home']);
+      }
+    }
+  
  }

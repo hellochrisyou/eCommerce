@@ -8,7 +8,7 @@ import * as auth0 from 'auth0-js';
     providedIn: 'root'
 })
 export class AuthService {
-
+    userAccount: any;
     userEmail: AccountClass = {
         email: "",
         admin: false,
@@ -20,8 +20,7 @@ export class AuthService {
         email: "",
         admin: false,
         master_account: false,
-    }
-    userAccount: any;
+    }    
     auth0 = new auth0.WebAuth({
         clientID: '0MJ1BB2OJ-f_9eaPXxTZA7RBjkkMUR1s',
         domain: 'r13champ.auth0.com',
@@ -35,6 +34,7 @@ export class AuthService {
     public login(): void {
         this.auth0.authorize();
     }
+    
     public handleAuthentication(): void {
         this.auth0.parseHash((err, authResult) => {
             if (authResult && authResult.accessToken && authResult.idToken) {

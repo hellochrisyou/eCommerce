@@ -136,12 +136,12 @@ export class CheckoutComponent implements OnInit {
 
 //Completion Popup
 @Component({
-  selector: 'OrderCompleteSnack',
-  templateUrl: 'OrderCompleteSnack.html',
-  styles: [`
-  .OrderMessage {
-    color: Green;      
-  }
-`],
+    selector: 'OrderCompleteSnack',
+    templateUrl: 'OrderCompleteSnack.html',
+    styles: [`
+        .OrderMessage {
+            color: Green;      
+        }
+    `],
 })
 export class OrderCompleteSnack {}

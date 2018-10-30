@@ -53,18 +53,15 @@ export class DashboardComponent implements OnInit {
   dataNewOrders: any[] = [12];
   dataUsedOrders: any[] = [12];
 
-
   //Objects
   firstObj: NumberArrObj = {
       data: [],
       label: ''
   };
-
   secondObj: NumberArrObj = {
       data: [],
       label: ''
   };
-
   powerSupplyComponent: KeyValuePair = {
       name: '',
       price: 0,
@@ -74,7 +71,6 @@ export class DashboardComponent implements OnInit {
       brand: '',
       details: ''
   }
-
   coolingFanComponent: KeyValuePair = {
       name: '',
       price: 0,
@@ -84,7 +80,6 @@ export class DashboardComponent implements OnInit {
       brand: '',
       details: ''
   }
-
   motherboardComponent: KeyValuePair = {
       name: '',
       price: 0,
@@ -94,7 +89,6 @@ export class DashboardComponent implements OnInit {
       brand: '',
       details: ''
   }
-
   gpuComponent: KeyValuePair = {
       name: '',
       price: 0,
@@ -104,7 +98,6 @@ export class DashboardComponent implements OnInit {
       brand: '',
       details: ''
   }
-
   cpuComponent: KeyValuePair = {
       name: '',
       price: 0,
@@ -114,7 +107,6 @@ export class DashboardComponent implements OnInit {
       brand: '',
       details: ''
   }
-
   ramComponent: KeyValuePair = {
       name: '',
       price: 0,
@@ -124,7 +116,6 @@ export class DashboardComponent implements OnInit {
       brand: '',
       details: ''
   }
-
   storageComponent: KeyValuePair = {
       name: '',
       price: 0,
@@ -134,7 +125,6 @@ export class DashboardComponent implements OnInit {
       brand: '',
       details: ''
   }
-
   caseComponent: KeyValuePair = {
       name: '',
       price: 0,
@@ -247,7 +237,6 @@ export class DashboardComponent implements OnInit {
   listComponents: string[] = ['', 'CPU', 'Motherboard', 'RAM', 'Storage', 'GPU', 'Power Supply', 'Cooling Fan', 'Case'];
   selectedFilter: string;
   filteredComponent: any[] = [];
-
 
   constructor(
       private router: Router,
@@ -656,9 +645,6 @@ export class editComponent {
 }
 
 //Classes
-class stringProvider {
-  componentName: string;
-}
 class ComponentDetails {
   name: string;
   price: string;
