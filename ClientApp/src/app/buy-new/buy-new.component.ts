@@ -3,7 +3,7 @@
  import { ShoppingcartService } from './../Services/shoppingcart.service';
  import { Component, OnInit } from '@angular/core';
  import { FormGroup, FormBuilder, Validators } from '@angular/forms';
- import { thisOrder, KeyValuePair } from './../Models/interfaces'
+ import { ThisOrder, KeyValuePair } from './../Models/interfaces'
  import { MatSnackBar } from '@angular/material';
  import { Router } from '@angular/router';
  
@@ -117,7 +117,7 @@ export class BuyNewComponent implements OnInit {
       details: ''
   };
 
-  tmpThisOrder: thisOrder = {
+  tmpThisOrder: ThisOrder = {
       type: 'New',
       address: '',
       state: '',

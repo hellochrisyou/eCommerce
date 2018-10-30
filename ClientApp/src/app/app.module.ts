@@ -27,8 +27,8 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BuyNewComponent, ConfirmNewItem } from './buy-new/buy-new.component';
 import { MakeService } from './Services/make.service';
 
-import { SellComponent, UploadDialog, snackErrorMessage } from './sell/sell.component';
-import { BuyUsedComponent, expandPic, ConfirmUsedItem } from './buy-used/buy-used.component';
+import { SellComponent, UploadDialog, SnackErrorMessage } from './sell/sell.component';
+import { BuyUsedComponent, ExpandPic, ConfirmUsedItem } from './buy-used/buy-used.component';
 import { OrderhistoryComponent } from './orderhistory/orderhistory.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 import { PhotoService } from './Services/photo.service';
@@ -50,8 +50,8 @@ import { CheckoutComponent, OrderCompleteSnack } from './checkout/checkout.compo
     OrderhistoryComponent,
     ShoppingcartComponent,
     UploadDialog,
-    snackErrorMessage,
-    expandPic,
+    SnackErrorMessage,
+    ExpandPic,
     MainHomeComponent,
     CallbackComponent,    
     ConfirmNewItem,
@@ -111,8 +111,8 @@ import { CheckoutComponent, OrderCompleteSnack } from './checkout/checkout.compo
   ],
   entryComponents: [
     UploadDialog, 
-    snackErrorMessage, 
-    expandPic,     
+    SnackErrorMessage, 
+    ExpandPic,     
     ConfirmNewItem, 
     ConfirmUsedItem,
     OrderCompleteSnack,

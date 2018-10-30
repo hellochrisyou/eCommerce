@@ -9,13 +9,13 @@ import * as auth0 from 'auth0-js';
 })
 export class AuthService {
 
-    userEmail: accountClass = {
+    userEmail: AccountClass = {
         email: "",
         admin: false,
         master_account: false,
 
     };
-    existingUser: existingAccountClass = {
+    existingUser: ExistingAccountClass = {
         id: '0',
         email: "",
         admin: false,
@@ -119,13 +119,13 @@ export class AuthService {
     }
 }
 
-class accountClass {
+class AccountClass {
     email: string;
     admin: boolean;
     master_account: boolean;
 }
 
-class existingAccountClass {
+class ExistingAccountClass {
     id: string;
     email: string;
     admin: boolean;

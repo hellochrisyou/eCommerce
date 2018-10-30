@@ -1,5 +1,5 @@
  import { AuthService } from './../Services/auth.service';
- import { components, account, KeyValuePair } from './../Models/interfaces';
+ import { Components, Account, KeyValuePair } from './../Models/interfaces';
  import { Component, OnInit, Inject } from '@angular/core';
  import { MakeService } from '../Services/make.service';
  import { FormBuilder } from '@angular/forms'; 
@@ -55,12 +55,12 @@ export class DashboardComponent implements OnInit {
 
 
   //Objects
-  firstObj: numberArrObj = {
+  firstObj: NumberArrObj = {
       data: [],
       label: ''
   };
 
-  secondObj: numberArrObj = {
+  secondObj: NumberArrObj = {
       data: [],
       label: ''
   };
@@ -183,7 +183,7 @@ export class DashboardComponent implements OnInit {
   }]
 
   //tmp Components
-  thisComponent: components[] = [{
+  thisComponent: Components[] = [{
           value: 'cpu',
           viewValue: 'CPU'
       },
@@ -216,11 +216,11 @@ export class DashboardComponent implements OnInit {
           viewValue: 'Case'
       }
   ];
-  selectedComponent: components = {
+  selectedComponent: Components = {
       value: '',
       viewValue: ''
   };
-  tmpNewComponent: componentDetails = {
+  tmpNewComponent: ComponentDetails = {
       name: '',
       price: '',
       model: '',
@@ -228,7 +228,7 @@ export class DashboardComponent implements OnInit {
       brand: '',
       details: ''
   }
-  tmpAccount: account = {
+  tmpAccount: Account = {
       email: '',
       master_account: true,
       admin: true
@@ -659,7 +659,7 @@ export class editComponent {
 class stringProvider {
   componentName: string;
 }
-class componentDetails {
+class ComponentDetails {
   name: string;
   price: string;
   model: string;
@@ -667,7 +667,7 @@ class componentDetails {
   brand: string;
   details: string;
 }
-class numberArrObj {
+class NumberArrObj {
   data: any[];
   label: string;
 }

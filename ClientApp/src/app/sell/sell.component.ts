@@ -4,7 +4,7 @@
  import { FormGroup, FormBuilder, Validators } from '@angular/forms';
  import { MakeService } from './../Services/make.service';
  import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
- import { thisSellOrder } from '../Models/interfaces';
+ import { ThisSellOrder } from '../Models/interfaces';
  import { Router } from '@angular/router';
  
  @Component({
@@ -32,7 +32,7 @@ export class SellComponent implements OnInit {
   uploadedItem: any[];
 
   //Objects
-  tmpThisOrder: thisSellOrder = {
+  tmpThisOrder: ThisSellOrder = {
       accountsaleitemid: '',
       type: 'Used',
       case: '',
@@ -202,7 +202,7 @@ export class UploadDialog {
   }
 
   openSnackBar() {
-      this.snackBar.openFromComponent(snackErrorMessage, {
+      this.snackBar.openFromComponent(SnackErrorMessage, {
           duration: 5000,
       });
   }
@@ -222,7 +222,7 @@ export class UploadDialog {
   }
 `],
 })
-export class snackErrorMessage {}
+export class SnackErrorMessage {}
 
 interface uploadedItemId {
   itemId: number;

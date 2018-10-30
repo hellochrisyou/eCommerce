@@ -2,7 +2,7 @@ import { AuthService } from './../Services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { MakeService } from './../Services/make.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { thisOrder, KeyValuePair, orderWDate} from './../Models/interfaces'
+import { ThisOrder, KeyValuePair, OrderWDate} from './../Models/interfaces'
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,7 +16,7 @@ export class OrderhistoryComponent implements OnInit {
 
   //Objects
   clonedOrder: any = {};
-  tmpThisOrder: orderWDate = {
+  tmpThisOrder: OrderWDate = {
       type: 'New',
       address: '',
       state: '',

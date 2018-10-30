@@ -1,4 +1,4 @@
- export interface thisOrder {
+ export interface ThisOrder {
   type: string;
   order_Number: string,
    address: string;
@@ -27,13 +27,13 @@
   details: string;
  }
 
- export interface account {
+ export interface Account {
   email: string;
   master_account: boolean;
   admin: boolean;
  }
 
- export interface orderWDate {
+ export interface OrderWDate {
   type: string;
   order_Number: string,
   address: string;
@@ -53,7 +53,7 @@
    string;
  }
 
- export interface thisSellOrder {
+ export interface ThisSellOrder {
   accountsaleitemid: string;
   type: string;
   cooling_Fan: string;
@@ -69,7 +69,7 @@
    sellerName: string;
  }
 
- export interface components {
+ export interface Components {
   value: string;
   viewValue: string;
  };

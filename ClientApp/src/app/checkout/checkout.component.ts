@@ -3,7 +3,7 @@ import { ShoppingcartService } from '../Services/shoppingcart.service';
 import { MatSnackBar } from '@angular/material';
 import { MakeService } from '../Services/make.service';
 import { AuthService } from '../Services/auth.service';
-import { thisOrder } from '../Models/interfaces';
+import { ThisOrder } from '../Models/interfaces';
 import { Router } from '@angular/router';
 
 declare let paypal: any;
@@ -25,7 +25,7 @@ export class CheckoutComponent implements OnInit {
 
   //Objects
   shoppingOrder: any = {};
-  tmpObject: thisOrder = {
+  tmpObject: ThisOrder = {
       order_Number: '1',
       type: 'Used',
       address: 'aa',

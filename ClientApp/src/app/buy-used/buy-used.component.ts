@@ -2,7 +2,7 @@
  import { MakeService } from './../Services/make.service';
  import { ShoppingcartService } from './../Services/shoppingcart.service';
  import { PhotoService } from '../Services/photo.service';
- import { thisOrder } from '../Models/interfaces';
+ import { ThisOrder } from '../Models/interfaces';
  import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
  import { AuthService } from '../Services/auth.service';
  import { Router } from '@angular/router';
@@ -19,7 +19,7 @@ export class BuyUsedComponent implements OnInit {
   tmpSelect: string = '';
   tmpSelectedFileName: string;
   isAdmin: string = '';
-  tmpShoppingOrder: thisOrder;
+  tmpShoppingOrder: ThisOrder;
 
   //Arrays
   collectionPhotos: any[] = [];
@@ -29,7 +29,7 @@ export class BuyUsedComponent implements OnInit {
   radioSelection: string[] = ['All items', "My items"];
 
   //Objects
-  tmpThisOrder: thisOrder = {
+  tmpThisOrder: ThisOrder = {
       type: 'Used',
       address: '',
       state: '',
@@ -114,7 +114,7 @@ export class BuyUsedComponent implements OnInit {
 
   openDialog(selectedPic): void {
       this.tmpSelectedFileName = selectedPic.fileName;
-      const dialogRef = this.dialog.open(expandPic, {
+      const dialogRef = this.dialog.open(ExpandPic, {
           width: '300px',
           height: '300px',
           data: {
@@ -153,7 +153,7 @@ export class BuyUsedComponent implements OnInit {
 })
 export class ConfirmUsedItem {}
 
-class photoClass {
+class PhotoClass {
   expandedPic: string;
 }
 
@@ -167,10 +167,10 @@ class photoClass {
     height:auto;     
 `],
 })
-export class expandPic {
+export class ExpandPic {
   constructor(
-      public dialogRef: MatDialogRef < expandPic > ,
-      @Inject(MAT_DIALOG_DATA) public data: photoClass) {}
+      public dialogRef: MatDialogRef < ExpandPic > ,
+      @Inject(MAT_DIALOG_DATA) public data: PhotoClass) {}
 
   done(): void {
 

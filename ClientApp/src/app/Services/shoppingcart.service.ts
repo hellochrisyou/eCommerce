@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { thisOrder } from './../Models/interfaces'
+import { ThisOrder } from './../Models/interfaces'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingcartService {
   //Arrays
-  tmpArray: thisOrder[] = [];
+  tmpArray: ThisOrder[] = [];
 
   //Objects
   tmpThisOrder: shoppingthisOrder = {
