@@ -4,7 +4,7 @@
   margin-right: 8px;
 }
 
-.search-hero {
+.search-bar {
   width: 500px;
   padding-bottom: 25px;
   margin: auto;
@@ -16,12 +16,6 @@
 
 .form-control::placeholder {
   font-family: FontAwesome;
-}
-
-.by-country, .by-name {
-  text-decoration: underline;
-  padding-left: 10px;
-  cursor: pointer;
 }
 
 .dashboard-card {

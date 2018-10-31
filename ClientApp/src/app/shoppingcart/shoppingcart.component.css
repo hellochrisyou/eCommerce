@@ -1,4 +1,4 @@
-.search-hero {
+.search-bar {
   max-width: 500px;
   padding-bottom: 50px;
   margin: auto;
@@ -10,12 +10,6 @@
 
 .form-control::placeholder {
   font-family: FontAwesome;
-}
-
-.by-country, .by-name {
-  text-decoration: underline;
-  padding-left: 10px;
-  cursor: pointer;
 }
 
 .trash-button {
