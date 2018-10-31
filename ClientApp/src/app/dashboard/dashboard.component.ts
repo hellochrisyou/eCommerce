@@ -227,7 +227,7 @@ export class DashboardComponent implements OnInit {
   //Sorting logic
   key = 'order_Number'; // sort default by name
   reverse = false;
-  sortList(key) {
+  SortList(key) {
       this.key = key;
       this.reverse = !this.reverse;
       console.log(this.key);
@@ -247,18 +247,18 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-      if (!this.auth.isAuthenticated() || !this.auth.isAdmin()) {
+      if (!this.auth.IsAuthenticated() || !this.auth.IsAdmin()) {
           this.router.navigate(['/home']);
       }
       //Refresh List
-      this.getComponents();
+      this.GetComponents();
 
       //Call Services
-      this.MakeService.getAccount().subscribe(account => {
+      this.MakeService.GetAccount().subscribe(account => {
           this.accounts = account
           this.totalAccounts = this.accounts.length;
       });
-      this.MakeService.getOrder().subscribe(order => {
+      this.MakeService.GetOrder().subscribe(order => {
           this.orders = order
           var usedCount = 0;
           var newCount = 0;
@@ -390,9 +390,9 @@ export class DashboardComponent implements OnInit {
   }
 
   //filter  
-  filterList() {
+  FilterList() {
       if (this.selectedFilter == '') {
-          this.insertAllComponents();
+          this.InsertAllComponents();
       }
       if (this.selectedFilter == 'CPU') {
           this.filteredComponent = [];
@@ -431,7 +431,7 @@ export class DashboardComponent implements OnInit {
   //End Filter
 
   //Account
-  updateAccount(index, role) {
+  UpdateAccount(index, role) {
       this.tmpAccount = this.accounts[index];
 
       if (this.tmpAccount.admin == true) {
@@ -442,12 +442,12 @@ export class DashboardComponent implements OnInit {
       if (this.isMaster == 'true' && role == 'master') {
           this.tmpAccount.master_account = this.tmpAccount.admin;
       }
-      this.MakeService.updateAccount(this.tmpAccount).subscribe(x => x);
+      this.MakeService.UpdateAccount(this.tmpAccount).subscribe(x => x);
   }
   //End Account
 
   //Components
-  insertAllComponents() {
+  InsertAllComponents() {
       this.filteredComponent = [];
       this.filteredComponent = this.filteredComponent.concat(this.caseComponent);
       this.filteredComponent = this.filteredComponent.concat(this.coolingFanComponent);
@@ -459,91 +459,91 @@ export class DashboardComponent implements OnInit {
       this.filteredComponent = this.filteredComponent.concat(this.motherboardComponent);
   }
 
-  submitNewComponent() {
+  SubmitNewComponent() {
       if (this.selectedComponent.value == 'cpu') {
-          this.MakeService.createCPU(this.tmpNewComponent).subscribe(x => x);
+          this.MakeService.CreateCpu(this.tmpNewComponent).subscribe(x => x);
       }
       if (this.selectedComponent.value == 'motherboard') {
-          this.MakeService.createMotherboard(this.tmpNewComponent).subscribe(x => x);
+          this.MakeService.CreateMotherboard(this.tmpNewComponent).subscribe(x => x);
       }
       if (this.selectedComponent.value == 'ram') {
-          this.MakeService.createRAM(this.tmpNewComponent).subscribe(x => x);
+          this.MakeService.CreateRam(this.tmpNewComponent).subscribe(x => x);
       }
       if (this.selectedComponent.value == 'storage') {
-          this.MakeService.createStorage(this.tmpNewComponent).subscribe(x => x);
+          this.MakeService.CreateStorage(this.tmpNewComponent).subscribe(x => x);
       }
       if (this.selectedComponent.value == 'gpu') {
-          this.MakeService.createGPU(this.tmpNewComponent).subscribe(x => x);
+          this.MakeService.CreateGpu(this.tmpNewComponent).subscribe(x => x);
       }
       if (this.selectedComponent.value == 'power_supply') {
-          this.MakeService.createPowersupply(this.tmpNewComponent).subscribe(x => x);
+          this.MakeService.CreatePowersupply(this.tmpNewComponent).subscribe(x => x);
       }
       if (this.selectedComponent.value == 'cooling_Fan') {
-          this.MakeService.createCoolingfan(this.tmpNewComponent).subscribe(x => x);
+          this.MakeService.CreateCoolingFan(this.tmpNewComponent).subscribe(x => x);
       }
       if (this.selectedComponent.value == 'case') {
-          this.MakeService.createCase(this.tmpNewComponent).subscribe(x => x);
+          this.MakeService.CreateCase(this.tmpNewComponent).subscribe(x => x);
       }
       this.ngOnInit();
   }
 
-  deleteComponent(index) {
+  DeleteComponent(index) {
       if (this.filteredComponent[index].hardwareType == 'CPU') {
-          this.MakeService.deleteCPU(this.filteredComponent[index].id).subscribe(x =>
-              this.getComponents()
+          this.MakeService.DeleteCpu(this.filteredComponent[index].id).subscribe(x =>
+              this.GetComponents()
           );
       }
       if (this.filteredComponent[index].hardwareType == 'Case') {
-          this.MakeService.deleteCase(this.filteredComponent[index].id).subscribe(x =>
-              this.getComponents()
+          this.MakeService.DeleteCase(this.filteredComponent[index].id).subscribe(x =>
+              this.GetComponents()
           );
       }
       if (this.filteredComponent[index].hardwareType == 'Cooling Fan') {
-          this.MakeService.deleteCoolingFan(this.filteredComponent[index].id).subscribe(x =>
-              this.getComponents());
+          this.MakeService.DeleteCoolingFan(this.filteredComponent[index].id).subscribe(x =>
+              this.GetComponents());
       }
       if (this.filteredComponent[index].hardwareType == 'Motherboard') {
-          this.MakeService.deleteMotherboard(this.filteredComponent[index].id).subscribe(x =>
-              this.getComponents());
+          this.MakeService.DeleteMotherboard(this.filteredComponent[index].id).subscribe(x =>
+              this.GetComponents());
       }
       if (this.filteredComponent[index].hardwareType == 'RAM') {
-          this.MakeService.deleteRAM(this.filteredComponent[index].id).subscribe(x =>
-              this.getComponents());
+          this.MakeService.DeleteRam(this.filteredComponent[index].id).subscribe(x =>
+              this.GetComponents());
       }
       if (this.filteredComponent[index].hardwareType == 'Storage') {
-          this.MakeService.deleteStorage(this.filteredComponent[index].id).subscribe(x =>
-              this.getComponents());
+          this.MakeService.DeleteStorage(this.filteredComponent[index].id).subscribe(x =>
+              this.GetComponents());
       }
       if (this.filteredComponent[index].hardwareType == 'Power Supply') {
-          this.MakeService.deletePowerSupply(this.filteredComponent[index].id).subscribe(x =>
-              this.getComponents());
+          this.MakeService.DeletePowersupply(this.filteredComponent[index].id).subscribe(x =>
+              this.GetComponents());
       }
       if (this.filteredComponent[index].hardwareType == 'GPU') {
-          this.MakeService.deleteGPU(this.filteredComponent[index].id).subscribe(x =>
-              this.getComponents());
+          this.MakeService.DeleteGpu(this.filteredComponent[index].id).subscribe(x =>
+              this.GetComponents());
       }
   }
 
-  getComponents() {
-      this.MakeService.getCase().subscribe(caseItem => {
+  GetComponents() {
+      this.MakeService.GetCase().subscribe(caseItem => {
           this.caseComponent = caseItem;
-          this.MakeService.getCoolingfan().subscribe(coolingFan => {
+          this.MakeService.GetCoolingFan().subscribe(coolingFan => {
               this.coolingFanComponent = coolingFan;
-              this.MakeService.getCoolingfan().subscribe(coolingFan => {
+              this.MakeService.GetCoolingFan().subscribe(coolingFan => {
                   this.coolingFanComponent = coolingFan;
-                  this.MakeService.getCPU().subscribe(CPU => {
+                  this.MakeService.GetCpu().subscribe(CPU => {
                       this.cpuComponent = CPU;
-                      this.MakeService.getGPU().subscribe(GPU => {
+                      this.MakeService.GetGpu().subscribe(GPU => {
                           this.gpuComponent = GPU;
-                          this.MakeService.getStorage().subscribe(storage => {
+                          this.MakeService.GetStorage().subscribe(storage => {
                               this.storageComponent = storage;
-                              this.MakeService.getRAM().subscribe(RAM => {
+                              this.MakeService.GetRam().subscribe(RAM => {
                                   this.ramComponent = RAM;
-                                  this.MakeService.getPowersupply().subscribe(powerSupply => {
+                                  this.MakeService.GetPowersupply().subscribe(powerSupply => {
                                       this.powerSupplyComponent = powerSupply;
-                                      this.MakeService.getMotherboard().subscribe(motherboard => {
+                                      this.MakeService.GetMotherboard().subscribe(motherboard => {
                                           this.motherboardComponent = motherboard;
-                                          this.insertAllComponents();
+                                          this.InsertAllComponents();
                                       });
                                   });
                               });
@@ -555,11 +555,11 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  chartClicked(e: any): void {}
+  ChartClicked(e: any): void {}
 
-  chartHovered(e: any): void {}
+  ChartHovered(e: any): void {}
 
-  openDialog(index): void {
+  OpenDialog(index): void {
       const dialogRef = this.dialog.open(editComponent, {
           width: '250px',
           data: {
@@ -574,7 +574,7 @@ export class DashboardComponent implements OnInit {
           }
       });
       dialogRef.afterClosed().subscribe(() => {
-          this.getComponents();
+          this.GetComponents();
       })
   }
 
@@ -611,34 +611,34 @@ export class editComponent {
 
   ngOnInit() {}
 
-  cancel(): void {
+  Cancel(): void {
       this.dialogRef.close();
   }
 
-  submit(): void {
+  Submit(): void {
       if (this.tmpComponent.hardwareType == 'CPU') {
-          this.MakeService.updateCPU(this.tmpComponent).subscribe(x => x);
+          this.MakeService.UpdateCpu(this.tmpComponent).subscribe(x => x);
       }
       if (this.tmpComponent.hardwareType == 'Motherboard') {
-          this.MakeService.updateMotherboard(this.tmpComponent).subscribe(x => x);
+          this.MakeService.UpdateMotherboard(this.tmpComponent).subscribe(x => x);
       }
       if (this.tmpComponent.hardwareType == 'RAM') {
-          this.MakeService.updateRAM(this.tmpComponent).subscribe(x => x);
+          this.MakeService.UpdateRam(this.tmpComponent).subscribe(x => x);
       }
       if (this.tmpComponent.hardwareType == 'Storage') {
-          this.MakeService.updateStorage(this.tmpComponent).subscribe(x => x);
+          this.MakeService.UpdateStorage(this.tmpComponent).subscribe(x => x);
       }
       if (this.tmpComponent.hardwareType == 'GPU') {
-          this.MakeService.updateGPU(this.tmpComponent).subscribe(x => x);
+          this.MakeService.UpdateGpu(this.tmpComponent).subscribe(x => x);
       }
       if (this.tmpComponent.hardwareType == 'Power Supply') {
-          this.MakeService.updatePowerSupply(this.tmpComponent).subscribe(x => x);
+          this.MakeService.UpdatePowerSupply(this.tmpComponent).subscribe(x => x);
       }
       if (this.tmpComponent.hardwareType == 'Cooling Fan') {
-          this.MakeService.updateCoolingFan(this.tmpComponent).subscribe(x => x);
+          this.MakeService.UpdateCoolingFan(this.tmpComponent).subscribe(x => x);
       }
       if (this.tmpComponent.hardwareType == 'Case') {
-          this.MakeService.updateCase(this.tmpComponent).subscribe(x => x);
+          this.MakeService.UpdateCase(this.tmpComponent).subscribe(x => x);
       }
       this.dialogRef.close();
   }

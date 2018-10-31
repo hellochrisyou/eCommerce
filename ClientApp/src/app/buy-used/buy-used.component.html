@@ -2,7 +2,7 @@
   <div class="row">
      <h2>Buy Used</h2>
      <mat-radio-group class="buy-radio-group" [(ngModel)]="selection" name="selection">
-     <mat-radio-button class="buy-radio-button" *ngFor="let select of radioSelection" (change)="filterItems(select)">
+     <mat-radio-button class="buy-radio-button" *ngFor="let select of radioSelection" (change)="FilterItems(select)">
      {{select}}
      </mat-radio-button>
      </mat-radio-group>
@@ -14,7 +14,7 @@
               <mat-card-header>
                  <div mat-card-avatar class="buy-header-image"></div>
                  <mat-card-title>Seller
-                    <span *ngIf="isAdmin">
+                    <span *ngIf="IsAdmin">
                     <button class="trash-button">
                     <i style="color:red" class="fa fa-trash" (click)="DeleteItem(i)" aria-hidden="true"></i>
                     </button>
@@ -22,7 +22,7 @@
                  </mat-card-title>
                  <mat-card-subtitle>{{j.sellerName}}</mat-card-subtitle>
               </mat-card-header>
-              <!-- <img (click)="openDialog(photo)" matTooltip="Click to expand." *ngFor="let photo of collectionPhotos[i]" src="/Uploads/{{ photo.fileName }}" class="img-thumbnail">                   -->
+              <!-- <img (click)="OpenDialog(photo)" matTooltip="Click to expand." *ngFor="let photo of collectionPhotos[i]" src="/Uploads/{{ photo.fileName }}" class="img-thumbnail">                   -->
               <mat-card-content>
                  <p class="title-label">CPU:</p>
                  <p class="word-overflow">{{j.cpu}}</p>
@@ -43,7 +43,7 @@
                  <p class="title-label">Total Price: ${{j.total_Price}}</p>
               </mat-card-content>
               <mat-card-actions>
-                 <button mat-raised-button color="primary" (click)="addToCart(i)">Add to Cart</button>                   
+                 <button mat-raised-button color="primary" (click)="AddToCart(i)">Add to Cart</button>                   
               </mat-card-actions>
            </mat-card>
         </div>

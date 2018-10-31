@@ -141,7 +141,7 @@ export class BuyNewComponent implements OnInit {
   // sorting logic
   key = 'order_Number'; // sort default by name
   reverse = false;
-  sortList(key) {
+  SortList(key) {
       this.key = key;
       this.reverse = !this.reverse;
   }
@@ -156,20 +156,20 @@ export class BuyNewComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-      if (!this.auth.isAuthenticated()) {
+      if (!this.auth.IsAuthenticated()) {
           this.router.navigate(['/home']);
       }
       //Service Call
-      this.MakeService.getCase().subscribe(caseItem => this.caseItem = caseItem);
-      this.MakeService.getCoolingfan().subscribe(coolingFan => this.coolingFan = coolingFan);
-      this.MakeService.getCPU().subscribe(CPU => this.CPU = CPU);
-      this.MakeService.getGPU().subscribe(GPU => this.GPU = GPU);
-      this.MakeService.getMotherboard().subscribe(motherboard => this.motherboard = motherboard);
-      this.MakeService.getPowersupply().subscribe(powerSupply => this.powerSupply = powerSupply);
-      this.MakeService.getRAM().subscribe(RAM => this.RAM = RAM);
-      this.MakeService.getStorage().subscribe(storage => this.storage = storage);
+      this.MakeService.GetCase().subscribe(caseItem => this.caseItem = caseItem);
+      this.MakeService.GetCoolingFan().subscribe(coolingFan => this.coolingFan = coolingFan);
+      this.MakeService.GetCpu().subscribe(CPU => this.CPU = CPU);
+      this.MakeService.GetGpu().subscribe(GPU => this.GPU = GPU);
+      this.MakeService.GetMotherboard().subscribe(motherboard => this.motherboard = motherboard);
+      this.MakeService.GetPowersupply().subscribe(powerSupply => this.powerSupply = powerSupply);
+      this.MakeService.GetRam().subscribe(RAM => this.RAM = RAM);
+      this.MakeService.GetStorage().subscribe(storage => this.storage = storage);
       //Eliminate id from List
-      this.MakeService.getOrder().subscribe(order => {
+      this.MakeService.GetOrder().subscribe(order => {
         this.order = order
         this.clonedOrder = JSON.parse(JSON.stringify(this.order));
         this.clonedOrder.forEach(function(value) {
@@ -206,7 +206,7 @@ export class BuyNewComponent implements OnInit {
       });
   }
 
-  calculateTotal() {
+  CalculateTotal() {
     this.totalPrice = 0;
 
     if (this.tmpThisOrder.cpu != '') {
@@ -251,12 +251,12 @@ export class BuyNewComponent implements OnInit {
     }
   }
 
-  addOrder() {
-    this.ShoppingcartService.add(this.tmpThisOrder);
-    this.openSnackBar();
+  AddOrder() {
+    this.ShoppingcartService.Add(this.tmpThisOrder);
+    this.OpenSnackbar();
   }
 
-  openSnackBar() {
+  OpenSnackbar() {
     this.snackBar.openFromComponent(ConfirmNewItem, {
         duration: 5000,
     });

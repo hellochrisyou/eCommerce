@@ -85,7 +85,7 @@
      <mat-step>
         <ng-template matStepLabel>Save</ng-template>
         <div>
-           <button mat-raised-button color="primary"  (click)="stepper.reset();submit();" 
+           <button mat-raised-button color="primary"  (click)="stepper.reset();Submit();" 
            [disabled]="!cpuFormGroup.valid || 
            !motherboardFormGroup.valid ||
            !ramFormGroup.valid ||
@@ -96,7 +96,7 @@
            !caseFormGroup.valid ||
            !priceFormGroup.valid"
            >Submit</button>
-           <!-- <button mat-raised-button color="primary" (click)="stepper.reset();submit();">Submit</button> -->
+           <!-- <button mat-raised-button color="primary" (click)="stepper.reset();Submit();">Submit</button> -->
         </div>
      </mat-step>
      </mat-vertical-stepper>

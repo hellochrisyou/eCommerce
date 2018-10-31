@@ -21,7 +21,7 @@ namespace CyouEcommerce.Controllers
             this.context = context;
         }
         [HttpPost]
-        public async Task<IActionResult> CreatePowerSupply ([FromBody] KeyValuePairResource KeyValuePairResource)
+        public async Task<IActionResult> CreatePowersupply ([FromBody] KeyValuePairResource KeyValuePairResource)
         {
             if (!ModelState.IsValid)
             {
@@ -53,7 +53,7 @@ namespace CyouEcommerce.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePowerSupply(int id)
+        public async Task<IActionResult> DeletePowersupply(int id)
         {
             var powerSupply = await context.PowerSupplys.FindAsync(id);
 
@@ -67,7 +67,7 @@ namespace CyouEcommerce.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<KeyValuePairResource>> GetPowerSupply()
+        public async Task<IEnumerable<KeyValuePairResource>> GetPowersupply()
         {
             var features = await context.PowerSupplys.ToListAsync();      
             return mapper.Map<List<Powersupply>, List<KeyValuePairResource>>(features);

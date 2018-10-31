@@ -356,7 +356,7 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.login = function () {
         this.auth0.authorize();
     };
-    AuthService.prototype.handleAuthentication = function () {
+    AuthService.prototype.HandleAuthentication = function () {
         var _this = this;
         this.auth0.parseHash(function (err, authResult) {
             if (authResult && authResult.accessToken && authResult.idToken) {
@@ -377,22 +377,22 @@ var AuthService = /** @class */ (function () {
         localStorage.setItem('id_token', authResult.idToken);
         localStorage.setItem('expires_at', expiresAt);
         //create user account if not exist, otherwise set user_email to current user
-        this.makeService.getAccount().subscribe(function (userAccount) {
+        this.makeService.GetAccount().subscribe(function (userAccount) {
             _this.userAccount = userAccount;
             //check if user account exists
             var accountExists = _this.userAccount.find(function (m) { return m.email == authResult.idTokenPayload.email; });
             if (accountExists == null) {
                 //create account with email value
                 _this.userEmail.email = authResult.idTokenPayload.email;
-                _this.makeService.createAccount(_this.userEmail).subscribe(function (x) { x; });
+                _this.makeService.CreateAccount(_this.userEmail).subscribe(function (x) { x; });
                 localStorage.setItem('user_email', _this.userEmail.email);
                 //get userId.  refactor so you can search last id of user and not make another get request
                 // DO WE REALLY NEED TO CALL GET ACCOUNT TWICE?
-                _this.makeService.getAccount().subscribe(function (userAccount) {
+                _this.makeService.GetAccount().subscribe(function (userAccount) {
                     _this.userAccount = userAccount;
                     var accountId = _this.userAccount.find(function (m) { return m.email == userAccount.email; });
                     localStorage.setItem('account_id', accountId.Id);
-                    localStorage.setItem('isAdmin', 'false');
+                    localStorage.setItem('IsAdmin', 'false');
                     localStorage.setItem('isMaster', 'false');
                 });
             }
@@ -401,10 +401,10 @@ var AuthService = /** @class */ (function () {
                 //added
                 //check if user is admin
                 if (_this.existingUser.admin == true) {
-                    localStorage.setItem('isAdmin', 'true');
+                    localStorage.setItem('IsAdmin', 'true');
                 }
                 else {
-                    localStorage.setItem('isAdmin', 'false');
+                    localStorage.setItem('IsAdmin', 'false');
                 }
                 if (_this.existingUser.master_account == true) {
                     localStorage.setItem('isMaster', 'true');
@@ -426,20 +426,20 @@ var AuthService = /** @class */ (function () {
         localStorage.removeItem('user_email');
         localStorage.removeItem('account_id');
         localStorage.removeItem('isMaster');
-        localStorage.removeItem('isAdmin');
+        localStorage.removeItem('IsAdmin');
         window.location.href = 'https://r13champ.auth0.com/v2/logout/?returnTo=https%3A%2F%2Flocalhost%3A5001';
-        // this.isAuthenticated();
+        // this.IsAuthenticated();
         // Go back to the home route
     };
-    AuthService.prototype.isAuthenticated = function () {
+    AuthService.prototype.IsAuthenticated = function () {
         // Check whether the current time is past the
         // Access Token's expiry time
         var expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
         // console.log(new Date().getTime() < expiresAt);
         return new Date().getTime() < expiresAt;
     };
-    AuthService.prototype.isAdmin = function () {
-        if (localStorage.getItem('isAdmin') == 'true') {
+    AuthService.prototype.IsAdmin = function () {
+        if (localStorage.getItem('IsAdmin') == 'true') {
             return true;
         }
         return false;
@@ -498,131 +498,131 @@ var MakeService = /** @class */ (function () {
     function MakeService(http) {
         this.http = http;
     }
-    MakeService.prototype.getCase = function () {
+    MakeService.prototype.GetCase = function () {
         return this.http.get('/api/Case').map(function (res) { return res.json(); });
     };
-    MakeService.prototype.getCoolingfan = function () {
+    MakeService.prototype.GetCoolingFan = function () {
         return this.http.get('/api/CoolingFan').map(function (res) { return res.json(); });
     };
-    MakeService.prototype.getCPU = function () {
+    MakeService.prototype.GetCpu = function () {
         return this.http.get('/api/CPU').map(function (res) { return res.json(); });
     };
-    MakeService.prototype.getGPU = function () {
+    MakeService.prototype.GetGpu = function () {
         return this.http.get('/api/GPU').map(function (res) { return res.json(); });
     };
-    MakeService.prototype.getMotherboard = function () {
+    MakeService.prototype.GetMotherboard = function () {
         return this.http.get('/api/Motherboard').map(function (res) { return res.json(); });
     };
-    MakeService.prototype.getPowersupply = function () {
+    MakeService.prototype.GetPowersupply = function () {
         return this.http.get('/api/PowerSupply').map(function (res) { return res.json(); });
     };
-    MakeService.prototype.getRAM = function () {
+    MakeService.prototype.GetRam = function () {
         return this.http.get('/api/RAM').map(function (res) { return res.json(); });
     };
-    MakeService.prototype.getStorage = function () {
+    MakeService.prototype.GetStorage = function () {
         return this.http.get('/api/Storage').map(function (res) { return res.json(); });
     };
-    MakeService.prototype.getOrder = function () {
+    MakeService.prototype.GetOrder = function () {
         return this.http.get('/api/Order').map(function (res) { return res.json(); });
     };
-    MakeService.prototype.getAccount = function () {
+    MakeService.prototype.GetAccount = function () {
         return this.http.get('/api/Account').map(function (res) { return res.json(); });
     };
-    MakeService.prototype.getAllSaleItem = function () {
+    MakeService.prototype.GetAllSaleItem = function () {
         return this.http.get('/api/ItemForSale').map(function (res) { return res.json(); });
     };
-    MakeService.prototype.getSaleItem = function (itemId) {
+    MakeService.prototype.GetSaleItem = function (itemId) {
         return this.http.get('/api/ItemForSale').map(function (res) { return res.json(); });
     };
-    MakeService.prototype.createCase = function (caseItem) {
+    MakeService.prototype.CreateCase = function (caseItem) {
         return this.http.post('/api/Case', caseItem).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.createCoolingfan = function (coolingfan) {
+    MakeService.prototype.CreateCoolingFan = function (coolingfan) {
         return this.http.post('/api/Coolingfan', coolingfan).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.createCPU = function (cpu) {
+    MakeService.prototype.CreateCpu = function (cpu) {
         return this.http.post('/api/CPU', cpu).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.createGPU = function (gpu) {
+    MakeService.prototype.CreateGpu = function (gpu) {
         return this.http.post('/api/GPU', gpu).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.createMotherboard = function (motherboard) {
+    MakeService.prototype.CreateMotherboard = function (motherboard) {
         return this.http.post('/api/Motherboard', motherboard).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.createPowersupply = function (powersupply) {
+    MakeService.prototype.CreatePowersupply = function (powersupply) {
         return this.http.post('/api/Powersupply', powersupply).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.createRAM = function (ram) {
+    MakeService.prototype.CreateRam = function (ram) {
         return this.http.post('/api/RAM', ram).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.createStorage = function (storage) {
+    MakeService.prototype.CreateStorage = function (storage) {
         return this.http.post('/api/Storage', storage).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.createAccount = function (account) {
+    MakeService.prototype.CreateAccount = function (account) {
         return this.http.post('/api/Account', account);
     };
-    MakeService.prototype.createOrder = function (order) {
+    MakeService.prototype.CreateOrder = function (order) {
         return this.http.post('/api/Order', order);
     };
-    MakeService.prototype.createSaleItem = function (saleItem) {
+    MakeService.prototype.CreateSaleItem = function (saleItem) {
         return this.http.post('/api/ItemForSale', saleItem);
     };
-    MakeService.prototype.createUser = function (user) {
+    MakeService.prototype.CreateUser = function (user) {
         return this.http.post('/api/Account', user);
     };
     //added
-    MakeService.prototype.updateAccount = function (account) {
+    MakeService.prototype.UpdateAccount = function (account) {
         return this.http.put('/api/Account/' + account.id, account).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.updateCPU = function (cpu) {
+    MakeService.prototype.UpdateCpu = function (cpu) {
         return this.http.put('/api/CPU/' + cpu.id, cpu).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.updateCase = function (caseItem) {
+    MakeService.prototype.UpdateCase = function (caseItem) {
         return this.http.put('/api/Case/' + caseItem.id, caseItem).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.updateCoolingFan = function (coolingFan) {
+    MakeService.prototype.UpdateCoolingFan = function (coolingFan) {
         return this.http.put('/api/CoolingFan/' + coolingFan.id, coolingFan).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.updatePowerSupply = function (powerSupply) {
+    MakeService.prototype.UpdatePowerSupply = function (powerSupply) {
         return this.http.put('/api/PowerSupply/' + powerSupply.id, powerSupply).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.updateGPU = function (gpu) {
+    MakeService.prototype.UpdateGpu = function (gpu) {
         return this.http.put('/api/GPU/' + gpu.id, gpu).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.updateMotherboard = function (motherboard) {
+    MakeService.prototype.UpdateMotherboard = function (motherboard) {
         return this.http.put('/api/Motherboard/' + motherboard.id, motherboard).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.updateRAM = function (ram) {
+    MakeService.prototype.UpdateRam = function (ram) {
         return this.http.put('/api/RAM/' + ram.id, ram).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.updateStorage = function (storage) {
+    MakeService.prototype.UpdateStorage = function (storage) {
         return this.http.put('/api/Storage/' + storage.id, storage).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.deleteCPU = function (id) {
+    MakeService.prototype.DeleteCpu = function (id) {
         return this.http.delete('/api/CPU/' + id).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.deleteCase = function (id) {
+    MakeService.prototype.DeleteCase = function (id) {
         return this.http.delete('/api/Case/' + id).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.deleteCoolingFan = function (id) {
+    MakeService.prototype.DeleteCoolingFan = function (id) {
         return this.http.delete('/api/CoolingFan/' + id).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.deletePowerSupply = function (id) {
+    MakeService.prototype.DeletePowersupply = function (id) {
         return this.http.delete('/api/PowerSupply/' + id).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.deleteGPU = function (id) {
+    MakeService.prototype.DeleteGpu = function (id) {
         return this.http.delete('/api/GPU/' + id).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.deleteMotherboard = function (id) {
+    MakeService.prototype.DeleteMotherboard = function (id) {
         return this.http.delete('/api/Motherboard/' + id).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.deleteRAM = function (id) {
+    MakeService.prototype.DeleteRam = function (id) {
         return this.http.delete('/api/RAM/' + id).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.deleteStorage = function (id) {
+    MakeService.prototype.DeleteStorage = function (id) {
         return this.http.delete('/api/Storage/' + id).map(function (res) { return res.json(); });
     };
-    MakeService.prototype.deleteUsed = function (id) {
+    MakeService.prototype.DeleteUsed = function (id) {
         return this.http.delete('/api/ItemForSale/' + id).map(function (res) { return res.json(); });
     };
     MakeService = __decorate([
@@ -743,7 +743,7 @@ var ShoppingcartService = /** @class */ (function () {
     ShoppingcartService.prototype.get = function () {
         return this.tmpArray;
     };
-    ShoppingcartService.prototype.sortList = function (key) {
+    ShoppingcartService.prototype.SortList = function (key) {
         this.key = key;
         this.reverse = !this.reverse;
     };
@@ -1043,7 +1043,7 @@ module.exports = ".mat-elevation-z0{box-shadow:0 0 0 0 rgba(0,0,0,.2),0 0 0 0 rg
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container m-0\">\n    <div class=\"row\">\n        <h2>Buy New</h2>      \n        <mat-vertical-stepper [linear]=\"isLinear\" #stepper>\n          <mat-step [stepControl]=\"secondFormGroup\">\n            <form [formGroup]=\"cpuFormGroup\">\n              <ng-template matStepLabel>CPU</ng-template>     \n            <form-field>              \n              <select id=\"CPU\" class=\"form-control\" (change)=\"calculateTotal()\" [(ngModel)]=\"tmpThisOrder.cpu\" name=\"CPU\" #case=\"ngModel\" [ngModelOptions]=\"{standalone: true}\">\n                    <option value=\"\"></option>\n                    <option *ngFor=\"let m of CPU\" value=\"{{ m.name }}\">{{ m.name }}</option>\n                  </select>     \n                    <mat-accordion>\n                      <mat-expansion-panel class=\"mat-elevation-z0\">\n                        <mat-expansion-panel-header>\n                          <mat-panel-title>\n                            Details\n                          </mat-panel-title>\n                          <mat-panel-description>\n                            <!-- Type your name and age -->\n                          </mat-panel-description>\n                        </mat-expansion-panel-header>   \n                        <mat-list>\n                          <mat-list-item>Model: {{selectedCPU.model}}</mat-list-item>\n                          <mat-divider></mat-divider>\n                          <mat-list-item>Series: {{selectedCPU.series}}</mat-list-item>\n                          <mat-divider></mat-divider>\n                          <mat-list-item>Brand: {{selectedCPU.brand}}</mat-list-item>\n                          <mat-divider></mat-divider>\n                          <mat-list-item>Details: {{selectedCPU.details}}</mat-list-item>\n                        </mat-list>\n                      </mat-expansion-panel>\n                    </mat-accordion>\n                  </form-field>\n            </form>    \n          </mat-step>\n          <mat-step [stepControl]=\"secondFormGroup\">\n            <form [formGroup]=\"motherboardFormGroup\">\n              <ng-template matStepLabel>Motherboard</ng-template>          \n              <select id=\"Motherboard\" class=\"form-control\" (change)=\"calculateTotal()\" [(ngModel)]=\"tmpThisOrder.motherboard\" name=\"Motherboard\" #case=\"ngModel\" [ngModelOptions]=\"{standalone: true}\">\n                    <option value=\"\"></option>\n                    <option *ngFor=\"let m of motherboard\" value=\"{{ m.name }}\">{{ m.name }}</option>\n                  </select>     \n                  <mat-accordion>\n                    <mat-expansion-panel>\n                      <mat-expansion-panel-header>\n                        <mat-panel-title>\n                          Details\n                        </mat-panel-title>\n                        <mat-panel-description>\n                          <!-- Type your name and age -->\n                        </mat-panel-description>\n                      </mat-expansion-panel-header>   \n                      <mat-list>\n                        <mat-list-item>Model: {{selectedMotherboard.model}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Series: {{selectedMotherboard.series}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Brand: {{selectedMotherboard.brand}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Details: {{selectedMotherboard.details}}</mat-list-item>\n                      </mat-list>\n                    </mat-expansion-panel>\n                  </mat-accordion>\n            </form>    \n          </mat-step>\n          <mat-step [stepControl]=\"secondFormGroup\">\n            <form [formGroup]=\"motherboardFormGroup\">\n              <ng-template matStepLabel>RAM</ng-template>          \n              <select id=\"RAM\" class=\"form-control\" (change)=\"calculateTotal()\" [(ngModel)]=\"tmpThisOrder.ram\" name=\"RAM\" #case=\"ngModel\" [ngModelOptions]=\"{standalone: true}\">\n                    <option value=\"\"></option>\n                    <option *ngFor=\"let m of RAM\" value=\"{{ m.name }}\">{{ m.name }}</option>\n                  </select>     \n                  <mat-accordion>\n                    <mat-expansion-panel>\n                      <mat-expansion-panel-header>\n                        <mat-panel-title>\n                          Details\n                        </mat-panel-title>\n                        <mat-panel-description>\n                          <!-- Type your name and age -->\n                        </mat-panel-description>\n                      </mat-expansion-panel-header>   \n                      <mat-list>\n                        <mat-list-item>Model: {{selectedRAM.model}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Series: {{selectedRAM.series}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Brand: {{selectedRAM.brand}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Details: {{selectedRAM.details}}</mat-list-item>\n                      </mat-list>\n                    </mat-expansion-panel>\n                  </mat-accordion>\n            </form>    \n          </mat-step>     \n            <mat-step [stepControl]=\"secondFormGroup\">\n            <form [formGroup]=\"storageFormGroup\">\n              <ng-template matStepLabel>Storage</ng-template>          \n              <select id=\"Storage\" class=\"form-control\" (change)=\"calculateTotal()\" [(ngModel)]=\"tmpThisOrder.storage\" name=\"Storage\" #case=\"ngModel\" [ngModelOptions]=\"{standalone: true}\">\n                    <option value=\"\"></option>\n                    <option *ngFor=\"let m of storage\" value=\"{{ m.name }}\">{{ m.name }}</option>\n                  </select>   \n                  <mat-accordion>\n                    <mat-expansion-panel>\n                      <mat-expansion-panel-header>\n                        <mat-panel-title>\n                          Details\n                        </mat-panel-title>\n                        <mat-panel-description>\n                          <!-- Type your name and age -->\n                        </mat-panel-description>\n                      </mat-expansion-panel-header>   \n                      <mat-list>\n                        <mat-list-item>Model: {{selectedStorage.model}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Series: {{selectedStorage.series}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Brand: {{selectedStorage.brand}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Details: {{selectedStorage.details}}</mat-list-item>\n                      </mat-list>\n                    </mat-expansion-panel>\n                  </mat-accordion>  \n            </form>    \n          </mat-step>  \n          <mat-step [stepControl]=\"secondFormGroup\">\n            <form [formGroup]=\"gpuFormGroup\">\n              <ng-template matStepLabel>GPU</ng-template>          \n              <select id=\"GPU\" class=\"form-control\" (change)=\"calculateTotal()\" [(ngModel)]=\"tmpThisOrder.gpu\" name=\"GPU\" #case=\"ngModel\" [ngModelOptions]=\"{standalone: true}\">\n                    <option value=\"\"></option>\n                    <option *ngFor=\"let m of GPU\" value=\"{{ m.name }}\">{{ m.name }}</option>\n                  </select>   \n                  <mat-accordion>\n                    <mat-expansion-panel>\n                      <mat-expansion-panel-header>\n                        <mat-panel-title>\n                          Details\n                        </mat-panel-title>\n                        <mat-panel-description>\n                          <!-- Type your name and age -->\n                        </mat-panel-description>\n                      </mat-expansion-panel-header>   \n                      <mat-list>\n                        <mat-list-item>Model: {{selectedGPU.model}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Series: {{selectedGPU.series}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Brand: {{selectedGPU.brand}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Details: {{selectedGPU.details}}</mat-list-item>\n                      </mat-list>\n                    </mat-expansion-panel>\n                  </mat-accordion>  \n            </form>    \n          </mat-step>\n          <mat-step [stepControl]=\"secondFormGroup\">\n            <form [formGroup]=\"powerFormGroup\">\n              <ng-template matStepLabel>Power Supply</ng-template>          \n              <select id=\"Power_Supply\" class=\"form-control\" (change)=\"calculateTotal()\" [(ngModel)]=\"tmpThisOrder.power_Supply\" name=\"Power_Supply\" #case=\"ngModel\" [ngModelOptions]=\"{standalone: true}\">\n                    <option value=\"\"></option>\n                    <option *ngFor=\"let m of powerSupply\" value=\"{{ m.name }}\">{{ m.name }}</option>\n                  </select>     \n                  <mat-accordion>\n                    <mat-expansion-panel>\n                      <mat-expansion-panel-header>\n                        <mat-panel-title>\n                          Details\n                        </mat-panel-title>\n                        <mat-panel-description>\n                          <!-- Type your name and age -->\n                        </mat-panel-description>\n                      </mat-expansion-panel-header>   \n                      <mat-list>\n                        <mat-list-item>Model: {{selectedPSupply.model}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Series: {{selectedPSupply.series}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Brand: {{selectedPSupply.brand}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Details: {{selectedPSupply.details}}</mat-list-item>\n                      </mat-list>\n                    </mat-expansion-panel>\n                  </mat-accordion>\n            </form>    \n          </mat-step> \n          <mat-step [stepControl]=\"secondFormGroup\">\n            <form [formGroup]=\"coolingFormGroup\">\n              <ng-template matStepLabel>Cooling Fan</ng-template>          \n              <select id=\"Cooling_Fan\" class=\"form-control\" (change)=\"calculateTotal()\" [(ngModel)]=\"tmpThisOrder.cooling_Fan\" name=\"Cooling_Fan\" #case=\"ngModel\" [ngModelOptions]=\"{standalone: true}\">\n                    <option value=\"\"></option>\n                    <option *ngFor=\"let m of coolingFan\" value=\"{{ m.name }}\">{{ m.name }}</option>\n                  </select>     \n                  <mat-accordion>\n                    <mat-expansion-panel>\n                      <mat-expansion-panel-header>\n                        <mat-panel-title>\n                          Details\n                        </mat-panel-title>\n                        <mat-panel-description>\n                          <!-- Type your name and age -->\n                        </mat-panel-description>\n                      </mat-expansion-panel-header>   \n                      <mat-list>\n                        <mat-list-item>Model: {{selectedFan.model}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Series: {{selectedFan.series}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Brand: {{selectedFan.brand}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Details: {{selectedFan.details}}</mat-list-item>\n                      </mat-list>\n                    </mat-expansion-panel>\n                  </mat-accordion>\n            </form>    \n          </mat-step>\n            \n          <mat-step [stepControl]=\"secondFormGroup\">\n            <form [formGroup]=\"caseFormGroup\">\n              <ng-template matStepLabel>Case</ng-template>          \n                  <select id=\"Case\" class=\"form-control\" (change)=\"calculateTotal()\" [(ngModel)]=\"tmpThisOrder.case\" name=\"Case\" #case=\"ngModel\" [ngModelOptions]=\"{standalone: true}\">\n                    <option value=\"\"></option>\n                    <option *ngFor=\"let m of caseItem\" value=\"{{ m.name }}\">{{ m.name }}</option>\n                  </select>     \n                  <mat-accordion>\n                    <mat-expansion-panel>\n                      <mat-expansion-panel-header>\n                        <mat-panel-title>\n                          Details\n                        </mat-panel-title>\n                        <mat-panel-description>\n                          <!-- Type your name and age -->\n                        </mat-panel-description>\n                      </mat-expansion-panel-header>   \n                      <mat-list>\n                        <mat-list-item>Model: {{selectedCase.model}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Series: {{selectedCase.series}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Brand: {{selectedCase.brand}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Details: {{selectedCase.details}}</mat-list-item>\n                      </mat-list>\n                    </mat-expansion-panel>\n                  </mat-accordion>\n            </form>    \n          </mat-step>\n        \n          <mat-step>\n            <ng-template matStepLabel>Save</ng-template>\n            <div>\n              <button mat-raised-button color=\"primary\" (click)='stepper.reset();addOrder()' [disabled]=\"tmpThisOrder.cpu == '' || tmpThisOrder.case == '' || tmpThisOrder.cooling_Fan == '' || tmpThisOrder.gpu == '' || tmpThisOrder.motherboard == '' || tmpThisOrder.power_Supply == '' || tmpThisOrder.ram == '' || tmpThisOrder.storage == ''\">Add to Shopping Cart</button>\n            </div>\n          </mat-step>\n        </mat-vertical-stepper>\n    <h4>Total Price: {{totalPrice}}</h4>\n    </div>\n  </div>\n  \n  \n\n  \n  \n  "
+module.exports = "<div class=\"container m-0\">\n    <div class=\"row\">\n        <h2>Buy New</h2>      \n        <mat-vertical-stepper [linear]=\"isLinear\" #stepper>\n          <mat-step [stepControl]=\"secondFormGroup\">\n            <form [formGroup]=\"cpuFormGroup\">\n              <ng-template matStepLabel>CPU</ng-template>     \n            <form-field>              \n              <select id=\"CPU\" class=\"form-control\" (change)=\"CalculateTotal()\" [(ngModel)]=\"tmpThisOrder.cpu\" name=\"CPU\" #case=\"ngModel\" [ngModelOptions]=\"{standalone: true}\">\n                    <option value=\"\"></option>\n                    <option *ngFor=\"let m of CPU\" value=\"{{ m.name }}\">{{ m.name }}</option>\n                  </select>     \n                    <mat-accordion>\n                      <mat-expansion-panel class=\"mat-elevation-z0\">\n                        <mat-expansion-panel-header>\n                          <mat-panel-title>\n                            Details\n                          </mat-panel-title>\n                          <mat-panel-description>\n                            <!-- Type your name and age -->\n                          </mat-panel-description>\n                        </mat-expansion-panel-header>   \n                        <mat-list>\n                          <mat-list-item>Model: {{selectedCPU.model}}</mat-list-item>\n                          <mat-divider></mat-divider>\n                          <mat-list-item>Series: {{selectedCPU.series}}</mat-list-item>\n                          <mat-divider></mat-divider>\n                          <mat-list-item>Brand: {{selectedCPU.brand}}</mat-list-item>\n                          <mat-divider></mat-divider>\n                          <mat-list-item>Details: {{selectedCPU.details}}</mat-list-item>\n                        </mat-list>\n                      </mat-expansion-panel>\n                    </mat-accordion>\n                  </form-field>\n            </form>    \n          </mat-step>\n          <mat-step [stepControl]=\"secondFormGroup\">\n            <form [formGroup]=\"motherboardFormGroup\">\n              <ng-template matStepLabel>Motherboard</ng-template>          \n              <select id=\"Motherboard\" class=\"form-control\" (change)=\"CalculateTotal()\" [(ngModel)]=\"tmpThisOrder.motherboard\" name=\"Motherboard\" #case=\"ngModel\" [ngModelOptions]=\"{standalone: true}\">\n                    <option value=\"\"></option>\n                    <option *ngFor=\"let m of motherboard\" value=\"{{ m.name }}\">{{ m.name }}</option>\n                  </select>     \n                  <mat-accordion>\n                    <mat-expansion-panel>\n                      <mat-expansion-panel-header>\n                        <mat-panel-title>\n                          Details\n                        </mat-panel-title>\n                        <mat-panel-description>\n                          <!-- Type your name and age -->\n                        </mat-panel-description>\n                      </mat-expansion-panel-header>   \n                      <mat-list>\n                        <mat-list-item>Model: {{selectedMotherboard.model}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Series: {{selectedMotherboard.series}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Brand: {{selectedMotherboard.brand}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Details: {{selectedMotherboard.details}}</mat-list-item>\n                      </mat-list>\n                    </mat-expansion-panel>\n                  </mat-accordion>\n            </form>    \n          </mat-step>\n          <mat-step [stepControl]=\"secondFormGroup\">\n            <form [formGroup]=\"motherboardFormGroup\">\n              <ng-template matStepLabel>RAM</ng-template>          \n              <select id=\"RAM\" class=\"form-control\" (change)=\"CalculateTotal()\" [(ngModel)]=\"tmpThisOrder.ram\" name=\"RAM\" #case=\"ngModel\" [ngModelOptions]=\"{standalone: true}\">\n                    <option value=\"\"></option>\n                    <option *ngFor=\"let m of RAM\" value=\"{{ m.name }}\">{{ m.name }}</option>\n                  </select>     \n                  <mat-accordion>\n                    <mat-expansion-panel>\n                      <mat-expansion-panel-header>\n                        <mat-panel-title>\n                          Details\n                        </mat-panel-title>\n                        <mat-panel-description>\n                          <!-- Type your name and age -->\n                        </mat-panel-description>\n                      </mat-expansion-panel-header>   \n                      <mat-list>\n                        <mat-list-item>Model: {{selectedRAM.model}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Series: {{selectedRAM.series}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Brand: {{selectedRAM.brand}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Details: {{selectedRAM.details}}</mat-list-item>\n                      </mat-list>\n                    </mat-expansion-panel>\n                  </mat-accordion>\n            </form>    \n          </mat-step>     \n            <mat-step [stepControl]=\"secondFormGroup\">\n            <form [formGroup]=\"storageFormGroup\">\n              <ng-template matStepLabel>Storage</ng-template>          \n              <select id=\"Storage\" class=\"form-control\" (change)=\"CalculateTotal()\" [(ngModel)]=\"tmpThisOrder.storage\" name=\"Storage\" #case=\"ngModel\" [ngModelOptions]=\"{standalone: true}\">\n                    <option value=\"\"></option>\n                    <option *ngFor=\"let m of storage\" value=\"{{ m.name }}\">{{ m.name }}</option>\n                  </select>   \n                  <mat-accordion>\n                    <mat-expansion-panel>\n                      <mat-expansion-panel-header>\n                        <mat-panel-title>\n                          Details\n                        </mat-panel-title>\n                        <mat-panel-description>\n                          <!-- Type your name and age -->\n                        </mat-panel-description>\n                      </mat-expansion-panel-header>   \n                      <mat-list>\n                        <mat-list-item>Model: {{selectedStorage.model}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Series: {{selectedStorage.series}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Brand: {{selectedStorage.brand}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Details: {{selectedStorage.details}}</mat-list-item>\n                      </mat-list>\n                    </mat-expansion-panel>\n                  </mat-accordion>  \n            </form>    \n          </mat-step>  \n          <mat-step [stepControl]=\"secondFormGroup\">\n            <form [formGroup]=\"gpuFormGroup\">\n              <ng-template matStepLabel>GPU</ng-template>          \n              <select id=\"GPU\" class=\"form-control\" (change)=\"CalculateTotal()\" [(ngModel)]=\"tmpThisOrder.gpu\" name=\"GPU\" #case=\"ngModel\" [ngModelOptions]=\"{standalone: true}\">\n                    <option value=\"\"></option>\n                    <option *ngFor=\"let m of GPU\" value=\"{{ m.name }}\">{{ m.name }}</option>\n                  </select>   \n                  <mat-accordion>\n                    <mat-expansion-panel>\n                      <mat-expansion-panel-header>\n                        <mat-panel-title>\n                          Details\n                        </mat-panel-title>\n                        <mat-panel-description>\n                          <!-- Type your name and age -->\n                        </mat-panel-description>\n                      </mat-expansion-panel-header>   \n                      <mat-list>\n                        <mat-list-item>Model: {{selectedGPU.model}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Series: {{selectedGPU.series}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Brand: {{selectedGPU.brand}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Details: {{selectedGPU.details}}</mat-list-item>\n                      </mat-list>\n                    </mat-expansion-panel>\n                  </mat-accordion>  \n            </form>    \n          </mat-step>\n          <mat-step [stepControl]=\"secondFormGroup\">\n            <form [formGroup]=\"powerFormGroup\">\n              <ng-template matStepLabel>Power Supply</ng-template>          \n              <select id=\"Power_Supply\" class=\"form-control\" (change)=\"CalculateTotal()\" [(ngModel)]=\"tmpThisOrder.power_Supply\" name=\"Power_Supply\" #case=\"ngModel\" [ngModelOptions]=\"{standalone: true}\">\n                    <option value=\"\"></option>\n                    <option *ngFor=\"let m of powerSupply\" value=\"{{ m.name }}\">{{ m.name }}</option>\n                  </select>     \n                  <mat-accordion>\n                    <mat-expansion-panel>\n                      <mat-expansion-panel-header>\n                        <mat-panel-title>\n                          Details\n                        </mat-panel-title>\n                        <mat-panel-description>\n                          <!-- Type your name and age -->\n                        </mat-panel-description>\n                      </mat-expansion-panel-header>   \n                      <mat-list>\n                        <mat-list-item>Model: {{selectedPSupply.model}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Series: {{selectedPSupply.series}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Brand: {{selectedPSupply.brand}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Details: {{selectedPSupply.details}}</mat-list-item>\n                      </mat-list>\n                    </mat-expansion-panel>\n                  </mat-accordion>\n            </form>    \n          </mat-step> \n          <mat-step [stepControl]=\"secondFormGroup\">\n            <form [formGroup]=\"coolingFormGroup\">\n              <ng-template matStepLabel>Cooling Fan</ng-template>          \n              <select id=\"Cooling_Fan\" class=\"form-control\" (change)=\"CalculateTotal()\" [(ngModel)]=\"tmpThisOrder.cooling_Fan\" name=\"Cooling_Fan\" #case=\"ngModel\" [ngModelOptions]=\"{standalone: true}\">\n                    <option value=\"\"></option>\n                    <option *ngFor=\"let m of coolingFan\" value=\"{{ m.name }}\">{{ m.name }}</option>\n                  </select>     \n                  <mat-accordion>\n                    <mat-expansion-panel>\n                      <mat-expansion-panel-header>\n                        <mat-panel-title>\n                          Details\n                        </mat-panel-title>\n                        <mat-panel-description>\n                          <!-- Type your name and age -->\n                        </mat-panel-description>\n                      </mat-expansion-panel-header>   \n                      <mat-list>\n                        <mat-list-item>Model: {{selectedFan.model}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Series: {{selectedFan.series}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Brand: {{selectedFan.brand}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Details: {{selectedFan.details}}</mat-list-item>\n                      </mat-list>\n                    </mat-expansion-panel>\n                  </mat-accordion>\n            </form>    \n          </mat-step>\n            \n          <mat-step [stepControl]=\"secondFormGroup\">\n            <form [formGroup]=\"caseFormGroup\">\n              <ng-template matStepLabel>Case</ng-template>          \n                  <select id=\"Case\" class=\"form-control\" (change)=\"CalculateTotal()\" [(ngModel)]=\"tmpThisOrder.case\" name=\"Case\" #case=\"ngModel\" [ngModelOptions]=\"{standalone: true}\">\n                    <option value=\"\"></option>\n                    <option *ngFor=\"let m of caseItem\" value=\"{{ m.name }}\">{{ m.name }}</option>\n                  </select>     \n                  <mat-accordion>\n                    <mat-expansion-panel>\n                      <mat-expansion-panel-header>\n                        <mat-panel-title>\n                          Details\n                        </mat-panel-title>\n                        <mat-panel-description>\n                          <!-- Type your name and age -->\n                        </mat-panel-description>\n                      </mat-expansion-panel-header>   \n                      <mat-list>\n                        <mat-list-item>Model: {{selectedCase.model}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Series: {{selectedCase.series}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Brand: {{selectedCase.brand}}</mat-list-item>\n                        <mat-divider></mat-divider>\n                        <mat-list-item>Details: {{selectedCase.details}}</mat-list-item>\n                      </mat-list>\n                    </mat-expansion-panel>\n                  </mat-accordion>\n            </form>    \n          </mat-step>\n        \n          <mat-step>\n            <ng-template matStepLabel>Save</ng-template>\n            <div>\n              <button mat-raised-button color=\"primary\" (click)='stepper.reset();AddOrder()' [disabled]=\"tmpThisOrder.cpu == '' || tmpThisOrder.case == '' || tmpThisOrder.cooling_Fan == '' || tmpThisOrder.gpu == '' || tmpThisOrder.motherboard == '' || tmpThisOrder.power_Supply == '' || tmpThisOrder.ram == '' || tmpThisOrder.storage == ''\">Add to Shopping Cart</button>\n            </div>\n          </mat-step>\n        </mat-vertical-stepper>\n    <h4>Total Price: {{totalPrice}}</h4>\n    </div>\n  </div>\n  \n  \n\n  \n  \n  "
 
 /***/ }),
 
@@ -1188,24 +1188,24 @@ var BuyNewComponent = /** @class */ (function () {
         this.key = 'order_Number'; // sort default by name
         this.reverse = false;
     }
-    BuyNewComponent.prototype.sortList = function (key) {
+    BuyNewComponent.prototype.SortList = function (key) {
         this.key = key;
         this.reverse = !this.reverse;
     };
     BuyNewComponent.prototype.ngOnInit = function () {
         var _this = this;
-        if (!this.auth.isAuthenticated()) {
+        if (!this.auth.IsAuthenticated()) {
             this.router.navigate(['/home']);
         }
-        this.MakeService.getCase().subscribe(function (caseItem) { return _this.caseItem = caseItem; });
-        this.MakeService.getCoolingfan().subscribe(function (coolingFan) { return _this.coolingFan = coolingFan; });
-        this.MakeService.getCPU().subscribe(function (CPU) { return _this.CPU = CPU; });
-        this.MakeService.getGPU().subscribe(function (GPU) { return _this.GPU = GPU; });
-        this.MakeService.getMotherboard().subscribe(function (motherboard) { return _this.motherboard = motherboard; });
-        this.MakeService.getPowersupply().subscribe(function (powerSupply) { return _this.powerSupply = powerSupply; });
-        this.MakeService.getRAM().subscribe(function (RAM) { return _this.RAM = RAM; });
-        this.MakeService.getStorage().subscribe(function (storage) { return _this.storage = storage; });
-        this.MakeService.getOrder().subscribe(function (order) {
+        this.MakeService.GetCase().subscribe(function (caseItem) { return _this.caseItem = caseItem; });
+        this.MakeService.GetCoolingFan().subscribe(function (coolingFan) { return _this.coolingFan = coolingFan; });
+        this.MakeService.GetCpu().subscribe(function (CPU) { return _this.CPU = CPU; });
+        this.MakeService.GetGpu().subscribe(function (GPU) { return _this.GPU = GPU; });
+        this.MakeService.GetMotherboard().subscribe(function (motherboard) { return _this.motherboard = motherboard; });
+        this.MakeService.GetPowersupply().subscribe(function (powerSupply) { return _this.powerSupply = powerSupply; });
+        this.MakeService.GetRam().subscribe(function (RAM) { return _this.RAM = RAM; });
+        this.MakeService.GetStorage().subscribe(function (storage) { return _this.storage = storage; });
+        this.MakeService.GetOrder().subscribe(function (order) {
             _this.order = order;
             _this.clonedOrder = JSON.parse(JSON.stringify(_this.order));
             _this.clonedOrder.forEach(function (value) {
@@ -1240,16 +1240,16 @@ var BuyNewComponent = /** @class */ (function () {
             caseCtrl: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
         });
     };
-    BuyNewComponent.prototype.addOrder = function () {
+    BuyNewComponent.prototype.AddOrder = function () {
         this.ShoppingcartService.add(this.tmpThisOrder);
-        this.openSnackBar();
+        this.OpenSnackbar();
     };
-    BuyNewComponent.prototype.openSnackBar = function () {
+    BuyNewComponent.prototype.OpenSnackbar = function () {
         this.snackBar.openFromComponent(ConfirmNewItem, {
             duration: 5000,
         });
     };
-    BuyNewComponent.prototype.calculateTotal = function () {
+    BuyNewComponent.prototype.CalculateTotal = function () {
         var _this = this;
         this.totalPrice = 0;
         if (this.tmpThisOrder.cpu != '') {
@@ -1356,7 +1356,7 @@ module.exports = "@media (min-width: 768px) {\r\n.example-card {\r\n    max-widt
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container m-0\">\n    <div class=\"row\">\n        <h2>Buy Used</h2>\n      <mat-radio-group class=\"example-radio-group\" [(ngModel)]=\"selection\" name=\"selection\">\n        <mat-radio-button class=\"example-radio-button\" *ngFor=\"let select of radioSelection\" (change)=\"filterItems(select)\">\n          {{select}}\n        </mat-radio-button>\n      </mat-radio-group>\n    </div>\n    <div class=\"row\">\n        <div class=\"col col-sm-5\">\n          <div *ngFor=\"let j of selectedItems; let i = index\">     \n            <mat-card class=\"example-card mat-elevation-z1\">\n                <mat-card-header>\n                  <div mat-card-avatar class=\"example-header-image\"></div>\n                  <mat-card-title>Seller\n                    <span *ngIf=\"isAdmin\">\n                      <button class=\"trash-button\">\n                        <i style=\"color:red\" class=\"fa fa-trash\" (click)=\"DeleteItem(i)\" aria-hidden=\"true\"></i>\n                      </button>\n                    </span>\n                  </mat-card-title>\n                  <mat-card-subtitle>{{j.sellerName}}</mat-card-subtitle>\n                </mat-card-header>         \n                <!-- <img (click)=\"openDialog(photo)\" matTooltip=\"Click to expand.\" *ngFor=\"let photo of collectionPhotos[i]\" src=\"/Uploads/{{ photo.fileName }}\" class=\"img-thumbnail\">                   -->\n                  <mat-card-content>       \n                    <p class=\"title-label\">CPU:</p>\n                    <p class=\"word-overflow\">{{j.cpu}}</p>                   \n                    <p class=\"title-label\">Motherboard:</p>\n                    <p class=\"word-overflow\">{{j.motherboard}}</p>                   \n                    <p class=\"title-label\">RAM:</p>\n                    <p class=\"word-overflow\">{{j.ram}}</p>                   \n                    <p class=\"title-label\">Storage:</p>\n                    <p class=\"word-overflow\">{{j.storage}}</p>                   \n                    <p class=\"title-label\">GPU:</p>\n                    <p class=\"word-overflow\">{{j.gpu}}</p>                   \n                    <p class=\"title-label\">Power Supply:</p>\n                    <p class=\"word-overflow\">{{j.power_Supply}}</p>                   \n                    <p class=\"title-label\">Cooling Fan:</p>\n                    <p class=\"word-overflow\">{{j.cooling_Fan}}</p>                   \n                    <p class=\"title-label\">Case:</p>\n                    <p class=\"word-overflow\">{{j.case}}</p>                   \n                    <p class=\"title-label\">Total Price: ${{j.total_Price}}</p>\n                  </mat-card-content>\n                <mat-card-actions>\n                  <button mat-raised-button color=\"primary\" (click)=\"addToCart(i)\">Add to Cart</button>                   \n                </mat-card-actions>\n            </mat-card>\n      </div>          \n    </div>\n  </div>\n</div>\n\n "
+module.exports = "<div class=\"container m-0\">\n    <div class=\"row\">\n        <h2>Buy Used</h2>\n      <mat-radio-group class=\"example-radio-group\" [(ngModel)]=\"selection\" name=\"selection\">\n        <mat-radio-button class=\"example-radio-button\" *ngFor=\"let select of radioSelection\" (change)=\"FilterItems(select)\">\n          {{select}}\n        </mat-radio-button>\n      </mat-radio-group>\n    </div>\n    <div class=\"row\">\n        <div class=\"col col-sm-5\">\n          <div *ngFor=\"let j of selectedItems; let i = index\">     \n            <mat-card class=\"example-card mat-elevation-z1\">\n                <mat-card-header>\n                  <div mat-card-avatar class=\"example-header-image\"></div>\n                  <mat-card-title>Seller\n                    <span *ngIf=\"IsAdmin\">\n                      <button class=\"trash-button\">\n                        <i style=\"color:red\" class=\"fa fa-trash\" (click)=\"DeleteItem(i)\" aria-hidden=\"true\"></i>\n                      </button>\n                    </span>\n                  </mat-card-title>\n                  <mat-card-subtitle>{{j.sellerName}}</mat-card-subtitle>\n                </mat-card-header>         \n                <!-- <img (click)=\"OpenDialog(photo)\" matTooltip=\"Click to expand.\" *ngFor=\"let photo of collectionPhotos[i]\" src=\"/Uploads/{{ photo.fileName }}\" class=\"img-thumbnail\">                   -->\n                  <mat-card-content>       \n                    <p class=\"title-label\">CPU:</p>\n                    <p class=\"word-overflow\">{{j.cpu}}</p>                   \n                    <p class=\"title-label\">Motherboard:</p>\n                    <p class=\"word-overflow\">{{j.motherboard}}</p>                   \n                    <p class=\"title-label\">RAM:</p>\n                    <p class=\"word-overflow\">{{j.ram}}</p>                   \n                    <p class=\"title-label\">Storage:</p>\n                    <p class=\"word-overflow\">{{j.storage}}</p>                   \n                    <p class=\"title-label\">GPU:</p>\n                    <p class=\"word-overflow\">{{j.gpu}}</p>                   \n                    <p class=\"title-label\">Power Supply:</p>\n                    <p class=\"word-overflow\">{{j.power_Supply}}</p>                   \n                    <p class=\"title-label\">Cooling Fan:</p>\n                    <p class=\"word-overflow\">{{j.cooling_Fan}}</p>                   \n                    <p class=\"title-label\">Case:</p>\n                    <p class=\"word-overflow\">{{j.case}}</p>                   \n                    <p class=\"title-label\">Total Price: ${{j.total_Price}}</p>\n                  </mat-card-content>\n                <mat-card-actions>\n                  <button mat-raised-button color=\"primary\" (click)=\"AddToCart(i)\">Add to Cart</button>                   \n                </mat-card-actions>\n            </mat-card>\n      </div>          \n    </div>\n  </div>\n</div>\n\n "
 
 /***/ }),
 
@@ -1410,7 +1410,7 @@ var BuyUsedComponent = /** @class */ (function () {
         this.radioSelection = ['All items', "My items"];
         this.tmpSelect = '';
         this.collectionPhotos = [];
-        this.isAdmin = '';
+        this.IsAdmin = '';
         //temporary object for practice.  use ng init to cycle through items
         this.tmpThisOrder = {
             type: 'Used',
@@ -1431,37 +1431,37 @@ var BuyUsedComponent = /** @class */ (function () {
         };
     }
     BuyUsedComponent.prototype.ngOnInit = function () {
-        if (!this.Auth.isAuthenticated()) {
+        if (!this.Auth.IsAuthenticated()) {
             this.router.navigate(['/home']);
         }
         this.tmpSelect = '';
-        this.serviceGet();
+        this.GetService();
     };
     BuyUsedComponent.prototype.DeleteItem = function (index) {
         var _this = this;
         if (this.tmpSelect === 'My items') {
-            this.MakeService.deleteUsed(this.myUsedItems[index].id).subscribe(function (x) {
+            this.MakeService.DeleteUsed(this.myUsedItems[index].id).subscribe(function (x) {
                 x;
-                _this.serviceGet();
-                _this.filterItems('My items');
+                _this.GetService();
+                _this.FilterItems('My items');
             });
             ;
         }
         else {
-            this.MakeService.deleteUsed(this.allUsedItems[index].id).subscribe(function (x) {
+            this.MakeService.DeleteUsed(this.allUsedItems[index].id).subscribe(function (x) {
                 x;
-                _this.serviceGet();
-                _this.filterItems('All items');
+                _this.GetService();
+                _this.FilterItems('All items');
             });
         }
     };
-    BuyUsedComponent.prototype.addToCart = function (i) {
-        this.openUsedSnackBar();
+    BuyUsedComponent.prototype.AddToCart = function (i) {
+        this.OpenSnackbar();
         this.tmpThisOrder = this.allUsedItems[i];
         this.tmpThisOrder.total_Price = this.tmpThisOrder.total_Price.toString();
         this.shoppingcart.add(this.tmpThisOrder);
     };
-    BuyUsedComponent.prototype.openDialog = function (selectedPic) {
+    BuyUsedComponent.prototype.OpenDialog = function (selectedPic) {
         this.tmpSelectedFileName = selectedPic.fileName;
         var dialogRef = this.dialog.open(expandPic, {
             width: '300px',
@@ -1469,16 +1469,16 @@ var BuyUsedComponent = /** @class */ (function () {
             data: { expandedPic: this.tmpSelectedFileName }
         });
     };
-    BuyUsedComponent.prototype.openUsedSnackBar = function () {
+    BuyUsedComponent.prototype.OpenSnackbar = function () {
         this.UsedSnackBar.openFromComponent(ConfirmUsedItem, {
             duration: 5000,
         });
     };
-    BuyUsedComponent.prototype.serviceGet = function () {
+    BuyUsedComponent.prototype.GetService = function () {
         var _this = this;
         var accountId = localStorage.getItem('account_id');
-        this.isAdmin = localStorage.getItem('isAdmin');
-        this.MakeService.getAllSaleItem().subscribe(function (usedItem) {
+        this.IsAdmin = localStorage.getItem('IsAdmin');
+        this.MakeService.GetAllSaleItem().subscribe(function (usedItem) {
             _this.allUsedItems = usedItem;
             // this.allUsedItems.forEach(element => {
             //       this.photoService.getPhotos(element.id)
@@ -1492,10 +1492,10 @@ var BuyUsedComponent = /** @class */ (function () {
                     return e;
                 }
             });
-            _this.filterItems(_this.tmpSelect);
+            _this.FilterItems(_this.tmpSelect);
         });
     };
-    BuyUsedComponent.prototype.filterItems = function (selection) {
+    BuyUsedComponent.prototype.FilterItems = function (selection) {
         if (selection === 'All items') {
             this.selectedItems = this.allUsedItems;
             this.tmpSelect = 'All items';
@@ -1631,7 +1631,7 @@ var CallbackComponent = /** @class */ (function () {
         this.router = router;
     }
     CallbackComponent.prototype.ngOnInit = function () {
-        if (!this.auth.isAuthenticated()) {
+        if (!this.auth.IsAuthenticated()) {
             this.router.navigate(['/home']);
         }
     };
@@ -1783,8 +1783,8 @@ var CheckoutComponent = /** @class */ (function () {
                         _this.tmpObject.storage = _this.shoppingOrder[tmp].storage;
                         _this.tmpObject.total_Price = _this.shoppingOrder[tmp].total_Price;
                         _this.tmpObject.type = _this.shoppingOrder[tmp].type;
-                        _this.makeService.createOrder(_this.tmpObject).subscribe(function (x) { return x; });
-                        _this.openSnackBar();
+                        _this.makeService.CreateOrder(_this.tmpObject).subscribe(function (x) { return x; });
+                        _this.OpenSnackbar();
                     }
                     ;
                 });
@@ -1811,7 +1811,7 @@ var CheckoutComponent = /** @class */ (function () {
         });
     };
     CheckoutComponent.prototype.ngOnInit = function () {
-        if (!this.auth.isAuthenticated()) {
+        if (!this.auth.IsAuthenticated()) {
             this.router.navigate(['/home']);
         }
         this.shoppingOrder = this.ShoppingcartService.get();
@@ -1820,7 +1820,7 @@ var CheckoutComponent = /** @class */ (function () {
         }
         console.log('totalp', this.total_price);
     };
-    CheckoutComponent.prototype.openSnackBar = function () {
+    CheckoutComponent.prototype.OpenSnackbar = function () {
         this.snackBar.openFromComponent(OrderCompleteSnack, {
             duration: 5000,
         });
@@ -1924,7 +1924,7 @@ module.exports = "/*!\n * Bootstrap Grid v4.1.3 (https://getbootstrap.com/)\n * 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"container m-0 text-center\">\n    <h2>Dashboard</h2>\n    <div class=\"row\">        \n      <mat-tab-group mat-stretch-tabs class=\"col margin-container\">\n          <mat-tab>\n            <ng-template mat-tab-label>\n              <mat-icon class=\"example-tab-icon\">bar_chart</mat-icon>\n              Dashboard\n            </ng-template>  \n\n            <div class=\"container\">\n              <div class=\"row first-margin\">             \n                <div class=\"rectangle-users col-4 col-sm\">\n                  <div class=\"row text-center\" style=\"display:inline-block\">\n                    <mat-icon class=\"icon-margin\" style=\"color:white\">group</mat-icon>              \n                  </div>                    \n                  <div class=\"row\">\n                    <span class=\"margin-box-left-label\" style=\"color:white\">Accounts</span>                      \n                    <span class=\"margin-box-left-label\" style=\"color: white\">{{totalAccounts}}</span>\n                  </div>\n                </div>\n                <div class=\"rectangle-revenue col-4 col-sm offset-sm-1\">\n                  <div class=\"row text-center\" style=\"display:inline-block\">\n                    <mat-icon class=\"icon-margin\" style=\"color:white\">attach_money</mat-icon>              \n                  </div>                    \n                  <div class=\"row\">\n                    <span class=\"margin-box-left-label\" style=\"color:white\">Revenue</span>                      \n                    <span class=\"margin-box-left-label\" style=\"color: white\">{{revenue}}</span>\n                  </div>\n                </div>   \n                  <div class=\"rectangle-orders col-4 col-sm offset-sm-1\">\n                    <div class=\"row text-center\" style=\"display:inline-block\">\n                      <mat-icon class=\"icon-margin\" style=\"color:white\">business_center</mat-icon>              \n                    </div>                    \n                    <div class=\"row\">\n                      <span class=\"margin-box-left-label\" style=\"color:white\">Orders</span>                      \n                      <span class=\"margin-box-left-label\" style=\"color: white\">{{totalOrders}}</span>\n                    </div>\n                  </div>                   \n              </div>\n                <h4 class=\"bar-margin\" style=\"text-align:center\">Bar chart for Orders\n     \n                  </h4><br/>\n                <div>\n                  <div style=\"display: block\" *ngIf=\"barChartData.length > 0\">\n                    <canvas baseChart\n                            [datasets]=\"barChartData\"\n                            [labels]=\"mbarChartLabels\"\n                            [options]=\"barChartOptions\"\n                            [colors]=\"barChartColors\"\n                            [legend]=\"barChartLegend\"\n                            [chartType]=\"barChartType\"\n                            (chartHover)=\"chartHovered($event)\"\n                            (chartClick)=\"chartClicked($event)\"></canvas>\n                  </div> \n                </div>\n                <!-- <div id=\"pieChart\" style=\"margin-top:5%; padding:0px\">                \n                  <canvas baseChart \n                  class=\"col\"              \n                  style=\"margin:0 auto;position:relative;\"   \n                          [data]=\"orderData\"\n                          [labels]=\"pieChartLabels\"\n                          [chartType]=\"pieChartType\"\n                          (chartHover)=\"chartHovered($event)\"\n                          (chartClick)=\"chartClicked($event)\"\n                          [colors]=\"colors\">\n                  </canvas>\n                </div> -->\n            </div>\n              \n          </mat-tab>\n        \n          <mat-tab>\n            <ng-template mat-tab-label>\n              <mat-icon class=\"example-tab-icon\">account_circle</mat-icon>\n                Account\n            </ng-template>\n              <div class=\"container\" style=\"margin-top:7%\">\n                  <div class=\"row\">\n                    <div class=\"search-hero\">\n                      <input class=\"form-control\" type=\"text\" name=\"search\" [(ngModel)]=\"searchText\" autocomplete=\"on\" placeholder=\"&#61442;  Search\">\n                    </div>\n                  <table style=\"border-collapse:collapse\" class=\"table table-striped\">\n                  <thead>\n                      <tr>\n                        <th (click)=\"sortList('email')\">Email\n                          <span *ngIf=\"key === 'email'\">\n                              <span *ngIf=\"reverse\">\n                                <i class=\"fa fa-arrow-up\"></i>\n                              </span>\n                              <span *ngIf=\"!reverse\">\n                                <i class=\"fa fa-arrow-down\"></i>\n                              </span>\n                          </span>                \n                        </th>\n                      <th (click)=\"sortList('master_account')\">Master\n                        <span *ngIf=\"key === 'master_account'\">\n                            <span *ngIf=\"reverse\">\n                              <i class=\"fa fa-arrow-up\"></i>\n                            </span>\n                        <span *ngIf=\"!reverse\">\n                              <i class=\"fa fa-arrow-down\"></i>\n                              </span>\n                        </span>            \n                      </th>\n                      <th (click)=\"sortList('admin')\">Admin\n                          <span *ngIf=\"key === 'admin'\">\n                              <span *ngIf=\"reverse\">\n                                <i class=\"fa fa-arrow-up\"></i>\n                              </span>\n                              <span *ngIf=\"!reverse\">\n                                <i class=\"fa fa-arrow-down\"></i>\n                              </span>\n                          </span>              \n                      </th>                   \n                      </tr>\n                    </thead>\n                  <tbody>\n                    <tr *ngFor=\"let t of accounts | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index\"> <!--added-->\n                      <td>{{t.email}}</td>\n                      <td>\n                        <!--added--><mat-slide-toggle (change)=\"updateAccount(i, 'master')\"\n                          [color]=\"red\"\n                          [checked]=t.master_account\n                          [disabled] = \"!isMaster\"> <!--ADDED-->\n                        </mat-slide-toggle>\n                      </td>\n                      <td>\n                        <!--added--><mat-slide-toggle (change)=\"updateAccount(i, 'admin')\"\n                          [color]=\"red\"\n                          [checked]=t.admin>\n                        </mat-slide-toggle>\n                      </td>                   \n                    </tr>\n                    </tbody>\n                    <pagination-controls (pageChange)=\"p = $event\"></pagination-controls>\n                  </table>\n                  </div>\n                  </div> \n            </mat-tab>\n            \n            <mat-tab>\n          <ng-template mat-tab-label>\n            <mat-icon class=\"example-tab-icon\">add_to_queue</mat-icon>\n              Hardware\n          </ng-template>  \n            <mat-tab-group>\n              <mat-tab>\n                <ng-template mat-tab-label>\n                    <mat-icon class=\"example-tab-icon\">add_box</mat-icon>\n                      Add\n                </ng-template>  \n                <div class=\"example-container\" style=\"margin-top:7%\">\n                    <mat-form-field hintLabel=\"Max 10 characters\">\n                      <mat-select placeholder=\"Select Component\"  [(ngModel)]=\"selectedComponent.value\">\n                        <mat-option *ngFor=\"let tmp of thisComponent\" value=\"{{tmp.value}}\" name=\"component\" ngDefaultControl>\n                          {{tmp.viewValue}}\n                        </mat-option>\n                      </mat-select>\n                    </mat-form-field>              \n                    <mat-form-field appearance=\"legacy\">                  \n                      <input matInput [(ngModel)]=\"tmpNewComponent.name\" maxlength=\"255\" placeholder=\"Name\">                                    \n                    </mat-form-field>\n                    <mat-form-field appearance=\"legacy\">                  \n                      <input matInput [(ngModel)]=\"tmpNewComponent.brand\" maxlength=\"255\" placeholder=\"Brand\">                                    \n                    </mat-form-field>\n                    <mat-form-field appearance=\"legacy\">                  \n                        <input matInput [(ngModel)]=\"tmpNewComponent.model\" maxlength=\"255\" placeholder=\"Model\">                                    \n                    </mat-form-field>\n                    <mat-form-field appearance=\"legacy\">                  \n                        <input matInput [(ngModel)]=\"tmpNewComponent.series\" maxlength=\"255\" placeholder=\"Series\">                                    \n                    </mat-form-field>\n                    <mat-form-field appearance=\"legacy\">                  \n                        <input matInput [(ngModel)]=\"tmpNewComponent.details\" maxlength=\"255\" placeholder=\"Details\">                                    \n                    </mat-form-field>\n                    <mat-form-field appearance=\"legacy\">                  \n                        <input matInput  matInput type=\"number\" [(ngModel)]=\"tmpNewComponent.price\" placeholder=\"Price\">                                    \n                    </mat-form-field>                    \n                  </div>\n                  <button mat-raised-button color=\"primary\" (click)=\"submitNewComponent()\">Submit</button>\n              </mat-tab>\n              <mat-tab>\n                <ng-template mat-tab-label>\n                    <mat-icon class=\"example-tab-icon\">border_color</mat-icon>\n                      Edit\n                </ng-template>  \n                <mat-form-field class=\"filter-length\">\n                  <mat-select placeholder=\"Filter\" (selectionChange)=\"filterList()\" [(ngModel)]=\"selectedFilter\">\n                    <mat-option *ngFor=\"let component of listComponents\" [value]=\"component\">\n                      {{component}}\n                    </mat-option>\n                  </mat-select>\n                </mat-form-field>\n                <div *ngIf=\"filteredComponent.length == 0\">\n                    <h4>Empty</h4>\n                  </div>\n                <div *ngIf=\"filteredComponent.length > 0\">\n                  <table   style='border-collapse:collapse' class=\"table table-striped\">\n                  <thead>\n                      <tr>\n                      <th>Edit</th>\n                      <th>Delete</th>\n                      <th (click)=\"sortList('hardwareType')\">hardwareType\n                        <span *ngIf=\"key === 'hardwareType'\">\n                            <span *ngIf=\"reverse\">\n                              <i class=\"fa fa-arrow-up\"></i>\n                            </span>\n                        <span *ngIf=\"!reverse\">\n                              <i class=\"fa fa-arrow-down\"></i>\n                              </span>\n                        </span>            \n                      </th>\n                      <th (click)=\"sortList('name')\">Name\n                        <span *ngIf=\"key === 'name'\">\n                            <span *ngIf=\"reverse\">\n                              <i class=\"fa fa-arrow-up\"></i>\n                            </span>\n                        <span *ngIf=\"!reverse\">\n                              <i class=\"fa fa-arrow-down\"></i>\n                              </span>\n                        </span>            \n                      </th>\n                      <th (click)=\"sortList('brand')\">Brand\n                          <span *ngIf=\"key === 'brand'\">\n                              <span *ngIf=\"reverse\">\n                                <i class=\"fa fa-arrow-up\"></i>\n                              </span>\n                              <span *ngIf=\"!reverse\">\n                                <i class=\"fa fa-arrow-down\"></i>\n                              </span>\n                          </span>              \n                      </th>\n                      <th (click)=\"sortList('model')\">Model\n                        <span *ngIf=\"key === 'model'\">\n                            <span *ngIf=\"reverse\">\n                              <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                            </span>\n                            <span *ngIf=\"!reverse\">\n                              <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                            </span>\n                        </span>                 \n                      </th>\n                      <th (click)=\"sortList('series')\">Series\n                          <span *ngIf=\"key === 'series'\">\n                              <span *ngIf=\"reverse\">\n                                <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                              </span>\n                              <span *ngIf=\"!reverse\">\n                                <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                              </span>\n                          </span>                    \n                        </th>\n                        <th (click)=\"sortList('price')\">Price\n                          <span *ngIf=\"key === 'price'\">\n                            <span *ngIf=\"reverse\">\n                            <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                            </span>\n                            <span *ngIf=\"!reverse\">\n                              <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                            </span>\n                          </span>              \n                        </th>\n                        <th (click)=\"sortList('details')\">Details\n                            <span *ngIf=\"key === 'details'\">\n                                <span *ngIf=\"reverse\">\n                                  <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                                </span>\n                                <span *ngIf=\"!reverse\">\n                                  <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                                </span>\n                            </span>               \n                        </th>                    \n                      </tr>\n                    </thead>\n                  <tbody>\n                  <tr *ngFor=\"let t of filteredComponent | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index\">\n                    <td style=\"text-align:center\">\n                      <button class=\"trash-button button-no-border\">\n                          <i class=\"fa fa-edit\" (click)=\"openDialog(i)\" aria-hidden=\"true\"></i>\n                      </button>  \n                    </td>\n                    <td style=\"text-align:center\">\n                        <button class=\"trash-button button-no-border\">\n                            <i style=\"color:red\" class=\"fa fa-trash\" (click)=\"deleteComponent(i)\" aria-hidden=\"true\"></i>\n                        </button>  \n                      </td>\n                    <td>{{t.hardwareType}}</td>\n                    <td>{{t.name}}</td>\n                    <td>{{t.brand}}</td>\n                    <td>{{t.model}}</td>\n                    <td>{{t.series}}</td>\n                    <td>{{t.price}}</td>\n                    <td>{{t.details}}</td>                \n                  </tr>\n                  </tbody>                                                   \n                </table>\n                <pagination-controls (pageChange)=\"p = $event\"></pagination-controls>\n              </div>\n              </mat-tab>\n            </mat-tab-group>    \n          </mat-tab>\n      </mat-tab-group>\n  </div>\n</div>"
+module.exports = "\n<div class=\"container m-0 text-center\">\n    <h2>Dashboard</h2>\n    <div class=\"row\">        \n      <mat-tab-group mat-stretch-tabs class=\"col margin-container\">\n          <mat-tab>\n            <ng-template mat-tab-label>\n              <mat-icon class=\"example-tab-icon\">bar_chart</mat-icon>\n              Dashboard\n            </ng-template>  \n\n            <div class=\"container\">\n              <div class=\"row first-margin\">             \n                <div class=\"rectangle-users col-4 col-sm\">\n                  <div class=\"row text-center\" style=\"display:inline-block\">\n                    <mat-icon class=\"icon-margin\" style=\"color:white\">group</mat-icon>              \n                  </div>                    \n                  <div class=\"row\">\n                    <span class=\"margin-box-left-label\" style=\"color:white\">Accounts</span>                      \n                    <span class=\"margin-box-left-label\" style=\"color: white\">{{totalAccounts}}</span>\n                  </div>\n                </div>\n                <div class=\"rectangle-revenue col-4 col-sm offset-sm-1\">\n                  <div class=\"row text-center\" style=\"display:inline-block\">\n                    <mat-icon class=\"icon-margin\" style=\"color:white\">attach_money</mat-icon>              \n                  </div>                    \n                  <div class=\"row\">\n                    <span class=\"margin-box-left-label\" style=\"color:white\">Revenue</span>                      \n                    <span class=\"margin-box-left-label\" style=\"color: white\">{{revenue}}</span>\n                  </div>\n                </div>   \n                  <div class=\"rectangle-orders col-4 col-sm offset-sm-1\">\n                    <div class=\"row text-center\" style=\"display:inline-block\">\n                      <mat-icon class=\"icon-margin\" style=\"color:white\">business_center</mat-icon>              \n                    </div>                    \n                    <div class=\"row\">\n                      <span class=\"margin-box-left-label\" style=\"color:white\">Orders</span>                      \n                      <span class=\"margin-box-left-label\" style=\"color: white\">{{totalOrders}}</span>\n                    </div>\n                  </div>                   \n              </div>\n                <h4 class=\"bar-margin\" style=\"text-align:center\">Bar chart for Orders\n     \n                  </h4><br/>\n                <div>\n                  <div style=\"display: block\" *ngIf=\"barChartData.length > 0\">\n                    <canvas baseChart\n                            [datasets]=\"barChartData\"\n                            [labels]=\"mbarChartLabels\"\n                            [options]=\"barChartOptions\"\n                            [colors]=\"barChartColors\"\n                            [legend]=\"barChartLegend\"\n                            [chartType]=\"barChartType\"\n                            (chartHover)=\"ChartHovered($event)\"\n                            (chartClick)=\"ChartClicked($event)\"></canvas>\n                  </div> \n                </div>\n                <!-- <div id=\"pieChart\" style=\"margin-top:5%; padding:0px\">                \n                  <canvas baseChart \n                  class=\"col\"              \n                  style=\"margin:0 auto;position:relative;\"   \n                          [data]=\"orderData\"\n                          [labels]=\"pieChartLabels\"\n                          [chartType]=\"pieChartType\"\n                          (chartHover)=\"ChartHovered($event)\"\n                          (chartClick)=\"ChartClicked($event)\"\n                          [colors]=\"colors\">\n                  </canvas>\n                </div> -->\n            </div>\n              \n          </mat-tab>\n        \n          <mat-tab>\n            <ng-template mat-tab-label>\n              <mat-icon class=\"example-tab-icon\">account_circle</mat-icon>\n                Account\n            </ng-template>\n              <div class=\"container\" style=\"margin-top:7%\">\n                  <div class=\"row\">\n                    <div class=\"search-hero\">\n                      <input class=\"form-control\" type=\"text\" name=\"search\" [(ngModel)]=\"searchText\" autocomplete=\"on\" placeholder=\"&#61442;  Search\">\n                    </div>\n                  <table style=\"border-collapse:collapse\" class=\"table table-striped\">\n                  <thead>\n                      <tr>\n                        <th (click)=\"SortList('email')\">Email\n                          <span *ngIf=\"key === 'email'\">\n                              <span *ngIf=\"reverse\">\n                                <i class=\"fa fa-arrow-up\"></i>\n                              </span>\n                              <span *ngIf=\"!reverse\">\n                                <i class=\"fa fa-arrow-down\"></i>\n                              </span>\n                          </span>                \n                        </th>\n                      <th (click)=\"SortList('master_account')\">Master\n                        <span *ngIf=\"key === 'master_account'\">\n                            <span *ngIf=\"reverse\">\n                              <i class=\"fa fa-arrow-up\"></i>\n                            </span>\n                        <span *ngIf=\"!reverse\">\n                              <i class=\"fa fa-arrow-down\"></i>\n                              </span>\n                        </span>            \n                      </th>\n                      <th (click)=\"SortList('admin')\">Admin\n                          <span *ngIf=\"key === 'admin'\">\n                              <span *ngIf=\"reverse\">\n                                <i class=\"fa fa-arrow-up\"></i>\n                              </span>\n                              <span *ngIf=\"!reverse\">\n                                <i class=\"fa fa-arrow-down\"></i>\n                              </span>\n                          </span>              \n                      </th>                   \n                      </tr>\n                    </thead>\n                  <tbody>\n                    <tr *ngFor=\"let t of accounts | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index\"> <!--added-->\n                      <td>{{t.email}}</td>\n                      <td>\n                        <!--added--><mat-slide-toggle (change)=\"UpdateAccount(i, 'master')\"\n                          [color]=\"red\"\n                          [checked]=t.master_account\n                          [disabled] = \"!isMaster\"> <!--ADDED-->\n                        </mat-slide-toggle>\n                      </td>\n                      <td>\n                        <!--added--><mat-slide-toggle (change)=\"UpdateAccount(i, 'admin')\"\n                          [color]=\"red\"\n                          [checked]=t.admin>\n                        </mat-slide-toggle>\n                      </td>                   \n                    </tr>\n                    </tbody>\n                    <pagination-controls (pageChange)=\"p = $event\"></pagination-controls>\n                  </table>\n                  </div>\n                  </div> \n            </mat-tab>\n            \n            <mat-tab>\n          <ng-template mat-tab-label>\n            <mat-icon class=\"example-tab-icon\">add_to_queue</mat-icon>\n              Hardware\n          </ng-template>  \n            <mat-tab-group>\n              <mat-tab>\n                <ng-template mat-tab-label>\n                    <mat-icon class=\"example-tab-icon\">add_box</mat-icon>\n                      Add\n                </ng-template>  \n                <div class=\"example-container\" style=\"margin-top:7%\">\n                    <mat-form-field hintLabel=\"Max 10 characters\">\n                      <mat-select placeholder=\"Select Component\"  [(ngModel)]=\"selectedComponent.value\">\n                        <mat-option *ngFor=\"let tmp of thisComponent\" value=\"{{tmp.value}}\" name=\"component\" ngDefaultControl>\n                          {{tmp.viewValue}}\n                        </mat-option>\n                      </mat-select>\n                    </mat-form-field>              \n                    <mat-form-field appearance=\"legacy\">                  \n                      <input matInput [(ngModel)]=\"tmpNewComponent.name\" maxlength=\"255\" placeholder=\"Name\">                                    \n                    </mat-form-field>\n                    <mat-form-field appearance=\"legacy\">                  \n                      <input matInput [(ngModel)]=\"tmpNewComponent.brand\" maxlength=\"255\" placeholder=\"Brand\">                                    \n                    </mat-form-field>\n                    <mat-form-field appearance=\"legacy\">                  \n                        <input matInput [(ngModel)]=\"tmpNewComponent.model\" maxlength=\"255\" placeholder=\"Model\">                                    \n                    </mat-form-field>\n                    <mat-form-field appearance=\"legacy\">                  \n                        <input matInput [(ngModel)]=\"tmpNewComponent.series\" maxlength=\"255\" placeholder=\"Series\">                                    \n                    </mat-form-field>\n                    <mat-form-field appearance=\"legacy\">                  \n                        <input matInput [(ngModel)]=\"tmpNewComponent.details\" maxlength=\"255\" placeholder=\"Details\">                                    \n                    </mat-form-field>\n                    <mat-form-field appearance=\"legacy\">                  \n                        <input matInput  matInput type=\"number\" [(ngModel)]=\"tmpNewComponent.price\" placeholder=\"Price\">                                    \n                    </mat-form-field>                    \n                  </div>\n                  <button mat-raised-button color=\"primary\" (click)=\"SubmitNewComponent()\">Submit</button>\n              </mat-tab>\n              <mat-tab>\n                <ng-template mat-tab-label>\n                    <mat-icon class=\"example-tab-icon\">border_color</mat-icon>\n                      Edit\n                </ng-template>  \n                <mat-form-field class=\"filter-length\">\n                  <mat-select placeholder=\"Filter\" (selectionChange)=\"FilterList()\" [(ngModel)]=\"selectedFilter\">\n                    <mat-option *ngFor=\"let component of listComponents\" [value]=\"component\">\n                      {{component}}\n                    </mat-option>\n                  </mat-select>\n                </mat-form-field>\n                <div *ngIf=\"filteredComponent.length == 0\">\n                    <h4>Empty</h4>\n                  </div>\n                <div *ngIf=\"filteredComponent.length > 0\">\n                  <table   style='border-collapse:collapse' class=\"table table-striped\">\n                  <thead>\n                      <tr>\n                      <th>Edit</th>\n                      <th>Delete</th>\n                      <th (click)=\"SortList('hardwareType')\">hardwareType\n                        <span *ngIf=\"key === 'hardwareType'\">\n                            <span *ngIf=\"reverse\">\n                              <i class=\"fa fa-arrow-up\"></i>\n                            </span>\n                        <span *ngIf=\"!reverse\">\n                              <i class=\"fa fa-arrow-down\"></i>\n                              </span>\n                        </span>            \n                      </th>\n                      <th (click)=\"SortList('name')\">Name\n                        <span *ngIf=\"key === 'name'\">\n                            <span *ngIf=\"reverse\">\n                              <i class=\"fa fa-arrow-up\"></i>\n                            </span>\n                        <span *ngIf=\"!reverse\">\n                              <i class=\"fa fa-arrow-down\"></i>\n                              </span>\n                        </span>            \n                      </th>\n                      <th (click)=\"SortList('brand')\">Brand\n                          <span *ngIf=\"key === 'brand'\">\n                              <span *ngIf=\"reverse\">\n                                <i class=\"fa fa-arrow-up\"></i>\n                              </span>\n                              <span *ngIf=\"!reverse\">\n                                <i class=\"fa fa-arrow-down\"></i>\n                              </span>\n                          </span>              \n                      </th>\n                      <th (click)=\"SortList('model')\">Model\n                        <span *ngIf=\"key === 'model'\">\n                            <span *ngIf=\"reverse\">\n                              <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                            </span>\n                            <span *ngIf=\"!reverse\">\n                              <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                            </span>\n                        </span>                 \n                      </th>\n                      <th (click)=\"SortList('series')\">Series\n                          <span *ngIf=\"key === 'series'\">\n                              <span *ngIf=\"reverse\">\n                                <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                              </span>\n                              <span *ngIf=\"!reverse\">\n                                <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                              </span>\n                          </span>                    \n                        </th>\n                        <th (click)=\"SortList('price')\">Price\n                          <span *ngIf=\"key === 'price'\">\n                            <span *ngIf=\"reverse\">\n                            <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                            </span>\n                            <span *ngIf=\"!reverse\">\n                              <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                            </span>\n                          </span>              \n                        </th>\n                        <th (click)=\"SortList('details')\">Details\n                            <span *ngIf=\"key === 'details'\">\n                                <span *ngIf=\"reverse\">\n                                  <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                                </span>\n                                <span *ngIf=\"!reverse\">\n                                  <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                                </span>\n                            </span>               \n                        </th>                    \n                      </tr>\n                    </thead>\n                  <tbody>\n                  <tr *ngFor=\"let t of filteredComponent | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index\">\n                    <td style=\"text-align:center\">\n                      <button class=\"trash-button button-no-border\">\n                          <i class=\"fa fa-edit\" (click)=\"OpenDialog(i)\" aria-hidden=\"true\"></i>\n                      </button>  \n                    </td>\n                    <td style=\"text-align:center\">\n                        <button class=\"trash-button button-no-border\">\n                            <i style=\"color:red\" class=\"fa fa-trash\" (click)=\"DeleteComponent(i)\" aria-hidden=\"true\"></i>\n                        </button>  \n                      </td>\n                    <td>{{t.hardwareType}}</td>\n                    <td>{{t.name}}</td>\n                    <td>{{t.brand}}</td>\n                    <td>{{t.model}}</td>\n                    <td>{{t.series}}</td>\n                    <td>{{t.price}}</td>\n                    <td>{{t.details}}</td>                \n                  </tr>\n                  </tbody>                                                   \n                </table>\n                <pagination-controls (pageChange)=\"p = $event\"></pagination-controls>\n              </div>\n              </mat-tab>\n            </mat-tab-group>    \n          </mat-tab>\n      </mat-tab-group>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -2154,24 +2154,24 @@ var DashboardComponent = /** @class */ (function () {
             details: ''
         };
     }
-    DashboardComponent.prototype.sortList = function (key) {
+    DashboardComponent.prototype.SortList = function (key) {
         this.key = key;
         this.reverse = !this.reverse;
         console.log(this.key);
     };
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
-        if (!this.auth.isAuthenticated() || !this.auth.isAdmin()) {
+        if (!this.auth.IsAuthenticated() || !this.auth.IsAdmin()) {
             this.router.navigate(['/home']);
         }
         //filter
-        this.getComponents();
+        this.GetComponents();
         //end
-        this.MakeService.getAccount().subscribe(function (account) {
+        this.MakeService.GetAccount().subscribe(function (account) {
             _this.accounts = account;
             _this.totalAccounts = _this.accounts.length;
         });
-        this.MakeService.getOrder().subscribe(function (order) {
+        this.MakeService.GetOrder().subscribe(function (order) {
             _this.orders = order;
             var usedCount = 0;
             var newCount = 0;
@@ -2294,7 +2294,7 @@ var DashboardComponent = /** @class */ (function () {
         this.isMaster = localStorage.getItem('isMaster');
     };
     //filter
-    DashboardComponent.prototype.insertAllComponents = function () {
+    DashboardComponent.prototype.InsertAllComponents = function () {
         this.filteredComponent = [];
         this.filteredComponent = this.filteredComponent.concat(this.caseComponent);
         this.filteredComponent = this.filteredComponent.concat(this.coolingFanComponent);
@@ -2305,9 +2305,9 @@ var DashboardComponent = /** @class */ (function () {
         this.filteredComponent = this.filteredComponent.concat(this.powerSupplyComponent);
         this.filteredComponent = this.filteredComponent.concat(this.motherboardComponent);
     };
-    DashboardComponent.prototype.filterList = function () {
+    DashboardComponent.prototype.FilterList = function () {
         if (this.selectedFilter == '') {
-            this.insertAllComponents();
+            this.InsertAllComponents();
         }
         if (this.selectedFilter == 'CPU') {
             this.filteredComponent = [];
@@ -2343,39 +2343,39 @@ var DashboardComponent = /** @class */ (function () {
         }
     };
     //end
-    DashboardComponent.prototype.submitNewComponent = function () {
+    DashboardComponent.prototype.SubmitNewComponent = function () {
         if (this.selectedComponent.value == 'cpu') {
-            this.MakeService.createCPU(this.tmpNewComponent).subscribe(function (x) { return x; });
+            this.MakeService.CreateCpu(this.tmpNewComponent).subscribe(function (x) { return x; });
         }
         if (this.selectedComponent.value == 'motherboard') {
-            this.MakeService.createMotherboard(this.tmpNewComponent).subscribe(function (x) { return x; });
+            this.MakeService.CreateMotherboard(this.tmpNewComponent).subscribe(function (x) { return x; });
         }
         if (this.selectedComponent.value == 'ram') {
-            this.MakeService.createRAM(this.tmpNewComponent).subscribe(function (x) { return x; });
+            this.MakeService.CreateRam(this.tmpNewComponent).subscribe(function (x) { return x; });
         }
         if (this.selectedComponent.value == 'storage') {
-            this.MakeService.createStorage(this.tmpNewComponent).subscribe(function (x) { return x; });
+            this.MakeService.CreateStorage(this.tmpNewComponent).subscribe(function (x) { return x; });
         }
         if (this.selectedComponent.value == 'gpu') {
-            this.MakeService.createGPU(this.tmpNewComponent).subscribe(function (x) { return x; });
+            this.MakeService.CreateGpu(this.tmpNewComponent).subscribe(function (x) { return x; });
         }
         if (this.selectedComponent.value == 'power_supply') {
-            this.MakeService.createPowersupply(this.tmpNewComponent).subscribe(function (x) { return x; });
+            this.MakeService.CreatePowersupply(this.tmpNewComponent).subscribe(function (x) { return x; });
         }
         if (this.selectedComponent.value == 'cooling_Fan') {
-            this.MakeService.createCoolingfan(this.tmpNewComponent).subscribe(function (x) { return x; });
+            this.MakeService.CreateCoolingFan(this.tmpNewComponent).subscribe(function (x) { return x; });
         }
         if (this.selectedComponent.value == 'case') {
-            this.MakeService.createCase(this.tmpNewComponent).subscribe(function (x) { return x; });
+            this.MakeService.CreateCase(this.tmpNewComponent).subscribe(function (x) { return x; });
         }
         this.ngOnInit();
     };
-    DashboardComponent.prototype.chartClicked = function (e) {
+    DashboardComponent.prototype.ChartClicked = function (e) {
     };
-    DashboardComponent.prototype.chartHovered = function (e) {
+    DashboardComponent.prototype.ChartHovered = function (e) {
     };
     //added
-    DashboardComponent.prototype.updateAccount = function (index, role) {
+    DashboardComponent.prototype.UpdateAccount = function (index, role) {
         this.tmpAccount = this.accounts[index];
         if (this.tmpAccount.admin == true) {
             this.tmpAccount.admin = false;
@@ -2386,52 +2386,52 @@ var DashboardComponent = /** @class */ (function () {
         if (this.isMaster == 'true' && role == 'master') {
             this.tmpAccount.master_account = this.tmpAccount.admin;
         }
-        this.MakeService.updateAccount(this.tmpAccount).subscribe(function (x) { return x; });
+        this.MakeService.UpdateAccount(this.tmpAccount).subscribe(function (x) { return x; });
     };
-    DashboardComponent.prototype.deleteComponent = function (index) {
+    DashboardComponent.prototype.DeleteComponent = function (index) {
         var _this = this;
         if (this.filteredComponent[index].hardwareType == 'CPU') {
-            this.MakeService.deleteCPU(this.filteredComponent[index].id).subscribe(function (x) {
-                return _this.getComponents();
+            this.MakeService.DeleteCpu(this.filteredComponent[index].id).subscribe(function (x) {
+                return _this.GetComponents();
             });
         }
         if (this.filteredComponent[index].hardwareType == 'Case') {
-            this.MakeService.deleteCase(this.filteredComponent[index].id).subscribe(function (x) {
-                return _this.getComponents();
+            this.MakeService.DeleteCase(this.filteredComponent[index].id).subscribe(function (x) {
+                return _this.GetComponents();
             });
         }
         if (this.filteredComponent[index].hardwareType == 'Cooling Fan') {
-            this.MakeService.deleteCoolingFan(this.filteredComponent[index].id).subscribe(function (x) {
-                return _this.getComponents();
+            this.MakeService.DeleteCoolingFan(this.filteredComponent[index].id).subscribe(function (x) {
+                return _this.GetComponents();
             });
         }
         if (this.filteredComponent[index].hardwareType == 'Motherboard') {
-            this.MakeService.deleteMotherboard(this.filteredComponent[index].id).subscribe(function (x) {
-                return _this.getComponents();
+            this.MakeService.DeleteMotherboard(this.filteredComponent[index].id).subscribe(function (x) {
+                return _this.GetComponents();
             });
         }
         if (this.filteredComponent[index].hardwareType == 'RAM') {
-            this.MakeService.deleteRAM(this.filteredComponent[index].id).subscribe(function (x) {
-                return _this.getComponents();
+            this.MakeService.DeleteRam(this.filteredComponent[index].id).subscribe(function (x) {
+                return _this.GetComponents();
             });
         }
         if (this.filteredComponent[index].hardwareType == 'Storage') {
-            this.MakeService.deleteStorage(this.filteredComponent[index].id).subscribe(function (x) {
-                return _this.getComponents();
+            this.MakeService.DeleteStorage(this.filteredComponent[index].id).subscribe(function (x) {
+                return _this.GetComponents();
             });
         }
         if (this.filteredComponent[index].hardwareType == 'Power Supply') {
-            this.MakeService.deletePowerSupply(this.filteredComponent[index].id).subscribe(function (x) {
-                return _this.getComponents();
+            this.MakeService.DeletePowersupply(this.filteredComponent[index].id).subscribe(function (x) {
+                return _this.GetComponents();
             });
         }
         if (this.filteredComponent[index].hardwareType == 'GPU') {
-            this.MakeService.deleteGPU(this.filteredComponent[index].id).subscribe(function (x) {
-                return _this.getComponents();
+            this.MakeService.DeleteGpu(this.filteredComponent[index].id).subscribe(function (x) {
+                return _this.GetComponents();
             });
         }
     };
-    DashboardComponent.prototype.openDialog = function (index) {
+    DashboardComponent.prototype.OpenDialog = function (index) {
         var _this = this;
         var dialogRef = this.dialog.open(editComponent, {
             width: '250px',
@@ -2447,30 +2447,30 @@ var DashboardComponent = /** @class */ (function () {
             }
         });
         dialogRef.afterClosed().subscribe(function () {
-            _this.getComponents();
+            _this.GetComponents();
         });
     };
-    DashboardComponent.prototype.getComponents = function () {
+    DashboardComponent.prototype.GetComponents = function () {
         var _this = this;
-        this.MakeService.getCase().subscribe(function (caseItem) {
+        this.MakeService.GetCase().subscribe(function (caseItem) {
             _this.caseComponent = caseItem;
-            _this.MakeService.getCoolingfan().subscribe(function (coolingFan) {
+            _this.MakeService.GetCoolingFan().subscribe(function (coolingFan) {
                 _this.coolingFanComponent = coolingFan;
-                _this.MakeService.getCoolingfan().subscribe(function (coolingFan) {
+                _this.MakeService.GetCoolingFan().subscribe(function (coolingFan) {
                     _this.coolingFanComponent = coolingFan;
-                    _this.MakeService.getCPU().subscribe(function (CPU) {
+                    _this.MakeService.GetCpu().subscribe(function (CPU) {
                         _this.cpuComponent = CPU;
-                        _this.MakeService.getGPU().subscribe(function (GPU) {
+                        _this.MakeService.GetGpu().subscribe(function (GPU) {
                             _this.gpuComponent = GPU;
-                            _this.MakeService.getStorage().subscribe(function (storage) {
+                            _this.MakeService.GetStorage().subscribe(function (storage) {
                                 _this.storageComponent = storage;
-                                _this.MakeService.getRAM().subscribe(function (RAM) {
+                                _this.MakeService.GetRam().subscribe(function (RAM) {
                                     _this.ramComponent = RAM;
-                                    _this.MakeService.getPowersupply().subscribe(function (powerSupply) {
+                                    _this.MakeService.GetPowersupply().subscribe(function (powerSupply) {
                                         _this.powerSupplyComponent = powerSupply;
-                                        _this.MakeService.getMotherboard().subscribe(function (motherboard) {
+                                        _this.MakeService.GetMotherboard().subscribe(function (motherboard) {
                                             _this.motherboardComponent = motherboard;
-                                            _this.insertAllComponents();
+                                            _this.InsertAllComponents();
                                         });
                                     });
                                 });
@@ -2530,28 +2530,28 @@ var editComponent = /** @class */ (function () {
     };
     editComponent.prototype.submit = function () {
         if (this.tmpComponent.hardwareType == 'CPU') {
-            this.MakeService.updateCPU(this.tmpComponent).subscribe(function (x) { return x; });
+            this.MakeService.UpdateCpu(this.tmpComponent).subscribe(function (x) { return x; });
         }
         if (this.tmpComponent.hardwareType == 'Motherboard') {
-            this.MakeService.updateMotherboard(this.tmpComponent).subscribe(function (x) { return x; });
+            this.MakeService.UpdateMotherboard(this.tmpComponent).subscribe(function (x) { return x; });
         }
         if (this.tmpComponent.hardwareType == 'RAM') {
-            this.MakeService.updateRAM(this.tmpComponent).subscribe(function (x) { return x; });
+            this.MakeService.UpdateRam(this.tmpComponent).subscribe(function (x) { return x; });
         }
         if (this.tmpComponent.hardwareType == 'Storage') {
-            this.MakeService.updateStorage(this.tmpComponent).subscribe(function (x) { return x; });
+            this.MakeService.UpdateStorage(this.tmpComponent).subscribe(function (x) { return x; });
         }
         if (this.tmpComponent.hardwareType == 'GPU') {
-            this.MakeService.updateGPU(this.tmpComponent).subscribe(function (x) { return x; });
+            this.MakeService.UpdateGpu(this.tmpComponent).subscribe(function (x) { return x; });
         }
         if (this.tmpComponent.hardwareType == 'Power Supply') {
-            this.MakeService.updatePowerSupply(this.tmpComponent).subscribe(function (x) { return x; });
+            this.MakeService.UpdatePowerSupply(this.tmpComponent).subscribe(function (x) { return x; });
         }
         if (this.tmpComponent.hardwareType == 'Cooling Fan') {
-            this.MakeService.updateCoolingFan(this.tmpComponent).subscribe(function (x) { return x; });
+            this.MakeService.UpdateCoolingFan(this.tmpComponent).subscribe(function (x) { return x; });
         }
         if (this.tmpComponent.hardwareType == 'Case') {
-            this.MakeService.updateCase(this.tmpComponent).subscribe(function (x) { return x; });
+            this.MakeService.UpdateCase(this.tmpComponent).subscribe(function (x) { return x; });
         }
         this.dialogRef.close();
     };
@@ -2741,8 +2741,8 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var MainHomeComponent = /** @class */ (function () {
     function MainHomeComponent(auth) {
         this.auth = auth;
-        auth.handleAuthentication();
-        auth.isAdmin();
+        auth.HandleAuthentication();
+        auth.IsAdmin();
     }
     MainHomeComponent.prototype.ngOnInit = function () { };
     MainHomeComponent = __decorate([
@@ -2778,7 +2778,7 @@ module.exports = "li .glyphicon {\r\n    margin-right: 10px;\r\n}\r\n\r\n/* High
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='main-nav'>\r\n    <div class='navbar navbar-inverse'>\r\n        <div class='navbar-header'>\r\n            <button type='button' class='navbar-toggle nav-button' data-toggle='collapse' data-target='.navbar-collapse' [attr.aria-expanded]='isExpanded' (click)='toggle()'>\r\n                <span class='sr-only'>Toggle navigation</span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n            </button>\r\n            <a class='navbar-brand' [routerLink]='[\"/\"]'>{{emailName}}</a>\r\n        </div>\r\n        <div class='clearfix'></div>\r\n        <div class='navbar-collapse collapse' [ngClass]='{ \"in\": isExpanded }'>\r\n            <ul class='nav navbar-nav'>\r\n                <li [routerLinkActive]='[\"link-active\"]'>\r\n                    <a (click)='auth.login()' *ngIf=\"!auth.isAuthenticated()\">\r\n                        <span class='glyphicon glyphicon-user'></span> Login\r\n                    </a>\r\n                </li>                \r\n                <li [routerLinkActive]='[\"link-active\"]' >\r\n                    <a [routerLink]='[\"/\"]' (click)='collapse()'>\r\n                        <span class='glyphicon glyphicon-home'></span> Home\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]='[\"link-active\"]' >\r\n                    <a [routerLink]='[\"/Dashboard\"]' (click)='collapse()' *ngIf=\"auth.isAuthenticated() && auth.isAdmin()\">\r\n                        <span class='glyphicon glyphicon-th-list'></span> Dashboard\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]='[\"link-active\"]'>\r\n                    <a [routerLink]='[\"/buy-new\"]' (click)='collapse()' *ngIf=\"auth.isAuthenticated()\">\r\n                        <span class='glyphicon glyphicon-blackboard'></span> Buy New\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]='[\"link-active\"]'>\r\n                    <a [routerLink]='[\"/buy-used\"]' (click)='collapse()' *ngIf=\"auth.isAuthenticated()\">\r\n                        <span class='glyphicon glyphicon-briefcase'></span> Buy Used\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]='[\"link-active\"]'>\r\n                    <a [routerLink]='[\"/sell\"]' (click)='collapse()' *ngIf=\"auth.isAuthenticated()\">\r\n                        <span class='glyphicon glyphicon-usd'></span> Sell\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]='[\"link-active\"]'>\r\n                        <a [routerLink]='[\"/orderhistory\"]' (click)='collapse()' *ngIf=\"auth.isAuthenticated()\">\r\n                            <span class='glyphicon glyphicon-th-list'></span> Order History\r\n                        </a>\r\n                </li>\r\n                <li [routerLinkActive]='[\"link-active\"]'>\r\n                        <a [routerLink]='[\"/shoppingcart\"]' (click)='collapse()' *ngIf=\"auth.isAuthenticated()\">\r\n                            <span class='glyphicon glyphicon-shopping-cart'></span> Shoppingcart\r\n                        </a>\r\n                </li>\r\n                <li [routerLinkActive]='[\"link-active\"]'>\r\n                    <a (click)='auth.logout()' *ngIf=\"auth.isAuthenticated()\">\r\n                        <span class='glyphicon glyphicon-user'></span> Logout\r\n                    </a>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div class='main-nav'>\r\n    <div class='navbar navbar-inverse'>\r\n        <div class='navbar-header'>\r\n            <button type='button' class='navbar-toggle nav-button' data-toggle='collapse' data-target='.navbar-collapse' [attr.aria-expanded]='isExpanded' (click)='toggle()'>\r\n                <span class='sr-only'>Toggle navigation</span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n            </button>\r\n            <a class='navbar-brand' [routerLink]='[\"/\"]'>{{emailName}}</a>\r\n        </div>\r\n        <div class='clearfix'></div>\r\n        <div class='navbar-collapse collapse' [ngClass]='{ \"in\": isExpanded }'>\r\n            <ul class='nav navbar-nav'>\r\n                <li [routerLinkActive]='[\"link-active\"]'>\r\n                    <a (click)='auth.login()' *ngIf=\"!auth.IsAuthenticated()\">\r\n                        <span class='glyphicon glyphicon-user'></span> Login\r\n                    </a>\r\n                </li>                \r\n                <li [routerLinkActive]='[\"link-active\"]' >\r\n                    <a [routerLink]='[\"/\"]' (click)='collapse()'>\r\n                        <span class='glyphicon glyphicon-home'></span> Home\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]='[\"link-active\"]' >\r\n                    <a [routerLink]='[\"/Dashboard\"]' (click)='collapse()' *ngIf=\"auth.IsAuthenticated() && auth.IsAdmin()\">\r\n                        <span class='glyphicon glyphicon-th-list'></span> Dashboard\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]='[\"link-active\"]'>\r\n                    <a [routerLink]='[\"/buy-new\"]' (click)='collapse()' *ngIf=\"auth.IsAuthenticated()\">\r\n                        <span class='glyphicon glyphicon-blackboard'></span> Buy New\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]='[\"link-active\"]'>\r\n                    <a [routerLink]='[\"/buy-used\"]' (click)='collapse()' *ngIf=\"auth.IsAuthenticated()\">\r\n                        <span class='glyphicon glyphicon-briefcase'></span> Buy Used\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]='[\"link-active\"]'>\r\n                    <a [routerLink]='[\"/sell\"]' (click)='collapse()' *ngIf=\"auth.IsAuthenticated()\">\r\n                        <span class='glyphicon glyphicon-usd'></span> Sell\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]='[\"link-active\"]'>\r\n                        <a [routerLink]='[\"/orderhistory\"]' (click)='collapse()' *ngIf=\"auth.IsAuthenticated()\">\r\n                            <span class='glyphicon glyphicon-th-list'></span> Order History\r\n                        </a>\r\n                </li>\r\n                <li [routerLinkActive]='[\"link-active\"]'>\r\n                        <a [routerLink]='[\"/shoppingcart\"]' (click)='collapse()' *ngIf=\"auth.IsAuthenticated()\">\r\n                            <span class='glyphicon glyphicon-shopping-cart'></span> Shoppingcart\r\n                        </a>\r\n                </li>\r\n                <li [routerLinkActive]='[\"link-active\"]'>\r\n                    <a (click)='auth.logout()' *ngIf=\"auth.IsAuthenticated()\">\r\n                        <span class='glyphicon glyphicon-user'></span> Logout\r\n                    </a>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2856,7 +2856,7 @@ module.exports = ".search-hero {\r\n    max-width: 500px;\r\n    padding-bottom:
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"overflow-x:hidden\">\n  <div class=\"container m-0\">\n      <div class=\"row\" style=\"margin-left:1%; margin-right:1%\">\n          <h2>Order History</h2>\n          <div *ngIf=\"clonedOrder.length == 0\">\n              <h4>Empty</h4>\n            </div>\n            <div *ngIf=\"clonedOrder.length > 0\">\n        <div class=\"search-hero\">\n          <input class=\"form-control\" type=\"text\" name=\"search\" [(ngModel)]=\"searchText\" autocomplete=\"on\" placeholder=\"&#61442;  Search\">\n        </div>\n          <table  style='border-collapse:collapse'  class=\"table table-striped\">\n          <thead>\n              <tr>\n                <th (click)=\"sortList('order_Number')\">Order Number\n                  <span *ngIf=\"key === 'order_Number'\">\n                    <span *ngIf=\"reverse\">\n                      <i class=\"fa fa-arrow-up\"></i>\n                    </span>\n                    <span *ngIf=\"!reverse\">\n                      <i class=\"fa fa-arrow-down\"></i>\n                    </span>\n                </span>                \n                </th>\n                <th (click)=\"sortList('orderDate')\">Order Date\n                <span *ngIf=\"key === 'orderDate'\">\n                    <span *ngIf=\"reverse\">\n                      <i class=\"fa fa-arrow-up\"></i>\n                    </span>\n                    <span *ngIf=\"!reverse\">\n                      <i class=\"fa fa-arrow-down\"></i>\n                    </span>\n                </span>                \n                </th>\n              <th (click)=\"sortList('type')\">Type\n                <span *ngIf=\"key === 'type'\">\n                    <span *ngIf=\"reverse\">\n                      <i class=\"fa fa-arrow-up\"></i>\n                    </span>\n                <span *ngIf=\"!reverse\">\n                      <i class=\"fa fa-arrow-down\"></i>\n                      </span>\n                </span>            \n              </th>\n              <th (click)=\"sortList('cpu')\">CPU\n                  <span *ngIf=\"key === 'cpu'\">\n                      <span *ngIf=\"reverse\">\n                        <i class=\"fa fa-arrow-up\"></i>\n                      </span>\n                      <span *ngIf=\"!reverse\">\n                        <i class=\"fa fa-arrow-down\"></i>\n                      </span>\n                  </span>              \n              </th>\n              <th (click)=\"sortList('motherboard')\">Motherboard\n                <span *ngIf=\"key === 'motherboard'\">\n                    <span *ngIf=\"reverse\">\n                      <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                    </span>\n                    <span *ngIf=\"!reverse\">\n                      <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                    </span>\n                </span>                 \n              </th>\n              <th (click)=\"sortList('ram')\">RAM\n                  <span *ngIf=\"key === 'ram'\">\n                      <span *ngIf=\"reverse\">\n                        <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                      </span>\n                      <span *ngIf=\"!reverse\">\n                        <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                      </span>\n                  </span>                    \n                </th>\n                <th (click)=\"sortList('gpu')\">GPU\n                  <span *ngIf=\"key === 'gpu'\">\n                    <span *ngIf=\"reverse\">\n                    <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                    </span>\n                    <span *ngIf=\"!reverse\">\n                      <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                    </span>\n                  </span>              \n                </th>\n                <th (click)=\"sortList('storage')\">Storage\n                    <span *ngIf=\"key === 'storage'\">\n                        <span *ngIf=\"reverse\">\n                          <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                        </span>\n                        <span *ngIf=\"!reverse\">\n                          <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                        </span>\n                    </span>               \n                </th>\n                <th (click)=\"sortList('power_Supply')\">PowerSupply\n                    <span *ngIf=\"key === 'power_Supply'\">\n                        <span *ngIf=\"reverse\">\n                          <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                        </span>\n                        <span *ngIf=\"!reverse\">\n                          <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                        </span>\n                    </span>                   \n                </th>\n                <th (click)=\"sortList('cooling_Fan')\">Cooling Fan\n                  <span *ngIf=\"key === 'cooling_Fan'\">\n                      <span *ngIf=\"reverse\">\n                        <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                      </span>\n                      <span *ngIf=\"!reverse\">\n                        <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                      </span>\n                  </span>                     \n                </th>\n                <th (click)=\"sortList('case')\">Case\n                  <span *ngIf=\"key === 'case'\">\n                    <span *ngIf=\"reverse\">\n                      <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                    </span>\n                    <span *ngIf=\"!reverse\">\n                      <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                    </span>\n                  </span>                      \n                </th>\n                <th (click)=\"sortList('total_Price')\">Total Price\n                  <span *ngIf=\"key === 'total_Price'\">\n                    <span *ngIf=\"reverse\">\n                      <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                    </span>\n                    <span *ngIf=\"!reverse\">\n                      <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                    </span>\n                  </span>                       \n                </th>    \n              </tr>\n            </thead>\n          <tbody>\n          <tr *ngFor=\"let t of clonedOrder | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }\">\n            <td>{{t.order_Number}}</td>\n            <td>{{t.orderDate| date:'MM/dd/yyyy'}}</td>\n            <td>{{t.type}}</td>\n            <td>{{t.cpu}}</td>      \n            <td>{{t.motherboard}}</td>\n            <td>{{t.ram}}</td>      \n            <td>{{t.gpu}}</td>      \n            <td>{{t.storage}}</td>\n            <td>{{t.power_Supply}}</td>\n            <td>{{t.cooling_Fan}}</td>      \n            <td>{{t.case}}</td>\n            <td>{{t.total_Price}}</td>\n          </tr>\n          </tbody>     \n        </table>\n        <pagination-controls (pageChange)=\"p = $event\"></pagination-controls>\n      </div>\n    </div>\n  </div> \n</div>"
+module.exports = "<div style=\"overflow-x:hidden\">\n  <div class=\"container m-0\">\n      <div class=\"row\" style=\"margin-left:1%; margin-right:1%\">\n          <h2>Order History</h2>\n          <div *ngIf=\"clonedOrder.length == 0\">\n              <h4>Empty</h4>\n            </div>\n            <div *ngIf=\"clonedOrder.length > 0\">\n        <div class=\"search-hero\">\n          <input class=\"form-control\" type=\"text\" name=\"search\" [(ngModel)]=\"searchText\" autocomplete=\"on\" placeholder=\"&#61442;  Search\">\n        </div>\n          <table  style='border-collapse:collapse'  class=\"table table-striped\">\n          <thead>\n              <tr>\n                <th (click)=\"SortList('order_Number')\">Order Number\n                  <span *ngIf=\"key === 'order_Number'\">\n                    <span *ngIf=\"reverse\">\n                      <i class=\"fa fa-arrow-up\"></i>\n                    </span>\n                    <span *ngIf=\"!reverse\">\n                      <i class=\"fa fa-arrow-down\"></i>\n                    </span>\n                </span>                \n                </th>\n                <th (click)=\"SortList('orderDate')\">Order Date\n                <span *ngIf=\"key === 'orderDate'\">\n                    <span *ngIf=\"reverse\">\n                      <i class=\"fa fa-arrow-up\"></i>\n                    </span>\n                    <span *ngIf=\"!reverse\">\n                      <i class=\"fa fa-arrow-down\"></i>\n                    </span>\n                </span>                \n                </th>\n              <th (click)=\"SortList('type')\">Type\n                <span *ngIf=\"key === 'type'\">\n                    <span *ngIf=\"reverse\">\n                      <i class=\"fa fa-arrow-up\"></i>\n                    </span>\n                <span *ngIf=\"!reverse\">\n                      <i class=\"fa fa-arrow-down\"></i>\n                      </span>\n                </span>            \n              </th>\n              <th (click)=\"SortList('cpu')\">CPU\n                  <span *ngIf=\"key === 'cpu'\">\n                      <span *ngIf=\"reverse\">\n                        <i class=\"fa fa-arrow-up\"></i>\n                      </span>\n                      <span *ngIf=\"!reverse\">\n                        <i class=\"fa fa-arrow-down\"></i>\n                      </span>\n                  </span>              \n              </th>\n              <th (click)=\"SortList('motherboard')\">Motherboard\n                <span *ngIf=\"key === 'motherboard'\">\n                    <span *ngIf=\"reverse\">\n                      <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                    </span>\n                    <span *ngIf=\"!reverse\">\n                      <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                    </span>\n                </span>                 \n              </th>\n              <th (click)=\"SortList('ram')\">RAM\n                  <span *ngIf=\"key === 'ram'\">\n                      <span *ngIf=\"reverse\">\n                        <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                      </span>\n                      <span *ngIf=\"!reverse\">\n                        <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                      </span>\n                  </span>                    \n                </th>\n                <th (click)=\"SortList('gpu')\">GPU\n                  <span *ngIf=\"key === 'gpu'\">\n                    <span *ngIf=\"reverse\">\n                    <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                    </span>\n                    <span *ngIf=\"!reverse\">\n                      <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                    </span>\n                  </span>              \n                </th>\n                <th (click)=\"SortList('storage')\">Storage\n                    <span *ngIf=\"key === 'storage'\">\n                        <span *ngIf=\"reverse\">\n                          <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                        </span>\n                        <span *ngIf=\"!reverse\">\n                          <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                        </span>\n                    </span>               \n                </th>\n                <th (click)=\"SortList('power_Supply')\">PowerSupply\n                    <span *ngIf=\"key === 'power_Supply'\">\n                        <span *ngIf=\"reverse\">\n                          <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                        </span>\n                        <span *ngIf=\"!reverse\">\n                          <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                        </span>\n                    </span>                   \n                </th>\n                <th (click)=\"SortList('cooling_Fan')\">Cooling Fan\n                  <span *ngIf=\"key === 'cooling_Fan'\">\n                      <span *ngIf=\"reverse\">\n                        <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                      </span>\n                      <span *ngIf=\"!reverse\">\n                        <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                      </span>\n                  </span>                     \n                </th>\n                <th (click)=\"SortList('case')\">Case\n                  <span *ngIf=\"key === 'case'\">\n                    <span *ngIf=\"reverse\">\n                      <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                    </span>\n                    <span *ngIf=\"!reverse\">\n                      <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                    </span>\n                  </span>                      \n                </th>\n                <th (click)=\"SortList('total_Price')\">Total Price\n                  <span *ngIf=\"key === 'total_Price'\">\n                    <span *ngIf=\"reverse\">\n                      <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                    </span>\n                    <span *ngIf=\"!reverse\">\n                      <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                    </span>\n                  </span>                       \n                </th>    \n              </tr>\n            </thead>\n          <tbody>\n          <tr *ngFor=\"let t of clonedOrder | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }\">\n            <td>{{t.order_Number}}</td>\n            <td>{{t.orderDate| date:'MM/dd/yyyy'}}</td>\n            <td>{{t.type}}</td>\n            <td>{{t.cpu}}</td>      \n            <td>{{t.motherboard}}</td>\n            <td>{{t.ram}}</td>      \n            <td>{{t.gpu}}</td>      \n            <td>{{t.storage}}</td>\n            <td>{{t.power_Supply}}</td>\n            <td>{{t.cooling_Fan}}</td>      \n            <td>{{t.case}}</td>\n            <td>{{t.total_Price}}</td>\n          </tr>\n          </tbody>     \n        </table>\n        <pagination-controls (pageChange)=\"p = $event\"></pagination-controls>\n      </div>\n    </div>\n  </div> \n</div>"
 
 /***/ }),
 
@@ -2919,17 +2919,17 @@ var OrderhistoryComponent = /** @class */ (function () {
         this.key = 'order_Number'; // sort default by name
         this.reverse = false;
     }
-    OrderhistoryComponent.prototype.sortList = function (key) {
+    OrderhistoryComponent.prototype.SortList = function (key) {
         this.key = key;
         this.reverse = !this.reverse;
     };
     OrderhistoryComponent.prototype.ngOnInit = function () {
         var _this = this;
-        if (!this.Auth.isAuthenticated()) {
+        if (!this.Auth.IsAuthenticated()) {
             this.router.navigate(['/home']);
         }
         var accountId = localStorage.getItem('account_id');
-        this.MakeService.getOrder().subscribe(function (order) {
+        this.MakeService.GetOrder().subscribe(function (order) {
             _this.order = order;
             _this.clonedOrder = JSON.parse(JSON.stringify(_this.order
                 .filter(function (e) {
@@ -2967,7 +2967,7 @@ var OrderhistoryComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1 mat-dialog-title>Upload Photo</h1>\r\n    <div mat-dialog-content> \r\n        <p *ngIf=\"count > 4\">Maximum image upload reached.</p>\r\n        <input *ngIf=\"!(count > 4)\" type=\"file\" (change)=\"uploadPhoto()\" #fileInput >                                        \r\n    <img *ngFor=\"let photo of photos\" src=\"/Uploads/{{ photo.fileName }}\" class=\"img-thumbnail\"> \r\n    </div>\r\n<div mat-dialog-actions>\r\n  <button mat-button (click)=\"done()\">Done</button>\r\n</div>\r\n\r\n"
+module.exports = "<h1 mat-dialog-title>Upload Photo</h1>\r\n    <div mat-dialog-content> \r\n        <p *ngIf=\"count > 4\">Maximum image upload reached.</p>\r\n        <input *ngIf=\"!(count > 4)\" type=\"file\" (change)=\"UploadPhoto()\" #fileInput >                                        \r\n    <img *ngFor=\"let photo of photos\" src=\"/Uploads/{{ photo.fileName }}\" class=\"img-thumbnail\"> \r\n    </div>\r\n<div mat-dialog-actions>\r\n  <button mat-button (click)=\"done()\">Done</button>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -3058,7 +3058,7 @@ var SellComponent = /** @class */ (function () {
         this.isLinear = false;
     }
     SellComponent.prototype.ngOnInit = function () {
-        if (!this.Auth.isAuthenticated()) {
+        if (!this.Auth.IsAuthenticated()) {
             this.router.navigate(['/home']);
         }
         //initialize accountId
@@ -3120,13 +3120,13 @@ var SellComponent = /** @class */ (function () {
         this.caseFormGroup.reset();
         this.coolingFormGroup.reset();
         this.priceFormGroup.reset();
-        this.MakeService.createSaleItem(this.tmpThisOrder).subscribe(function (x) {
-            _this.MakeService.getAllSaleItem().subscribe(function (uploadedItem) {
+        this.MakeService.CreateSaleItem(this.tmpThisOrder).subscribe(function (x) {
+            _this.MakeService.GetAllSaleItem().subscribe(function (uploadedItem) {
                 // this.uploadedItem = uploadedItem;
                 // var lastItem = this.uploadedItem.pop();
                 //   this.uploadedItemId = lastItem.id;
                 //   console.log("uploadeditemid", this.uploadedItemId)
-                //   this.openDialog();
+                //   this.OpenDialog();
                 _this.tmpThisOrder = {
                     accountsaleitemid: '',
                     type: 'Used',
@@ -3146,7 +3146,7 @@ var SellComponent = /** @class */ (function () {
             });
         });
     };
-    SellComponent.prototype.openDialog = function () {
+    SellComponent.prototype.OpenDialog = function () {
         var dialogRef = this.dialog.open(UploadDialog, {
             width: '250px',
             data: { itemId: this.uploadedItemId }
@@ -3183,7 +3183,7 @@ var UploadDialog = /** @class */ (function () {
             _this.photos = photos;
         });
     };
-    UploadDialog.prototype.uploadPhoto = function () {
+    UploadDialog.prototype.UploadPhoto = function () {
         var _this = this;
         var nativeElement = this.fileInput.nativeElement;
         this.photoService.upload(this.itemObject.itemId, nativeElement.files[0])
@@ -3191,10 +3191,10 @@ var UploadDialog = /** @class */ (function () {
             _this.photos.push(photo);
             _this.count = _this.count + 1;
         }, function (err) {
-            _this.openSnackBar();
+            _this.OpenSnackbar();
         });
     };
-    UploadDialog.prototype.openSnackBar = function () {
+    UploadDialog.prototype.OpenSnackbar = function () {
         this.snackBar.openFromComponent(snackErrorMessage, {
             duration: 5000,
         });
@@ -3265,7 +3265,7 @@ module.exports = "\r\n\r\n.search-hero {\r\n    max-width: 500px;\r\n    padding
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n        <div class=\"container m-0\">\n            <div class=\"row text-center\" style=\"margin-left:1%; margin-right:1%\">\n                <h2>Shopping Cart</h2>\n                <div *ngIf=\"shoppingOrder.length == 0\">\n                  <h4>Empty</h4>\n                </div>\n                <div *ngIf=\"shoppingOrder.length > 0\">\n            <div class=\"search-hero\">\n              <input class=\"form-control\" type=\"text\" name=\"search\" [(ngModel)]=\"searchText\" autocomplete=\"on\" placeholder=\"&#61442;  Search\">\n            </div>    \n              <table style=\"border-collapse:collapse\" class=\"table table-striped\">\n              <thead>\n                  <tr>\n                  <th style=\"text-align: center;\">Delete</th>\n                  <th (click)=\"sortList('type')\">Type\n                    <span *ngIf=\"key === 'type'\">\n                        <span *ngIf=\"reverse\">\n                          <i class=\"fa fa-arrow-up\"></i>\n                        </span>\n                    <span *ngIf=\"!reverse\">\n                          <i class=\"fa fa-arrow-down\"></i>\n                          </span>\n                    </span>            \n                  </th>\n                  <th (click)=\"sortList('cpu')\">CPU\n                      <span *ngIf=\"key === 'cpu'\">\n                          <span *ngIf=\"reverse\">\n                            <i class=\"fa fa-arrow-up\"></i>\n                          </span>\n                          <span *ngIf=\"!reverse\">\n                            <i class=\"fa fa-arrow-down\"></i>\n                          </span>\n                      </span>              \n                  </th>\n                  <th (click)=\"sortList('motherboard')\">Motherboard\n                    <span *ngIf=\"key === 'motherboard'\">\n                        <span *ngIf=\"reverse\">\n                          <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                        </span>\n                        <span *ngIf=\"!reverse\">\n                          <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                        </span>\n                    </span>                 \n                  </th>\n                  <th (click)=\"sortList('ram')\">RAM\n                      <span *ngIf=\"key === 'ram'\">\n                          <span *ngIf=\"reverse\">\n                            <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                          </span>\n                          <span *ngIf=\"!reverse\">\n                            <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                          </span>\n                      </span>                    \n                    </th>\n                    <th (click)=\"sortList('gpu')\">GPU\n                      <span *ngIf=\"key === 'gpu'\">\n                        <span *ngIf=\"reverse\">\n                        <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                        </span>\n                        <span *ngIf=\"!reverse\">\n                          <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                        </span>\n                      </span>              \n                    </th>\n                    <th (click)=\"sortList('storage')\">Storage \n                        <span *ngIf=\"key === 'storage'\">\n                            <span *ngIf=\"reverse\">\n                              <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                            </span>\n                            <span *ngIf=\"!reverse\">\n                              <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                            </span>\n                        </span>               \n                    </th>\n                    <th (click)=\"sortList('power_Supply')\">PowerSupply\n                        <span *ngIf=\"key === 'power_Supply'\">\n                            <span *ngIf=\"reverse\">\n                              <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                            </span>\n                            <span *ngIf=\"!reverse\">\n                              <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                            </span>\n                        </span>                   \n                    </th>\n                    <th (click)=\"sortList('cooling_Fan')\">Cooling Fan\n                      <span *ngIf=\"key === 'cooling_Fan'\">\n                          <span *ngIf=\"reverse\">\n                            <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                          </span>\n                          <span *ngIf=\"!reverse\">\n                            <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                          </span>\n                      </span>                     \n                    </th>\n                    <th (click)=\"sortList('case')\">Case\n                      <span *ngIf=\"key === 'case'\">\n                        <span *ngIf=\"reverse\">\n                          <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                        </span>\n                        <span *ngIf=\"!reverse\">\n                          <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                        </span>\n                      </span>                      \n                    </th>\n                    <th (click)=\"sortList('total_Price')\">Total Price\n                      <span *ngIf=\"key === 'total_Price'\">\n                        <span *ngIf=\"reverse\">\n                          <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                        </span>\n                        <span *ngIf=\"!reverse\">\n                          <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                        </span>\n                      </span>                       \n                    </th>    \n                  </tr>\n                </thead>\n              <tbody>\n              <tr *ngFor=\"let t of shoppingOrder | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index\">\n                <td style=\"text-align:center\">\n                  <button class=\"trash-button\">\n                      <i style=\"color:red\" class=\"fa fa-trash\" (click)=\"DeleteOrder(i)\" aria-hidden=\"true\"></i>\n                  </button>  \n                </td>\n                <td>{{t.type}}</td>\n                <td>{{t.cpu}}</td>\n                <td>{{t.motherboard}}</td>\n                <td>{{t.ram}}</td>\n                <td>{{t.gpu}}</td>\n                <td>{{t.storage}}</td>\n                <td>{{t.power_Supply}}</td>\n                <td>{{t.cooling_Fan}}</td>\n                <td>{{t.case}}</td>\n                <td>{{t.total_Price}}</td>\n              </tr>\n              </tbody>      \n            </table>\n            <pagination-controls (pageChange)=\"p = $event\"></pagination-controls>\n            <button mat-raised-button color=\"primary\"(click)=\"submit()\">Submit</button>\n            </div>\n          </div>\n        </div> \n      "
+module.exports = "\n        <div class=\"container m-0\">\n            <div class=\"row text-center\" style=\"margin-left:1%; margin-right:1%\">\n                <h2>Shopping Cart</h2>\n                <div *ngIf=\"shoppingOrder.length == 0\">\n                  <h4>Empty</h4>\n                </div>\n                <div *ngIf=\"shoppingOrder.length > 0\">\n            <div class=\"search-hero\">\n              <input class=\"form-control\" type=\"text\" name=\"search\" [(ngModel)]=\"searchText\" autocomplete=\"on\" placeholder=\"&#61442;  Search\">\n            </div>    \n              <table style=\"border-collapse:collapse\" class=\"table table-striped\">\n              <thead>\n                  <tr>\n                  <th style=\"text-align: center;\">Delete</th>\n                  <th (click)=\"SortList('type')\">Type\n                    <span *ngIf=\"key === 'type'\">\n                        <span *ngIf=\"reverse\">\n                          <i class=\"fa fa-arrow-up\"></i>\n                        </span>\n                    <span *ngIf=\"!reverse\">\n                          <i class=\"fa fa-arrow-down\"></i>\n                          </span>\n                    </span>            \n                  </th>\n                  <th (click)=\"SortList('cpu')\">CPU\n                      <span *ngIf=\"key === 'cpu'\">\n                          <span *ngIf=\"reverse\">\n                            <i class=\"fa fa-arrow-up\"></i>\n                          </span>\n                          <span *ngIf=\"!reverse\">\n                            <i class=\"fa fa-arrow-down\"></i>\n                          </span>\n                      </span>              \n                  </th>\n                  <th (click)=\"SortList('motherboard')\">Motherboard\n                    <span *ngIf=\"key === 'motherboard'\">\n                        <span *ngIf=\"reverse\">\n                          <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                        </span>\n                        <span *ngIf=\"!reverse\">\n                          <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                        </span>\n                    </span>                 \n                  </th>\n                  <th (click)=\"SortList('ram')\">RAM\n                      <span *ngIf=\"key === 'ram'\">\n                          <span *ngIf=\"reverse\">\n                            <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                          </span>\n                          <span *ngIf=\"!reverse\">\n                            <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                          </span>\n                      </span>                    \n                    </th>\n                    <th (click)=\"SortList('gpu')\">GPU\n                      <span *ngIf=\"key === 'gpu'\">\n                        <span *ngIf=\"reverse\">\n                        <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                        </span>\n                        <span *ngIf=\"!reverse\">\n                          <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                        </span>\n                      </span>              \n                    </th>\n                    <th (click)=\"SortList('storage')\">Storage \n                        <span *ngIf=\"key === 'storage'\">\n                            <span *ngIf=\"reverse\">\n                              <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                            </span>\n                            <span *ngIf=\"!reverse\">\n                              <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                            </span>\n                        </span>               \n                    </th>\n                    <th (click)=\"SortList('power_Supply')\">PowerSupply\n                        <span *ngIf=\"key === 'power_Supply'\">\n                            <span *ngIf=\"reverse\">\n                              <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                            </span>\n                            <span *ngIf=\"!reverse\">\n                              <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                            </span>\n                        </span>                   \n                    </th>\n                    <th (click)=\"SortList('cooling_Fan')\">Cooling Fan\n                      <span *ngIf=\"key === 'cooling_Fan'\">\n                          <span *ngIf=\"reverse\">\n                            <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                          </span>\n                          <span *ngIf=\"!reverse\">\n                            <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                          </span>\n                      </span>                     \n                    </th>\n                    <th (click)=\"SortList('case')\">Case\n                      <span *ngIf=\"key === 'case'\">\n                        <span *ngIf=\"reverse\">\n                          <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                        </span>\n                        <span *ngIf=\"!reverse\">\n                          <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                        </span>\n                      </span>                      \n                    </th>\n                    <th (click)=\"SortList('total_Price')\">Total Price\n                      <span *ngIf=\"key === 'total_Price'\">\n                        <span *ngIf=\"reverse\">\n                          <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>\n                        </span>\n                        <span *ngIf=\"!reverse\">\n                          <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>\n                        </span>\n                      </span>                       \n                    </th>    \n                  </tr>\n                </thead>\n              <tbody>\n              <tr *ngFor=\"let t of shoppingOrder | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index\">\n                <td style=\"text-align:center\">\n                  <button class=\"trash-button\">\n                      <i style=\"color:red\" class=\"fa fa-trash\" (click)=\"DeleteOrder(i)\" aria-hidden=\"true\"></i>\n                  </button>  \n                </td>\n                <td>{{t.type}}</td>\n                <td>{{t.cpu}}</td>\n                <td>{{t.motherboard}}</td>\n                <td>{{t.ram}}</td>\n                <td>{{t.gpu}}</td>\n                <td>{{t.storage}}</td>\n                <td>{{t.power_Supply}}</td>\n                <td>{{t.cooling_Fan}}</td>\n                <td>{{t.case}}</td>\n                <td>{{t.total_Price}}</td>\n              </tr>\n              </tbody>      \n            </table>\n            <pagination-controls (pageChange)=\"p = $event\"></pagination-controls>\n            <button mat-raised-button color=\"primary\"(click)=\"submit()\">Submit</button>\n            </div>\n          </div>\n        </div> \n      "
 
 /***/ }),
 
@@ -3360,8 +3360,8 @@ var ShoppingcartComponent = /** @class */ (function () {
     //         this.tmpObject.storage = this.shoppingOrder[tmp].storage;
     //         this.tmpObject.total_Price = this.shoppingOrder[tmp].total_Price;
     //         this.tmpObject.type = this.shoppingOrder[tmp].type;
-    //         this.makeService.createOrder(this.tmpObject).subscribe(x => x);
-    //         this.openSnackBar();
+    //         this.makeService.CreateOrder(this.tmpObject).subscribe(x => x);
+    //         this.OpenSnackbar();
     //         };
     //       })
     //     }
@@ -3396,12 +3396,12 @@ var ShoppingcartComponent = /** @class */ (function () {
         this.key = 'order_Number'; // sort default by name
         this.reverse = false;
     }
-    ShoppingcartComponent.prototype.sortList = function (key) {
+    ShoppingcartComponent.prototype.SortList = function (key) {
         this.key = key;
         this.reverse = !this.reverse;
     };
     ShoppingcartComponent.prototype.ngOnInit = function () {
-        if (!this.auth.isAuthenticated()) {
+        if (!this.auth.IsAuthenticated()) {
             this.router.navigate(['/home']);
         }
         this.shoppingOrder = this.ShoppingcartService.get();

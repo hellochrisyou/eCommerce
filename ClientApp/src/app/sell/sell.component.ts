@@ -58,7 +58,7 @@ export class SellComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        if (!this.Auth.isAuthenticated()) {
+        if (!this.Auth.IsAuthenticated()) {
             this.router.navigate(['/home']);
         }
         //Initialize accountId
@@ -126,13 +126,13 @@ export class SellComponent implements OnInit {
         this.priceFormGroup.reset();
 
         //Crreate Service Call
-        this.MakeService.createSaleItem(this.tmpThisOrder).subscribe(x => {
-            this.MakeService.getAllSaleItem().subscribe(uploadedItem => {
+        this.MakeService.CreateSaleItem(this.tmpThisOrder).subscribe(x => {
+            this.MakeService.GetAllSaleItem().subscribe(uploadedItem => {
                 this.uploadedItem = uploadedItem;
                 var lastItem = this.uploadedItem.pop();
                 this.uploadedItemId = lastItem.id;
                 //Prompt Upload Picture
-                this.openDialog();
+                this.OpenDialog();
                 this.tmpThisOrder = {
                     accountsaleitemid: '',
                     type: 'Used',
@@ -153,7 +153,7 @@ export class SellComponent implements OnInit {
         });
     }
 
-    openDialog(): void {
+    OpenDialog(): void {
         const dialogRef = this.dialog.open(UploadDialog, {
             width: '250px',
             data: {
@@ -184,31 +184,31 @@ export class UploadDialog {
         @Inject(MAT_DIALOG_DATA) public itemObject: uploadedItemId) {}
 
     ngOnInit() {
-        this.photoService.getPhotos(this.itemObject.itemId).subscribe(photos => {
+        this.photoService.GetPhotos(this.itemObject.itemId).subscribe(photos => {
             this.photos = photos
         });
     }
 
-    uploadPhoto() {
+    UploadPhoto() {
         var nativeElement: HTMLInputElement = this.fileInput.nativeElement;
-        this.photoService.upload(this.itemObject.itemId, nativeElement.files[0])
+        this.photoService.Upload(this.itemObject.itemId, nativeElement.files[0])
             .subscribe(photo => {
                     this.photos.push(photo);
                     this.count = this.count + 1;
                 },
                 err => {
-                    this.openSnackBar();
+                    this.OpenSnackbar();
                 }
             );
     }
 
-    openSnackBar() {
+    OpenSnackbar() {
         this.snackBar.openFromComponent(SnackErrorMessage, {
             duration: 5000,
         });
     }
 
-    done(): void {
+    Done(): void {
         this.dialogRef.close();
     }
 }

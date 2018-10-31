@@ -20,7 +20,7 @@ namespace CyouEcommerce.Controllers
             this.context = context;
         }
         [HttpPost]
-        public async Task<IActionResult> CreateGPU ([FromBody] KeyValuePairResource KeyValuePairResource)
+        public async Task<IActionResult> CreateGpu ([FromBody] KeyValuePairResource KeyValuePairResource)
         {
             if (!ModelState.IsValid)
             {
@@ -34,7 +34,7 @@ namespace CyouEcommerce.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateGPU (int id, [FromBody] KeyValuePairResource KeyValuePairResource)
+        public async Task<IActionResult> UpdateGpu (int id, [FromBody] KeyValuePairResource KeyValuePairResource)
         {
             if (!ModelState.IsValid)
             {
@@ -52,7 +52,7 @@ namespace CyouEcommerce.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteGPU(int id)
+        public async Task<IActionResult> DeleteGpu(int id)
         {
             var gpu = await context.GPUs.FindAsync(id);
 
@@ -66,7 +66,7 @@ namespace CyouEcommerce.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<KeyValuePairResource>> GetGPU()
+        public async Task<IEnumerable<KeyValuePairResource>> GetGpu()
         {
             var features = await context.GPUs.ToListAsync();      
             return mapper.Map<List<GPU>, List<KeyValuePairResource>>(features);

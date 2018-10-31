@@ -30,21 +30,21 @@ export class ShoppingcartService {
   //Sorting Logic
   key = 'order_Number'; // Sort Default by Name
   reverse = false;
-  sortList(key) {
+  SortList(key) {
       this.key = key;
       this.reverse = !this.reverse;
   }
 
   constructor() {}
 
-  add(tmpOrder) {
+  Add(tmpOrder) {
       this.tmpThisOrder = tmpOrder;
       this.tmpArray.push(this.tmpThisOrder);
   }
-  delete(index) {
+  Delete(index) {
       this.tmpArray.splice(index, 1);
   }
-  get() {
+  Get() {
       return this.tmpArray;
   }
 }

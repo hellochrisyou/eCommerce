@@ -21,7 +21,7 @@ namespace CyouEcommerce.Controllers
             this.context = context;
         }
         [HttpPost]
-        public async Task<IActionResult> CreateRAM ([FromBody] KeyValuePairResource KeyValuePairResource)
+        public async Task<IActionResult> CreateRam ([FromBody] KeyValuePairResource KeyValuePairResource)
         {
             if (!ModelState.IsValid)
             {
@@ -35,7 +35,7 @@ namespace CyouEcommerce.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateRAM (int id, [FromBody] KeyValuePairResource KeyValuePairResource)
+        public async Task<IActionResult> UpdateRam (int id, [FromBody] KeyValuePairResource KeyValuePairResource)
         {
             if (!ModelState.IsValid)
             {
@@ -53,7 +53,7 @@ namespace CyouEcommerce.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRAM(int id)
+        public async Task<IActionResult> DeleteRam(int id)
         {
             var ram = await context.RAMs.FindAsync(id);
 
@@ -67,7 +67,7 @@ namespace CyouEcommerce.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<KeyValuePairResource>> GetRAM()
+        public async Task<IEnumerable<KeyValuePairResource>> GetRam()
         {
             var features = await context.RAMs.ToListAsync();      
             return mapper.Map<List<RAM>, List<KeyValuePairResource>>(features);

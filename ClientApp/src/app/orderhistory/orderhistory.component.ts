@@ -38,7 +38,7 @@ export class OrderhistoryComponent implements OnInit {
   // Sorting Logic
   key = 'order_Number'; // sort default by name
   reverse = false;
-  sortList(key) {
+  SortList(key) {
       this.key = key;
       this.reverse = !this.reverse;
   }
@@ -51,11 +51,11 @@ export class OrderhistoryComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-      if (!this.Auth.isAuthenticated()) {
+      if (!this.Auth.IsAuthenticated()) {
           this.router.navigate(['/home']);
       }
       var accountId = localStorage.getItem('account_id');
-      this.MakeService.getOrder().subscribe(order => {
+      this.MakeService.GetOrder().subscribe(order => {
           this.order = order;
           this.clonedOrder = JSON.parse(JSON.stringify(this.order
               .filter(

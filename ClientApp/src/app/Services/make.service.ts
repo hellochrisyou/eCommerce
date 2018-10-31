@@ -11,134 +11,134 @@ export class MakeService {
   constructor(private http: Http) {}
 
   //get
-  getCase() {
+  GetCase() {
       return this.http.get('/api/Case').map(res => res.json());
   }
-  getCoolingfan() {
+  GetCoolingFan() {
       return this.http.get('/api/CoolingFan').map(res => res.json());
   }
-  getCPU() {
+  GetCpu() {
       return this.http.get('/api/CPU').map(res => res.json());
   }
-  getGPU() {
+  GetGpu() {
       return this.http.get('/api/GPU').map(res => res.json());
   }
-  getMotherboard() {
+  GetMotherboard() {
       return this.http.get('/api/Motherboard').map(res => res.json());
   }
-  getPowersupply() {
+  GetPowersupply() {
       return this.http.get('/api/PowerSupply').map(res => res.json());
   }
-  getRAM() {
+  GetRam() {
       return this.http.get('/api/RAM').map(res => res.json());
   }
-  getStorage() {
+  GetStorage() {
       return this.http.get('/api/Storage').map(res => res.json());
   }
-  getOrder() {
+  GetOrder() {
       return this.http.get('/api/Order').map(res => res.json());
   }
-  getAccount() {
+  GetAccount() {
       return this.http.get('/api/Account').map(res => res.json());
   }
-  getAllSaleItem() {
+  GetAllSaleItem() {
       return this.http.get('/api/ItemForSale').map(res => res.json());
   }
-  getSaleItem(itemId) {
+  GetSaleItem(itemId) {
       return this.http.get('/api/ItemForSale').map(res => res.json());
   }
   //create
-  createCase(caseItem) {
+  CreateCase(caseItem) {
       return this.http.post('/api/Case', caseItem).map(res => res.json());
   }
-  createCoolingfan(coolingfan) {
+  CreateCoolingFan(coolingfan) {
       return this.http.post('/api/Coolingfan', coolingfan).map(res => res.json());
   }
-  createCPU(cpu) {
+  CreateCpu(cpu) {
       return this.http.post('/api/CPU', cpu).map(res => res.json());
   }
-  createGPU(gpu) {
+  CreateGpu(gpu) {
       return this.http.post('/api/GPU', gpu).map(res => res.json());
   }
-  createMotherboard(motherboard) {
+  CreateMotherboard(motherboard) {
       return this.http.post('/api/Motherboard', motherboard).map(res => res.json());
   }
-  createPowersupply(powersupply) {
+  CreatePowersupply(powersupply) {
       return this.http.post('/api/Powersupply', powersupply).map(res => res.json());
   }
-  createRAM(ram) {
+  CreateRam(ram) {
       return this.http.post('/api/RAM', ram).map(res => res.json());
   }
-  createStorage(storage) {
+  CreateStorage(storage) {
       return this.http.post('/api/Storage', storage).map(res => res.json());
   }
-  createAccount(account) {
+  CreateAccount(account) {
       return this.http.post('/api/Account', account);
   }
-  createOrder(order) {
+  CreateOrder(order) {
       return this.http.post('/api/Order', order);
   }
-  createSaleItem(saleItem) {
+  CreateSaleItem(saleItem) {
       return this.http.post('/api/ItemForSale', saleItem);
   }
-  createUser(user) {
+  CreateUser(user) {
       return this.http.post('/api/Account', user);
   }
 
   //update
-  updateAccount(account) {
+  UpdateAccount(account) {
       return this.http.put('/api/Account/' + account.id, account).map(res => res.json());
   }
-  updateCPU(cpu) {
+  UpdateCpu(cpu) {
       return this.http.put('/api/CPU/' + cpu.id, cpu).map(res => res.json());
   }
-  updateCase(caseItem) {
+  UpdateCase(caseItem) {
       return this.http.put('/api/Case/' + caseItem.id, caseItem).map(res => res.json());
   }
-  updateCoolingFan(coolingFan) {
+  UpdateCoolingFan(coolingFan) {
       return this.http.put('/api/CoolingFan/' + coolingFan.id, coolingFan).map(res => res.json());
   }
-  updatePowerSupply(powerSupply) {
+  UpdatePowerSupply(powerSupply) {
       return this.http.put('/api/PowerSupply/' + powerSupply.id, powerSupply).map(res => res.json());
   }
-  updateGPU(gpu) {
+  UpdateGpu(gpu) {
       return this.http.put('/api/GPU/' + gpu.id, gpu).map(res => res.json());
   }
-  updateMotherboard(motherboard) {
+  UpdateMotherboard(motherboard) {
       return this.http.put('/api/Motherboard/' + motherboard.id, motherboard).map(res => res.json());
   }
-  updateRAM(ram) {
+  UpdateRam(ram) {
       return this.http.put('/api/RAM/' + ram.id, ram).map(res => res.json());
   }
-  updateStorage(storage) {
+  UpdateStorage(storage) {
       return this.http.put('/api/Storage/' + storage.id, storage).map(res => res.json());
   }
   //delete
-  deleteCPU(id) {
+  DeleteCpu(id) {
       return this.http.delete('/api/CPU/' + id).map(res => res.json());
   }
-  deleteCase(id) {
+  DeleteCase(id) {
       return this.http.delete('/api/Case/' + id).map(res => res.json());
   }
-  deleteCoolingFan(id) {
+  DeleteCoolingFan(id) {
       return this.http.delete('/api/CoolingFan/' + id).map(res => res.json());
   }
-  deletePowerSupply(id) {
+  DeletePowersupply(id) {
       return this.http.delete('/api/PowerSupply/' + id).map(res => res.json());
   }
-  deleteGPU(id) {
+  DeleteGpu(id) {
       return this.http.delete('/api/GPU/' + id).map(res => res.json());
   }
-  deleteMotherboard(id) {
+  DeleteMotherboard(id) {
       return this.http.delete('/api/Motherboard/' + id).map(res => res.json());
   }
-  deleteRAM(id) {
+  DeleteRam(id) {
       return this.http.delete('/api/RAM/' + id).map(res => res.json());
   }
-  deleteStorage(id) {
+  DeleteStorage(id) {
       return this.http.delete('/api/Storage/' + id).map(res => res.json());
   }
-  deleteUsed(id) {
+  DeleteUsed(id) {
       return this.http.delete('/api/ItemForSale/' + id).map(res => res.json());
   }
 }

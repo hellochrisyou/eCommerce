@@ -20,7 +20,7 @@ namespace CyouEcommerce.Controllers
             this.context = context;
         }
         [HttpPost]
-        public async Task<IActionResult> CreateCPU ([FromBody] KeyValuePairResource KeyValuePairResource)
+        public async Task<IActionResult> CreateCpu ([FromBody] KeyValuePairResource KeyValuePairResource)
         {
             if (!ModelState.IsValid)
             {
@@ -34,7 +34,7 @@ namespace CyouEcommerce.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCPU (int id, [FromBody] KeyValuePairResource KeyValuePairResource)
+        public async Task<IActionResult> UpdateCpu (int id, [FromBody] KeyValuePairResource KeyValuePairResource)
         {
             if (!ModelState.IsValid)
             {
@@ -52,7 +52,7 @@ namespace CyouEcommerce.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCPU(int id)
+        public async Task<IActionResult> DeleteCpu(int id)
         {
             var cpu = await context.CPUs.FindAsync(id);
 
@@ -66,7 +66,7 @@ namespace CyouEcommerce.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<KeyValuePairResource>> GetCPU()
+        public async Task<IEnumerable<KeyValuePairResource>> GetCpu()
         {
             var features = await context.CPUs.ToListAsync();      
             return mapper.Map<List<CPU>, List<KeyValuePairResource>>(features);

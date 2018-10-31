@@ -18,7 +18,7 @@ export class BuyUsedComponent implements OnInit {
   selection: any;
   tmpSelect: string = '';
   tmpSelectedFileName: string;
-  isAdmin: string = '';
+  IsAdmin: string = '';
   tmpShoppingOrder: ThisOrder;
 
   //Arrays
@@ -58,21 +58,21 @@ export class BuyUsedComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-      if (!this.Auth.isAuthenticated()) {
+      if (!this.Auth.IsAuthenticated()) {
           this.router.navigate(['/home']);
       }
       this.tmpSelect = '';
-      this.serviceGet();
+      this.GetService();
   }
 
-  serviceGet() {
+  GetService() {
       var accountId = localStorage.getItem('account_id');
-      this.isAdmin = localStorage.getItem('isAdmin');
-      this.MakeService.getAllSaleItem().subscribe(usedItem => {
+      this.IsAdmin = localStorage.getItem('IsAdmin');
+      this.MakeService.GetAllSaleItem().subscribe(usedItem => {
           this.allUsedItems = usedItem
 
           this.allUsedItems.forEach(element => {
-              this.photoService.getPhotos(element.id)
+              this.photoService.GetPhotos(element.id)
                   .subscribe(photo => {
                       this.collectionPhotos.push(photo);
                   });
@@ -85,34 +85,34 @@ export class BuyUsedComponent implements OnInit {
                       }
                   }
               );
-          this.filterItems(this.tmpSelect);
+          this.FilterItems(this.tmpSelect);
       });
   }
 
   DeleteItem(index) {
       if (this.tmpSelect === 'My items') {
-          this.MakeService.deleteUsed(this.myUsedItems[index].id).subscribe(x => {
+          this.MakeService.DeleteUsed(this.myUsedItems[index].id).subscribe(x => {
               x;
-              this.serviceGet();
-              this.filterItems('My items');
+              this.GetService();
+              this.FilterItems('My items');
           });;
       } else {
-          this.MakeService.deleteUsed(this.allUsedItems[index].id).subscribe(x => {
+          this.MakeService.DeleteUsed(this.allUsedItems[index].id).subscribe(x => {
               x;
-              this.serviceGet();
-              this.filterItems('All items');
+              this.GetService();
+              this.FilterItems('All items');
           });
       }
   }
 
-  addToCart(i) {
-      this.openUsedSnackBar();
+  AddToCart(i) {
+      this.OpenSnackbar();
       this.tmpThisOrder = this.allUsedItems[i];
       this.tmpThisOrder.total_Price = this.tmpThisOrder.total_Price.toString();
-      this.shoppingcart.add(this.tmpThisOrder);
+      this.shoppingcart.Add(this.tmpThisOrder);
   }
 
-  openDialog(selectedPic): void {
+  OpenDialog(selectedPic): void {
       this.tmpSelectedFileName = selectedPic.fileName;
       const dialogRef = this.dialog.open(ExpandPic, {
           width: '300px',
@@ -123,13 +123,13 @@ export class BuyUsedComponent implements OnInit {
       });
   }
 
-  openUsedSnackBar() {
+  OpenSnackbar() {
       this.UsedSnackBar.openFromComponent(ConfirmUsedItem, {
           duration: 5000,
       });
   }
 
-  filterItems(selection) {
+  FilterItems(selection) {
       if (selection === 'All items') {
           this.selectedItems = this.allUsedItems;
           this.tmpSelect = 'All items';

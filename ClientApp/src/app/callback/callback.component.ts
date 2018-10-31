@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
     ) {}
   
     ngOnInit() {
-      if (!this.auth.isAuthenticated()) {
+      if (!this.auth.IsAuthenticated()) {
         this.router.navigate(['/home']);
       }
     }

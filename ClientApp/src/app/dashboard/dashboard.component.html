@@ -49,8 +49,8 @@
                     [colors]="barChartColors"
                     [legend]="barChartLegend"
                     [chartType]="barChartType"
-                    (chartHover)="chartHovered($event)"
-                    (chartClick)="chartClicked($event)"></canvas>
+                    (chartHover)="ChartHovered($event)"
+                    (chartClick)="ChartClicked($event)"></canvas>
                  </div>
               </div>
               <!-- <div id="pieChart" style="margin-top:5%; padding:0px">                
@@ -60,8 +60,8 @@
                          [data]="orderData"
                          [labels]="pieChartLabels"
                          [chartType]="pieChartType"
-                         (chartHover)="chartHovered($event)"
-                         (chartClick)="chartClicked($event)"
+                         (chartHover)="ChartHovered($event)"
+                         (chartClick)="ChartClicked($event)"
                          [colors]="colors">
                  </canvas>
                  </div> -->
@@ -80,7 +80,7 @@
                  <table style="border-collapse:collapse" class="table table-striped">
                     <thead>
                        <tr>
-                          <th (click)="sortList('email')">Email
+                          <th (click)="SortList('email')">Email
                              <span *ngIf="key === 'email'">
                              <span *ngIf="reverse">
                              <i class="fa fa-arrow-up"></i>
@@ -90,7 +90,7 @@
                              </span>
                              </span>                
                           </th>
-                          <th (click)="sortList('master_account')">Master
+                          <th (click)="SortList('master_account')">Master
                              <span *ngIf="key === 'master_account'">
                              <span *ngIf="reverse">
                              <i class="fa fa-arrow-up"></i>
@@ -100,7 +100,7 @@
                              </span>
                              </span>            
                           </th>
-                          <th (click)="sortList('admin')">Admin
+                          <th (click)="SortList('admin')">Admin
                              <span *ngIf="key === 'admin'">
                              <span *ngIf="reverse">
                              <i class="fa fa-arrow-up"></i>
@@ -117,14 +117,14 @@
                           <!--added-->
                           <td>{{t.email}}</td>
                           <td>
-                             <!--added--><mat-slide-toggle (change)="updateAccount(i, 'master')"
+                             <!--added--><mat-slide-toggle (change)="UpdateAccount(i, 'master')"
                              [color]="red"
                              [checked]=t.master_account
                              [disabled] = "!isMaster"> <!--ADDED-->
                              </mat-slide-toggle>
                           </td>
                           <td>
-                             <!--added--><mat-slide-toggle (change)="updateAccount(i, 'admin')"
+                             <!--added--><mat-slide-toggle (change)="UpdateAccount(i, 'admin')"
                              [color]="red"
                              [checked]=t.admin>
                              </mat-slide-toggle>
@@ -174,7 +174,7 @@
                        <input matInput  matInput type="number" [(ngModel)]="tmpNewComponent.price" placeholder="Price">                                    
                     </mat-form-field>
                  </div>
-                 <button mat-raised-button color="primary" (click)="submitNewComponent()">Submit</button>
+                 <button mat-raised-button color="primary" (click)="SubmitNewComponent()">Submit</button>
               </mat-tab>
               <mat-tab>
                  <ng-template mat-tab-label>
@@ -182,7 +182,7 @@
                     Edit
                  </ng-template>
                  <mat-form-field class="filter-length">
-                    <mat-select placeholder="Filter" (selectionChange)="filterList()" [(ngModel)]="selectedFilter">
+                    <mat-select placeholder="Filter" (selectionChange)="FilterList()" [(ngModel)]="selectedFilter">
                     <mat-option *ngFor="let component of listComponents" [value]="component">
                     {{component}}
                     </mat-option>
@@ -197,7 +197,7 @@
                           <tr>
                              <th>Edit</th>
                              <th>Delete</th>
-                             <th (click)="sortList('hardwareType')">hardwareType
+                             <th (click)="SortList('hardwareType')">hardwareType
                                 <span *ngIf="key === 'hardwareType'">
                                 <span *ngIf="reverse">
                                 <i class="fa fa-arrow-up"></i>
@@ -207,7 +207,7 @@
                                 </span>
                                 </span>            
                              </th>
-                             <th (click)="sortList('name')">Name
+                             <th (click)="SortList('name')">Name
                                 <span *ngIf="key === 'name'">
                                 <span *ngIf="reverse">
                                 <i class="fa fa-arrow-up"></i>
@@ -217,7 +217,7 @@
                                 </span>
                                 </span>            
                              </th>
-                             <th (click)="sortList('brand')">Brand
+                             <th (click)="SortList('brand')">Brand
                                 <span *ngIf="key === 'brand'">
                                 <span *ngIf="reverse">
                                 <i class="fa fa-arrow-up"></i>
@@ -227,7 +227,7 @@
                                 </span>
                                 </span>              
                              </th>
-                             <th (click)="sortList('model')">Model
+                             <th (click)="SortList('model')">Model
                                 <span *ngIf="key === 'model'">
                                 <span *ngIf="reverse">
                                 <i class="fa fa-arrow-up" aria-hidden="true"></i>
@@ -237,7 +237,7 @@
                                 </span>
                                 </span>                 
                              </th>
-                             <th (click)="sortList('series')">Series
+                             <th (click)="SortList('series')">Series
                                 <span *ngIf="key === 'series'">
                                 <span *ngIf="reverse">
                                 <i class="fa fa-arrow-up" aria-hidden="true"></i>
@@ -247,7 +247,7 @@
                                 </span>
                                 </span>                    
                              </th>
-                             <th (click)="sortList('price')">Price
+                             <th (click)="SortList('price')">Price
                                 <span *ngIf="key === 'price'">
                                 <span *ngIf="reverse">
                                 <i class="fa fa-arrow-up" aria-hidden="true"></i>
@@ -257,7 +257,7 @@
                                 </span>
                                 </span>              
                              </th>
-                             <th (click)="sortList('details')">Details
+                             <th (click)="SortList('details')">Details
                                 <span *ngIf="key === 'details'">
                                 <span *ngIf="reverse">
                                 <i class="fa fa-arrow-up" aria-hidden="true"></i>
@@ -273,12 +273,12 @@
                           <tr *ngFor="let t of filteredComponent | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                              <td style="text-align:center">
                                 <button class="trash-button button-no-border">
-                                <i class="fa fa-edit" (click)="openDialog(i)" aria-hidden="true"></i>
+                                <i class="fa fa-edit" (click)="OpenDialog(i)" aria-hidden="true"></i>
                                 </button>  
                              </td>
                              <td style="text-align:center">
                                 <button class="trash-button button-no-border">
-                                <i style="color:red" class="fa fa-trash" (click)="deleteComponent(i)" aria-hidden="true"></i>
+                                <i style="color:red" class="fa fa-trash" (click)="DeleteComponent(i)" aria-hidden="true"></i>
                                 </button>  
                              </td>
                              <td>{{t.hardwareType}}</td>

@@ -16,7 +16,7 @@ export class ShoppingcartComponent implements OnInit {
   //Sorting Logic
   key = 'order_Number'; // sort default by name
   reverse = false;
-  sortList(key) {
+  SortList(key) {
       this.key = key;
       this.reverse = !this.reverse;
   }
@@ -30,17 +30,17 @@ export class ShoppingcartComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-      if (!this.auth.isAuthenticated()) {
+      if (!this.auth.IsAuthenticated()) {
           this.router.navigate(['/home']);
       }
-      this.shoppingOrder = this.ShoppingcartService.get();
+      this.shoppingOrder = this.ShoppingcartService.Get();
   }
 
   DeleteOrder(index) {
-      this.ShoppingcartService.delete(index);
+      this.ShoppingcartService.Delete(index);
   }
 
-  submit() {
+  Submit() {
       this.router.navigate(['/checkout']);
   }
 }

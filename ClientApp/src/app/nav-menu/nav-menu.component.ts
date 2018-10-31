@@ -18,11 +18,11 @@ export class NavMenuComponent{
    }, 2000);
   }
 
-  collapse() {
+  Collapse() {
     this.isExpanded = false;
   }
 
-  toggle() {
+  Toggle() {
     this.isExpanded = !this.isExpanded;
   }
 }

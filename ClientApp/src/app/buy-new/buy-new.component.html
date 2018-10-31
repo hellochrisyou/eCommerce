@@ -6,7 +6,7 @@
         <form [formGroup]="cpuFormGroup">
            <ng-template matStepLabel>CPU</ng-template>
            <form-field>
-              <select id="CPU" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.cpu" name="CPU" #case="ngModel" [ngModelOptions]="{standalone: true}">
+              <select id="CPU" class="form-control" (change)="CalculateTotal()" [(ngModel)]="tmpThisOrder.cpu" name="CPU" #case="ngModel" [ngModelOptions]="{standalone: true}">
               <option value=""></option>
               <option *ngFor="let m of CPU" value="{{ m.name }}">{{ m.name }}</option>
               </select>     
@@ -37,7 +37,7 @@
      <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="motherboardFormGroup">
            <ng-template matStepLabel>Motherboard</ng-template>
-           <select id="Motherboard" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.motherboard" name="Motherboard" #case="ngModel" [ngModelOptions]="{standalone: true}">
+           <select id="Motherboard" class="form-control" (change)="CalculateTotal()" [(ngModel)]="tmpThisOrder.motherboard" name="Motherboard" #case="ngModel" [ngModelOptions]="{standalone: true}">
            <option value=""></option>
            <option *ngFor="let m of motherboard" value="{{ m.name }}">{{ m.name }}</option>
            </select>     
@@ -67,7 +67,7 @@
      <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="motherboardFormGroup">
            <ng-template matStepLabel>RAM</ng-template>
-           <select id="RAM" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.ram" name="RAM" #case="ngModel" [ngModelOptions]="{standalone: true}">
+           <select id="RAM" class="form-control" (change)="CalculateTotal()" [(ngModel)]="tmpThisOrder.ram" name="RAM" #case="ngModel" [ngModelOptions]="{standalone: true}">
            <option value=""></option>
            <option *ngFor="let m of RAM" value="{{ m.name }}">{{ m.name }}</option>
            </select>     
@@ -97,7 +97,7 @@
      <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="storageFormGroup">
            <ng-template matStepLabel>Storage</ng-template>
-           <select id="Storage" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.storage" name="Storage" #case="ngModel" [ngModelOptions]="{standalone: true}">
+           <select id="Storage" class="form-control" (change)="CalculateTotal()" [(ngModel)]="tmpThisOrder.storage" name="Storage" #case="ngModel" [ngModelOptions]="{standalone: true}">
            <option value=""></option>
            <option *ngFor="let m of storage" value="{{ m.name }}">{{ m.name }}</option>
            </select>   
@@ -127,7 +127,7 @@
      <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="gpuFormGroup">
            <ng-template matStepLabel>GPU</ng-template>
-           <select id="GPU" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.gpu" name="GPU" #case="ngModel" [ngModelOptions]="{standalone: true}">
+           <select id="GPU" class="form-control" (change)="CalculateTotal()" [(ngModel)]="tmpThisOrder.gpu" name="GPU" #case="ngModel" [ngModelOptions]="{standalone: true}">
            <option value=""></option>
            <option *ngFor="let m of GPU" value="{{ m.name }}">{{ m.name }}</option>
            </select>   
@@ -157,7 +157,7 @@
      <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="powerFormGroup">
            <ng-template matStepLabel>Power Supply</ng-template>
-           <select id="Power_Supply" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.power_Supply" name="Power_Supply" #case="ngModel" [ngModelOptions]="{standalone: true}">
+           <select id="Power_Supply" class="form-control" (change)="CalculateTotal()" [(ngModel)]="tmpThisOrder.power_Supply" name="Power_Supply" #case="ngModel" [ngModelOptions]="{standalone: true}">
            <option value=""></option>
            <option *ngFor="let m of powerSupply" value="{{ m.name }}">{{ m.name }}</option>
            </select>     
@@ -187,7 +187,7 @@
      <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="coolingFormGroup">
            <ng-template matStepLabel>Cooling Fan</ng-template>
-           <select id="Cooling_Fan" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.cooling_Fan" name="Cooling_Fan" #case="ngModel" [ngModelOptions]="{standalone: true}">
+           <select id="Cooling_Fan" class="form-control" (change)="CalculateTotal()" [(ngModel)]="tmpThisOrder.cooling_Fan" name="Cooling_Fan" #case="ngModel" [ngModelOptions]="{standalone: true}">
            <option value=""></option>
            <option *ngFor="let m of coolingFan" value="{{ m.name }}">{{ m.name }}</option>
            </select>     
@@ -217,7 +217,7 @@
      <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="caseFormGroup">
            <ng-template matStepLabel>Case</ng-template>
-           <select id="Case" class="form-control" (change)="calculateTotal()" [(ngModel)]="tmpThisOrder.case" name="Case" #case="ngModel" [ngModelOptions]="{standalone: true}">
+           <select id="Case" class="form-control" (change)="CalculateTotal()" [(ngModel)]="tmpThisOrder.case" name="Case" #case="ngModel" [ngModelOptions]="{standalone: true}">
            <option value=""></option>
            <option *ngFor="let m of caseItem" value="{{ m.name }}">{{ m.name }}</option>
            </select>     
@@ -247,7 +247,7 @@
      <mat-step>
         <ng-template matStepLabel>Save</ng-template>
         <div>
-           <button mat-raised-button color="primary" (click)='stepper.reset();addOrder()' [disabled]="tmpThisOrder.cpu == '' || tmpThisOrder.case == '' || tmpThisOrder.cooling_Fan == '' || tmpThisOrder.gpu == '' || tmpThisOrder.motherboard == '' || tmpThisOrder.power_Supply == '' || tmpThisOrder.ram == '' || tmpThisOrder.storage == ''">Add to Shopping Cart</button>
+           <button mat-raised-button color="primary" (click)='stepper.reset();AddOrder()' [disabled]="tmpThisOrder.cpu == '' || tmpThisOrder.case == '' || tmpThisOrder.cooling_Fan == '' || tmpThisOrder.gpu == '' || tmpThisOrder.motherboard == '' || tmpThisOrder.power_Supply == '' || tmpThisOrder.ram == '' || tmpThisOrder.storage == ''">Add to Shopping Cart</button>
         </div>
      </mat-step>
      </mat-vertical-stepper>

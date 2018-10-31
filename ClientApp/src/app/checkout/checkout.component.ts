@@ -52,10 +52,10 @@ export class CheckoutComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-      if (!this.auth.isAuthenticated()) {
+      if (!this.auth.IsAuthenticated()) {
           this.router.navigate(['/home']);
       }
-      this.shoppingOrder = this.ShoppingcartService.get();
+      this.shoppingOrder = this.ShoppingcartService.Get();
       for (var tmp in this.shoppingOrder) {
           this.total_price = this.total_price + parseInt(this.shoppingOrder[tmp].total_Price, 10);
       }
@@ -101,21 +101,21 @@ export class CheckoutComponent implements OnInit {
                   this.tmpObject.storage = this.shoppingOrder[tmp].storage;
                   this.tmpObject.total_Price = this.shoppingOrder[tmp].total_Price;
                   this.tmpObject.type = this.shoppingOrder[tmp].type;
-                  this.makeService.createOrder(this.tmpObject).subscribe(x => x);
-                  this.openSnackBar();
+                  this.makeService.CreateOrder(this.tmpObject).subscribe(x => x);
+                  this.OpenSnackbar();
               };
           })
       }
   };
   ngAfterViewChecked() {
       if (!this.addScript) {
-          this.addPaypalScript().then(() => {
+          this.AddPaypalScript().then(() => {
               paypal.Button.render(this.paypalConfig, '#paypal-checkout-btn');
               this.paypalLoad = false;
           })
       }
   }
-  addPaypalScript() {
+  AddPaypalScript() {
       this.addScript = true;
       return new Promise((resolve, reject) => {
           let scripttagElement = document.createElement('script');
@@ -126,7 +126,7 @@ export class CheckoutComponent implements OnInit {
   }
   //end paypal
 
-  openSnackBar() {
+  OpenSnackbar() {
       this.snackBar.openFromComponent(OrderCompleteSnack, {
           duration: 5000,
       });
