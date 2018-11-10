@@ -2,7 +2,7 @@ import { AuthService } from './../Services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { MakeService } from './../Services/make.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ThisOrder, KeyValuePair, OrderWDate} from './../Models/interfaces'
+import { ThisOrder, KeyValuePair, OrderWDate} from './../Models/interfaces';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,10 +11,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./orderhistory.component.css']
 })
 export class OrderhistoryComponent implements OnInit {
-  //Variables
+  // Variables
   order: any;
 
-  //Objects
+  // Objects
   clonedOrder: any = {};
   tmpThisOrder: OrderWDate = {
       type: 'New',
@@ -23,7 +23,7 @@ export class OrderhistoryComponent implements OnInit {
       zipCode: '',
       accountInfoOrderId: '',
       order_Number: '',
-      orderDate: new Date("January 1, 2018 00:00:00"),
+      orderDate: new Date('January 1, 2018 00:00:00'),
       case: '',
       cooling_Fan: '',
       cpu: '',
@@ -33,7 +33,7 @@ export class OrderhistoryComponent implements OnInit {
       ram: '',
       storage: '',
       total_Price: '11'
-  }
+  };
 
   // Sorting Logic
   key = 'order_Number'; // sort default by name
@@ -46,16 +46,17 @@ export class OrderhistoryComponent implements OnInit {
   constructor(
       private router: Router,
       private Auth: AuthService,
-      private MakeService: MakeService,
+      private MakeServices: MakeService,
       private _formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
-      if (!this.Auth.IsAuthenticated()) {
+      if (!this.Auth.isAuthenticated()) {
           this.router.navigate(['/home']);
       }
-      var accountId = localStorage.getItem('account_id');
-      this.MakeService.GetOrder().subscribe(order => {
+      console.log('d');
+      const accountId = localStorage.getItem('account_id');
+      this.MakeServices.GetOrder().subscribe(order => {
           this.order = order;
           this.clonedOrder = JSON.parse(JSON.stringify(this.order
               .filter(
@@ -69,6 +70,6 @@ export class OrderhistoryComponent implements OnInit {
           this.clonedOrder.forEach(function(value, index, object) {
               delete value.id;
           });
-      })
+      });
   }
 }

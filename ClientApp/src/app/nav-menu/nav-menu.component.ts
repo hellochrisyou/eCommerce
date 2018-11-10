@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { Component, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { AuthService } from '../Services/auth.service';
 
 @Component({
@@ -6,16 +7,21 @@ import { AuthService } from '../Services/auth.service';
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css']
 })
-export class NavMenuComponent{
-  emailName: string = "";
+export class NavMenuComponent implements OnDestroy {
+  emailName = '';
   isExpanded = false;
+  mobileQuery: MediaQueryList;
+  fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
 
-  constructor(public auth: AuthService){ 
-    //timeout for now, until you can figure out how to set email. Also, component constructor is running twice
+  private _mobileQueryListener: () => void;
+
+  constructor(public auth: AuthService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     setTimeout(() => {
-      localStorage; 
     this.emailName = localStorage.getItem('user_email');
    }, 2000);
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
   Collapse() {
@@ -24,5 +30,8 @@ export class NavMenuComponent{
 
   Toggle() {
     this.isExpanded = !this.isExpanded;
+  }
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 }

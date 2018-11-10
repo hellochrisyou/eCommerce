@@ -21,3 +21,54 @@
 td:nth-child(1), th:nth-child(1) {
   width: 1%;
 }
+
+
+@media (max-width: 767px) {  
+  .header-margin-left-empty {
+    width: 100%;
+    margin-left: 25%;
+  }
+}
+
+@media (min-width: 768px) {
+  .header-margin-left-empty {
+    width: 100%;
+    margin-left: 110%;
+  }
+}
+
+@media (min-width: 1025px) {
+  .header-margin-left-empty {
+    width: 100%;
+    margin-left: 130%;
+  }
+}
+
+@media (min-width: 1281px) {
+  .header-margin-left-empty {
+    width: 100%;
+    margin-left: 140%;
+  }
+}
+
+@media (min-width: 1367px) {
+  .header-margin-left-empty {
+    width: 100%;
+    margin-left: 200%;
+  }
+}
+
+@media (min-width: 1921px) {
+  .header-margin-left-empty {
+    width: 100%;
+    margin-left: 260%;
+  }
+}
+
+.container {
+  max-width: fit-content;
+}
+
+.row {
+  max-width: fit-content;
+}

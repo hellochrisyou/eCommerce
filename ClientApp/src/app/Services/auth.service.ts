@@ -10,17 +10,17 @@ import * as auth0 from 'auth0-js';
 export class AuthService {
     userAccount: any;
     userEmail: AccountClass = {
-        email: "",
+        email: '',
         admin: false,
         master_account: false,
 
     };
     existingUser: ExistingAccountClass = {
         id: '0',
-        email: "",
+        email: '',
         admin: false,
         master_account: false,
-    }    
+    };
     auth0 = new auth0.WebAuth({
         clientID: '0MJ1BB2OJ-f_9eaPXxTZA7RBjkkMUR1s',
         domain: 'r13champ.auth0.com',
@@ -31,15 +31,16 @@ export class AuthService {
 
     constructor(public router: Router, private makeService: MakeService) {}
 
-    public Login(): void {
+    public login(): void {
         this.auth0.authorize();
     }
-    
-    public HandleAuthentication(): void {
+
+    public handleAuthentication(): void {
+        console.log('handle');
         this.auth0.parseHash((err, authResult) => {
             if (authResult && authResult.accessToken && authResult.idToken) {
                 window.location.hash = '';
-                this.SetSession(authResult);
+                this.setSession(authResult);
                 this.router.navigate(['/']);
             } else if (err) {
                 this.router.navigate(['/']);
@@ -47,34 +48,32 @@ export class AuthService {
         });
     }
 
-    private SetSession(authResult): void {
+    private setSession(authResult): void {
         // Set the time that the Access Token will expire at
         const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
         localStorage.setItem('access_token', authResult.accessToken);
         localStorage.setItem('id_token', authResult.idToken);
         localStorage.setItem('expires_at', expiresAt);
-        //create user account if not exist, otherwise set user_email to current user
+        // Create user account if not exist, otherwise set user_email to current user
         this.makeService.GetAccount().subscribe(userAccount => {
             this.userAccount = userAccount;
-            //check if user account exists
-            var accountExists = this.userAccount.find(m => m.email == authResult.idTokenPayload.email);
+            // Check if user account exists
+            const accountExists = this.userAccount.find(m => m.email == authResult.idTokenPayload.email);
             if (accountExists == null) {
-                //create account with email value
+                // Create account with email value
                 this.userEmail.email = authResult.idTokenPayload.email;
-                this.makeService.CreateAccount(this.userEmail).subscribe(x => {
-                    x
-                });
+                this.makeService.CreateAccount(this.userEmail).subscribe();
                 localStorage.setItem('user_email', this.userEmail.email);
-                //get userId.  refactor so you can search last id of user and not make another get request
-                this.makeService.GetAccount().subscribe(userAccount => {
-                    this.userAccount = userAccount;
-                    var accountId = this.userAccount.find(m => m.email == userAccount.email);
+                // Get userId.  refactor so you can search last id of user and not make another get request
+                this.makeService.GetAccount().subscribe(userAccounts => {
+                    this.userAccount = userAccounts;
+                    const accountId = this.userAccount.find(m => m.email == userAccounts.email);
                     localStorage.setItem('account_id', accountId.Id);
                     localStorage.setItem('IsAdmin', 'false');
                     localStorage.setItem('isMaster', 'false');
-                })
+                });
             } else {
-                this.existingUser = this.userAccount.find(m => m.email == authResult.idTokenPayload.email)
+                this.existingUser = this.userAccount.find(m => m.email == authResult.idTokenPayload.email);
                 if (this.existingUser.admin == true) {
                     localStorage.setItem('IsAdmin', 'true');
                 } else {
@@ -91,7 +90,7 @@ export class AuthService {
         });
     }
 
-    public Logout(): void {
+    public logout(): void {
         // Remove tokens and expiry time from localStorage
         localStorage.removeItem('access_token');
         localStorage.removeItem('id_token');
@@ -103,11 +102,11 @@ export class AuthService {
         window.location.href = 'https://r13champ.auth0.com/v2/logout/?returnTo=https%3A%2F%2Flocalhost%3A5001';
     }
 
-    public IsAuthenticated(): boolean {
+    public isAuthenticated(): boolean {
         // Check whether the current time is past the
         // Access Token's expiry time
         const expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
-        // console.log(new Date().getTime() < expiresAt);
+        console.log('test', new Date().getTime() < expiresAt);
         return new Date().getTime() < expiresAt;
     }
 

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using CyouEcommerce.Controllers.Resources;
 using CYouEcommerce.Core.EFTables;
@@ -75,20 +76,12 @@ namespace CyouEcommerce.Controllers
             return mapper.Map<List<SaleItem>, List<SaleItemResource>>(saleItems);
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetSaleItem(int id)
+        public async Task<IEnumerable<SaleItemResource>> GetSaleItem(int id)
         {
-            var saleItem = await GetSaleItemTask(id);
+            var saleItem = await context.SaleItems.Where(p => p.AccountSaleItemId == id).ToListAsync();
 
-            if (saleItem == null)
-                return NotFound();
+            return mapper.Map<List<SaleItem>, List<SaleItemResource>>(saleItem);
 
-            var saleResource = mapper.Map<SaleItem, SaleItemResource>(saleItem);
-            return Ok(saleResource);
-        }
-
-        public async Task<SaleItem> GetSaleItemTask(int id)
-        {
-            return await context.SaleItems.FindAsync(id);
         }
     }
 }

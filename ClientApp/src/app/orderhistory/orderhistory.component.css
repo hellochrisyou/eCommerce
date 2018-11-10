@@ -11,3 +11,42 @@
 .form-control::placeholder {
   font-family: FontAwesome;
 } 
+
+@media (max-width: 767px) {  
+  .container {
+    margin-top: -35%;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    margin-top: -35%;
+    margin-left: -15%;
+  }
+}
+
+@media (min-width: 1025px) {
+  .container {
+    margin-top: -45%;
+    margin-left: -20%;
+  }
+}
+
+@media (min-width: 1281px) {
+  .container {
+    margin-top: -40%;
+    margin-left: -5%;
+  }
+}
+
+@media (min-width: 1367px) {
+  .container {
+    margin-top: 0;
+    margin-left: 0;
+  }
+}
+
+h2 {
+  margin: 0 auto;
+}
+

@@ -75,6 +75,27 @@ namespace CyouEcommerce.Controllers
 
             return Ok(mapper.Map<Photo, PhotoResource>(photo));
         }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePhotoItem(int id)
+        {
+            var photoItem = await context.Photos
+                .Where(p => p.itemId == id)
+                .ToListAsync();
+            
+            if (photoItem == null)
+            {
+                return Ok(id);            
+            }
+            
+            foreach (var tmp in photoItem) 
+            {
+                context.Remove(tmp);    
+            }                                  
+
+            await context.SaveChangesAsync();
+            
+            return Ok(id);
+        }
         public async Task<SaleItem> GetSaleItem(int id)
         {
             return await context.SaleItems.FindAsync(id);

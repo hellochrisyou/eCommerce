@@ -2,58 +2,63 @@
  import { Components, Account, KeyValuePair } from './../Models/interfaces';
  import { Component, OnInit, Inject } from '@angular/core';
  import { MakeService } from '../Services/make.service';
- import { FormBuilder } from '@angular/forms'; 
+ import { FormBuilder } from '@angular/forms';
  import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
  import { Router } from '@angular/router';
- 
+
  @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  //variables
+  // Filter logic
+  listComponents: string[] = ['', 'CPU', 'Motherboard', 'RAM', 'Storage', 'GPU', 'Power Supply', 'Cooling Fan', 'Case'];
+  selectedFilter: string;
+  filteredComponent: any[] = [];
+
+  // Variables
   p: any;
   searchText: any;
-  barChartLegend: boolean = true;
+  barChartLegend = true;
   isMaster: string;
-  revenue: number = 0;
-  totalOrders: number = 0;
-  totalAccounts: number = 0;
+  revenue = 0;
+  totalOrders = 0;
+  totalAccounts = 0;
 
-  countJan: number = 0;
-  countFeb: number = 0;
-  countMar: number = 0;
-  countApr: number = 0;
-  countMay: number = 0;
-  countJun: number = 0;
-  countJul: number = 0;
-  countAug: number = 0;
-  countSep: number = 0;
-  countOct: number = 0;
-  countNov: number = 0;
-  countDec: number = 0;
-  NewCountJan: number = 0;
-  NewCountFeb: number = 0;
-  NewCountMar: number = 0;
-  NewCountApr: number = 0;
-  NewCountMay: number = 0;
-  NewCountJun: number = 0;
-  NewCountJul: number = 0;
-  NewCountAug: number = 0;
-  NewCountSep: number = 0;
-  NewCountOct: number = 0;
-  NewCountNov: number = 0;
-  NewCountDec: number = 0;
+  countJan = 0;
+  countFeb = 0;
+  countMar = 0;
+  countApr = 0;
+  countMay = 0;
+  countJun = 0;
+  countJul = 0;
+  countAug = 0;
+  countSep = 0;
+  countOct = 0;
+  countNov = 0;
+  countDec = 0;
+  NewCountJan = 0;
+  NewCountFeb = 0;
+  NewCountMar = 0;
+  NewCountApr = 0;
+  NewCountMay = 0;
+  NewCountJun = 0;
+  NewCountJul = 0;
+  NewCountAug = 0;
+  NewCountSep = 0;
+  NewCountOct = 0;
+  NewCountNov = 0;
+  NewCountDec = 0;
 
-  //arrays
+  // Arrays
   accounts: any[];
   orders: any[];
   orderData: number[] = [];
   dataNewOrders: any[] = [12];
   dataUsedOrders: any[] = [12];
 
-  //Objects
+  // Objects
   firstObj: NumberArrObj = {
       data: [],
       label: ''
@@ -70,7 +75,7 @@ export class DashboardComponent implements OnInit {
       series: '',
       brand: '',
       details: ''
-  }
+  };
   coolingFanComponent: KeyValuePair = {
       name: '',
       price: 0,
@@ -79,7 +84,7 @@ export class DashboardComponent implements OnInit {
       series: '',
       brand: '',
       details: ''
-  }
+  };
   motherboardComponent: KeyValuePair = {
       name: '',
       price: 0,
@@ -88,7 +93,7 @@ export class DashboardComponent implements OnInit {
       series: '',
       brand: '',
       details: ''
-  }
+  };
   gpuComponent: KeyValuePair = {
       name: '',
       price: 0,
@@ -97,7 +102,7 @@ export class DashboardComponent implements OnInit {
       series: '',
       brand: '',
       details: ''
-  }
+  };
   cpuComponent: KeyValuePair = {
       name: '',
       price: 0,
@@ -106,7 +111,7 @@ export class DashboardComponent implements OnInit {
       series: '',
       brand: '',
       details: ''
-  }
+  };
   ramComponent: KeyValuePair = {
       name: '',
       price: 0,
@@ -115,7 +120,7 @@ export class DashboardComponent implements OnInit {
       series: '',
       brand: '',
       details: ''
-  }
+  };
   storageComponent: KeyValuePair = {
       name: '',
       price: 0,
@@ -124,7 +129,7 @@ export class DashboardComponent implements OnInit {
       series: '',
       brand: '',
       details: ''
-  }
+  };
   caseComponent: KeyValuePair = {
       name: '',
       price: 0,
@@ -133,15 +138,15 @@ export class DashboardComponent implements OnInit {
       series: '',
       brand: '',
       details: ''
-  }
+  };
 
-  //Pie Chart
-  pieChartType: string = 'pie';
+  // Pie Chart
+  pieChartType = 'pie';
   pieChartLabels: string[] = ['New', 'Used'];
   pieChartData: number[] = [45, 25, 30];
 
-  //Bar Chart
-  barChartType: string = 'bar';
+  // Bar Chart
+  barChartType = 'bar';
   barChartData: any[] = [];
   mbarChartLabels: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
   barChartColors: Array < any > = [{
@@ -170,9 +175,9 @@ export class DashboardComponent implements OnInit {
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)'
       ]
-  }]
+  }];
 
-  //tmp Components
+  // tmp Components
   thisComponent: Components[] = [{
           value: 'cpu',
           viewValue: 'CPU'
@@ -217,14 +222,14 @@ export class DashboardComponent implements OnInit {
       series: '',
       brand: '',
       details: ''
-  }
+  };
   tmpAccount: Account = {
       email: '',
       master_account: true,
       admin: true
-  }
+  };
 
-  //Sorting logic
+  // Sorting logic
   key = 'order_Number'; // sort default by name
   reverse = false;
   SortList(key) {
@@ -233,119 +238,116 @@ export class DashboardComponent implements OnInit {
       console.log(this.key);
   }
 
-  //Filter logic
-  listComponents: string[] = ['', 'CPU', 'Motherboard', 'RAM', 'Storage', 'GPU', 'Power Supply', 'Cooling Fan', 'Case'];
-  selectedFilter: string;
-  filteredComponent: any[] = [];
 
   constructor(
       private router: Router,
       private auth: AuthService,
       public dialog: MatDialog,
-      private MakeService: MakeService,
+      private MakeServices: MakeService,
       private _formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
-      if (!this.auth.IsAuthenticated() || !this.auth.IsAdmin()) {
+      if (!this.auth.isAuthenticated() || !this.auth.IsAdmin()) {
           this.router.navigate(['/home']);
       }
-      //Refresh List
+      // Refresh List
       this.GetComponents();
 
-      //Call Services
-      this.MakeService.GetAccount().subscribe(account => {
-          this.accounts = account
+      // Call Services
+      this.MakeServices.GetAccount().subscribe(account => {
+          this.accounts = account;
           this.totalAccounts = this.accounts.length;
       });
-      this.MakeService.GetOrder().subscribe(order => {
-          this.orders = order
-          var usedCount = 0;
-          var newCount = 0;
-          //Bar Chart
-          for (var tmp in this.orders) {
-              if (this.orders[tmp].type == "Used") {
-                  usedCount = usedCount + 1;
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '01') {
-                      this.countJan = this.countJan + 1;
-                  }
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '02') {
-                      this.countFeb = this.countFeb + 1;
-                  }
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '03') {
-                      this.countMar = this.countMar + 1;
-                  }
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '04') {
-                      this.countApr = this.countApr + 1;
-                  }
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '05') {
-                      this.countMay = this.countMay + 1;
-                  }
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '06') {
-                      this.countJun = this.countJun + 1;
-                  }
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '07') {
-                      this.countJul = this.countJul + 1;
-                  }
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '08') {
-                      this.countAug = this.countAug + 1;
-                  }
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '09') {
-                      this.countSep = this.countSep + 1;
-                  }
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '10') {
-                      this.countOct = this.countOct + 1;
-                  }
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '11') {
-                      this.countNov = this.countNov + 1;
-                  }
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '12') {
-                      this.countDec = this.countDec + 1;
-                  }
-              }
+      this.MakeServices.GetOrder().subscribe(order => {
+          this.orders = order;
+          console.log('orders', this.orders);
+          let usedCount = 0;
+          let newCount = 0;
+          // Bar Chart
+          for (const tmp of this.orders) {
+                if (this.orders[tmp].type == 'Used') {
+                    usedCount = usedCount + 1;
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '01') {
+                        this.countJan = this.countJan + 1;
+                    }
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '02') {
+                        this.countFeb = this.countFeb + 1;
+                    }
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '03') {
+                        this.countMar = this.countMar + 1;
+                    }
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '04') {
+                        this.countApr = this.countApr + 1;
+                    }
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '05') {
+                        this.countMay = this.countMay + 1;
+                    }
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '06') {
+                        this.countJun = this.countJun + 1;
+                    }
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '07') {
+                        this.countJul = this.countJul + 1;
+                    }
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '08') {
+                        this.countAug = this.countAug + 1;
+                    }
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '09') {
+                        this.countSep = this.countSep + 1;
+                    }
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '10') {
+                        this.countOct = this.countOct + 1;
+                    }
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '11') {
+                        this.countNov = this.countNov + 1;
+                    }
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '12') {
+                        this.countDec = this.countDec + 1;
+                    }
+                }
 
-              if (this.orders[tmp].type == "New") {
-                  newCount = newCount + 1;
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '01') {
-                      this.NewCountJan = this.NewCountJan + 1;
-                  }
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '02') {
-                      this.NewCountFeb = this.NewCountFeb + 1;
-                  }
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '03') {
-                      this.NewCountMar = this.NewCountMar + 1;
-                  }
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '04') {
-                      this.NewCountApr = this.NewCountApr + 1;
-                  }
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '05') {
-                      this.NewCountMay = this.NewCountMay + 1;
-                  }
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '06') {
-                      this.NewCountJun = this.NewCountJun + 1;
-                  }
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '07') {
-                      this.NewCountJul = this.NewCountJul + 1;
-                  }
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '08') {
-                      this.NewCountAug = this.NewCountAug + 1;
-                  }
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '09') {
-                      this.NewCountSep = this.NewCountSep + 1;
-                  }
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '10') {
-                      this.NewCountOct = this.NewCountOct + 1;
-                  }
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '11') {
-                      this.NewCountNov = this.NewCountNov + 1;
-                  }
-                  if (this.orders[tmp].orderDate.substring(5, 7) == '12') {
-                      this.NewCountDec = this.NewCountDec + 1;
-                  }
-              }
-              this.totalOrders = this.orders.length;
-              this.revenue = this.orders[tmp].total_Price + this.revenue;
-          }
+                if (this.orders[tmp].type == 'New') {
+                    newCount = newCount + 1;
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '01') {
+                        this.NewCountJan = this.NewCountJan + 1;
+                    }
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '02') {
+                        this.NewCountFeb = this.NewCountFeb + 1;
+                    }
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '03') {
+                        this.NewCountMar = this.NewCountMar + 1;
+                    }
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '04') {
+                        this.NewCountApr = this.NewCountApr + 1;
+                    }
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '05') {
+                        this.NewCountMay = this.NewCountMay + 1;
+                    }
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '06') {
+                        this.NewCountJun = this.NewCountJun + 1;
+                    }
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '07') {
+                        this.NewCountJul = this.NewCountJul + 1;
+                    }
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '08') {
+                        this.NewCountAug = this.NewCountAug + 1;
+                    }
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '09') {
+                        this.NewCountSep = this.NewCountSep + 1;
+                    }
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '10') {
+                        this.NewCountOct = this.NewCountOct + 1;
+                    }
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '11') {
+                        this.NewCountNov = this.NewCountNov + 1;
+                    }
+                    if (this.orders[tmp].orderDate.substring(5, 7) == '12') {
+                        this.NewCountDec = this.NewCountDec + 1;
+                    }
+                }
+                this.totalOrders = this.orders.length;
+                this.revenue = this.orders[tmp].total_Price + this.revenue;
+            }
 
           this.dataUsedOrders[0] = this.countJan;
           this.dataUsedOrders[1] = this.countFeb;
@@ -373,7 +375,7 @@ export class DashboardComponent implements OnInit {
           this.dataNewOrders[10] = this.NewCountNov;
           this.dataNewOrders[11] = this.NewCountDec;
 
-          //Push Data
+          // Push Data
           this.firstObj.data = this.dataNewOrders;
           this.firstObj.label = 'New';
           this.secondObj.data = this.dataUsedOrders;
@@ -381,7 +383,7 @@ export class DashboardComponent implements OnInit {
 
           this.barChartData.push(this.firstObj);
           this.barChartData.push(this.secondObj);
-
+            console.log('bar', this.barChartData);
           this.orderData.push(usedCount);
           this.orderData.push(newCount);
       });
@@ -389,7 +391,7 @@ export class DashboardComponent implements OnInit {
       this.isMaster = localStorage.getItem('isMaster');
   }
 
-  //filter  
+  // Filter
   FilterList() {
       if (this.selectedFilter == '') {
           this.InsertAllComponents();
@@ -428,9 +430,9 @@ export class DashboardComponent implements OnInit {
       }
 
   }
-  //End Filter
+  // End Filter
 
-  //Account
+  // Account
   UpdateAccount(index, role) {
       this.tmpAccount = this.accounts[index];
 
@@ -442,11 +444,11 @@ export class DashboardComponent implements OnInit {
       if (this.isMaster == 'true' && role == 'master') {
           this.tmpAccount.master_account = this.tmpAccount.admin;
       }
-      this.MakeService.UpdateAccount(this.tmpAccount).subscribe(x => x);
+      this.MakeServices.UpdateAccount(this.tmpAccount).subscribe(x => x);
   }
-  //End Account
+  // End Account
 
-  //Components
+  // Components
   InsertAllComponents() {
       this.filteredComponent = [];
       this.filteredComponent = this.filteredComponent.concat(this.caseComponent);
@@ -461,88 +463,86 @@ export class DashboardComponent implements OnInit {
 
   SubmitNewComponent() {
       if (this.selectedComponent.value == 'cpu') {
-          this.MakeService.CreateCpu(this.tmpNewComponent).subscribe(x => x);
+          this.MakeServices.CreateCpu(this.tmpNewComponent).subscribe(x => x);
       }
       if (this.selectedComponent.value == 'motherboard') {
-          this.MakeService.CreateMotherboard(this.tmpNewComponent).subscribe(x => x);
+          this.MakeServices.CreateMotherboard(this.tmpNewComponent).subscribe(x => x);
       }
       if (this.selectedComponent.value == 'ram') {
-          this.MakeService.CreateRam(this.tmpNewComponent).subscribe(x => x);
+          this.MakeServices.CreateRam(this.tmpNewComponent).subscribe(x => x);
       }
       if (this.selectedComponent.value == 'storage') {
-          this.MakeService.CreateStorage(this.tmpNewComponent).subscribe(x => x);
+          this.MakeServices.CreateStorage(this.tmpNewComponent).subscribe(x => x);
       }
       if (this.selectedComponent.value == 'gpu') {
-          this.MakeService.CreateGpu(this.tmpNewComponent).subscribe(x => x);
+          this.MakeServices.CreateGpu(this.tmpNewComponent).subscribe(x => x);
       }
       if (this.selectedComponent.value == 'power_supply') {
-          this.MakeService.CreatePowersupply(this.tmpNewComponent).subscribe(x => x);
+          this.MakeServices.CreatePowersupply(this.tmpNewComponent).subscribe(x => x);
       }
       if (this.selectedComponent.value == 'cooling_Fan') {
-          this.MakeService.CreateCoolingFan(this.tmpNewComponent).subscribe(x => x);
+          this.MakeServices.CreateCoolingFan(this.tmpNewComponent).subscribe(x => x);
       }
       if (this.selectedComponent.value == 'case') {
-          this.MakeService.CreateCase(this.tmpNewComponent).subscribe(x => x);
+          this.MakeServices.CreateCase(this.tmpNewComponent).subscribe(x => x);
       }
       this.ngOnInit();
   }
 
   DeleteComponent(index) {
       if (this.filteredComponent[index].hardwareType == 'CPU') {
-          this.MakeService.DeleteCpu(this.filteredComponent[index].id).subscribe(x =>
+          this.MakeServices.DeleteCpu(this.filteredComponent[index].id).subscribe(x =>
               this.GetComponents()
           );
       }
       if (this.filteredComponent[index].hardwareType == 'Case') {
-          this.MakeService.DeleteCase(this.filteredComponent[index].id).subscribe(x =>
+          this.MakeServices.DeleteCase(this.filteredComponent[index].id).subscribe(x =>
               this.GetComponents()
           );
       }
       if (this.filteredComponent[index].hardwareType == 'Cooling Fan') {
-          this.MakeService.DeleteCoolingFan(this.filteredComponent[index].id).subscribe(x =>
+          this.MakeServices.DeleteCoolingFan(this.filteredComponent[index].id).subscribe(x =>
               this.GetComponents());
       }
       if (this.filteredComponent[index].hardwareType == 'Motherboard') {
-          this.MakeService.DeleteMotherboard(this.filteredComponent[index].id).subscribe(x =>
+          this.MakeServices.DeleteMotherboard(this.filteredComponent[index].id).subscribe(x =>
               this.GetComponents());
       }
       if (this.filteredComponent[index].hardwareType == 'RAM') {
-          this.MakeService.DeleteRam(this.filteredComponent[index].id).subscribe(x =>
+          this.MakeServices.DeleteRam(this.filteredComponent[index].id).subscribe(x =>
               this.GetComponents());
       }
       if (this.filteredComponent[index].hardwareType == 'Storage') {
-          this.MakeService.DeleteStorage(this.filteredComponent[index].id).subscribe(x =>
+          this.MakeServices.DeleteStorage(this.filteredComponent[index].id).subscribe(x =>
               this.GetComponents());
       }
       if (this.filteredComponent[index].hardwareType == 'Power Supply') {
-          this.MakeService.DeletePowersupply(this.filteredComponent[index].id).subscribe(x =>
+          this.MakeServices.DeletePowersupply(this.filteredComponent[index].id).subscribe(x =>
               this.GetComponents());
       }
       if (this.filteredComponent[index].hardwareType == 'GPU') {
-          this.MakeService.DeleteGpu(this.filteredComponent[index].id).subscribe(x =>
+          this.MakeServices.DeleteGpu(this.filteredComponent[index].id).subscribe(x =>
               this.GetComponents());
       }
   }
 
   GetComponents() {
-      this.MakeService.GetCase().subscribe(caseItem => {
+      this.MakeServices.GetCase().subscribe(caseItem => {
           this.caseComponent = caseItem;
-          this.MakeService.GetCoolingFan().subscribe(coolingFan => {
+          this.MakeServices.GetCoolingFan().subscribe(coolingFan => {
               this.coolingFanComponent = coolingFan;
-              this.MakeService.GetCoolingFan().subscribe(coolingFan => {
-                  this.coolingFanComponent = coolingFan;
-                  this.MakeService.GetCpu().subscribe(CPU => {
-                      this.cpuComponent = CPU;
-                      this.MakeService.GetGpu().subscribe(GPU => {
-                          this.gpuComponent = GPU;
-                          this.MakeService.GetStorage().subscribe(storage => {
-                              this.storageComponent = storage;
-                              this.MakeService.GetRam().subscribe(RAM => {
-                                  this.ramComponent = RAM;
-                                  this.MakeService.GetPowersupply().subscribe(powerSupply => {
-                                      this.powerSupplyComponent = powerSupply;
-                                      this.MakeService.GetMotherboard().subscribe(motherboard => {
-                                          this.motherboardComponent = motherboard;
+                  this.MakeServices.GetCpu().subscribe(CPU => {
+                    this.cpuComponent = CPU;
+                      this.MakeServices.GetGpu().subscribe(GPU => {
+                        this.gpuComponent = GPU;
+                          this.MakeServices.GetStorage().subscribe(storage => {
+                            this.storageComponent = storage;
+                              this.MakeServices.GetRam().subscribe(RAM => {
+                                this.ramComponent = RAM;
+                                  this.MakeServices.GetPowersupply().subscribe(powerSupply => {
+                                    this.powerSupplyComponent = powerSupply;
+                                      this.MakeServices.GetMotherboard().subscribe(motherboard => {
+                                        this.motherboardComponent = motherboard;
                                           this.InsertAllComponents();
                                       });
                                   });
@@ -552,15 +552,14 @@ export class DashboardComponent implements OnInit {
                   });
               });
           });
-      });
-  }
+      }
 
   ChartClicked(e: any): void {}
 
   ChartHovered(e: any): void {}
 
   OpenDialog(index): void {
-      const dialogRef = this.dialog.open(editComponent, {
+      const dialogRef = this.dialog.open(EditComponent, {
           width: '250px',
           data: {
               id: this.filteredComponent[index].id,
@@ -575,28 +574,28 @@ export class DashboardComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(() => {
           this.GetComponents();
-      })
+      });
   }
 
 }
-//End Dashboard Component
+// End Dashboard Component
 
-//Edit Component
+// Edit Component
 @Component({
-  selector: 'editComponent',
+  selector: 'app-edit-component',
   templateUrl: 'editComponent.html',
   styles: [`
       .picSize {
         height: 100%;
-        width: 100%;      
+        width: 100%;
       }
     `],
 })
-export class editComponent {
+export class EditComponent implements OnInit {
   constructor(
       public snackBar: MatSnackBar,
-      public dialogRef: MatDialogRef < editComponent > ,
-      private MakeService: MakeService,
+      public dialogRef: MatDialogRef < EditComponent > ,
+      private MakeServices: MakeService,
       @Inject(MAT_DIALOG_DATA) public tmpComponent: any = {
           id: 0,
           name: '',
@@ -617,34 +616,34 @@ export class editComponent {
 
   Submit(): void {
       if (this.tmpComponent.hardwareType == 'CPU') {
-          this.MakeService.UpdateCpu(this.tmpComponent).subscribe(x => x);
+          this.MakeServices.UpdateCpu(this.tmpComponent).subscribe(x => x);
       }
       if (this.tmpComponent.hardwareType == 'Motherboard') {
-          this.MakeService.UpdateMotherboard(this.tmpComponent).subscribe(x => x);
+          this.MakeServices.UpdateMotherboard(this.tmpComponent).subscribe(x => x);
       }
       if (this.tmpComponent.hardwareType == 'RAM') {
-          this.MakeService.UpdateRam(this.tmpComponent).subscribe(x => x);
+          this.MakeServices.UpdateRam(this.tmpComponent).subscribe(x => x);
       }
       if (this.tmpComponent.hardwareType == 'Storage') {
-          this.MakeService.UpdateStorage(this.tmpComponent).subscribe(x => x);
+          this.MakeServices.UpdateStorage(this.tmpComponent).subscribe(x => x);
       }
       if (this.tmpComponent.hardwareType == 'GPU') {
-          this.MakeService.UpdateGpu(this.tmpComponent).subscribe(x => x);
+          this.MakeServices.UpdateGpu(this.tmpComponent).subscribe(x => x);
       }
       if (this.tmpComponent.hardwareType == 'Power Supply') {
-          this.MakeService.UpdatePowerSupply(this.tmpComponent).subscribe(x => x);
+          this.MakeServices.UpdatePowerSupply(this.tmpComponent).subscribe(x => x);
       }
       if (this.tmpComponent.hardwareType == 'Cooling Fan') {
-          this.MakeService.UpdateCoolingFan(this.tmpComponent).subscribe(x => x);
+          this.MakeServices.UpdateCoolingFan(this.tmpComponent).subscribe(x => x);
       }
       if (this.tmpComponent.hardwareType == 'Case') {
-          this.MakeService.UpdateCase(this.tmpComponent).subscribe(x => x);
+          this.MakeServices.UpdateCase(this.tmpComponent).subscribe(x => x);
       }
       this.dialogRef.close();
   }
 }
 
-//Classes
+// Classes
 class ComponentDetails {
   name: string;
   price: string;

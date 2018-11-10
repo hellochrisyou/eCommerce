@@ -1,6 +1,6 @@
  export interface ThisOrder {
   type: string;
-  order_Number: string,
+  order_Number: string;
    address: string;
   state: string;
   zipCode: string;
@@ -12,7 +12,7 @@
   gpu: string;
   power_Supply: string;
   cooling_Fan: string;
-  case :string;
+  case: string;
   total_Price:
    string;
  }
@@ -35,7 +35,7 @@
 
  export interface OrderWDate {
   type: string;
-  order_Number: string,
+  order_Number: string;
   address: string;
   state: string;
   zipCode: string;
@@ -48,7 +48,7 @@
   gpu: string;
   power_Supply: string;
   cooling_Fan: string;
-  case :string;
+  case: string;
   total_Price:
    string;
  }
@@ -63,7 +63,7 @@
   power_Supply: string;
   ram: string;
   storage: string;
-  case :string;
+  case: string;
   total_Price:
    string;
    sellerName: string;
@@ -72,4 +72,4 @@
  export interface Components {
   value: string;
   viewValue: string;
- };
+ }

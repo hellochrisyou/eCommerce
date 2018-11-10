@@ -4,14 +4,24 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatIconModule, MatRadioModule, MatSlideToggleModule, MatTabsModule, MatToolbarModule, } from '@angular/material';
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatRadioModule,
+  MatSlideToggleModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatSidenavModule,
+  MatListModule,
+  MatNativeDateModule
+  } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { MatSelectModule, MatSnackBarModule } from  '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule, MatSnackBarModule } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { Ng2OrderModule } from 'ng2-order-pipe';
-import { NgxPaginationModule } from 'ngx-pagination'; 
+import { NgxPaginationModule } from 'ngx-pagination';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
@@ -24,18 +34,18 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { BuyNewComponent, ConfirmNewItem } from './buy-new/buy-new.component';
+import { BuyNewComponent, ConfirmNewItemComponent } from './buy-new/buy-new.component';
 import { MakeService } from './Services/make.service';
 
-import { SellComponent, UploadDialog, SnackErrorMessage } from './sell/sell.component';
-import { BuyUsedComponent, ExpandPic, ConfirmUsedItem } from './buy-used/buy-used.component';
+import { SellComponent, UploadDialogComponent, SnackErrorMessageComponent } from './sell/sell.component';
+import { BuyUsedComponent, ExpandPicComponent, ConfirmUsedItemComponent, ConfirmDeleteUsedComponent } from './buy-used/buy-used.component';
 import { OrderhistoryComponent } from './orderhistory/orderhistory.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 import { PhotoService } from './Services/photo.service';
 import { MainHomeComponent } from './main-home/main-home.component';
 import { CallbackComponent } from './callback/callback.component';
-import { DashboardComponent, editComponent } from './dashboard/dashboard.component';
-import { CheckoutComponent, OrderCompleteSnack } from './checkout/checkout.component';
+import { DashboardComponent, EditComponent } from './dashboard/dashboard.component';
+import { CheckoutComponent, OrderCompleteSnackComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -49,16 +59,17 @@ import { CheckoutComponent, OrderCompleteSnack } from './checkout/checkout.compo
     BuyUsedComponent,
     OrderhistoryComponent,
     ShoppingcartComponent,
-    UploadDialog,
-    SnackErrorMessage,
-    ExpandPic,
+    UploadDialogComponent,
+    SnackErrorMessageComponent,
+    ExpandPicComponent,
     MainHomeComponent,
-    CallbackComponent,    
-    ConfirmNewItem,
-    ConfirmUsedItem,
+    CallbackComponent,
+    ConfirmNewItemComponent,
+    ConfirmUsedItemComponent,
     DashboardComponent,
-    OrderCompleteSnack,
-    editComponent,
+    OrderCompleteSnackComponent,
+    EditComponent,
+    ConfirmDeleteUsedComponent,
     CheckoutComponent
   ],
   imports: [
@@ -66,15 +77,15 @@ import { CheckoutComponent, OrderCompleteSnack } from './checkout/checkout.compo
     HttpClientModule,
     FormsModule,
     HttpModule,
-
+    MatListModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule,    
+    HttpClientModule,
     ReactiveFormsModule,
     MatTableModule,
     Ng2SearchPipeModule,
-    ReactiveFormsModule,    
+    MatNativeDateModule,
     BrowserAnimationsModule,
     MatSelectModule,
     Ng2OrderModule,
@@ -89,12 +100,12 @@ import { CheckoutComponent, OrderCompleteSnack } from './checkout/checkout.compo
     MatTooltipModule,
     MatTabsModule,
     MatIconModule,
-    MatSlideToggleModule,    
+    MatSlideToggleModule,
     ChartsModule,
     MatRadioModule,
     MatToolbarModule,
     MatButtonModule,
-
+    MatSidenavModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'buy-new', component: BuyNewComponent },
@@ -110,17 +121,19 @@ import { CheckoutComponent, OrderCompleteSnack } from './checkout/checkout.compo
     ])
   ],
   entryComponents: [
-    UploadDialog, 
-    SnackErrorMessage, 
-    ExpandPic,     
-    ConfirmNewItem, 
-    ConfirmUsedItem,
-    OrderCompleteSnack,
-    editComponent
+    NavMenuComponent,
+    UploadDialogComponent,
+    SnackErrorMessageComponent,
+    ExpandPicComponent,
+    ConfirmNewItemComponent,
+    ConfirmUsedItemComponent,
+    OrderCompleteSnackComponent,
+    ConfirmDeleteUsedComponent,
+    EditComponent
   ],
   providers: [
     AuthService,
-    MakeService, 
+    MakeService,
     PhotoService,
   ],
   bootstrap: [AppComponent],

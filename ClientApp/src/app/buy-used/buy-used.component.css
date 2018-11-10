@@ -1,18 +1,64 @@
-@media (min-width: 768px) {
+@media (max-width: 767px) {
+  .margin-left {
+    /* margin-left: 30% !important; */
+  }
   .buy-card {
-    max-width: 400px !important;
+    min-width: 270px !important;
     display: block;
     margin-top: 3% !important;
     margin-bottom: 3% !important;
   }
 }
 
-@media (max-width: 767px) {
+@media (min-width: 768px) {
+  .margin-left {
+    margin-left: 75% !important;
+  }
   .buy-card {
-    max-width: 300px !important;
+    min-width: 400px !important;
     display: block;
     margin-top: 3% !important;
     margin-bottom: 3% !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .margin-left {
+    margin-left: 110% !important;
+  }
+  .buy-card {
+    min-width: 450px !important;
+    display: block;
+    margin-top: 3% !important;
+    margin-bottom: 3% !important;
+  }
+}
+@media (min-width: 1366px) {
+  .margin-left {
+    margin-left: 120% !important;
+  }
+  .buy-card {
+    min-width: 550px !important;
+    display: block;
+    margin-top: 3% !important;
+    margin-bottom: 3% !important;
+  }
+}
+@media (min-width: 1920px) {
+  .margin-left {
+    margin-left: 170% !important;
+  }
+  .buy-card {
+    min-width: 600px !important;
+    display: block;
+    margin-top: 3% !important;
+    margin-bottom: 3% !important;    
+  }
+}
+
+@media (min-width: 1921px) {
+  .margin-left {
+    margin-left: 210% !important;
   }
 }
 
@@ -60,4 +106,9 @@
   border: none !important;
   background: none !important;
   margin-left: 10%;
+}
+
+.center-items  {
+  margin-left: auto;
+  margin-right: auto;
 }

@@ -1,8 +1,93 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+@media (max-width: 767px) {  
+  .margin-left-title {
+    margin-left: 40%;
+  }
+  #full-width {
+    margin-left: 10%;
+    margin-top: -7%;       
+   }
+}
+
+@media (min-width: 768px) {
+  .mat-stepper-vertical {
+    min-width: 60%;  
+    margin-left:20%; 
+  }  
+  .mat-form-field {
+    min-width: 75%;
+  }
+  .margin-left-title {
+    margin-left: 35%;
+  }
+  #full-width {
+    width: 300%; 
+    margin-left: 12%;       
+   }
+}
+
+@media (min-width: 1025px) {
+  .mat-stepper-vertical {
+    min-width: 60%;  
+    margin-left:20%; 
+  }  
+  .mat-form-field {
+    min-width: 75%;
+  }
+  .margin-left-title {
+    margin-left: 40%;
+  }
+  #full-width {
+    width: 300%; 
+    margin-left: 20%;       
+   }
+}
+
+@media (min-width: 1281px) {
+  .mat-stepper-vertical {
+    min-width: 60%;  
+    margin-left:20%; 
+  }  
+  .mat-form-field {
+    min-width: 75%;
+  }
+  .margin-left-title {
+    margin-left: 50%;
+  }
+  #full-width {
+    width: 300%; 
+    margin-left: 20%;       
+   }
+}
+
 @media (min-width: 1367px) {
   .mat-stepper-vertical {
-    width: 50%;
-    margin-left: 36% ;
+    min-width: 60%;  
+    margin-left:20%; 
+  }  
+  .mat-form-field {
+    min-width: 100%;
   }
+  .margin-left-title {
+    margin-left: 50%;
+  }
+  #full-width {
+    width: 300%; 
+    margin-left: 75%;       
+   }
 }
+@media (min-width: 1921px) {
+  .mat-stepper-vertical {
+    width: 60%;   
+    margin-left:15%;
+  }  
+  .margin-left-title {
+    margin-left: 45%;
+  }
+  #full-width {
+    width: 300%; 
+    margin-left: 115%;       
+   }
+}
+

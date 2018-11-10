@@ -3,7 +3,7 @@ import { ShoppingcartService } from './../Services/shoppingcart.service';
 import { Component, OnInit, AfterViewChecked  } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { AuthService } from '../Services/auth.service';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shoppingcart',
@@ -13,7 +13,7 @@ import { Router } from '@angular/router'
 export class ShoppingcartComponent implements OnInit {
   shoppingOrder: any = {};
 
-  //Sorting Logic
+  // Sorting Logic
   key = 'order_Number'; // sort default by name
   reverse = false;
   SortList(key) {
@@ -22,7 +22,7 @@ export class ShoppingcartComponent implements OnInit {
   }
 
   constructor(
-      private ShoppingcartService: ShoppingcartService,
+      private ShoppingcartServices: ShoppingcartService,
       public snackBar: MatSnackBar,
       private makeService: MakeService,
       public auth: AuthService,
@@ -30,14 +30,14 @@ export class ShoppingcartComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-      if (!this.auth.IsAuthenticated()) {
+      if (!this.auth.isAuthenticated()) {
           this.router.navigate(['/home']);
       }
-      this.shoppingOrder = this.ShoppingcartService.Get();
+      this.shoppingOrder = this.ShoppingcartServices.Get();
   }
 
   DeleteOrder(index) {
-      this.ShoppingcartService.Delete(index);
+      this.ShoppingcartServices.Delete(index);
   }
 
   Submit() {

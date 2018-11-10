@@ -9,7 +9,7 @@ export class PhotoService {
   constructor(private http: Http) {}
 
   Upload(itemId, photo) {
-      var formData = new FormData();
+      const formData = new FormData();
       formData.append('file', photo);
       return this.http.post(`/api/ItemForSale/${itemId}/photos`, formData)
           .map(res => res.json());

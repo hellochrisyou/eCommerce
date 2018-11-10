@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { ThisOrder } from './../Models/interfaces'
+import { ThisOrder } from './../Models/interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingcartService {
-  //Arrays
+  // Arrays
   tmpArray: ThisOrder[] = [];
 
-  //Objects
+  // Objects
   tmpThisOrder: ShoppingthisOrder = {
       type: '',
       address: '',
@@ -25,9 +25,9 @@ export class ShoppingcartService {
       ram: '',
       storage: '',
       total_Price: ''
-  }
+  };
 
-  //Sorting Logic
+  // Sorting Logic
   key = 'order_Number'; // Sort Default by Name
   reverse = false;
   SortList(key) {
@@ -48,9 +48,9 @@ export class ShoppingcartService {
       return this.tmpArray;
   }
 }
-//End Shoppingcart Service
+// End Shoppingcart Service
 
-//Classes
+// Classes
 class ShoppingthisOrder {
   type: string;
   address: string;
@@ -58,7 +58,7 @@ class ShoppingthisOrder {
   zipCode: string;
   accountInfoOrderId: string;
   order_Number: string;
-  case :string;
+  case: string;
   cooling_Fan:
       string;
       cpu: string;

@@ -6,15 +6,15 @@
  import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
  import { ThisSellOrder } from '../Models/interfaces';
  import { Router } from '@angular/router';
- 
+
  @Component({
   selector: 'app-sell',
   templateUrl: './sell.component.html',
   styleUrls: ['./sell.component.css']
 })
 export class SellComponent implements OnInit {
-    //Variables
-    uploadedItemId: number = 0;
+    // Variables
+    uploadedItemId = 0;
     isLinear = false;
     sellerNameFormGroup: FormGroup;
     cpuFormGroup: FormGroup;
@@ -28,10 +28,10 @@ export class SellComponent implements OnInit {
     caseFormGroup: FormGroup;
     priceFormGroup: FormGroup;
 
-    //Arrays
+    // Arrays
     uploadedItem: any[];
 
-    //Objects
+    // Objects
     tmpThisOrder: ThisSellOrder = {
         accountsaleitemid: '',
         type: 'Used',
@@ -45,26 +45,25 @@ export class SellComponent implements OnInit {
         storage: '',
         total_Price: '',
         sellerName: 'test'
-    }
+    };
 
     constructor(
         private router: Router,
         public snackBar: MatSnackBar,
         private _formBuilder: FormBuilder,
-        private MakeService: MakeService,
-        private photoService: PhotoService,
+        private MakeServices: MakeService,
         public dialog: MatDialog,
         private Auth: AuthService,
     ) {}
 
     ngOnInit() {
-        if (!this.Auth.IsAuthenticated()) {
+        if (!this.Auth.isAuthenticated()) {
             this.router.navigate(['/home']);
         }
-        //Initialize accountId
+        // Initialize accountId
         this.tmpThisOrder.accountsaleitemid = localStorage.getItem('account_id');
 
-        //Initialize Form Groups
+        // Initialize Form Groups
         this.sellerNameFormGroup = this._formBuilder.group({
             sellerNameCtrl: ['', Validators.required]
         });
@@ -101,7 +100,8 @@ export class SellComponent implements OnInit {
 
     }
 
-    submit() {
+    Submit() {
+        console.log('1');
         this.tmpThisOrder.sellerName = this.sellerNameFormGroup.value.sellerNameCtrl;
         this.tmpThisOrder.case = this.caseFormGroup.value.caseCtrl;
         this.tmpThisOrder.cooling_Fan = this.coolingFormGroup.value.coolingCtrl;
@@ -113,7 +113,7 @@ export class SellComponent implements OnInit {
         this.tmpThisOrder.storage = this.storageFormGroup.value.storageCtrl;
         this.tmpThisOrder.total_Price = this.priceFormGroup.value.priceCtrl.toString();
 
-        //Reset Fields
+        // Reset Fields
         this.sellerNameFormGroup.reset();
         this.cpuFormGroup.reset();
         this.motherboardFormGroup.reset();
@@ -125,13 +125,13 @@ export class SellComponent implements OnInit {
         this.coolingFormGroup.reset();
         this.priceFormGroup.reset();
 
-        //Crreate Service Call
-        this.MakeService.CreateSaleItem(this.tmpThisOrder).subscribe(x => {
-            this.MakeService.GetAllSaleItem().subscribe(uploadedItem => {
+        // Create Service Call
+        this.MakeServices.CreateSaleItem(this.tmpThisOrder).subscribe(x => {
+            this.MakeServices.GetAllSaleItem().subscribe(uploadedItem => {
                 this.uploadedItem = uploadedItem;
-                var lastItem = this.uploadedItem.pop();
+                const lastItem = this.uploadedItem.pop();
                 this.uploadedItemId = lastItem.id;
-                //Prompt Upload Picture
+                // Prompt Upload Picture
                 this.OpenDialog();
                 this.tmpThisOrder = {
                     accountsaleitemid: '',
@@ -154,7 +154,7 @@ export class SellComponent implements OnInit {
     }
 
     OpenDialog(): void {
-        const dialogRef = this.dialog.open(UploadDialog, {
+        const dialogRef = this.dialog.open(UploadDialogComponent, {
             width: '250px',
             data: {
                 itemId: this.uploadedItemId
@@ -162,36 +162,36 @@ export class SellComponent implements OnInit {
         });
     }
 }
-//End Sell Component
+// End Sell Component
 
-//Upload Picture Dialog
+// Upload Picture Dialog
 @Component({
-  selector: 'UploadDialog',
+  selector: 'app-upload-dialog',
   templateUrl: 'UploadDialog.html',
 })
 
-export class UploadDialog {
+export class UploadDialogComponent implements OnInit {
     @ViewChild('fileInput') fileInput: ElementRef;
-    //Variables
-    count: number = 0;
+    // Variables
+    count = 0;
     photos: any[];
     progress: any;
 
     constructor(
-        private photoService: PhotoService,
+        private photoServices: PhotoService,
         public snackBar: MatSnackBar,
-        public dialogRef: MatDialogRef < UploadDialog > ,
-        @Inject(MAT_DIALOG_DATA) public itemObject: uploadedItemId) {}
+        public dialogRef: MatDialogRef < UploadDialogComponent > ,
+        @Inject(MAT_DIALOG_DATA) public itemObject: UploadedItemId) {}
 
     ngOnInit() {
-        this.photoService.GetPhotos(this.itemObject.itemId).subscribe(photos => {
-            this.photos = photos
+        this.photoServices.GetPhotos(this.itemObject.itemId).subscribe(photos => {
+            this.photos = photos;
         });
     }
 
     UploadPhoto() {
-        var nativeElement: HTMLInputElement = this.fileInput.nativeElement;
-        this.photoService.Upload(this.itemObject.itemId, nativeElement.files[0])
+        const nativeElement: HTMLInputElement = this.fileInput.nativeElement;
+        this.photoServices.Upload(this.itemObject.itemId, nativeElement.files[0])
             .subscribe(photo => {
                     this.photos.push(photo);
                     this.count = this.count + 1;
@@ -203,7 +203,7 @@ export class UploadDialog {
     }
 
     OpenSnackbar() {
-        this.snackBar.openFromComponent(SnackErrorMessage, {
+        this.snackBar.openFromComponent(SnackErrorMessageComponent, {
             duration: 5000,
         });
     }
@@ -213,18 +213,18 @@ export class UploadDialog {
     }
 }
 
-//Error Popup
+// Error Popup
 @Component({
-    selector: 'snackErrorMessage',
+    selector: 'app-snack-error-message',
     templateUrl: 'snackErrorMessage.html',
     styles: [`
         .errorMessage {
-            color: red;      
+            color: red;
         }
     `],
 })
-export class SnackErrorMessage {}
+export class SnackErrorMessageComponent {}
 
-interface uploadedItemId {
+interface UploadedItemId {
   itemId: number;
 }

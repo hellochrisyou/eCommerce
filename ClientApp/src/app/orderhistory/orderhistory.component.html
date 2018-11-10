@@ -1,10 +1,10 @@
-<div style="overflow-x:hidden">
-  <div class="container m-0">
-     <div class="row" style="margin-left:1%; margin-right:1%">
-        <h2>Order History</h2>
-        <div *ngIf="clonedOrder.length == 0">
+
+  <div class="container">
+     <div class="row">
+          <h2 class="center">Order History</h2>
+        <!-- <div *ngIf="clonedOrder.length == 0">
            <h4>Empty</h4>
-        </div>
+        </div> -->
         <div *ngIf="clonedOrder.length > 0">
            <div class="search-bar">
               <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="on" placeholder="&#61442;  Search">
@@ -13,7 +13,7 @@
               <thead>
                  <tr>
                     <th (click)="SortList('order_Number')">Order Number
-                       <span *ngIf="key === 'order_Number'">
+                       <span *ngIf="key == 'order_Number'">
                        <span *ngIf="reverse">
                        <i class="fa fa-arrow-up"></i>
                        </span>
@@ -23,7 +23,7 @@
                        </span>                
                     </th>
                     <th (click)="SortList('orderDate')">Order Date
-                       <span *ngIf="key === 'orderDate'">
+                       <span *ngIf="key == 'orderDate'">
                        <span *ngIf="reverse">
                        <i class="fa fa-arrow-up"></i>
                        </span>
@@ -33,7 +33,7 @@
                        </span>                
                     </th>
                     <th (click)="SortList('type')">Type
-                       <span *ngIf="key === 'type'">
+                       <span *ngIf="key == 'type'">
                        <span *ngIf="reverse">
                        <i class="fa fa-arrow-up"></i>
                        </span>
@@ -43,7 +43,7 @@
                        </span>            
                     </th>
                     <th (click)="SortList('cpu')">CPU
-                       <span *ngIf="key === 'cpu'">
+                       <span *ngIf="key == 'cpu'">
                        <span *ngIf="reverse">
                        <i class="fa fa-arrow-up"></i>
                        </span>
@@ -53,7 +53,7 @@
                        </span>              
                     </th>
                     <th (click)="SortList('motherboard')">Motherboard
-                       <span *ngIf="key === 'motherboard'">
+                       <span *ngIf="key == 'motherboard'">
                        <span *ngIf="reverse">
                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
                        </span>
@@ -63,7 +63,7 @@
                        </span>                 
                     </th>
                     <th (click)="SortList('ram')">RAM
-                       <span *ngIf="key === 'ram'">
+                       <span *ngIf="key == 'ram'">
                        <span *ngIf="reverse">
                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
                        </span>
@@ -73,7 +73,7 @@
                        </span>                    
                     </th>
                     <th (click)="SortList('gpu')">GPU
-                       <span *ngIf="key === 'gpu'">
+                       <span *ngIf="key == 'gpu'">
                        <span *ngIf="reverse">
                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
                        </span>
@@ -83,7 +83,7 @@
                        </span>              
                     </th>
                     <th (click)="SortList('storage')">Storage
-                       <span *ngIf="key === 'storage'">
+                       <span *ngIf="key == 'storage'">
                        <span *ngIf="reverse">
                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
                        </span>
@@ -93,7 +93,7 @@
                        </span>               
                     </th>
                     <th (click)="SortList('power_Supply')">PowerSupply
-                       <span *ngIf="key === 'power_Supply'">
+                       <span *ngIf="key == 'power_Supply'">
                        <span *ngIf="reverse">
                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
                        </span>
@@ -103,7 +103,7 @@
                        </span>                   
                     </th>
                     <th (click)="SortList('cooling_Fan')">Cooling Fan
-                       <span *ngIf="key === 'cooling_Fan'">
+                       <span *ngIf="key == 'cooling_Fan'">
                        <span *ngIf="reverse">
                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
                        </span>
@@ -113,7 +113,7 @@
                        </span>                     
                     </th>
                     <th (click)="SortList('case')">Case
-                       <span *ngIf="key === 'case'">
+                       <span *ngIf="key == 'case'">
                        <span *ngIf="reverse">
                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
                        </span>
@@ -123,7 +123,7 @@
                        </span>                      
                     </th>
                     <th (click)="SortList('total_Price')">Total Price
-                       <span *ngIf="key === 'total_Price'">
+                       <span *ngIf="key == 'total_Price'">
                        <span *ngIf="reverse">
                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
                        </span>
@@ -155,4 +155,3 @@
         </div>
      </div>
   </div>
-</div>

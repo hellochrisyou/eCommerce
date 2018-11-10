@@ -7,5 +7,5 @@ import { AuthService } from './Services/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'eCommerce';  
+  title = 'eCommerce';
 }

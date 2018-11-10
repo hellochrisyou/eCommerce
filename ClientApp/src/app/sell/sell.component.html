@@ -1,6 +1,8 @@
-<div class="container m-0">
+<div class="container" id = "full-width">
   <div class="row">
-     <h2>Sell</h2>
+     <h2 class="margin-left-title">Sell</h2>
+  </div>
+  <div class= "row">
      <mat-vertical-stepper [linear]="isLinear" #stepper >
      <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="sellerNameFormGroup">

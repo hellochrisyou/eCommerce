@@ -6,29 +6,29 @@
  import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
  import { AuthService } from '../Services/auth.service';
  import { Router } from '@angular/router';
- 
+
  @Component({
   selector: 'app-buy-used',
   templateUrl: './buy-used.component.html',
   styleUrls: ['./buy-used.component.css']
 })
 export class BuyUsedComponent implements OnInit {
-  //Variables
+  // Variables
   selectedItems: any;
   selection: any;
-  tmpSelect: string = '';
+  tmpSelect = '';
   tmpSelectedFileName: string;
-  IsAdmin: string = '';
+  IsAdmin = '';
   tmpShoppingOrder: ThisOrder;
 
-  //Arrays
+  // Arrays
   collectionPhotos: any[] = [];
   allUsedItems: any[];
   myUsedItems: any[];
   photos: any[];
-  radioSelection: string[] = ['All items', "My items"];
+  radioSelection: string[] = ['All items', 'My items'];
 
-  //Objects
+  // Objects
   tmpThisOrder: ThisOrder = {
       type: 'Used',
       address: '',
@@ -45,20 +45,21 @@ export class BuyUsedComponent implements OnInit {
       ram: '',
       storage: '',
       total_Price: ''
-  }
+  };
 
   constructor(
       private router: Router,
       private Auth: AuthService,
-      public UsedSnackBar: MatSnackBar,
+      public usedSnackBar: MatSnackBar,
+      public deleteUsedSnackBar: MatSnackBar,
       public dialog: MatDialog,
       private shoppingcart: ShoppingcartService,
-      private MakeService: MakeService,
+      private MakeServices: MakeService,
       private photoService: PhotoService
   ) {}
 
   ngOnInit() {
-      if (!this.Auth.IsAuthenticated()) {
+      if (!this.Auth.isAuthenticated()) {
           this.router.navigate(['/home']);
       }
       this.tmpSelect = '';
@@ -66,10 +67,10 @@ export class BuyUsedComponent implements OnInit {
   }
 
   GetService() {
-      var accountId = localStorage.getItem('account_id');
+      const accountId = localStorage.getItem('account_id');
       this.IsAdmin = localStorage.getItem('IsAdmin');
-      this.MakeService.GetAllSaleItem().subscribe(usedItem => {
-          this.allUsedItems = usedItem
+      this.MakeServices.GetAllSaleItem().subscribe(usedItem => {
+          this.allUsedItems = usedItem;
 
           this.allUsedItems.forEach(element => {
               this.photoService.GetPhotos(element.id)
@@ -90,17 +91,22 @@ export class BuyUsedComponent implements OnInit {
   }
 
   DeleteItem(index) {
-      if (this.tmpSelect === 'My items') {
-          this.MakeService.DeleteUsed(this.myUsedItems[index].id).subscribe(x => {
-              x;
-              this.GetService();
-              this.FilterItems('My items');
-          });;
+      if (this.tmpSelect == 'My items') {
+          this.MakeServices.DeletePhoto(this.myUsedItems[index].id).subscribe(x => {
+              this.MakeServices.DeleteUsed(this.myUsedItems[index].id).subscribe(y => {
+                this.DeleteUsedSnackBar();
+                this.GetService();
+                this.FilterItems('My items');
+              });
+          });
       } else {
-          this.MakeService.DeleteUsed(this.allUsedItems[index].id).subscribe(x => {
-              x;
-              this.GetService();
-              this.FilterItems('All items');
+          this.MakeServices.DeletePhoto(this.allUsedItems[index].id).subscribe(x => {
+            console.log('here');
+              this.MakeServices.DeleteUsed(this.allUsedItems[index].id).subscribe(y => {
+                this.DeleteUsedSnackBar();
+                this.GetService();
+                this.FilterItems('My items');
+              });
           });
       }
   }
@@ -114,7 +120,7 @@ export class BuyUsedComponent implements OnInit {
 
   OpenDialog(selectedPic): void {
       this.tmpSelectedFileName = selectedPic.fileName;
-      const dialogRef = this.dialog.open(ExpandPic, {
+      const dialogRef = this.dialog.open(ExpandPicComponent, {
           width: '300px',
           height: '300px',
           data: {
@@ -123,53 +129,60 @@ export class BuyUsedComponent implements OnInit {
       });
   }
 
+  DeleteUsedSnackBar(): void {
+    this.deleteUsedSnackBar.openFromComponent(ConfirmDeleteUsedComponent, {
+        duration: 5000,
+    });
+  }
+
   OpenSnackbar() {
-      this.UsedSnackBar.openFromComponent(ConfirmUsedItem, {
+      this.usedSnackBar.openFromComponent(ConfirmUsedItemComponent, {
           duration: 5000,
       });
   }
 
   FilterItems(selection) {
-      if (selection === 'All items') {
+      console.log('selection', selection);
+      if (selection == 'All items') {
           this.selectedItems = this.allUsedItems;
           this.tmpSelect = 'All items';
-      } else if (selection === 'My items') {
+      } else if (selection == 'My items') {
           this.selectedItems = this.myUsedItems;
           this.tmpSelect = 'My items';
       }
   }
 }
-//End Buy-Used Component
+// End Buy-Used Component
 
-//Confirm Dialog
+// Confirm Dialog
 @Component({
-  selector: 'ConfirmUsedItem',
+  selector: 'app-confirm-used-item',
   templateUrl: 'ConfirmUsedItem.html',
   styles: [`
   .confirmMessage {
-    color: green;      
+    color: green;
   }
 `],
 })
-export class ConfirmUsedItem {}
+export class ConfirmUsedItemComponent {}
 
 class PhotoClass {
   expandedPic: string;
 }
 
-//Expand Picture Popup
+// Expand Picture Popup
 @Component({
-  selector: 'expandPic',
+  selector: 'app-expand-pic',
   templateUrl: 'expandPic.html',
-  styles: [`  
+  styles: [`
   .picSize{
     width:90%;
-    height:auto;     
+    height:auto;
 `],
 })
-export class ExpandPic {
+export class ExpandPicComponent {
   constructor(
-      public dialogRef: MatDialogRef < ExpandPic > ,
+      public dialogRef: MatDialogRef < ExpandPicComponent > ,
       @Inject(MAT_DIALOG_DATA) public data: PhotoClass) {}
 
   done(): void {
@@ -177,3 +190,15 @@ export class ExpandPic {
       this.dialogRef.close();
   }
 }
+
+// Confirm Delete
+@Component({
+    selector: 'app-confirm-delete-used',
+    templateUrl: 'ConfirmUsedItem.html',
+    styles: [`
+    .confirmMessage {
+      color: red;
+    }
+  `],
+  })
+  export class ConfirmDeleteUsedComponent {}

@@ -1,4 +1,4 @@
-<div class="container m-0 text-center">
+<div class="container text-center">
   <h2>Dashboard</h2>
   <div class="row">
      <mat-tab-group mat-stretch-tabs class="col margin-container">
@@ -81,7 +81,7 @@
                     <thead>
                        <tr>
                           <th (click)="SortList('email')">Email
-                             <span *ngIf="key === 'email'">
+                             <span *ngIf="key == 'email'">
                              <span *ngIf="reverse">
                              <i class="fa fa-arrow-up"></i>
                              </span>
@@ -91,7 +91,7 @@
                              </span>                
                           </th>
                           <th (click)="SortList('master_account')">Master
-                             <span *ngIf="key === 'master_account'">
+                             <span *ngIf="key == 'master_account'">
                              <span *ngIf="reverse">
                              <i class="fa fa-arrow-up"></i>
                              </span>
@@ -101,7 +101,7 @@
                              </span>            
                           </th>
                           <th (click)="SortList('admin')">Admin
-                             <span *ngIf="key === 'admin'">
+                             <span *ngIf="key == 'admin'">
                              <span *ngIf="reverse">
                              <i class="fa fa-arrow-up"></i>
                              </span>
@@ -198,7 +198,7 @@
                              <th>Edit</th>
                              <th>Delete</th>
                              <th (click)="SortList('hardwareType')">hardwareType
-                                <span *ngIf="key === 'hardwareType'">
+                                <span *ngIf="key == 'hardwareType'">
                                 <span *ngIf="reverse">
                                 <i class="fa fa-arrow-up"></i>
                                 </span>
@@ -208,7 +208,7 @@
                                 </span>            
                              </th>
                              <th (click)="SortList('name')">Name
-                                <span *ngIf="key === 'name'">
+                                <span *ngIf="key == 'name'">
                                 <span *ngIf="reverse">
                                 <i class="fa fa-arrow-up"></i>
                                 </span>
@@ -218,7 +218,7 @@
                                 </span>            
                              </th>
                              <th (click)="SortList('brand')">Brand
-                                <span *ngIf="key === 'brand'">
+                                <span *ngIf="key == 'brand'">
                                 <span *ngIf="reverse">
                                 <i class="fa fa-arrow-up"></i>
                                 </span>
@@ -228,7 +228,7 @@
                                 </span>              
                              </th>
                              <th (click)="SortList('model')">Model
-                                <span *ngIf="key === 'model'">
+                                <span *ngIf="key == 'model'">
                                 <span *ngIf="reverse">
                                 <i class="fa fa-arrow-up" aria-hidden="true"></i>
                                 </span>
@@ -238,7 +238,7 @@
                                 </span>                 
                              </th>
                              <th (click)="SortList('series')">Series
-                                <span *ngIf="key === 'series'">
+                                <span *ngIf="key == 'series'">
                                 <span *ngIf="reverse">
                                 <i class="fa fa-arrow-up" aria-hidden="true"></i>
                                 </span>
@@ -248,7 +248,7 @@
                                 </span>                    
                              </th>
                              <th (click)="SortList('price')">Price
-                                <span *ngIf="key === 'price'">
+                                <span *ngIf="key == 'price'">
                                 <span *ngIf="reverse">
                                 <i class="fa fa-arrow-up" aria-hidden="true"></i>
                                 </span>
@@ -258,7 +258,7 @@
                                 </span>              
                              </th>
                              <th (click)="SortList('details')">Details
-                                <span *ngIf="key === 'details'">
+                                <span *ngIf="key == 'details'">
                                 <span *ngIf="reverse">
                                 <i class="fa fa-arrow-up" aria-hidden="true"></i>
                                 </span>

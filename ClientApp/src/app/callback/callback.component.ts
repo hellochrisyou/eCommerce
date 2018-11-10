@@ -8,16 +8,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./callback.component.css']
  })
  export class CallbackComponent implements OnInit {
- 
+
     constructor(
       private auth: AuthService,
       private router: Router
     ) {}
-  
+
     ngOnInit() {
-      if (!this.auth.IsAuthenticated()) {
+      if (!this.auth.isAuthenticated()) {
         this.router.navigate(['/home']);
       }
     }
-  
+
  }

@@ -1,12 +1,14 @@
-<div class="container m-0">
+<div class="container m-0" style="position:absolute">
   <div class="row">
-     <h2>Buy New</h2>
+     <h2 class="margin-left-title">Buy New</h2>
+  </div>
+  <div class="row">
      <mat-vertical-stepper [linear]="isLinear" #stepper>
      <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="cpuFormGroup">
            <ng-template matStepLabel>CPU</ng-template>
            <form-field>
-              <select id="CPU" class="form-control" (change)="CalculateTotal()" [(ngModel)]="tmpThisOrder.cpu" name="CPU" #case="ngModel" [ngModelOptions]="{standalone: true}">
+              <select class="dropdown-width" id="CPU" class="form-control" (change)="CalculateTotal()" [(ngModel)]="tmpThisOrder.cpu" name="CPU" #case="ngModel" [ngModelOptions]="{standalone: true}">
               <option value=""></option>
               <option *ngFor="let m of CPU" value="{{ m.name }}">{{ m.name }}</option>
               </select>     
@@ -21,13 +23,13 @@
                        </mat-panel-description>
                     </mat-expansion-panel-header>
                     <mat-list>
-                       <mat-list-item>Model: {{selectedCPU.model}}</mat-list-item>
+                       <mat-list-item class="description-list-item">Model: {{selectedCPU.model}}</mat-list-item>
                        <mat-divider></mat-divider>
-                       <mat-list-item>Series: {{selectedCPU.series}}</mat-list-item>
+                       <mat-list-item class="description-list-item">Series: {{selectedCPU.series}}</mat-list-item>
                        <mat-divider></mat-divider>
-                       <mat-list-item>Brand: {{selectedCPU.brand}}</mat-list-item>
+                       <mat-list-item class="description-list-item">Brand: {{selectedCPU.brand}}</mat-list-item>
                        <mat-divider></mat-divider>
-                       <mat-list-item>Details: {{selectedCPU.details}}</mat-list-item>
+                       <mat-list-item class="description-list-item">Details: {{selectedCPU.details}}</mat-list-item>
                     </mat-list>
                  </mat-expansion-panel>
               </mat-accordion>
@@ -52,13 +54,13 @@
                     </mat-panel-description>
                  </mat-expansion-panel-header>
                  <mat-list>
-                    <mat-list-item>Model: {{selectedMotherboard.model}}</mat-list-item>
+                    <mat-list-item style="align-items: initial">Model: {{selectedMotherboard.model}}</mat-list-item>
                     <mat-divider></mat-divider>
-                    <mat-list-item>Series: {{selectedMotherboard.series}}</mat-list-item>
+                    <mat-list-item style="align-items: initial">Series: {{selectedMotherboard.series}}</mat-list-item>
                     <mat-divider></mat-divider>
-                    <mat-list-item>Brand: {{selectedMotherboard.brand}}</mat-list-item>
+                    <mat-list-item style="align-items: initial">Brand: {{selectedMotherboard.brand}}</mat-list-item>
                     <mat-divider></mat-divider>
-                    <mat-list-item>Details: {{selectedMotherboard.details}}</mat-list-item>
+                    <mat-list-item style="align-items: initial">Details: {{selectedMotherboard.details}}</mat-list-item>
                  </mat-list>
               </mat-expansion-panel>
            </mat-accordion>
@@ -251,6 +253,8 @@
         </div>
      </mat-step>
      </mat-vertical-stepper>
+     <div class="row">
      <h4>Total Price: {{totalPrice}}</h4>
+    </div>
   </div>
 </div>

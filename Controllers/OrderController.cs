@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CyouEcommerce.Controllers.Resources;
@@ -72,10 +73,10 @@ namespace CyouEcommerce.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<OrderResource>> GetOrder()
+        public async Task<IEnumerable<OrderResource>> GetOrder(int id)
         {
             var order = await context.Orders.ToListAsync();      
-            return mapper.Map<List<Order>, List<OrderResource>>(order);
+            return mapper.Map<List<Order>, List<OrderResource>>(order);           
         }
     }
 }

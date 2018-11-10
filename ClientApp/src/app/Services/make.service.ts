@@ -10,7 +10,7 @@ export class MakeService {
 
   constructor(private http: Http) {}
 
-  //get
+  // Get
   GetCase() {
       return this.http.get('/api/Case').map(res => res.json());
   }
@@ -45,9 +45,9 @@ export class MakeService {
       return this.http.get('/api/ItemForSale').map(res => res.json());
   }
   GetSaleItem(itemId) {
-      return this.http.get('/api/ItemForSale').map(res => res.json());
+      return this.http.get('/api/ItemForSale/' + itemId).map(res => res.json());
   }
-  //create
+  // Create
   CreateCase(caseItem) {
       return this.http.post('/api/Case', caseItem).map(res => res.json());
   }
@@ -85,7 +85,7 @@ export class MakeService {
       return this.http.post('/api/Account', user);
   }
 
-  //update
+  // Update
   UpdateAccount(account) {
       return this.http.put('/api/Account/' + account.id, account).map(res => res.json());
   }
@@ -113,7 +113,7 @@ export class MakeService {
   UpdateStorage(storage) {
       return this.http.put('/api/Storage/' + storage.id, storage).map(res => res.json());
   }
-  //delete
+  // Delete
   DeleteCpu(id) {
       return this.http.delete('/api/CPU/' + id).map(res => res.json());
   }
@@ -141,4 +141,7 @@ export class MakeService {
   DeleteUsed(id) {
       return this.http.delete('/api/ItemForSale/' + id).map(res => res.json());
   }
+  DeletePhoto(id) {
+    return this.http.delete('/api/ItemForSale/${itemId}/photos/' + id).map(res => res.json());
+}
 }
