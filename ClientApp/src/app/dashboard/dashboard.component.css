@@ -73,11 +73,6 @@
     margin-top: 40%;
   }
 
-  .margin-box-left-label {
-    margin-left: 13%;
-    margin-top: -5%;
-  }
-
   .rectangle-users {
     height: 50px;
     max-width: 150px;
@@ -104,11 +99,7 @@
 
   .bar-margin {
     margin-top: 10%;
-  }
-
-  .margin-container {
-    margin-right: 2%;
-  }
+  }  
 
   .icon-margin {
     margin-top: 42%;
@@ -116,11 +107,6 @@
 
   .margin-box {
     margin-top: 40%;
-  }
-
-  .margin-box-left-label {
-    margin-left: 17%;
-    margin-top: 1%;
   }
 
   .rectangle-users {
@@ -151,21 +137,12 @@
     margin-top: 10%;
   }
 
-  .margin-container {
-    margin-right: 3%;
-  }
-
   .icon-margin {
     margin-top: 42%;
   }
 
   .margin-box {
     margin-top: 40%;
-  }
-
-  .margin-box-left-label {
-    margin-left: 23%;
-    margin-top: 1%;
   }
 
   .rectangle-users {
@@ -197,21 +174,12 @@
     margin-top: 5%;
   }
 
-   .margin-container {
-    margin-right: 10%;
-  }
-
   .icon-margin {
     margin-top: 30%;
   }
 
   .margin-box {
     margin-top: 40%;
-  }
-
-  .margin-box-left-label {
-    margin-left: 23%;
-    margin-top: 1%;
   }
 
   .rectangle-users {
@@ -244,11 +212,6 @@
 
   .margin-box {
     margin-top: 30%;
-  }
-
-  .margin-box-left-label {
-    margin-left: 25%;
-    margin-top: 2%;
   }
 
   .rectangle-users {

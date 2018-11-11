@@ -235,7 +235,6 @@ export class DashboardComponent implements OnInit {
   SortList(key) {
       this.key = key;
       this.reverse = !this.reverse;
-      console.log(this.key);
   }
 
 
@@ -261,92 +260,91 @@ export class DashboardComponent implements OnInit {
       });
       this.MakeServices.GetOrder().subscribe(order => {
           this.orders = order;
-          console.log('orders', this.orders);
           let usedCount = 0;
           let newCount = 0;
           // Bar Chart
           for (const tmp of this.orders) {
-                if (this.orders[tmp].type == 'Used') {
+                if (tmp.type == 'Used') {
                     usedCount = usedCount + 1;
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '01') {
+                    if (tmp.orderDate.substring(5, 7) == '01') {
                         this.countJan = this.countJan + 1;
                     }
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '02') {
+                    if (tmp.orderDate.substring(5, 7) == '02') {
                         this.countFeb = this.countFeb + 1;
                     }
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '03') {
+                    if (tmp.orderDate.substring(5, 7) == '03') {
                         this.countMar = this.countMar + 1;
                     }
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '04') {
+                    if (tmp.orderDate.substring(5, 7) == '04') {
                         this.countApr = this.countApr + 1;
                     }
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '05') {
+                    if (tmp.orderDate.substring(5, 7) == '05') {
                         this.countMay = this.countMay + 1;
                     }
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '06') {
+                    if (tmp.orderDate.substring(5, 7) == '06') {
                         this.countJun = this.countJun + 1;
                     }
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '07') {
+                    if (tmp.orderDate.substring(5, 7) == '07') {
                         this.countJul = this.countJul + 1;
                     }
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '08') {
+                    if (tmp.orderDate.substring(5, 7) == '08') {
                         this.countAug = this.countAug + 1;
                     }
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '09') {
+                    if (tmp.orderDate.substring(5, 7) == '09') {
                         this.countSep = this.countSep + 1;
                     }
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '10') {
+                    if (tmp.orderDate.substring(5, 7) == '10') {
                         this.countOct = this.countOct + 1;
                     }
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '11') {
+                    if (tmp.orderDate.substring(5, 7) == '11') {
                         this.countNov = this.countNov + 1;
                     }
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '12') {
+                    if (tmp.orderDate.substring(5, 7) == '12') {
                         this.countDec = this.countDec + 1;
                     }
                 }
 
-                if (this.orders[tmp].type == 'New') {
+                if (tmp.type == 'New') {
                     newCount = newCount + 1;
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '01') {
+                    if (tmp.orderDate.substring(5, 7) == '01') {
                         this.NewCountJan = this.NewCountJan + 1;
                     }
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '02') {
+                    if (tmp.orderDate.substring(5, 7) == '02') {
                         this.NewCountFeb = this.NewCountFeb + 1;
                     }
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '03') {
+                    if (tmp.orderDate.substring(5, 7) == '03') {
                         this.NewCountMar = this.NewCountMar + 1;
                     }
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '04') {
+                    if (tmp.orderDate.substring(5, 7) == '04') {
                         this.NewCountApr = this.NewCountApr + 1;
                     }
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '05') {
+                    if (tmp.orderDate.substring(5, 7) == '05') {
                         this.NewCountMay = this.NewCountMay + 1;
                     }
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '06') {
+                    if (tmp.orderDate.substring(5, 7) == '06') {
                         this.NewCountJun = this.NewCountJun + 1;
                     }
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '07') {
+                    if (tmp.orderDate.substring(5, 7) == '07') {
                         this.NewCountJul = this.NewCountJul + 1;
                     }
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '08') {
+                    if (tmp.orderDate.substring(5, 7) == '08') {
                         this.NewCountAug = this.NewCountAug + 1;
                     }
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '09') {
+                    if (tmp.orderDate.substring(5, 7) == '09') {
                         this.NewCountSep = this.NewCountSep + 1;
                     }
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '10') {
+                    if (tmp.orderDate.substring(5, 7) == '10') {
                         this.NewCountOct = this.NewCountOct + 1;
                     }
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '11') {
+                    if (tmp.orderDate.substring(5, 7) == '11') {
                         this.NewCountNov = this.NewCountNov + 1;
                     }
-                    if (this.orders[tmp].orderDate.substring(5, 7) == '12') {
+                    if (tmp.orderDate.substring(5, 7) == '12') {
                         this.NewCountDec = this.NewCountDec + 1;
                     }
                 }
                 this.totalOrders = this.orders.length;
-                this.revenue = this.orders[tmp].total_Price + this.revenue;
+                this.revenue = tmp.total_Price + this.revenue;
             }
 
           this.dataUsedOrders[0] = this.countJan;
@@ -383,7 +381,6 @@ export class DashboardComponent implements OnInit {
 
           this.barChartData.push(this.firstObj);
           this.barChartData.push(this.secondObj);
-            console.log('bar', this.barChartData);
           this.orderData.push(usedCount);
           this.orderData.push(newCount);
       });
