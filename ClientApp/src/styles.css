@@ -20,3 +20,27 @@ body {
     font-weight: bold;
 
 }
+
+.container {
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;    
+    text-align: center;
+  }
+
+.search-bar {
+    max-width: 500px;
+    padding-bottom: 25px;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-control {
+    box-shadow: 0 10px 40px 0 #B0C1D9;
+  }
+  
+.form-control::placeholder {
+    font-family: FontAwesome;
+} 
+

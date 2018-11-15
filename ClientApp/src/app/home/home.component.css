@@ -1,5 +1,7 @@
-@media (min-width: 1920px) {
-    .margin-top {
-        margin-top: 10%;
-    }
-  }
+.container {
+    margin-top: 10%;
+    text-align: left !important;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+

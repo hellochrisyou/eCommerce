@@ -1,7 +1,4 @@
 @media (max-width: 767px) {
-  .margin-left {
-    /* margin-left: 30% !important; */
-  }
   .buy-card {
     min-width: 270px !important;
     display: block;
@@ -11,9 +8,6 @@
 }
 
 @media (min-width: 768px) {
-  .margin-left {
-    margin-left: 75% !important;
-  }
   .buy-card {
     min-width: 400px !important;
     display: block;
@@ -23,9 +17,6 @@
 }
 
 @media (min-width: 1280px) {
-  .margin-left {
-    margin-left: 110% !important;
-  }
   .buy-card {
     min-width: 450px !important;
     display: block;
@@ -34,9 +25,6 @@
   }
 }
 @media (min-width: 1366px) {
-  .margin-left {
-    margin-left: 120% !important;
-  }
   .buy-card {
     min-width: 550px !important;
     display: block;
@@ -45,9 +33,6 @@
   }
 }
 @media (min-width: 1920px) {
-  .margin-left {
-    margin-left: 170% !important;
-  }
   .buy-card {
     min-width: 600px !important;
     display: block;
@@ -80,12 +65,6 @@
   margin: 15px 0;
 }
 
-.row {
-  text-align: center;
-  margin-left: 1% !important;
-  margin-right: 1% !important;
-}
-
 .col-2, .col-sm-5 {
   display: inline-block;
   float: none;
@@ -108,7 +87,7 @@
   margin-left: 10%;
 }
 
-.center-items  {
-  margin-left: auto;
-  margin-right: auto;
+.row {
+  text-align: center;
+  display: block;
 }

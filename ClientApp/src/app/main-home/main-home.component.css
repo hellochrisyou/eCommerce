@@ -47,11 +47,6 @@
         height: 7%;
         padding-top:1%;
       }
-      .router-padding {
-        padding-left: 10%;
-        padding-right: 10%;
-        width: 100%;
-    }
   }
 
   @media (min-width: 769px) {
@@ -63,11 +58,6 @@
         width: 100%;
         height: 7%;
       }
-      .router-padding {
-        padding-left: 20%;
-        padding-right: 20%;
-        width: 100%;
-    }
   }
 
   @media (min-width: 1280px) {
@@ -79,11 +69,6 @@
         width: 100%;
         height: 7%;
       }
-    .router-padding {
-        padding-left: 20%;
-        padding-right: 20%;
-        width: 100%;
-    }
   }
 
   @media (min-width: 1366px) {
@@ -95,11 +80,6 @@
         width: 100%;
         height: 7%;
       }
-    .router-padding {
-      padding-left: 20%;
-      padding-right: 20%;
-      width: 100%;
-    }
   }
 
   @media (min-width: 1920px) {
@@ -110,13 +90,9 @@
         display: inline-flex;
         width: 100%;
         height: 7%;
-      }
-      .router-padding {
-        padding-left: 20%;
-        padding-right: 20%;
-        width: 100%;
-    }
+    }      
   }
+
   @media (min-width: 1921px) {
     #top-mat-drawer {
         top: 59px !important;
@@ -125,9 +101,12 @@
         display: inline-flex;
         width: 100%;
         height: 7%;
-      }
-      .router-padding {
-        
-        width: 100%;
-    }
+      }          
+  }
+
+  .router-padding {        
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: block;
   }

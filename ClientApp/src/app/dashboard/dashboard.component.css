@@ -1,12 +1,9 @@
 @import "~bootstrap/dist/css/bootstrap-grid.css";
 
-.container {
-  width:200%;
-  height: 100%;
-}
 
 .row {
   height:fit-content;
+  text-align: center;
 }
 
 .mat-tab-group {
@@ -73,6 +70,15 @@
     margin-top: 40%;
   }
 
+  .margin-box-left-label {
+    margin-left: 11%;
+    margin-top: -5%;
+  }
+
+  .first-margin {
+    margin-left: 3%;
+  }
+
   .rectangle-users {
     height: 50px;
     max-width: 150px;
@@ -107,6 +113,14 @@
 
   .margin-box {
     margin-top: 40%;
+  }
+
+  .margin-box-left-label {
+    margin-left: 22%;    
+  }
+
+  .first-margin {
+    margin-left: 5%;
   }
 
   .rectangle-users {
@@ -145,6 +159,10 @@
     margin-top: 40%;
   }
 
+  .first-margin {
+    margin-left: 7%;
+  }
+
   .rectangle-users {
     height: 70px;
     max-width: 220px;
@@ -180,6 +198,10 @@
 
   .margin-box {
     margin-top: 40%;
+  }
+
+  .first-margin {
+    margin-left: 6%;
   }
 
   .rectangle-users {
@@ -230,5 +252,8 @@
     height: 80px;
     min-width: 245px;
     background-color: #2196F7 !important;
+  }
+  .first-margin {
+    margin-left: 2%;
   }
 }

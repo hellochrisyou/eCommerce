@@ -131,7 +131,7 @@
                           </td>
                        </tr>
                     </tbody>
-                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    <pagination-controls class="text-left" (pageChange)="p = $event"></pagination-controls>
                  </table>
               </div>
            </div>
@@ -141,7 +141,7 @@
               <mat-icon class="dashboard-tab-icon">add_to_queue</mat-icon>
               Hardware
            </ng-template>
-           <mat-tab-group>
+           <mat-tab-group style="padding-left:5%; padding-right:5">
               <mat-tab>
                  <ng-template mat-tab-label>
                     <mat-icon class="dashboard-tab-icon">add_box</mat-icon>
@@ -291,7 +291,7 @@
                           </tr>
                        </tbody>
                     </table>
-                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    <pagination-controls class="text-left" (pageChange)="p = $event"></pagination-controls>
                  </div>
               </mat-tab>
            </mat-tab-group>

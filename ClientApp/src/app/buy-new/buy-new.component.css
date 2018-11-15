@@ -1,20 +1,5 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-
-.search-bar {
-  max-width: 500px;
-  padding-bottom: 50px;
-  margin: auto;
-}
-
-.form-control {
-  box-shadow: 0 10px 40px 0 #B0C1D9;
-}
-
-.form-control::placeholder {
-  font-family: FontAwesome;
-}
-
 .mat-header-row {
   position: sticky;
   top: 0;
@@ -25,71 +10,21 @@
   height:auto;
 }
 
-@media (max-width: 767px) {
-  .mat-stepper-vertical {
-    min-width:90%;
-    max-width: 90%;      
-  }  
-  .margin-left-title {
-    margin-left: 25%;
-  }
-}
-
-@media (min-width: 768px) {
-  .mat-stepper-vertical {
-    max-width: 40%;  
-    margin-left:20%;     
-  }  
-  .margin-left-title {
-    margin-left: 35%;
-  }
-}
-
-@media (min-width: 1025px) {
-  .mat-stepper-vertical {
-    min-width: 40%;  
-    margin-left:20%;     
-  }  
-  .margin-left-title {
-    margin-left: 35%;
-  }
-}
-
-@media (min-width: 1281px) {
-  .mat-stepper-vertical {
-    max-width: 40%;  
-    margin-left:20%;     
-  }  
-  .margin-left-title {
-    margin-left: 35%;
-  }
-}
-
-@media (min-width: 1367px) {
-  .mat-stepper-vertical {
-    min-width: 60%;  
-    margin-left:30%;     
-  }  
-  .margin-left-title {
-    margin-left: 50%;
-  }
-}
-@media (min-width: 1921px) {
-  .mat-stepper-vertical {
-    width: 60%;   
-    margin-left:25%;
-  }  
-  .margin-left-title {
-    margin-left: 50%;
-  }
+.row {
+  text-align: center;
+  display: block;
 }
 
 .mat-expansion-panel, .mat-elevation-z0, .mat-accordian, .mat-expansion-panel-header, .mat-expanded,
   .mat-expansion-panel-header, .mat-expanded:hover {
   background-color: transparent;
   margin-top: 1px;
+  text-align: left;
 }
 
-form-control {
-  width: 100%;
+@media (min-width: 767px) {
+  .mat-stepper-vertical {
+    min-width: 60%;  
+    margin-left:5%;     
+  }  
 }

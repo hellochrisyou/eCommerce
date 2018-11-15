@@ -1,18 +1,33 @@
-.address {
-    width: 24%;
+  .address {
+    width: 30%;    
   }
   
   .state {
-    width: 9%;
+    width: 12%;    
   }
   
   .zipcode {
     margin-left: 3%;
-    width: 12%;
+    width: 15%;
   }
   
-  .form-control {
-    box-shadow: 0 10px 40px 0 #B0C1D9;
+ 
+  .row {
+    margin-top:2%; 
+    display:block;
   }
-  
-  
+
+  h4 {
+    margin-top:5%;
+  }
+
+ .button-margin {
+   margin-top:2%;
+ }
+
+ @media (max-width: 768px) {
+  .container {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+ }

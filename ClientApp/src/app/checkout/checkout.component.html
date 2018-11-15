@@ -1,12 +1,10 @@
-<div class="container m-0 text-center">
+<div class="container">
   <h2>Checkout</h2>
-  <div class="row" style="margin-top:4%">
+  <div class="row">
      <h3>Orders</h3>
-     <div *ngIf="shoppingOrder.length == 0">
-        <h4>Empty</h4>
-     </div>
-     <div *ngIf="shoppingOrder.length > 0">
-        <table style="border-collapse:collapse" class="table table-striped">
+
+     
+        <table style="border-collapse:collapse; text-align:left" class="table table-striped text-left">
            <thead>
               <tr>
                  <th>Type</th>
@@ -22,7 +20,7 @@
               </tr>
            </thead>
            <tbody>
-              <tr class="text-left" *ngFor="let t of shoppingOrder | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+              <tr *ngFor="let t of shoppingOrder | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                  <td class="text-left">{{t.type}}</td>
                  <td class="text-left">{{t.cpu}}</td>
                  <td class="text-left">{{t.motherboard}}</td>
@@ -39,21 +37,20 @@
         <div class="row">
            <mat-form-field class = "address" appearance="legacy">
               <mat-label>Address</mat-label>
-              <input [(ngModel)]="addressValue" matInput>   
+              <input [(ngModel)]="addressValue" matInput type="string">   
            </mat-form-field>
         </div>
         <div class="row">
            <mat-form-field class = "state" appearance="legacy">
               <mat-label>State</mat-label>
-              <input [(ngModel)]="stateValue" matInput> 
+              <input [(ngModel)]="stateValue" matInput type="string"> 
            </mat-form-field>
            <mat-form-field class = "zipcode" appearance="legacy">
               <mat-label>Zipcode</mat-label>
-              <input [(ngModel)]="zipCodeValue" matInput>         
+              <input [(ngModel)]="zipCodeValue" matInput type="string">         
            </mat-form-field>
            <h4>Total Price: ${{total_price}}</h4>
-           <div id="paypal-checkout-btn"></div>
-        </div>
-     </div>
+           <button class="button-margin" (click)="submit()" mat-raised-button color="primary" [disabled]="addressValue == '' || stateValue == '' || zipCodeValue == ''">Submit</button>
+    </div>
   </div>
 </div>
