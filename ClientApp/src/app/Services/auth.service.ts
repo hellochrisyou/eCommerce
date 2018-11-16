@@ -25,7 +25,7 @@ export class AuthService {
         clientID: '0MJ1BB2OJ-f_9eaPXxTZA7RBjkkMUR1s',
         domain: 'r13champ.auth0.com',
         responseType: 'token id_token',
-        redirectUri: 'https://localhost:5001',
+        redirectUri: 'https://cyou.us-west-2.elasticbeanstalk.com',
         scope: 'openid email'
     });
 
