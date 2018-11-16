@@ -47,6 +47,9 @@ export class ShoppingcartService {
   Get() {
       return this.tmpArray;
   }
+  Clear() {
+      this.tmpArray = [];
+  }
 }
 // End Shoppingcart Service
 

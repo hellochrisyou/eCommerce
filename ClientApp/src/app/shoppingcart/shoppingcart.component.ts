@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class ShoppingcartComponent implements OnInit {
   shoppingOrder: any = {};
-
+  p: any;
   // Sorting Logic
   key = 'order_Number'; // sort default by name
   reverse = false;
@@ -24,7 +24,6 @@ export class ShoppingcartComponent implements OnInit {
   constructor(
       private ShoppingcartServices: ShoppingcartService,
       public snackBar: MatSnackBar,
-      private makeService: MakeService,
       public auth: AuthService,
       private router: Router
   ) {}

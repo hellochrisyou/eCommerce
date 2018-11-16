@@ -95,7 +95,7 @@ export class SellComponent implements OnInit {
             caseCtrl: ['', Validators.required]
         });
         this.priceFormGroup = this._formBuilder.group({
-            priceCtrl: [0, Validators.required]
+            priceCtrl: ['', Validators.required]
         });
 
     }
@@ -126,6 +126,7 @@ export class SellComponent implements OnInit {
         this.priceFormGroup.reset();
 
         // Create Service Call
+        console.log(this.tmpThisOrder);
         this.MakeServices.CreateSaleItem(this.tmpThisOrder).subscribe(x => {
             this.MakeServices.GetAllSaleItem().subscribe(uploadedItem => {
                 this.uploadedItem = uploadedItem;

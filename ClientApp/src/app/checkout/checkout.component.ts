@@ -16,20 +16,24 @@ declare let paypal: any;
 })
 export class CheckoutComponent implements OnInit {
   // Variables
+  p: any;
+  key = 'order_Number'; // sort default by name
+  reverse = false;
   total_price = 0;
   finalAmount = 1;
   addressValue = '';
   stateValue = '';
   zipCodeValue = '';
-  lastOrderNumber: string[];
+  lastOrderNumber = 0;
   order_Number = '';
+  accountId: string;
 
   // Objects
   shoppingOrder: any = {};
   tmpObject: ThisOrder = {
       order_Number: '1',
       type: 'Used',
-      address: 'aa',
+      address: '',
       state: '',
       zipCode: '',
       accountInfoOrderId: '',
@@ -41,9 +45,14 @@ export class CheckoutComponent implements OnInit {
       power_Supply: '',
       ram: '',
       storage: '',
-      total_Price: ''
+      total_Price: '',
   };
   order: any;
+
+  SortList(key) {
+    this.key = key;
+    this.reverse = !this.reverse;
+    }
 
   constructor(
       private router: Router,
@@ -60,22 +69,41 @@ export class CheckoutComponent implements OnInit {
       this.shoppingOrder = this.ShoppingcartServices.Get();
       for (const tmp in this.shoppingOrder) {
          if (this.shoppingOrder.hasOwnProperty(tmp)) {
-           this.total_price = this.total_price + parseInt(this.shoppingOrder[tmp].total_Price, 10);         }
+           this.total_price = this.total_price + parseInt(this.shoppingOrder[tmp].total_Price, 10);
+        }
       }
+      this.accountId = localStorage.getItem('account_id');
    }
 
    submit() {
-        this.tmpObject = this.shoppingOrder;
-        this.tmpObject.address = this.addressValue;
-        this.tmpObject.state = this.stateValue;
-        this.tmpObject.zipCode = this.zipCodeValue;
         this.makeService.GetOrder().subscribe( x => {
-            console.log('this.tmpObject', x[x.length - 1]);
-            this.tmpObject.order_Number = (Math.floor(Math.random() * 9999999) +  x[x.length - 1].order_Number.toString());
-            console.log('this.tmpObject', this.tmpObject.order_Number);
-            this.makeService.CreateOrder(this.tmpObject).subscribe();
-            console.log(this.lastOrderNumber);
+                this.lastOrderNumber = x[x.length - 1].order_Number;
+            for (const tmp in this.shoppingOrder) {
+                if (this.shoppingOrder.hasOwnProperty(tmp)) {
+                this.lastOrderNumber++;
+                console.log(this.lastOrderNumber);
+                this.tmpObject.order_Number = this.lastOrderNumber.toString();
+                this.tmpObject.type = this.shoppingOrder[tmp].type.toString();
+                this.tmpObject.address = this.addressValue.toString();
+                this.tmpObject.state = this.stateValue.toString();
+                this.tmpObject.zipCode = this.zipCodeValue.toString();
+                this.tmpObject.accountInfoOrderId = this.accountId.toString();
+                this.tmpObject.case = this.shoppingOrder[tmp].case.toString();
+                this.tmpObject.cooling_Fan = this.shoppingOrder[tmp].cooling_Fan.toString();
+                this.tmpObject.cpu = this.shoppingOrder[tmp].cpu.toString();
+                this.tmpObject.gpu = this.shoppingOrder[tmp].gpu.toString();
+                this.tmpObject.motherboard = this.shoppingOrder[tmp].motherboard.toString();
+                this.tmpObject.power_Supply = this.shoppingOrder[tmp].power_Supply.toString();
+                this.tmpObject.ram = this.shoppingOrder[tmp].ram.toString();
+                this.tmpObject.storage = this.shoppingOrder[tmp].storage.toString();
+                this.tmpObject.total_Price = this.shoppingOrder[tmp].total_Price.toString();
+                this.makeService.CreateOrder(this.tmpObject).subscribe();
+                }
+            }
         });
+        this.OpenSnackbar();
+        this.ShoppingcartServices.Clear();
+        this.router.navigate(['/home']);
     }
 
   OpenSnackbar() {
@@ -97,3 +125,4 @@ export class CheckoutComponent implements OnInit {
     `],
 })
 export class OrderCompleteSnackComponent {}
+

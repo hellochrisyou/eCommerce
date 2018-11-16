@@ -1,9 +1,7 @@
 <div class="container">
   <h2>Checkout</h2>
   <div class="row">
-     <h3>Orders</h3>
-
-     
+     <h3>Orders</h3>     
         <table style="border-collapse:collapse; text-align:left" class="table table-striped text-left">
            <thead>
               <tr>
@@ -20,7 +18,7 @@
               </tr>
            </thead>
            <tbody>
-              <tr *ngFor="let t of shoppingOrder | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+              <tr *ngFor="let t of shoppingOrder | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                  <td class="text-left">{{t.type}}</td>
                  <td class="text-left">{{t.cpu}}</td>
                  <td class="text-left">{{t.motherboard}}</td>

@@ -1,9 +1,6 @@
 <div class="container">  
      <div class="row"> 
             <h2>Shopping Cart</h2>
-        <div class="search-bar">
-           <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="on" placeholder="&#61442;  Search">
-        </div>
         <table style="border-collapse:collapse" class="table table-striped">
            <thead>
               <tr>
@@ -111,7 +108,7 @@
               </tr>
            </thead>
            <tbody>
-              <tr *ngFor="let t of shoppingOrder | filter:searchText | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+              <tr *ngFor="let t of shoppingOrder | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                  <td style="text-align:center">
                     <button class="trash-button">
                     <i style="color:red" class="fa fa-trash" (click)="DeleteOrder(i)" aria-hidden="true"></i>
@@ -131,6 +128,8 @@
            </tbody>
         </table>
         <pagination-controls class="text-left" (pageChange)="p = $event"></pagination-controls>
-        <button mat-raised-button color="primary"(click)="Submit()">Submit</button>
+        <div *ngIf="shoppingOrder.length > 0">
+            <button mat-raised-button color="primary"(click)="Submit()">Submit</button>
+        </div>
 </div>
 </div>

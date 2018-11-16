@@ -15,7 +15,7 @@
             <a mat-list-item [routerLink]='["/buy-new"]' (click)='Collapse()' *ngIf="auth.isAuthenticated()">Buy New</a>
             <a mat-list-item [routerLink]='["/buy-used"]' (click)='Collapse()' *ngIf="auth.isAuthenticated()">Buy Used</a>
             <a mat-list-item [routerLink]='["/sell"]' (click)='Collapse()' *ngIf="auth.isAuthenticated()">Sell</a>
-            <a mat-list-item [routerLink]='["/orderhistory"]' (click)='Collapse()' *ngIf="auth.isAuthenticated() && auth.IsAdmin()">Order History</a>
+            <a mat-list-item [routerLink]='["/orderhistory"]' (click)='Collapse()' *ngIf="auth.isAuthenticated()">Order History</a>
             <a mat-list-item [routerLink]='["/shoppingcart"]' (click)='Collapse()' *ngIf="auth.isAuthenticated()">Shoppingcart</a>
             <a mat-list-item (click)='auth.logout()' *ngIf="auth.isAuthenticated()">logout</a>
           </mat-nav-list>

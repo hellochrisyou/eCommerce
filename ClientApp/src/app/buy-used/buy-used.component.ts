@@ -101,7 +101,6 @@ export class BuyUsedComponent implements OnInit {
           });
       } else {
           this.MakeServices.DeletePhoto(this.allUsedItems[index].id).subscribe(x => {
-            console.log('here');
               this.MakeServices.DeleteUsed(this.allUsedItems[index].id).subscribe(y => {
                 this.DeleteUsedSnackBar();
                 this.GetService();
@@ -142,7 +141,6 @@ export class BuyUsedComponent implements OnInit {
   }
 
   FilterItems(selection) {
-      console.log('selection', selection);
       if (selection == 'All items') {
           this.selectedItems = this.allUsedItems;
           this.tmpSelect = 'All items';

@@ -23,7 +23,7 @@ export class OrderhistoryComponent implements OnInit {
       zipCode: '',
       accountInfoOrderId: '',
       order_Number: '',
-      orderDate: new Date('January 1, 2018 00:00:00'),
+      orderDate: '',
       case: '',
       cooling_Fan: '',
       cpu: '',
@@ -54,7 +54,6 @@ export class OrderhistoryComponent implements OnInit {
       if (!this.Auth.isAuthenticated()) {
           this.router.navigate(['/home']);
       }
-      console.log('d');
       const accountId = localStorage.getItem('account_id');
       this.MakeServices.GetOrder().subscribe(order => {
           this.order = order;

@@ -18,13 +18,13 @@
 .mat-expansion-panel, .mat-elevation-z0, .mat-accordian, .mat-expansion-panel-header, .mat-expanded,
   .mat-expansion-panel-header, .mat-expanded:hover {
   background-color: transparent;
-  margin-top: 1px;
   text-align: left;
+  border-style: none;
 }
 
 @media (min-width: 767px) {
   .mat-stepper-vertical {
-    min-width: 60%;  
-    margin-left:5%;     
-  }  
+    width: 50%;  
+    margin: auto;
+  } 
 }

@@ -25,10 +25,10 @@ namespace CyouEcommerce.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateOrder ([FromBody] OrderResource orderResource)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            // if (!ModelState.IsValid)
+            // {
+            //     return BadRequest(ModelState);
+            // }
             var order = mapper.Map<OrderResource, Order>(orderResource);
 
             var dateAndTime = DateTime.Now;

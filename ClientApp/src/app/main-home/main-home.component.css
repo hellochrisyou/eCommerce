@@ -62,7 +62,7 @@
 
   @media (min-width: 1280px) {
     #top-mat-drawer {
-        top: 73px !important;
+        top: 72px !important;
     }
     .mat-toolbar {
         display: inline-flex;
@@ -109,4 +109,5 @@
     height: 100%;
     text-align: center;
     display: block;
+    margin:0;
   }

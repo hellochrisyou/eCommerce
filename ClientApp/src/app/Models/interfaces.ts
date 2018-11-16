@@ -40,7 +40,7 @@
   state: string;
   zipCode: string;
   accountInfoOrderId: string;
-  orderDate: Date;
+  orderDate: string;
   cpu: string;
   motherboard: string;
   ram: string;
