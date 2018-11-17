@@ -1,0 +1,23 @@
+{
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "description": "Ecommerce website developed in C# and Typescript with VsCode. Front-end: Angular 2+ and Bootstrap 4. Backend: Asp.net Core 2.1, Entity Framework, and SQL Server.  Authorization: Auth0.  Payment: Paypal Express(Restful API)",
+  "main": "index.js",
+  "dependencies": {
+    "karma": "^3.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hellochrisyou/DotNetCoreAngularECommerce.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hellochrisyou/DotNetCoreAngularECommerce/issues"
+  },
+  "homepage": "https://github.com/hellochrisyou/DotNetCoreAngularECommerce#readme"
+}
