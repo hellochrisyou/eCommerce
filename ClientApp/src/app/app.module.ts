@@ -37,7 +37,7 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BuyNewComponent, ConfirmNewItemComponent } from './buy-new/buy-new.component';
 import { MakeService } from './Services/make.service';
 
-import { SellComponent, UploadDialogComponent, SnackErrorMessageComponent } from './sell/sell.component';
+import { SellComponent, UploadDialogComponent, SnackErrorMessageComponent, SnackConfirmMessageComponent } from './sell/sell.component';
 import { BuyUsedComponent, ExpandPicComponent, ConfirmUsedItemComponent, ConfirmDeleteUsedComponent } from './buy-used/buy-used.component';
 import { OrderhistoryComponent } from './orderhistory/orderhistory.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
@@ -70,7 +70,8 @@ import { CheckoutComponent, OrderCompleteSnackComponent } from './checkout/check
     OrderCompleteSnackComponent,
     EditComponent,
     ConfirmDeleteUsedComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    SnackConfirmMessageComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -124,6 +125,7 @@ import { CheckoutComponent, OrderCompleteSnackComponent } from './checkout/check
     NavMenuComponent,
     UploadDialogComponent,
     SnackErrorMessageComponent,
+    SnackConfirmMessageComponent,
     ExpandPicComponent,
     ConfirmNewItemComponent,
     ConfirmUsedItemComponent,

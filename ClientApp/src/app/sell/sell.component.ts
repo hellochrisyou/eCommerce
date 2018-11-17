@@ -128,29 +128,31 @@ export class SellComponent implements OnInit {
         // Create Service Call
         console.log(this.tmpThisOrder);
         this.MakeServices.CreateSaleItem(this.tmpThisOrder).subscribe(x => {
-            this.MakeServices.GetAllSaleItem().subscribe(uploadedItem => {
-                this.uploadedItem = uploadedItem;
-                const lastItem = this.uploadedItem.pop();
-                this.uploadedItemId = lastItem.id;
-                // Prompt Upload Picture
-                this.OpenDialog();
-                this.tmpThisOrder = {
-                    accountsaleitemid: '',
-                    type: 'Used',
-                    case: '',
-                    cooling_Fan: '',
-                    cpu: '',
-                    gpu: '',
-                    motherboard: '',
-                    power_Supply: '',
-                    ram: '',
-                    storage: '',
-                    total_Price: '',
-                    sellerName: 'test'
-                };
-                this.tmpThisOrder.accountsaleitemid = localStorage.getItem('account_id');
-                this.priceFormGroup.get('priceCtrl').setValue(0);
-            });
+            console.log('created');
+            // this.MakeServices.GetAllSaleItem().subscribe(uploadedItem => {
+            //     this.uploadedItem = uploadedItem;
+            //     const lastItem = this.uploadedItem.pop();
+            //     this.uploadedItemId = lastItem.id;
+            //     // Prompt Upload Picture
+            //     // this.OpenDialog();
+            //     this.tmpThisOrder = {
+            //         accountsaleitemid: '',
+            //         type: 'Used',
+            //         case: '',
+            //         cooling_Fan: '',
+            //         cpu: '',
+            //         gpu: '',
+            //         motherboard: '',
+            //         power_Supply: '',
+            //         ram: '',
+            //         storage: '',
+            //         total_Price: '',
+            //         sellerName: 'test'
+            //     };
+            //     this.tmpThisOrder.accountsaleitemid = localStorage.getItem('account_id');
+            //     this.priceFormGroup.get('priceCtrl').setValue(0);
+            // });
+            this.OpenConfirmSnackBar();
         });
     }
 
@@ -160,6 +162,12 @@ export class SellComponent implements OnInit {
             data: {
                 itemId: this.uploadedItemId
             }
+        });
+    }
+
+    OpenConfirmSnackBar() {
+        this.snackBar.openFromComponent(SnackConfirmMessageComponent, {
+            duration: 5000,
         });
     }
 }
@@ -185,22 +193,22 @@ export class UploadDialogComponent implements OnInit {
         @Inject(MAT_DIALOG_DATA) public itemObject: UploadedItemId) {}
 
     ngOnInit() {
-        this.photoServices.GetPhotos(this.itemObject.itemId).subscribe(photos => {
-            this.photos = photos;
-        });
+        // this.photoServices.GetPhotos(this.itemObject.itemId).subscribe(photos => {
+        //     this.photos = photos;
+        // });
     }
 
     UploadPhoto() {
-        const nativeElement: HTMLInputElement = this.fileInput.nativeElement;
-        this.photoServices.Upload(this.itemObject.itemId, nativeElement.files[0])
-            .subscribe(photo => {
-                    this.photos.push(photo);
-                    this.count = this.count + 1;
-                },
-                err => {
-                    this.OpenSnackbar();
-                }
-            );
+        // const nativeElement: HTMLInputElement = this.fileInput.nativeElement;
+        // this.photoServices.Upload(this.itemObject.itemId, nativeElement.files[0])
+        //     .subscribe(photo => {
+        //             this.photos.push(photo);
+        //             this.count = this.count + 1;
+        //         },
+        //         err => {
+        //             this.OpenSnackbar();
+        //         }
+        //     );
     }
 
     OpenSnackbar() {
@@ -229,3 +237,15 @@ export class SnackErrorMessageComponent {}
 interface UploadedItemId {
   itemId: number;
 }
+
+// Confirm Popup
+@Component({
+    selector: 'app-snack-confirm-message',
+    templateUrl: 'snack-confirm-message.html',
+    styles: [`
+        .confirmMessage {
+            color: green;
+        }
+    `],
+})
+export class SnackConfirmMessageComponent {}

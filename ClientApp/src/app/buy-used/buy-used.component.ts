@@ -72,12 +72,12 @@ export class BuyUsedComponent implements OnInit {
       this.MakeServices.GetAllSaleItem().subscribe(usedItem => {
           this.allUsedItems = usedItem;
 
-          this.allUsedItems.forEach(element => {
-              this.photoService.GetPhotos(element.id)
-                  .subscribe(photo => {
-                      this.collectionPhotos.push(photo);
-                  });
-          });
+        //   this.allUsedItems.forEach(element => {
+        //       this.photoService.GetPhotos(element.id)
+        //           .subscribe(photo => {
+        //               this.collectionPhotos.push(photo);
+        //           });
+        //   });
           this.myUsedItems = this.allUsedItems
               .filter(
                   function(e) {
@@ -92,21 +92,31 @@ export class BuyUsedComponent implements OnInit {
 
   DeleteItem(index) {
       if (this.tmpSelect == 'My items') {
-          this.MakeServices.DeletePhoto(this.myUsedItems[index].id).subscribe(x => {
-              this.MakeServices.DeleteUsed(this.myUsedItems[index].id).subscribe(y => {
-                this.DeleteUsedSnackBar();
-                this.GetService();
-                this.FilterItems('My items');
-              });
+        this.MakeServices.DeleteUsed(this.myUsedItems[index].id).subscribe(y => {
+            this.DeleteUsedSnackBar();
+            this.GetService();
+            this.FilterItems('My items');
           });
+        //   this.MakeServices.DeletePhoto(this.myUsedItems[index].id).subscribe(x => {
+        //       this.MakeServices.DeleteUsed(this.myUsedItems[index].id).subscribe(y => {
+        //         this.DeleteUsedSnackBar();
+        //         this.GetService();
+        //         this.FilterItems('My items');
+        //       });
+        //   });
       } else {
-          this.MakeServices.DeletePhoto(this.allUsedItems[index].id).subscribe(x => {
-              this.MakeServices.DeleteUsed(this.allUsedItems[index].id).subscribe(y => {
-                this.DeleteUsedSnackBar();
-                this.GetService();
-                this.FilterItems('My items');
-              });
+        this.MakeServices.DeleteUsed(this.allUsedItems[index].id).subscribe(y => {
+            this.DeleteUsedSnackBar();
+            this.GetService();
+            this.FilterItems('My items');
           });
+        //   this.MakeServices.DeletePhoto(this.allUsedItems[index].id).subscribe(x => {
+        //       this.MakeServices.DeleteUsed(this.allUsedItems[index].id).subscribe(y => {
+        //         this.DeleteUsedSnackBar();
+        //         this.GetService();
+        //         this.FilterItems('My items');
+        //       });
+        //   });
       }
   }
 
