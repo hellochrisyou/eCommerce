@@ -7,3 +7,6 @@ Ecommerce website developed in C# and Typescript with VsCode. Front-end: Angular
 ![myimage-alt-tag](https://s3.amazonaws.com/chrisyou.com/assets/eCommerce-Shopping-Cart.png)
 ![myimage-alt-tag](https://s3.amazonaws.com/chrisyou.com/assets/eCommerce-Checkout.png)
 
+<p align="center">
+  <img width="460" height="300" src="http://www.fillmurray.com/460/300">
+</p>
