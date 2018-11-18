@@ -27,9 +27,11 @@ namespace CYouEcommerce
         {
             // services.Configure<PhotoSettings>(Configuration.GetSection("PhotoSettings"));
             services.AddAutoMapper(typeof(Startup));        
-            services.AddDbContext<R13DbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:Default"]));
+            // services.AddDbContext<R13DbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:Default"]));
+            var connection = @"Server=cyou.database.windows.net;Database=CYouEcommerce;User Id=cyou;Password=Chris411!;ConnectRetryCount=0";
+            services.AddDbContext<R13DbContext>(options => options.UseSqlServer(connection));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            
             //Auth0 implementation
             services.AddAuthentication(options =>
             {
