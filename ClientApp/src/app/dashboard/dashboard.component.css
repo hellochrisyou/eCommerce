@@ -1,17 +1,19 @@
 @import "~bootstrap/dist/css/bootstrap-grid.css";
 
 .container {
-  overflow-y: hidden;
-}
-.row {
-  height:fit-content;
-  text-align: center;    
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
-.mat-tab-group {
+.row {
+  text-align: center;  
+}
+
+.icon-row {
+  display: block;
+}
+
+.mat-tab-group .mat-tab {
   min-height: 100vh;
-  overflow-y: hidden;
 }
 
 .dashboard-tab-icon {
@@ -45,17 +47,24 @@
 }
 
 @media (max-width: 768px) { 
+  .bar-chart {
+    margin-bottom:3%; 
+    margin-left:auto;
+    margin-right:auto;
+  }
+
   .dashboard-container {
     display: flex;
     flex-direction: column;
     margin-top: 7%;
   }
+
   .bar-margin {
-    margin-top: 10%;
+    margin-top: 25%;
   }
 
   .icon-margin {
-    margin-top: 15%;
+    margin-top: 3.5%;
   }
 
   .margin-box {
@@ -63,13 +72,13 @@
   }
 
   .margin-box-bottom {
-    margin-top: -3%;
+    margin-top: -4%;
     margin-left: auto;
     margin-right: auto;
   }
 
   .first-margin {    
-    margin-top:8%;
+    margin-top:15%;
   }
 
   .rectangle-users {
@@ -96,20 +105,31 @@
     display: flex;
     flex-direction: column;
     margin-top: 7%;
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
   }
-  .first-margin {
-    margin-top: 13%;
+
+  .bar-chart {
+    margin-bottom:3%; 
+    margin-left:auto;
+    margin-right:auto;
+    max-height:auto; 
+    max-width:70%
   }
 
   .bar-margin {
-    margin-top: 10%;
-  }  
+    margin-top: 7%;
+  }
+
+  .first-margin {
+    margin-top: 4%;
+    margin-left: auto;
+    margin-right: auto;
+  } 
 
   .icon-margin {
-    margin-top: 42%;
+    margin-top: 5%;
   }
 
   .margin-box {
@@ -121,14 +141,11 @@
     margin-right: auto;
   }
 
-  .first-margin {
-    margin-left: 5%;
-  }
-
   .rectangle-users {
     height: 70px;
     max-width: 220px;
     background-color: #3F51B5 !important;
+    margin-left: auto;
   }
 
   .rectangle-revenue {
@@ -141,20 +158,69 @@
     height: 70px;
     max-width: 220px;
     background-color: #2196F7 !important;
+    margin-right: auto;
   }
 }
 
 @media (min-width: 1279px) {
+  .bar-chart {
+    margin-bottom:3%; 
+    margin-left:auto;
+    margin-right:auto;
+    max-height:auto; 
+    max-width:70%
+  }
+
   .first-margin {
-    margin-top: 13%;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .margin-box {
+    margin-top: 40%;
+  }
+  .rectangle-users {
+    height: 70px;
+    max-width: 220px;
+    background-color: #3F51B5 !important;
+    margin-left: auto;
+  }
+
+  .rectangle-revenue {
+    height: 70px;
+    max-width: 220px;
+    background-color: #EF4D4A !important;
+  }
+
+  .rectangle-orders {
+    height: 70px;
+    max-width: 220px;
+    background-color: #2196F7 !important;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 1365px) {
+  .dashboard-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2%;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .bar-chart {
+    margin-bottom:3%; 
+    margin-left:auto;
+    margin-right:auto;
+    max-height:auto; 
+    max-width:50%
   }
 
   .bar-margin {
-    margin-top: 10%;
-  }
-
-  .icon-margin {
-    margin-top: 42%;
+    margin-top: 3%;
   }
 
   .margin-box {
@@ -162,80 +228,54 @@
   }
 
   .first-margin {
-    margin-left: 7%;
+    margin-top: 3%;
+    margin-right: auto;
+    margin-left: auto;
   }
 
   .rectangle-users {
     height: 70px;
-    max-width: 220px;
+    min-width: 225px;
     background-color: #3F51B5 !important;
-    margin-left: 5%;
+    margin-left: auto;
   }
 
   .rectangle-revenue {
     height: 70px;
-    max-width: 220px;
+    min-width: 225px;
     background-color: #EF4D4A !important;
   }
 
   .rectangle-orders {
     height: 70px;
-    max-width: 220px;
+    min-width: 225px;
     background-color: #2196F7 !important;
+    margin-right: auto;
   }
 }
 
-@media (min-width: 1365px) {
-  .first-margin {
-    margin-top: 7%;
+
+@media (min-width: 1919px) {
+  .bar-chart {
+    margin-bottom:3%; 
+    margin-left:auto;
+    margin-right:auto;
+    max-height:auto; 
+    max-width:50%
   }
 
   .bar-margin {
     margin-top: 5%;
   }
 
-  .icon-margin {
-    margin-top: 30%;
-  }
-
-  .margin-box {
-    margin-top: 40%;
-  }
-
   .first-margin {
-    margin-left: 6%;
-  }
-
-  .rectangle-users {
-    height: 70px;
-    min-width: 225px;
-    background-color: #3F51B5 !important;
-  }
-
-  .rectangle-revenue {
-    height: 70px;
-    min-width: 225px;
-    background-color: #EF4D4A !important;
-  }
-
-  .rectangle-orders {
-    height: 70px;
-    min-width: 225px;
-    background-color: #2196F7 !important;
-  }
-}
-
-@media (min-width: 1919px) {
-  .icon-margin {
-    margin-top: 60%;
-  }
-
-  .bar-margin {
-    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4%;
   }
 
   .margin-box {
-    margin-top: 30%;
+    margin-top: 10%;
   }
 
   .rectangle-users {
@@ -257,7 +297,28 @@
     min-width: 245px;
     background-color: #2196F7 !important;
   }
+}
+
+@media (min-width: 2300px) {
+  .bar-chart {
+    margin-bottom:3%; 
+    margin-left:auto;
+    margin-right:auto;
+    max-height:auto; 
+    max-width:35%
+  }
+
   .first-margin {
-    margin-left: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+  }
+
+  .bar-margin {
+    margin-top: 2%;
+  }
+
+  .margin-box {
+    margin-top: 3%;
   }
 }

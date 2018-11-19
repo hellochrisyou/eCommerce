@@ -9,17 +9,17 @@
            </ng-template>
            <div class="container">
               <div class="row first-margin">
-                 <div class="rectangle-users col-4 col-sm">
-                    <div class="row text-center" style="display:inline-block">
-                       <mat-icon class="icon-margin" style="color:white">group</mat-icon>
+                 <div class="rectangle-users col-4 col-sm mat-elevation-z8">
+                    <div class="row text-center icon-row">
+                       <mat-icon class="icon-margin" style="color:white">account_circle</mat-icon>
                     </div>
                     <div class="row text-center">
                        <span class="margin-box-bottom" style="color:white">Accounts</span>                      
                        <span class="margin-box-bottom" style="color: white">{{totalAccounts}}</span>
                     </div>
                  </div>
-                 <div class="rectangle-revenue col-4 col-sm offset-sm-1">
-                    <div class="row text-center" style="display:inline-block">
+                 <div class="rectangle-revenue col-4 col-sm offset-sm-1 mat-elevation-z8">
+                    <div class="row text-center icon-row">
                        <mat-icon class="icon-margin" style="color:white">attach_money</mat-icon>
                     </div>
                     <div class="row">
@@ -27,8 +27,8 @@
                        <span class="margin-box-bottom" style="color: white">{{revenue}}</span>
                     </div>
                  </div>
-                 <div class="rectangle-orders col-4 col-sm offset-sm-1">
-                    <div class="row text-center" style="display:inline-block">
+                 <div class="rectangle-orders col-4 col-sm offset-sm-1 mat-elevation-z8">
+                    <div class="row text-center icon-row">
                        <mat-icon class="icon-margin" style="color:white">business_center</mat-icon>
                     </div>
                     <div class="row">
@@ -42,7 +42,7 @@
               <br/>
               <div>
                  <div style="display: block" *ngIf="barChartData.length > 0">
-                    <canvas baseChart
+                    <canvas baseChart class="mat-elevation-z5 bar-chart"
                     [datasets]="barChartData"
                     [labels]="mbarChartLabels"
                     [options]="barChartOptions"

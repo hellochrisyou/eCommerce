@@ -9,3 +9,7 @@ h2 {
   padding-bottom: 25px;
   margin: auto;
 }
+
+.row {
+  overflow-x: scroll;
+}

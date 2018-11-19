@@ -12,6 +12,7 @@ td:nth-child(1), th:nth-child(1) {
   max-width: fit-content;
   text-align: center;
   display: block;
+  overflow-x: scroll;
 }
 
 
