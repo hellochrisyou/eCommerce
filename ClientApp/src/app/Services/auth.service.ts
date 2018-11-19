@@ -26,7 +26,7 @@ export class AuthService {
         domain: 'r13champ.auth0.com',
         responseType: 'token id_token',
         // redirectUri: 'https://localhost:5001',
-        redirectUri: 'https://chrisyouecommerce.azurewebsites.net',
+        redirectUri: 'https://cyouecommerce.azurewebsites.net/',
         scope: 'openid email'
     });
 

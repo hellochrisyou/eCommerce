@@ -1,4 +1,4 @@
 {
     "appService.deploySubpath": "",
-    "appService.defaultWebAppToDeploy": "/subscriptions/a0804b90-73a1-406c-afc6-871d3842c74f/resourceGroups/appsvc_rg_windows_centralus/providers/Microsoft.Web/sites/ChrisYouEcommerce"
+    "appService.defaultWebAppToDeploy": "/subscriptions/a0804b90-73a1-406c-afc6-871d3842c74f/resourceGroups/CyouEcommerce/providers/Microsoft.Web/sites/CyouEcommerce"
 }

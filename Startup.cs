@@ -28,7 +28,7 @@ namespace CYouEcommerce
             // services.Configure<PhotoSettings>(Configuration.GetSection("PhotoSettings"));
             services.AddAutoMapper(typeof(Startup));        
             // services.AddDbContext<R13DbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:Default"]));
-            var connection = @"Server=cyou.database.windows.net;Database=CYouEcommerce;User Id=cyou;Password=Chris411!;ConnectRetryCount=0";
+            var connection = @"Server=tcp:chrisyouserver.database.windows.net,1433;Database=CYouEcommerce;Persist Security Info=False;User Id=cyou;Password=Chris411!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             services.AddDbContext<R13DbContext>(options => options.UseSqlServer(connection));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             
@@ -85,7 +85,7 @@ namespace CYouEcommerce
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
                 spa.Options.SourcePath = "ClientApp";
-                spa.UseAngularCliServer(npmScript: "start");
+                //spa.UseAngularCliServer(npmScript: "start");
                 if (env.IsDevelopment())
                 {
                     spa.UseAngularCliServer(npmScript: "start");
