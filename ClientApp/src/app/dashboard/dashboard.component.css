@@ -1,13 +1,17 @@
 @import "~bootstrap/dist/css/bootstrap-grid.css";
 
-
+.container {
+  overflow-y: hidden;
+}
 .row {
   height:fit-content;
-  text-align: center;
+  text-align: center;    
+  overflow-y: hidden;
 }
 
 .mat-tab-group {
-  height: 100%;
+  min-height: 100vh;
+  overflow-y: hidden;
 }
 
 .dashboard-tab-icon {
@@ -18,14 +22,6 @@
   width: 500px;
   padding-bottom: 25px;
   margin: auto;
-}
-
-.form-control {
-  box-shadow: 0 10px 40px 0 #B0C1D9;
-}
-
-.form-control::placeholder {
-  font-family: FontAwesome;
 }
 
 .dashboard-card {
@@ -42,22 +38,18 @@
   color: black !important;
 }
 
-.dashboard-container {
-  display: flex;
-  flex-direction: column;
-}
-
 .button-no-border {
   padding: 0 !important;
   border: none !important;
   background: none !important;
 }
 
-@media (max-width: 768px) {
-  .first-margin {
-    margin-top: 13%;
+@media (max-width: 768px) { 
+  .dashboard-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 7%;
   }
-
   .bar-margin {
     margin-top: 10%;
   }
@@ -70,35 +62,44 @@
     margin-top: 40%;
   }
 
-  .margin-box-left-label {
-    margin-left: 11%;
-    margin-top: -5%;
+  .margin-box-bottom {
+    margin-top: -3%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .first-margin {
-    margin-left: 3%;
+  .first-margin {    
+    margin-top:8%;
   }
 
   .rectangle-users {
     height: 50px;
-    max-width: 150px;
+    max-width: 175px;
     background-color: #3F51B5 !important;
   }
 
   .rectangle-revenue {
     height: 50px;
-    max-width: 150px;
+    max-width: 175px;
     background-color: #EF4D4A !important;
   }
 
   .rectangle-orders {
     height: 50px;
-    max-width: 150px;
+    max-width: 175px;
     background-color: #2196F7 !important;
   }
 }
 
 @media (min-width: 1023px) {
+  .dashboard-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 7%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
   .first-margin {
     margin-top: 13%;
   }
@@ -115,8 +116,9 @@
     margin-top: 40%;
   }
 
-  .margin-box-left-label {
-    margin-left: 22%;    
+  .margin-box-bottom {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .first-margin {
@@ -239,6 +241,7 @@
   .rectangle-users {
     height: 80px;
     min-width: 245px;
+    margin-left: auto;
     background-color: #3F51B5 !important;
   }
 
@@ -250,6 +253,7 @@
 
   .rectangle-orders {
     height: 80px;
+    margin-right: auto;
     min-width: 245px;
     background-color: #2196F7 !important;
   }

@@ -1,22 +1,18 @@
  .container-fluid {
-    width: 100%;
+    width: inherit;
     height: 100%;
     padding-left: 0px;
     padding-right: 0px;
     }
 
-  #toolbar-background-color {
+  #toolbar {
     background-color: #363636;
     color:white;
+    top: 0;
+    position: sticky;
+    min-width: inherit;
+    min-height: 6vh;
   }
-
-  .is-mobile .toolbar {
-    position: fixed;
-    /* Make sure the toolbar will stay on top of the content as it scrolls past. */
-    z-index: 2;    
-  }
-
-  
 
   h1.h1-app-name {
     margin-left: 8px;
@@ -39,7 +35,7 @@
 
   @media (max-width: 768px) {
     #top-mat-drawer {
-        top: 47px !important;
+        position: fixed; 
     }
     .mat-toolbar {
         display: inline-flex;
@@ -51,7 +47,8 @@
 
   @media (min-width: 769px) {
     #top-mat-drawer {
-        top: 54px !important;
+        top: 56px !important;
+        position: fixed; 
     }
     .mat-toolbar {
         display: inline-flex;
@@ -62,7 +59,8 @@
 
   @media (min-width: 1280px) {
     #top-mat-drawer {
-        top: 72px !important;
+        top: 56px !important;
+        position: fixed; 
     }
     .mat-toolbar {
         display: inline-flex;
@@ -73,7 +71,8 @@
 
   @media (min-width: 1366px) {
     #top-mat-drawer {
-        top: 54px !important;
+        top: 56px !important;
+        position: fixed; 
     }
     .mat-toolbar {
         display: inline-flex;
@@ -84,7 +83,8 @@
 
   @media (min-width: 1920px) {
     #top-mat-drawer {
-        top: 76px !important;
+        top: 56px !important;    
+        position: fixed;               
     }
     .mat-toolbar {
         display: inline-flex;
@@ -95,7 +95,8 @@
 
   @media (min-width: 1921px) {
     #top-mat-drawer {
-        top: 59px !important;
+        top: 56px !important;
+        position: fixed; 
     }
     .mat-toolbar {
         display: inline-flex;

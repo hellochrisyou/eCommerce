@@ -249,6 +249,8 @@ export class BuyNewComponent implements OnInit {
   }
 
   AddOrder() {
+      console.log(this.tmpThisOrder);
+    this.tmpThisOrder.total_Price = this.totalPrice.toString();
     this.ShoppingcartServices.Add(this.tmpThisOrder);
     this.OpenSnackbar();
   }

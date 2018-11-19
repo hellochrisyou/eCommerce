@@ -13,9 +13,9 @@
                     <div class="row text-center" style="display:inline-block">
                        <mat-icon class="icon-margin" style="color:white">group</mat-icon>
                     </div>
-                    <div class="row">
-                       <span class="margin-box-left-label" style="color:white">Accounts</span>                      
-                       <span class="margin-box-left-label" style="color: white">{{totalAccounts}}</span>
+                    <div class="row text-center">
+                       <span class="margin-box-bottom" style="color:white">Accounts</span>                      
+                       <span class="margin-box-bottom" style="color: white">{{totalAccounts}}</span>
                     </div>
                  </div>
                  <div class="rectangle-revenue col-4 col-sm offset-sm-1">
@@ -23,8 +23,8 @@
                        <mat-icon class="icon-margin" style="color:white">attach_money</mat-icon>
                     </div>
                     <div class="row">
-                       <span class="margin-box-left-label" style="color:white">Net</span>                      
-                       <span class="margin-box-left-label" style="color: white">{{revenue}}</span>
+                       <span class="margin-box-bottom" style="color:white">Net</span>                      
+                       <span class="margin-box-bottom" style="color: white">{{revenue}}</span>
                     </div>
                  </div>
                  <div class="rectangle-orders col-4 col-sm offset-sm-1">
@@ -32,8 +32,8 @@
                        <mat-icon class="icon-margin" style="color:white">business_center</mat-icon>
                     </div>
                     <div class="row">
-                       <span class="margin-box-left-label" style="color:white">Orders</span>                      
-                       <span class="margin-box-left-label" style="color: white">{{totalOrders}}</span>
+                       <span class="margin-box-bottom" style="color:white">Orders</span>                      
+                       <span class="margin-box-bottom" style="color: white">{{totalOrders}}</span>
                     </div>
                  </div>
               </div>
@@ -132,7 +132,7 @@
                        </tr>
                     </tbody>
                     <pagination-controls class="text-left" (pageChange)="p = $event"></pagination-controls>
-                 </table>
+                  </table>
               </div>
            </div>
         </mat-tab>
@@ -147,7 +147,7 @@
                     <mat-icon class="dashboard-tab-icon">add_box</mat-icon>
                     Add
                  </ng-template>
-                 <div class="dashboard-container" style="margin-top:7%">
+                 <div class="dashboard-container">
                     <mat-form-field hintLabel="Max 10 characters">
                        <mat-select placeholder="Select Component"  [(ngModel)]="selectedComponent.value">
                        <mat-option *ngFor="let tmp of thisComponent" value="{{tmp.value}}" name="component" ngDefaultControl>

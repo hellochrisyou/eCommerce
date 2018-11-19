@@ -1,11 +1,11 @@
 <div class='container-fluid m-0'>
-    <mat-toolbar id="toolbar-background-color" class="toolbar">
+    <mat-toolbar id="toolbar">
         <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
         <h1 class="h1-app-name">eCommerce</h1>
       </mat-toolbar>
     
       <mat-sidenav-container id="sidenav-container"
-                             [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+                              style="margin:0">
         <mat-sidenav id="top-mat-drawer" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
                      [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" style="background-color:#C0C0C0">
           <mat-nav-list>
