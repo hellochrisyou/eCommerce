@@ -3,17 +3,12 @@
   border: none;
   background: none;
 }
-
 td:nth-child(1), th:nth-child(1) {
   width: 1%;
 }
-
 .row {
   max-width: fit-content;
   text-align: center;
   display: block;
   overflow-x: scroll;
 }
-
-
-

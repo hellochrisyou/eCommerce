@@ -12,31 +12,33 @@ export class MainHomeComponent implements OnInit, OnDestroy {
   emailName = '';
   isExpanded = false;
   mobileQuery: MediaQueryList;
-  fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
+  fillerNav = Array.from({
+      length: 50
+  }, (_, i) => `Nav Item ${i + 1}`);
   private _mobileQueryListener: () => void;
 
   constructor(public auth: AuthService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
-    auth.handleAuthentication();
-    setTimeout(() => {
-    this.emailName = localStorage.getItem('user_email');
-   }, 2000);
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
+      auth.handleAuthentication();
+      setTimeout(() => {
+          this.emailName = localStorage.getItem('user_email');
+      }, 2000);
+      this.mobileQuery = media.matchMedia('(max-width: 600px)');
+      this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+      this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
   Collapse() {
-    this.isExpanded = false;
+      this.isExpanded = false;
   }
 
   Toggle() {
-    this.isExpanded = !this.isExpanded;
+      this.isExpanded = !this.isExpanded;
   }
 
   ngOnInit() {}
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
+      this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
 }

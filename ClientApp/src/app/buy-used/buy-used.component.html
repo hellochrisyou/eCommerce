@@ -1,57 +1,57 @@
 <div class="container">
-  <div class="row">
-     <h2>Buy Used</h2>
-  </div>
-    <div class="row">
+   <div class="row">
+       <h2>Buy Used</h2>
+   </div>
+   <div class="row">
 
-     <mat-radio-group class="center-items buy-radio-group" [(ngModel)]="selection" name="selection">
-     <mat-radio-button class="center-items buy-radio-button" *ngFor="let select of radioSelection" (change)="FilterItems(select)">
-     {{select}}
-     </mat-radio-button>
-     </mat-radio-group>
-     </div>
-     <div class="row">
-  </div>
-  <div class="row">
-     <div class="col col-sm-5 center-items">
-        <div *ngFor="let j of selectedItems; let i = index">
-           <mat-card class="buy-card mat-elevation-z2">
-              <mat-card-header>
-                  <div mat-card-avatar class="buy-header-image mat-elevation-z6"></div>
-                     <mat-card-title>Seller
-                        <span *ngIf="IsAdmin" style="display:inline-block">                           
-                           <button class="trash-button">
-                              <i style="color:red" class="fa fa-trash" (click)="DeleteItem(i)" aria-hidden="true"></i>
-                           </button>                           
-                        </span>                  
-                     </mat-card-title>
-                 <mat-card-subtitle>{{j.sellerName}}</mat-card-subtitle>
-              </mat-card-header>
-              <!-- <img (click)="OpenDialog(photo)" matTooltip="Click to expand." *ngFor="let photo of collectionPhotos[i]" src="/Uploads/{{ photo.fileName }}" class="img-thumbnail">                   -->
-              <mat-card-content>
-                 <p class="title-label">CPU:</p>
-                 <p class="word-overflow">{{j.cpu}}</p>
-                 <p class="title-label">Motherboard:</p>
-                 <p class="word-overflow">{{j.motherboard}}</p>
-                 <p class="title-label">RAM:</p>
-                 <p class="word-overflow">{{j.ram}}</p>
-                 <p class="title-label">Storage:</p>
-                 <p class="word-overflow">{{j.storage}}</p>
-                 <p class="title-label">GPU:</p>
-                 <p class="word-overflow">{{j.gpu}}</p>
-                 <p class="title-label">Power Supply:</p>
-                 <p class="word-overflow">{{j.power_Supply}}</p>
-                 <p class="title-label">Cooling Fan:</p>
-                 <p class="word-overflow">{{j.cooling_Fan}}</p>
-                 <p class="title-label">Case:</p>
-                 <p class="word-overflow">{{j.case}}</p>
-                 <p class="title-label">Total Price: ${{j.total_Price}}</p>
-              </mat-card-content>
-              <mat-card-actions>
-                 <button mat-raised-button color="primary" (click)="AddToCart(i)">Add to Cart</button>                   
-              </mat-card-actions>
-           </mat-card>
-        </div>
-     </div>
-  </div>
+       <mat-radio-group class="center-items buy-radio-group" [(ngModel)]="selection" name="selection">
+           <mat-radio-button class="center-items buy-radio-button" *ngFor="let select of radioSelection" (change)="FilterItems(select)">
+               {{select}}
+           </mat-radio-button>
+       </mat-radio-group>
+   </div>
+   <div class="row">
+   </div>
+   <div class="row">
+       <div class="col col-sm-5 center-items">
+           <div *ngFor="let j of selectedItems; let i = index">
+               <mat-card class="buy-card mat-elevation-z2">
+                   <mat-card-header>
+                       <div mat-card-avatar class="buy-header-image mat-elevation-z6"></div>
+                       <mat-card-title>Seller
+                           <span *ngIf="IsAdmin" style="display:inline-block">                           
+                          <button class="trash-button">
+                             <i style="color:red" class="fa fa-trash" (click)="DeleteItem(i)" aria-hidden="true"></i>
+                          </button>                           
+                       </span>
+                       </mat-card-title>
+                       <mat-card-subtitle>{{j.sellerName}}</mat-card-subtitle>
+                   </mat-card-header>
+                   <!-- <img (click)="OpenDialog(photo)" matTooltip="Click to expand." *ngFor="let photo of collectionPhotos[i]" src="/Uploads/{{ photo.fileName }}" class="img-thumbnail">                   -->
+                   <mat-card-content>
+                       <p class="title-label">CPU:</p>
+                       <p class="word-overflow">{{j.cpu}}</p>
+                       <p class="title-label">Motherboard:</p>
+                       <p class="word-overflow">{{j.motherboard}}</p>
+                       <p class="title-label">RAM:</p>
+                       <p class="word-overflow">{{j.ram}}</p>
+                       <p class="title-label">Storage:</p>
+                       <p class="word-overflow">{{j.storage}}</p>
+                       <p class="title-label">GPU:</p>
+                       <p class="word-overflow">{{j.gpu}}</p>
+                       <p class="title-label">Power Supply:</p>
+                       <p class="word-overflow">{{j.power_Supply}}</p>
+                       <p class="title-label">Cooling Fan:</p>
+                       <p class="word-overflow">{{j.cooling_Fan}}</p>
+                       <p class="title-label">Case:</p>
+                       <p class="word-overflow">{{j.case}}</p>
+                       <p class="title-label">Total Price: ${{j.total_Price}}</p>
+                   </mat-card-content>
+                   <mat-card-actions>
+                       <button mat-raised-button color="primary" (click)="AddToCart(i)">Add to Cart</button>
+                   </mat-card-actions>
+               </mat-card>
+           </div>
+       </div>
+   </div>
 </div>

@@ -175,8 +175,8 @@ export class SellComponent implements OnInit {
 
 // Upload Picture Dialog
 @Component({
-  selector: 'app-upload-dialog',
-  templateUrl: 'UploadDialog.html',
+    selector: 'app-upload-dialog',
+    templateUrl: 'UploadDialog.html',
 })
 
 export class UploadDialogComponent implements OnInit {
@@ -235,7 +235,7 @@ export class UploadDialogComponent implements OnInit {
 export class SnackErrorMessageComponent {}
 
 interface UploadedItemId {
-  itemId: number;
+    itemId: number;
 }
 
 // Confirm Popup

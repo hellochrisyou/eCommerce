@@ -11,35 +11,35 @@ import { Router } from '@angular/router';
   styleUrls: ['./shoppingcart.component.css']
 })
 export class ShoppingcartComponent implements OnInit {
-  shoppingOrder: any = {};
-  p: any;
-  // Sorting Logic
-  key = 'order_Number'; // sort default by name
-  reverse = false;
-  SortList(key) {
-      this.key = key;
-      this.reverse = !this.reverse;
-  }
+    shoppingOrder: any = {};
+    p: any;
+    // Sorting Logic
+    key = 'order_Number'; // sort default by name
+    reverse = false;
+    SortList(key) {
+        this.key = key;
+        this.reverse = !this.reverse;
+    }
 
-  constructor(
-      private ShoppingcartServices: ShoppingcartService,
-      public snackBar: MatSnackBar,
-      public auth: AuthService,
-      private router: Router
-  ) {}
+    constructor(
+        private ShoppingcartServices: ShoppingcartService,
+        public snackBar: MatSnackBar,
+        public auth: AuthService,
+        private router: Router
+    ) {}
 
-  ngOnInit() {
-      if (!this.auth.isAuthenticated()) {
-          this.router.navigate(['/home']);
-      }
-      this.shoppingOrder = this.ShoppingcartServices.Get();
-  }
+    ngOnInit() {
+        if (!this.auth.isAuthenticated()) {
+            this.router.navigate(['/home']);
+        }
+        this.shoppingOrder = this.ShoppingcartServices.Get();
+    }
 
-  DeleteOrder(index) {
-      this.ShoppingcartServices.Delete(index);
-  }
+    DeleteOrder(index) {
+        this.ShoppingcartServices.Delete(index);
+    }
 
-  Submit() {
-      this.router.navigate(['/checkout']);
-  }
+    Submit() {
+        this.router.navigate(['/checkout']);
+    }
 }

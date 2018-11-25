@@ -1,29 +1,26 @@
 <div class='container-fluid m-0'>
-    <mat-toolbar id="toolbar">
-        <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-        <h1 class="h1-app-name">eCommerce</h1>
-      </mat-toolbar>
-    
-      <mat-sidenav-container id="sidenav-container"
-                              style="margin:0">
-        <mat-sidenav id="top-mat-drawer" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-                     [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" style="background-color:#C0C0C0">
-          <mat-nav-list>
-            <a mat-list-item (click)='auth.login()' *ngIf="!auth.isAuthenticated()">login</a>
-            <a mat-list-item routerLink="/" (click)='Collapse()'>Home</a>
-            <a mat-list-item routerLink="/Dashboard" (click)='Collapse()' *ngIf="auth.isAuthenticated() && auth.IsAdmin()">Dashboard</a>
-            <a mat-list-item [routerLink]='["/buy-new"]' (click)='Collapse()' *ngIf="auth.isAuthenticated()">Buy New</a>
-            <a mat-list-item [routerLink]='["/buy-used"]' (click)='Collapse()' *ngIf="auth.isAuthenticated()">Buy Used</a>
-            <a mat-list-item [routerLink]='["/sell"]' (click)='Collapse()' *ngIf="auth.isAuthenticated()">Sell</a>
-            <a mat-list-item [routerLink]='["/orderhistory"]' (click)='Collapse()' *ngIf="auth.isAuthenticated()">Order History</a>
-            <a mat-list-item [routerLink]='["/shoppingcart"]' (click)='Collapse()' *ngIf="auth.isAuthenticated()">Shoppingcart</a>
-            <a mat-list-item (click)='auth.logout()' *ngIf="auth.isAuthenticated()">logout</a>
-          </mat-nav-list>
-        </mat-sidenav>
-        </mat-sidenav-container>
-        
-  <div class='row router-padding'>
-        <router-outlet></router-outlet>
-      </div>
-     </div>
+  <mat-toolbar id="toolbar">
+      <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+      <h1 class="h1-app-name">eCommerce</h1>
+  </mat-toolbar>
 
+  <mat-sidenav-container id="sidenav-container" style="margin:0">
+      <mat-sidenav id="top-mat-drawer" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" style="background-color:#C0C0C0">
+          <mat-nav-list>
+              <a mat-list-item (click)='auth.login()' *ngIf="!auth.isAuthenticated()">Login</a>
+              <a mat-list-item routerLink="/" (click)='Collapse()'>Home</a>
+              <a mat-list-item routerLink="/Dashboard" (click)='Collapse()' *ngIf="auth.isAuthenticated() && auth.IsAdmin()">Dashboard</a>
+              <a mat-list-item [routerLink]='["/buy-new"]' (click)='Collapse()' *ngIf="auth.isAuthenticated()">Buy New</a>
+              <a mat-list-item [routerLink]='["/buy-used"]' (click)='Collapse()' *ngIf="auth.isAuthenticated()">Buy Used</a>
+              <a mat-list-item [routerLink]='["/sell"]' (click)='Collapse()' *ngIf="auth.isAuthenticated()">Sell</a>
+              <a mat-list-item [routerLink]='["/orderhistory"]' (click)='Collapse()' *ngIf="auth.isAuthenticated()">Order History</a>
+              <a mat-list-item [routerLink]='["/shoppingcart"]' (click)='Collapse()' *ngIf="auth.isAuthenticated()">Shoppingcart</a>
+              <a mat-list-item (click)='auth.logout()' *ngIf="auth.isAuthenticated()">Logout</a>
+          </mat-nav-list>
+      </mat-sidenav>
+  </mat-sidenav-container>
+
+  <div class='row router-padding'>
+      <router-outlet></router-outlet>
+  </div>
+</div>

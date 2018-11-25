@@ -11,64 +11,64 @@ import { Router } from '@angular/router';
   styleUrls: ['./orderhistory.component.css']
 })
 export class OrderhistoryComponent implements OnInit {
-  // Variables
-  order: any;
+    // Variables
+    order: any;
 
-  // Objects
-  clonedOrder: any = {};
-  tmpThisOrder: OrderWDate = {
-      type: 'New',
-      address: '',
-      state: '',
-      zipCode: '',
-      accountInfoOrderId: '',
-      order_Number: '',
-      orderDate: '',
-      case: '',
-      cooling_Fan: '',
-      cpu: '',
-      gpu: '',
-      motherboard: '',
-      power_Supply: '',
-      ram: '',
-      storage: '',
-      total_Price: '11'
-  };
+    // Objects
+    clonedOrder: any = {};
+    tmpThisOrder: OrderWDate = {
+        type: 'New',
+        address: '',
+        state: '',
+        zipCode: '',
+        accountInfoOrderId: '',
+        order_Number: '',
+        orderDate: '',
+        case: '',
+        cooling_Fan: '',
+        cpu: '',
+        gpu: '',
+        motherboard: '',
+        power_Supply: '',
+        ram: '',
+        storage: '',
+        total_Price: '11'
+    };
 
-  // Sorting Logic
-  key = 'order_Number'; // sort default by name
-  reverse = false;
-  SortList(key) {
-      this.key = key;
-      this.reverse = !this.reverse;
-  }
+    // Sorting Logic
+    key = 'order_Number'; // sort default by name
+    reverse = false;
+    SortList(key) {
+        this.key = key;
+        this.reverse = !this.reverse;
+    }
 
-  constructor(
-      private router: Router,
-      private Auth: AuthService,
-      private MakeServices: MakeService,
-      private _formBuilder: FormBuilder
-  ) {}
+    constructor(
+        private router: Router,
+        private Auth: AuthService,
+        private MakeServices: MakeService,
+        private _formBuilder: FormBuilder
+    ) {}
 
-  ngOnInit() {
-      if (!this.Auth.isAuthenticated()) {
-          this.router.navigate(['/home']);
-      }
-      const accountId = localStorage.getItem('account_id');
-      this.MakeServices.GetOrder().subscribe(order => {
-          this.order = order;
-          this.clonedOrder = JSON.parse(JSON.stringify(this.order
-              .filter(
-                  function(e) {
-                      if (e.accountInfoOrderId == accountId) {
-                          return e;
-                      }
-                  }
-              )));
+    ngOnInit() {
+        if (!this.Auth.isAuthenticated()) {
+            this.router.navigate(['/home']);
+        }
+        const accountId = localStorage.getItem('account_id');
+        this.MakeServices.GetOrder().subscribe(order => {
+            this.order = order;
+            this.clonedOrder = JSON.parse(JSON.stringify(this.order
+                .filter(
+                    function(e) {
+                        if (e.accountInfoOrderId == accountId) {
+                            return e;
+                        }
+                    }
+                )));
 
-          this.clonedOrder.forEach(function(value, index, object) {
-              delete value.id;
-          });
-      });
-  }
+            this.clonedOrder.forEach(function(value, index, object) {
+                delete value.id;
+            });
+        });
+    }
 }

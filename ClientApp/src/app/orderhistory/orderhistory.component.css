@@ -1,15 +1,11 @@
-
-
 h2 {
   margin: 0 auto;
 }
-
 .search-bar {
   width: 500px;
   padding-bottom: 25px;
   margin: auto;
 }
-
 .row {
   overflow-x: scroll;
 }

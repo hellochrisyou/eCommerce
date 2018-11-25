@@ -1,324 +1,270 @@
 @import "~bootstrap/dist/css/bootstrap-grid.css";
-
-.container {
-  overflow: hidden;
+ .container {
+     overflow: hidden;
 }
-
-.row {
-  text-align: center;  
+ .row {
+     text-align: center;
 }
-
-.icon-row {
-  display: block;
+ .icon-row {
+     display: block;
 }
-
-.mat-tab-group .mat-tab {
-  min-height: 100vh;
+ .mat-tab-group .mat-tab {
+     min-height: 100vh;
 }
-
-.dashboard-tab-icon {
-  margin-right: 8px;
+ .dashboard-tab-icon {
+     margin-right: 8px;
 }
-
-.search-bar {
-  width: 500px;
-  padding-bottom: 25px;
-  margin: auto;
+ .search-bar {
+     width: 500px;
+     padding-bottom: 25px;
+     margin: auto;
 }
-
-.dashboard-card {
-  max-width: 400px;
-  background-color: #3F51B5 !important;
+ .dashboard-card {
+     max-width: 400px;
+     background-color: #3F51B5 !important;
 }
-
-.filter-length {
-  float: right;
-  min-width: 300px;
+ .filter-length {
+     float: right;
+     min-width: 300px;
 }
-
-.text-primary {
-  color: black !important;
+ .text-primary {
+     color: black !important;
 }
-
-.button-no-border {
-  padding: 0 !important;
-  border: none !important;
-  background: none !important;
+ .button-no-border {
+     padding: 0 !important;
+     border: none !important;
+     background: none !important;
 }
-
-@media (max-width: 768px) { 
-  .bar-chart {
-    margin-bottom:3%; 
-    margin-left:auto;
-    margin-right:auto;
-  }
-
-  .dashboard-container {
-    display: flex;
-    flex-direction: column;
-    margin-top: 7%;
-  }
-
-  .bar-margin {
-    margin-top: 25%;
-  }
-
-  .icon-margin {
-    margin-top: 3.5%;
-  }
-
-  .margin-box {
-    margin-top: 40%;
-  }
-
-  .margin-box-bottom {
-    margin-top: -4%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .first-margin {    
-    margin-top:15%;
-  }
-
-  .rectangle-users {
-    height: 50px;
-    max-width: 175px;
-    background-color: #3F51B5 !important;
-  }
-
-  .rectangle-revenue {
-    height: 50px;
-    max-width: 175px;
-    background-color: #EF4D4A !important;
-  }
-
-  .rectangle-orders {
-    height: 50px;
-    max-width: 175px;
-    background-color: #2196F7 !important;
-  }
+ @media (max-width: 768px) {
+     .bar-chart {
+         margin-bottom:3%;
+         margin-left:auto;
+         margin-right:auto;
+    }
+     .dashboard-container {
+         display: flex;
+         flex-direction: column;
+         margin-top: 7%;
+    }
+     .bar-margin {
+         margin-top: 25%;
+    }
+     .icon-margin {
+         margin-top: 3.5%;
+    }
+     .margin-box {
+         margin-top: 40%;
+    }
+     .margin-box-bottom {
+         margin-top: -4%;
+         margin-left: auto;
+         margin-right: auto;
+    }
+     .first-margin {
+         margin-top:15%;
+    }
+     .rectangle-users {
+         height: 50px;
+         max-width: 175px;
+         background-color: #3F51B5 !important;
+    }
+     .rectangle-revenue {
+         height: 50px;
+         max-width: 175px;
+         background-color: #EF4D4A !important;
+    }
+     .rectangle-orders {
+         height: 50px;
+         max-width: 175px;
+         background-color: #2196F7 !important;
+    }
 }
-
-@media (min-width: 1023px) {
-  .dashboard-container {
-    display: flex;
-    flex-direction: column;
-    margin-top: 7%;
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .bar-chart {
-    margin-bottom:3%; 
-    margin-left:auto;
-    margin-right:auto;
-    max-height:auto; 
-    max-width:70%
-  }
-
-  .bar-margin {
-    margin-top: 7%;
-  }
-
-  .first-margin {
-    margin-top: 4%;
-    margin-left: auto;
-    margin-right: auto;
-  } 
-
-  .icon-margin {
-    margin-top: 5%;
-  }
-
-  .margin-box {
-    margin-top: 40%;
-  }
-
-  .margin-box-bottom {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .rectangle-users {
-    height: 70px;
-    max-width: 220px;
-    background-color: #3F51B5 !important;
-    margin-left: auto;
-  }
-
-  .rectangle-revenue {
-    height: 70px;
-    max-width: 220px;
-    background-color: #EF4D4A !important;
-  }
-
-  .rectangle-orders {
-    height: 70px;
-    max-width: 220px;
-    background-color: #2196F7 !important;
-    margin-right: auto;
-  }
+ @media (min-width: 1023px) {
+     .dashboard-container {
+         display: flex;
+         flex-direction: column;
+         margin-top: 7%;
+         width: 50%;
+         margin-left: auto;
+         margin-right: auto;
+    }
+     .bar-chart {
+         margin-bottom:3%;
+         margin-left:auto;
+         margin-right:auto;
+         max-height:auto;
+         max-width:70% 
+    }
+     .bar-margin {
+         margin-top: 7%;
+    }
+     .first-margin {
+         margin-top: 4%;
+         margin-left: auto;
+         margin-right: auto;
+    }
+     .icon-margin {
+         margin-top: 5%;
+    }
+     .margin-box {
+         margin-top: 40%;
+    }
+     .margin-box-bottom {
+         margin-left: auto;
+         margin-right: auto;
+    }
+     .rectangle-users {
+         height: 70px;
+         max-width: 220px;
+         background-color: #3F51B5 !important;
+         margin-left: auto;
+    }
+     .rectangle-revenue {
+         height: 70px;
+         max-width: 220px;
+         background-color: #EF4D4A !important;
+    }
+     .rectangle-orders {
+         height: 70px;
+         max-width: 220px;
+         background-color: #2196F7 !important;
+         margin-right: auto;
+    }
 }
-
-@media (min-width: 1279px) {
-  .bar-chart {
-    margin-bottom:3%; 
-    margin-left:auto;
-    margin-right:auto;
-    max-height:auto; 
-    max-width:70%
-  }
-
-  .first-margin {
-    margin-top: 5%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .margin-box {
-    margin-top: 40%;
-  }
-  .rectangle-users {
-    height: 70px;
-    max-width: 220px;
-    background-color: #3F51B5 !important;
-    margin-left: auto;
-  }
-
-  .rectangle-revenue {
-    height: 70px;
-    max-width: 220px;
-    background-color: #EF4D4A !important;
-  }
-
-  .rectangle-orders {
-    height: 70px;
-    max-width: 220px;
-    background-color: #2196F7 !important;
-    margin-right: auto;
-  }
+ @media (min-width: 1279px) {
+     .bar-chart {
+         margin-bottom:3%;
+         margin-left:auto;
+         margin-right:auto;
+         max-height:auto;
+         max-width:70% 
+    }
+     .first-margin {
+         margin-top: 5%;
+         margin-left: auto;
+         margin-right: auto;
+    }
+     .margin-box {
+         margin-top: 40%;
+    }
+     .rectangle-users {
+         height: 70px;
+         max-width: 220px;
+         background-color: #3F51B5 !important;
+         margin-left: auto;
+    }
+     .rectangle-revenue {
+         height: 70px;
+         max-width: 220px;
+         background-color: #EF4D4A !important;
+    }
+     .rectangle-orders {
+         height: 70px;
+         max-width: 220px;
+         background-color: #2196F7 !important;
+         margin-right: auto;
+    }
 }
-
-@media (min-width: 1365px) {
-  .dashboard-container {
-    display: flex;
-    flex-direction: column;
-    margin-top: 2%;
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .bar-chart {
-    margin-bottom:3%; 
-    margin-left:auto;
-    margin-right:auto;
-    max-height:auto; 
-    max-width:50%
-  }
-
-  .bar-margin {
-    margin-top: 3%;
-  }
-
-  .margin-box {
-    margin-top: 40%;
-  }
-
-  .first-margin {
-    margin-top: 3%;
-    margin-right: auto;
-    margin-left: auto;
-  }
-
-  .rectangle-users {
-    height: 70px;
-    min-width: 225px;
-    background-color: #3F51B5 !important;
-    margin-left: auto;
-  }
-
-  .rectangle-revenue {
-    height: 70px;
-    min-width: 225px;
-    background-color: #EF4D4A !important;
-  }
-
-  .rectangle-orders {
-    height: 70px;
-    min-width: 225px;
-    background-color: #2196F7 !important;
-    margin-right: auto;
-  }
+ @media (min-width: 1365px) {
+     .dashboard-container {
+         display: flex;
+         flex-direction: column;
+         margin-top: 2%;
+         width: 50%;
+         margin-left: auto;
+         margin-right: auto;
+    }
+     .bar-chart {
+         margin-bottom:3%;
+         margin-left:auto;
+         margin-right:auto;
+         max-height:auto;
+         max-width:50% 
+    }
+     .bar-margin {
+         margin-top: 3%;
+    }
+     .margin-box {
+         margin-top: 40%;
+    }
+     .first-margin {
+         margin-top: 3%;
+         margin-right: auto;
+         margin-left: auto;
+    }
+     .rectangle-users {
+         height: 70px;
+         min-width: 225px;
+         background-color: #3F51B5 !important;
+         margin-left: auto;
+    }
+     .rectangle-revenue {
+         height: 70px;
+         min-width: 225px;
+         background-color: #EF4D4A !important;
+    }
+     .rectangle-orders {
+         height: 70px;
+         min-width: 225px;
+         background-color: #2196F7 !important;
+         margin-right: auto;
+    }
 }
-
-
-@media (min-width: 1919px) {
-  .bar-chart {
-    margin-bottom:3%; 
-    margin-left:auto;
-    margin-right:auto;
-    max-height:auto; 
-    max-width:50%
-  }
-
-  .bar-margin {
-    margin-top: 5%;
-  }
-
-  .first-margin {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 4%;
-  }
-
-  .margin-box {
-    margin-top: 10%;
-  }
-
-  .rectangle-users {
-    height: 80px;
-    min-width: 245px;
-    margin-left: auto;
-    background-color: #3F51B5 !important;
-  }
-
-  .rectangle-revenue {
-    height: 80px;
-    min-width: 245px;
-    background-color: #EF4D4A !important;
-  }
-
-  .rectangle-orders {
-    height: 80px;
-    margin-right: auto;
-    min-width: 245px;
-    background-color: #2196F7 !important;
-  }
+ @media (min-width: 1919px) {
+     .bar-chart {
+         margin-bottom:3%;
+         margin-left:auto;
+         margin-right:auto;
+         max-height:auto;
+         max-width:50% 
+    }
+     .bar-margin {
+         margin-top: 5%;
+    }
+     .first-margin {
+         margin-left: auto;
+         margin-right: auto;
+         margin-top: 4%;
+    }
+     .margin-box {
+         margin-top: 10%;
+    }
+     .rectangle-users {
+         height: 80px;
+         min-width: 245px;
+         margin-left: auto;
+         background-color: #3F51B5 !important;
+    }
+     .rectangle-revenue {
+         height: 80px;
+         min-width: 245px;
+         background-color: #EF4D4A !important;
+    }
+     .rectangle-orders {
+         height: 80px;
+         margin-right: auto;
+         min-width: 245px;
+         background-color: #2196F7 !important;
+    }
 }
-
-@media (min-width: 2300px) {
-  .bar-chart {
-    margin-bottom:3%; 
-    margin-left:auto;
-    margin-right:auto;
-    max-height:auto; 
-    max-width:35%
-  }
-
-  .first-margin {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2%;
-  }
-
-  .bar-margin {
-    margin-top: 2%;
-  }
-
-  .margin-box {
-    margin-top: 3%;
-  }
+ @media (min-width: 2300px) {
+     .bar-chart {
+         margin-bottom:3%;
+         margin-left:auto;
+         margin-right:auto;
+         max-height:auto;
+         max-width:35% 
+    }
+     .first-margin {
+         margin-left: auto;
+         margin-right: auto;
+         margin-top: 2%;
+    }
+     .bar-margin {
+         margin-top: 2%;
+    }
+     .margin-box {
+         margin-top: 3%;
+    }
 }
+ 

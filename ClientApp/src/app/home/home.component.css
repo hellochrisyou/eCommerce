@@ -4,4 +4,17 @@
     padding-left: 10%;
     padding-right: 10%;
 }
-
+#img-comp {
+    width: 13%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+@media (max-width: 768px) {
+    #img-comp {
+        width:17%;
+        height: auto;
+        margin-left: 0;
+        margin-right: 0;
+   }
+}

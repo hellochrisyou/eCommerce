@@ -1,114 +1,100 @@
- .container-fluid {
+.container-fluid {
     width: inherit;
     height: 100%;
     padding-left: 0px;
     padding-right: 0px;
-    }
-
-  #toolbar {
+}
+#toolbar {
     background-color: #363636;
     color:white;
     top: 0;
     position: sticky;
     min-width: inherit;
     min-height: 6vh;
-  }
-
-  h1.h1-app-name {
+}
+h1.h1-app-name {
     margin-left: 8px;
-  }
-
-  
-  #sidenav-container {
-    /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
-       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
-    flex: 1;    
+}
+#sidenav-container {
+   /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+    flex: 1;
     position: static;
     margin-top: 0px;
-  }
-  
-  .is-mobile #sidenav-container {
-    /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
-       `<body>` to be our scrolling element for mobile layouts. */
+}
+.is-mobile #sidenav-container {
+   /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the `<body>` to be our scrolling element for mobile layouts. */
     flex: 1 0 auto;
-  }
-
-  @media (max-width: 768px) {
+}
+@media (max-width: 768px) {
     #top-mat-drawer {
-        position: fixed; 
-    }
+        position: fixed;
+   }
     .mat-toolbar {
         display: inline-flex;
         width: 100%;
         height: 7%;
         padding-top:1%;
-      }
-  }
-
-  @media (min-width: 769px) {
+   }
+}
+@media (min-width: 769px) {
     #top-mat-drawer {
         top: 56px !important;
-        position: fixed; 
-    }
+        position: fixed;
+   }
     .mat-toolbar {
         display: inline-flex;
         width: 100%;
         height: 7%;
-      }
-  }
-
-  @media (min-width: 1280px) {
+   }
+}
+@media (min-width: 1280px) {
     #top-mat-drawer {
         top: 56px !important;
-        position: fixed; 
-    }
+        position: fixed;
+   }
     .mat-toolbar {
         display: inline-flex;
         width: 100%;
         height: 7%;
-      }
-  }
-
-  @media (min-width: 1366px) {
+   }
+}
+@media (min-width: 1366px) {
     #top-mat-drawer {
         top: 56px !important;
-        position: fixed; 
-    }
+        position: fixed;
+   }
     .mat-toolbar {
         display: inline-flex;
         width: 100%;
         height: 7%;
-      }
-  }
-
-  @media (min-width: 1920px) {
-    #top-mat-drawer {
-        top: 56px !important;    
-        position: fixed;               
-    }
-    .mat-toolbar {
-        display: inline-flex;
-        width: 100%;
-        height: 7%;
-    }      
-  }
-
-  @media (min-width: 1921px) {
+   }
+}
+@media (min-width: 1920px) {
     #top-mat-drawer {
         top: 56px !important;
-        position: fixed; 
-    }
+        position: fixed;
+   }
     .mat-toolbar {
         display: inline-flex;
         width: 100%;
         height: 7%;
-      }          
-  }
-
-  .router-padding {        
+   }
+}
+@media (min-width: 1921px) {
+    #top-mat-drawer {
+        top: 56px !important;
+        position: fixed;
+   }
+    .mat-toolbar {
+        display: inline-flex;
+        width: 100%;
+        height: 7%;
+   }
+}
+.router-padding {
     width: 100%;
     height: 100%;
     text-align: center;
     display: block;
     margin:0;
-  }
+}

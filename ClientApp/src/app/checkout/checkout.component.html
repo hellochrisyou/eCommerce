@@ -1,54 +1,54 @@
 <div class="container">
-  <h2>Checkout</h2>
-  <div class="row">
-     <h3>Orders</h3>     
-        <table style="border-collapse:collapse; text-align:left" class="table table-striped text-left">
+   <h2>Checkout</h2>
+   <div class="row">
+       <h3>Orders</h3>
+       <table style="border-collapse:collapse; text-align:left" class="table table-striped text-left">
            <thead>
-              <tr>
-                 <th>Type</th>
-                 <th>CPU</th>
-                 <th>Motherboard</th>
-                 <th>RAM</th>
-                 <th>GPU</th>
-                 <th>Storage</th>
-                 <th>PowerSupply</th>
-                 <th>Cooling Fan</th>
-                 <th>Case</th>
-                 <th>Price</th>
-              </tr>
+               <tr>
+                   <th>Type</th>
+                   <th>CPU</th>
+                   <th>Motherboard</th>
+                   <th>RAM</th>
+                   <th>GPU</th>
+                   <th>Storage</th>
+                   <th>PowerSupply</th>
+                   <th>Cooling Fan</th>
+                   <th>Case</th>
+                   <th>Price</th>
+               </tr>
            </thead>
            <tbody>
-              <tr *ngFor="let t of shoppingOrder | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
-                 <td class="text-left">{{t.type}}</td>
-                 <td class="text-left">{{t.cpu}}</td>
-                 <td class="text-left">{{t.motherboard}}</td>
-                 <td class="text-left">{{t.ram}}</td>
-                 <td class="text-left">{{t.gpu}}</td>
-                 <td class="text-left">{{t.storage}}</td>
-                 <td class="text-left">{{t.power_Supply}}</td>
-                 <td class="text-left">{{t.cooling_Fan}}</td>
-                 <td class="text-left">{{t.case}}</td>
-                 <td class="text-left">{{t.total_Price}}</td>
-              </tr>
+               <tr *ngFor="let t of shoppingOrder | orderBy: key : reverse| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                   <td class="text-left">{{t.type}}</td>
+                   <td class="text-left">{{t.cpu}}</td>
+                   <td class="text-left">{{t.motherboard}}</td>
+                   <td class="text-left">{{t.ram}}</td>
+                   <td class="text-left">{{t.gpu}}</td>
+                   <td class="text-left">{{t.storage}}</td>
+                   <td class="text-left">{{t.power_Supply}}</td>
+                   <td class="text-left">{{t.cooling_Fan}}</td>
+                   <td class="text-left">{{t.case}}</td>
+                   <td class="text-left">{{t.total_Price}}</td>
+               </tr>
            </tbody>
-        </table>
-        <div class="row">
-           <mat-form-field class = "address" appearance="legacy">
-              <mat-label>Address</mat-label>
-              <input [(ngModel)]="addressValue" matInput type="string">   
+       </table>
+       <div class="row">
+           <mat-form-field class="address" appearance="legacy">
+               <mat-label>Address</mat-label>
+               <input [(ngModel)]="addressValue" matInput type="string">
            </mat-form-field>
-        </div>
-        <div class="row">
-           <mat-form-field class = "state" appearance="legacy">
-              <mat-label>State</mat-label>
-              <input [(ngModel)]="stateValue" matInput type="string"> 
+       </div>
+       <div class="row">
+           <mat-form-field class="state" appearance="legacy">
+               <mat-label>State</mat-label>
+               <input [(ngModel)]="stateValue" matInput type="string">
            </mat-form-field>
-           <mat-form-field class = "zipcode" appearance="legacy">
-              <mat-label>Zipcode</mat-label>
-              <input [(ngModel)]="zipCodeValue" matInput type="string">         
+           <mat-form-field class="zipcode" appearance="legacy">
+               <mat-label>Zipcode</mat-label>
+               <input [(ngModel)]="zipCodeValue" matInput type="string">
            </mat-form-field>
            <h4>Total Price: ${{total_price}}</h4>
            <button class="button-margin" (click)="submit()" mat-raised-button color="primary" [disabled]="addressValue == '' || stateValue == '' || zipCodeValue == ''">Submit</button>
-    </div>
-  </div>
+       </div>
+   </div>
 </div>

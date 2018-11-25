@@ -1,21 +1,18 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
-.row {
-  text-align: center;
-  display: block;
+ .row {
+     text-align: center;
+     display: block;
 }
-
-@media (max-width: 766px) {
-  .mat-stepper-vertical {    
-    margin-left: 15%;
-    text-align:left;
-  }   
+ @media (max-width: 766px) {
+     .mat-stepper-vertical {
+         margin-left: 15%;
+         text-align:left;
+    }
 }
-
-@media (min-width: 767px) {
-  .mat-stepper-vertical {
-    width: 50%;   
-    margin-left: 40%;
-    text-align:left;
-  }   
+ @media (min-width: 767px) {
+     .mat-stepper-vertical {
+         width: 50%;
+         margin-left: 40%;
+         text-align:left;
+    }
 }
