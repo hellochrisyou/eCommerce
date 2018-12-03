@@ -52,7 +52,7 @@ export class SellComponent implements OnInit {
         public snackBar: MatSnackBar,
         private _formBuilder: FormBuilder,
         private MakeServices: MakeService,
-        public dialog: MatDialog,
+        private dialog: MatDialog,
         private Auth: AuthService,
     ) {}
 

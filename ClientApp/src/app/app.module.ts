@@ -13,11 +13,12 @@ import {
   MatToolbarModule,
   MatSidenavModule,
   MatListModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatSelectModule,
+  MatSnackBarModule
   } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSelectModule, MatSnackBarModule } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { Ng2OrderModule } from 'ng2-order-pipe';
