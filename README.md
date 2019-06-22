@@ -7,7 +7,7 @@ Ecommerce website developed in C# and Typescript with VsCode. Front-end: Angular
   <p align="center">
   <img src="https://chrisyou-backup-website.s3.amazonaws.com/assets/eCommerce-Buy-New.png" width="300">
   </p>
-  <p align="left">
+  <p align="center">
   <img src="https://chrisyou-backup-website.s3.amazonaws.com/assets/eCommerce-Sell.png" width="300">
   </p>
   <p align="center">
