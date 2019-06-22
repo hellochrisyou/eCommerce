@@ -5,7 +5,7 @@ Ecommerce website developed in C# and Typescript with VsCode. Front-end: Angular
   <img src="https://chrisyou-backup-website.s3.amazonaws.com/auth0-techno-babel.png" width="300">
   </p>
   <p align="center">
-  <img src="https://chrisyou-backup-website.s3.amazonaws.com/assets/eCommerce-Buy-New.png" width="300">
+  <img src="https://chrisyou-backup-website.s3.amazonaws.com/assets/eCommerce-Buy-New..png" width="300">
   </p>
   <p align="center">
   <img src="https://chrisyou-backup-website.s3.amazonaws.com/assets/eCommerce-Sell.png" width="300">
