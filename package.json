@@ -4,7 +4,7 @@
   "description": "Ecommerce website developed in C# and Typescript with VsCode. Front-end: Angular 2+ and Bootstrap 4. Backend: Asp.net Core 2.1, Entity Framework, and SQL Server.  Authorization: Auth0.  Payment: Paypal Express(Restful API)",
   "main": "index.js",
   "dependencies": {
-    "karma": "^3.1.1"
+    "karma": "^6.3.16"
   },
   "devDependencies": {},
   "scripts": {
